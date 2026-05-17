@@ -143,7 +143,7 @@ function Atelier() {
           <div style={{ position: 'absolute', bottom: 48, right: 80, textAlign: 'right' }}>
             <Fleuron color={AT.terra} size={20} />
             <div style={{ fontFamily: '"Instrument Serif", serif', fontStyle: 'italic', fontSize: 13, color: AT.slate, marginTop: 6 }}>
-              by Jennifer, from Florida
+              by Jennifer, from Arizona
             </div>
           </div>
         </div>
@@ -549,7 +549,7 @@ function Atelier() {
             <div>
               <ATEyebrow color="rgba(244,240,232,0.5)">Address</ATEyebrow>
               <p style={{ margin: '14px 0 0', fontFamily: 'Inter', fontSize: 13, fontWeight: 300, color: 'rgba(244,240,232,0.85)', lineHeight: 1.8 }}>
-                hello@calmtax.co<br />Florida, U.S.<br />year-round
+                hello@calmtax.co<br />Arizona, U.S.<br />year-round
               </p>
             </div>
             <div>

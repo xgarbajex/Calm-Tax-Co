@@ -261,7 +261,7 @@ const COPY = {
   about: {
     name: 'Jennifer',
     paras: [
-      'Jennifer runs Calm Tax Co. as a solo practice from Florida. She’s an IRS-registered tax preparer with an EFIN, currently completing additional certification, and serves clients across the country.',
+      'Jennifer runs Calm Tax Co. as a solo practice from Arizona. She’s an IRS-registered tax preparer with an EFIN, currently completing additional certification, and serves clients across the country.',
       'Her approach to tax work is methodical and unhurried. Every return gets careful attention. Questions get researched rather than guessed at. Situations outside her current scope get referred warmly to specialists. She’d rather take fewer returns and do them well than build a volume practice.',
       'The "calm" in Calm Tax Co. isn’t a marketing pose — it’s a longstanding personal practice around nervous system regulation that became the operating principle of the firm. Filing taxes shouldn’t activate anyone’s stress response, including the preparer’s. That’s why everything happens in writing, on your schedule, with as much room to think as either of you needs.',
     ],

@@ -153,7 +153,7 @@ function QuietLetter() {
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontFamily: 'Inter', fontSize: 10, letterSpacing: '0.28em', textTransform: 'uppercase', color: QL.inkMute, fontWeight: 500 }}>
           <span>Vol. I &nbsp;·&nbsp; Folio 04 &nbsp;·&nbsp; A.D. MMXXVI</span>
           <span>A Practice in Patient Tax Preparation</span>
-          <span>Set quietly in Florida</span>
+          <span>Set quietly in Arizona</span>
         </div>
         <div style={{ marginTop: 14, height: 1, background: QL.rule }} />
         <div style={{ marginTop: 4, height: 1, background: QL.rule, opacity: 0.4 }} />
@@ -211,7 +211,7 @@ function QuietLetter() {
               <span className="ink-bleed" style={{ color: QL.terra }}>est.</span> 2026<br />
               by Jennifer,<br />
               from her desk<br />
-              in Florida
+              in Arizona
             </div>
           </div>
         </div>
@@ -395,7 +395,7 @@ function QuietLetter() {
               IRS-registered<br />
               tax preparer<br />
               with an EFIN,<br />
-              from Florida.
+              from Arizona.
             </div>
           </div>
           <div style={{ maxWidth: 720 }}>
@@ -630,7 +630,7 @@ function QuietLetter() {
               <Eyebrow color="rgba(244,240,232,0.5)" size={9}>Address</Eyebrow>
               <p style={{ margin: '14px 0 0', fontFamily: 'Inter', fontSize: 13, fontWeight: 300, color: 'rgba(244,240,232,0.85)', lineHeight: 1.8 }}>
                 hello@calmtax.co<br />
-                Florida, U.S.<br />
+                Arizona, U.S.<br />
                 year-round
               </p>
             </div>

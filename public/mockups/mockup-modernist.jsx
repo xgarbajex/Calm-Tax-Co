@@ -95,7 +95,7 @@ function Modernist() {
           <img src="assets/logo-alone.png" alt="" style={{ width: 22, height: 26, objectFit: 'contain', opacity: 0.85 }} />
           <span style={{ fontFamily: '"Instrument Serif", serif', fontSize: 22, color: M.ink }}>Calm Tax Co.</span>
           <span style={{ fontFamily: 'Inter', fontSize: 10, letterSpacing: '0.28em', textTransform: 'uppercase', color: M.slate, fontWeight: 500, marginLeft: 18 }}>
-            est. 2026 — Florida
+            est. 2026 — Arizona
           </span>
         </div>
         <nav style={{ display: 'flex', gap: 36 }}>
@@ -367,7 +367,7 @@ function Modernist() {
               <img src="assets/jennifer.png" alt="Jennifer" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 25%' }} />
             </div>
             <div style={{ marginTop: 16, fontFamily: 'Inter', fontSize: 10, letterSpacing: '0.28em', textTransform: 'uppercase', color: M.slate, fontWeight: 500 }}>
-              fig. i — at her desk, Florida
+              fig. i — at her desk, Arizona
             </div>
             <div style={{ marginTop: 24, paddingTop: 24, borderTop: `1px solid ${M.rule}`, fontFamily: 'Inter', fontSize: 11, fontWeight: 300, color: M.inkMute, lineHeight: 1.8 }}>
               IRS-registered tax preparer<br />
@@ -587,7 +587,7 @@ function Modernist() {
           </div>
 
           {[
-            { label: 'Address', lines: ['hello@calmtax.co', 'Florida, U.S.', 'year-round'] },
+            { label: 'Address', lines: ['hello@calmtax.co', 'Arizona, U.S.', 'year-round'] },
             { label: 'Credentials', lines: ['IRS PTIN holder', 'IRS Authorized E-File Provider', 'Proton-secured'] },
             { label: 'Read also', lines: ['Privacy notice', 'Terms of engagement', 'Accessibility'] },
           ].map((col, i) => (
