@@ -27,11 +27,12 @@ const BreathingExercise: React.FC = () => {
   };
 
   return (
-    <section className="py-32 bg-white overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6 flex flex-col items-center">
-        <div className="text-center mb-0 flex flex-col items-center">
+    <section className="py-32 bg-[#FCFBFA] overflow-hidden">
+      <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16 md:items-center">
+        <div className="text-left mb-0 flex flex-col items-start">
           <h3 className="text-5xl md:text-6xl serif-font text-[#3C3633] leading-tight">A moment of calm, on us.</h3>
-          <p className="text-lg text-[#5D6D7E] mt-6 max-w-xl mx-auto leading-relaxed">
+          <div className="w-48 h-px bg-[#3C3633]/20 my-6" />
+          <p className="text-lg text-[#5D6D7E] mt-6 max-w-xl leading-relaxed">
             Just follow along with the animation.
             <br />
             Inhale through your nose for 4, then exhale slowly through pursed lips for 8, like you're gently blowing out a candle.

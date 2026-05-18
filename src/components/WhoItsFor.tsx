@@ -25,16 +25,25 @@ const WhoItsFor: React.FC = () => {
   ];
 
   return (
-    <section id="who-its-for" className="py-32 px-6 bg-white">
-      <div className="max-w-7xl mx-auto">
+    <section id="who-its-for" className="py-32 px-6 bg-[#FAFAF8]">
+      <div className="max-w-7xl mx-auto text-center">
         <h2 className="text-5xl md:text-6xl serif-font text-[#3C3633] mb-6">Sound familiar?</h2>
+        <div className="w-48 h-px bg-[#3C3633]/20 mx-auto mb-8" />
         <p className="text-[#5D6D7E] text-lg mb-16">Four situations we know well.</p>
         <div className="grid md:grid-cols-2 gap-8">
           {cards.map((card, index) => (
-            <div key={index} className="bg-[#F9F7F2] p-8 md:p-12 rounded-2xl border border-[#3C3633]/5 hover:shadow-lg transition-all duration-500">
-              <span className="text-sm uppercase tracking-[0.2em] font-medium text-[#7D8E7E] mb-6 block">{card.label}</span>
-              <h3 className="text-3xl serif-font text-[#3C3633] mb-4">{card.title}</h3>
-              <p className="text-[#5D6D7E] text-base md:text-lg leading-relaxed">{card.body}</p>
+            <div key={index} className="relative overflow-hidden bg-[#F9F7F2] p-8 md:p-12 rounded-2xl border border-[#3C3633]/5 hover:shadow-lg transition-all duration-500">
+              {/* Background Graphic */}
+              <div className="absolute inset-0 z-0 opacity-40 pointer-events-none">
+                <img src="/hero_background.png" alt="" className="w-full h-full object-cover" />
+              </div>
+
+              {/* Content */}
+              <div className="relative z-10 flex flex-col items-center text-center">
+                <span className="text-sm uppercase tracking-[0.2em] font-medium text-[#7D8E7E] mb-6 block">{card.title}</span>
+                <h3 className="text-3xl serif-font text-[#3C3633] mb-4">{card.label}</h3>
+                <p className="text-[#5D6D7E] text-base md:text-lg leading-relaxed">{card.body}</p>
+              </div>
             </div>
           ))}
         </div>

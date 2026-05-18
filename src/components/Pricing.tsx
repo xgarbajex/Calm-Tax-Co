@@ -3,16 +3,21 @@ import { SERVICES } from '../constants';
 
 const Pricing: React.FC = () => {
   return (
-    <section id="pricing" className="py-32 bg-white">
-      <div className="max-w-7xl mx-auto px-6">
+    <section id="pricing" className="relative py-32 bg-white overflow-hidden">
+      {/* Background Graphic */}
+      <div className="absolute inset-0 z-0 opacity-40">
+        <img src="/hero_background.png" alt="" className="w-full h-full object-cover" />
+      </div>
+
+      <div className="relative z-10 max-w-7xl mx-auto px-6">
         <div className="text-center mb-24">
           <h2 className="text-5xl md:text-6xl serif-font text-[#3C3633]">Pricing</h2>
-          <div className="w-16 h-px bg-[#3C3633]/20 mx-auto mt-8" />
+          <div className="w-48 h-px bg-[#3C3633]/20 mx-auto mt-8" />
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-5xl mx-auto">
           {SERVICES.map((service) => (
-            <div key={service.id} className="bg-[#F9F7F2] p-12 rounded-[2.5rem] border border-[#3C3633]/5 hover:shadow-xl hover:shadow-[#3C3633]/5 transition-all duration-700 flex flex-col items-center text-center">
+            <div key={service.id} className="bg-[#F2F0ED] p-12 rounded-[2.5rem] border border-[#3C3633]/5 hover:shadow-xl hover:shadow-[#3C3633]/5 transition-all duration-700 flex flex-col items-center text-center">
               <div className="mb-12 text-center flex flex-col items-center">
                 <h3 className="text-3xl md:text-4xl serif-font italic text-[#3C3633] mb-6">{service.title}</h3>
                 <div className="flex items-center justify-center gap-2 mb-6">
@@ -46,7 +51,7 @@ const Pricing: React.FC = () => {
         
         <div className="mt-24 text-center">
           <p className="text-sm italic text-[#7D8E7E]">
-            Payment is due in full before work begins. You will always receive a clear quote first.
+            * Payment is due in full before work begins. You will always receive a clear quote first.
           </p>
         </div>
       </div>

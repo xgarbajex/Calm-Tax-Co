@@ -31,7 +31,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
       
       {children}
 
-      <footer className="py-20 px-6 border-t border-[#3C3633]/5 bg-white">
+      <footer className="py-20 px-6 border-t border-[#3C3633]/5 bg-[#FCFBFA]">
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col md:flex-row justify-between items-start gap-12">
             <div className="max-w-xs">

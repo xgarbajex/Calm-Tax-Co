@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
 import { Plus, Minus } from 'lucide-react';
 
 const FAQ: React.FC = () => {
@@ -21,16 +20,16 @@ const FAQ: React.FC = () => {
       answer: "Documents are uploaded through an encrypted folder, not emailed as attachments. We use Proton Drive to share your documents: a privacy-first platform with end-to-end encryption, meaning no third parties can access your files, not even Proton. Only you and our office can view them. You will receive upload instructions when you reach out."
     },
     {
-      question: "Do you handle back taxes or unfiled returns from prior years?",
-      answer: "Yes, with some limits. We can help you catch up on prior-year filings and work through them systematically."
-    },
-    {
       question: "What happens if I get an IRS letter after you file?",
       answer: "Most letters are routine: payment reminders, verification requests, matching notices, or simple corrections. If you have a question, we will review the notice with you and help you understand what is being asked. For anything requiring formal representation, we refer you to a specialist."
     },
     {
       question: "What if I am running late getting my documents together?",
       answer: "No worries. We can file extensions for clients who need them."
+    },
+    {
+      question: "Do you handle back taxes or unfiled returns from prior years?",
+      answer: "Yes, with some limits. We can help you catch up on prior-year filings and work through them systematically."
     },
     {
       question: "What is your pricing, and are there hidden fees?",
@@ -42,49 +41,76 @@ const FAQ: React.FC = () => {
     }
   ];
 
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faqs.map(faq => ({
+      "@type": "Question",
+      "name": faq.question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faq.answer
+      }
+    }))
+  };
+
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+
+  const firstCol = [faqs[0], faqs[1], faqs[2], faqs[8]];
+  const secondCol = [faqs[4], faqs[5], faqs[6], faqs[7], faqs[3]];
+  const half = firstCol.length;
+
+  const renderFaqItem = (faq: typeof faqs[0], index: number) => {
+    const isOpen = openIndex === index;
+    return (
+      <div 
+        key={index} 
+        className="border-b border-[#3C3633]/5"
+      >
+        <button
+          onClick={() => setOpenIndex(isOpen ? null : index)}
+          aria-expanded={isOpen}
+          className="w-full flex items-center justify-between py-5 text-left hover:text-[#7D8E7E] transition-colors group"
+        >
+          <span className="text-lg font-medium text-[#3C3633] group-hover:text-[#7D8E7E] pr-8">{faq.question}</span>
+          <div className={`flex-none transform transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}>
+            {isOpen ? (
+              <Minus className="w-5 h-5 text-[#7D8E7E]" />
+            ) : (
+              <Plus className="w-5 h-5 text-[#3C3633]/30" />
+            )}
+          </div>
+        </button>
+        
+        <div 
+          className={`overflow-hidden transition-all duration-500 ease-in-out ${isOpen ? 'max-h-[500px] opacity-100 mb-5' : 'max-h-0 opacity-0'}`}
+        >
+          <p className="text-[#5D6D7E] text-base leading-relaxed">
+            {faq.answer}
+          </p>
+        </div>
+      </div>
+    );
+  };
 
   return (
     <section id="faq" className="py-24 bg-[#F9F7F2]">
-      <div className="max-w-3xl mx-auto px-6">
-        <div className="text-center mb-12">
+      <script type="application/ld+json">
+        {JSON.stringify(faqSchema)}
+      </script>
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl serif-font text-[#3C3633]">Common Questions</h2>
-          <div className="w-16 h-px bg-[#3C3633]/20 mx-auto mt-8" />
+          <div className="w-48 h-px bg-[#3C3633]/20 mx-auto mt-8" />
         </div>
 
-        <div className="space-y-2">
-          {faqs.map((faq, index) => {
-            const isOpen = openIndex === index;
-            return (
-              <div 
-                key={index} 
-                className="border-b border-[#3C3633]/5"
-              >
-                <button
-                  onClick={() => setOpenIndex(isOpen ? null : index)}
-                  aria-expanded={isOpen}
-                  className="w-full flex items-center justify-between py-5 text-left hover:text-[#7D8E7E] transition-colors group"
-                >
-                  <span className="text-lg md:text-xl font-medium text-[#3C3633] group-hover:text-[#7D8E7E] pr-8">{faq.question}</span>
-                  <div className={`flex-none transform transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}>
-                    {isOpen ? (
-                      <Minus className="w-5 h-5 text-[#7D8E7E]" />
-                    ) : (
-                      <Plus className="w-5 h-5 text-[#3C3633]/30" />
-                    )}
-                  </div>
-                </button>
-                
-                <div 
-                  className={`overflow-hidden transition-all duration-500 ease-in-out ${isOpen ? 'max-h-[500px] opacity-100 mb-5' : 'max-h-0 opacity-0'}`}
-                >
-                  <p className="text-[#5D6D7E] text-base leading-relaxed">
-                    {faq.answer}
-                  </p>
-                </div>
-              </div>
-            );
-          })}
+        <div className="grid md:grid-cols-2 gap-x-12">
+          <div className="space-y-2">
+            {firstCol.map((faq, index) => renderFaqItem(faq, index))}
+          </div>
+          <div className="space-y-2">
+            {secondCol.map((faq, index) => renderFaqItem(faq, index + half))}
+          </div>
         </div>
       </div>
     </section>

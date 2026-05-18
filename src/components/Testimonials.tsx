@@ -21,10 +21,16 @@ const Testimonials: React.FC = () => {
   ];
 
   return (
-    <section className="py-32 bg-[#F9F7F2]">
-      <div className="max-w-7xl mx-auto px-6">
+    <section className="relative py-32 bg-[#F9F7F2] overflow-hidden">
+      {/* Background Graphic */}
+      <div className="absolute inset-0 z-0 opacity-40">
+        <img src="/hero_background.png" alt="" className="w-full h-full object-cover" />
+      </div>
+
+      <div className="relative z-10 max-w-7xl mx-auto px-6">
         <div className="text-center mb-20">
           <p className="text-4xl md:text-5xl serif-font text-[#3C3633]">Client Experiences</p>
+          <div className="w-48 h-px bg-[#3C3633]/20 mx-auto mt-8" />
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">

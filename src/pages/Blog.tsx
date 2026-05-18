@@ -14,10 +14,7 @@ const Blog: React.FC = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-24"
         >
-          <h1 className="text-5xl md:text-7xl serif-font text-[#3C3633] mb-6">Field Notes</h1>
-          <p className="text-[#5D6D7E] text-xl max-w-2xl mx-auto">
-            Practical guides and tax updates for the independent professional.
-          </p>
+          <h1 className="text-5xl md:text-7xl serif-font text-[#3C3633] mb-6">Tax Resources</h1>
         </motion.div>
 
         <div className="grid gap-12">

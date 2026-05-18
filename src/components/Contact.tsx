@@ -11,12 +11,18 @@ const Contact: React.FC = () => {
   };
 
   return (
-    <section id="contact" className="py-32 bg-white">
-      <div className="max-w-7xl mx-auto px-6">
+    <section id="contact" className="relative py-32 bg-white overflow-hidden">
+      {/* Background Graphic */}
+      <div className="absolute inset-0 z-0 opacity-40 pointer-events-none">
+        <img src="/hero_background.png" alt="" className="w-full h-full object-cover" />
+      </div>
+
+      <div className="relative z-10 max-w-7xl mx-auto px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-24">
           <div>
             <img src="/logo-alone.png" alt="Calm Tax Co. Logo" className="h-16 mb-8" />
-            <h2 className="text-5xl md:text-6xl mb-8 leading-tight">Let's <br /><span className="italic">connect.</span></h2>
+            <h2 className="text-5xl md:text-6xl mb-4 leading-tight">Let's <br /><span className="italic">connect.</span></h2>
+            <div className="w-48 h-px bg-[#3C3633]/20 mb-8" />
             <p className="text-[#5D6D7E] mb-12 max-w-md leading-relaxed">
               We handle the filing so you don't have to. Drop us a message and we'll connect via email. No phone calls, no scheduling. Just write when you are ready.
             </p>

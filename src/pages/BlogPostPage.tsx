@@ -15,7 +15,7 @@ const BlogPostPage: React.FC = () => {
       <div className="py-32 px-6 text-center bg-[#F9F7F2] min-h-screen">
         <h1 className="text-4xl serif-font mb-8">Article not found</h1>
         <Link to="/blog" className="text-[#7D8E7E] hover:underline flex items-center justify-center gap-2">
-          <ArrowLeft className="w-4 h-4" /> Back to Field Notes
+          <ArrowLeft className="w-4 h-4" /> Back to Tax Resources
         </Link>
       </div>
     );
@@ -38,7 +38,7 @@ const BlogPostPage: React.FC = () => {
             to="/blog" 
             className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-[#7D8E7E] hover:text-[#3C3633] transition-colors mb-12"
           >
-            <ArrowLeft className="w-4 h-4" /> Back to Field Notes
+            <ArrowLeft className="w-4 h-4" /> Back to Tax Resources
           </Link>
           
           <header className="mb-16">

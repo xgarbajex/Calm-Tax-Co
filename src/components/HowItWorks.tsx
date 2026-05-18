@@ -29,7 +29,8 @@ const HowItWorks: React.FC = () => {
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-24">
           <h2 className="text-5xl md:text-6xl serif-font text-[#3C3633] mb-4">How it works</h2>
-          <p className="text-[#5D6D7E] text-xl max-w-2xl mx-auto">Most returns are completed within 10 to 14 days from the day we have your documents.</p>
+          <div className="w-px h-12 bg-[#7D8E7E]/30 mx-auto my-8" />
+          <p className="text-[#3C3633] serif-font text-xl max-w-2xl mx-auto">Most returns are completed within 10 to 14 days from the day we have your documents.</p>
         </div>
 
         <div className="relative">

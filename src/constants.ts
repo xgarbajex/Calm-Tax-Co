@@ -3,7 +3,7 @@ import { Service, NavItem } from './types';
 export const NAV_ITEMS: NavItem[] = [
   { label: 'Home', href: '/#home' },
   { label: 'Pricing', href: '/#pricing' },
-  { label: 'Field Notes', href: '/blog' },
+  { label: 'Tax Resources', href: '/blog' },
   { label: 'About', href: '/#about' },
   { label: 'Contact', href: '/#contact' },
 ];
