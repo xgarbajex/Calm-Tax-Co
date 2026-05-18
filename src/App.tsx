@@ -1,59 +1,72 @@
 import React, { useState } from 'react';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import Pricing from './components/Pricing';
-import About from './components/About';
-import Testimonials from './components/Testimonials';
-import Contact from './components/Contact';
-import FAQ from './components/FAQ';
-import DeadlineBanner from './components/DeadlineBanner';
-import TrustBadges from './components/TrustBadges';
-import BreathingExercise from './components/BreathingExercise';
+import Home from './pages/Home';
+import Blog from './pages/Blog';
+import BlogPostPage from './pages/BlogPostPage';
 import LegalNotice from './components/LegalNotice';
 
-const App: React.FC = () => {
+const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [activeLegal, setActiveLegal] = useState<'privacy' | 'terms' | 'accessibility' | null>(null);
+  const location = useLocation();
+
+  // Scroll logic
+  React.useEffect(() => {
+    if (location.hash) {
+      const id = location.hash.replace('#', '');
+      const element = document.getElementById(id);
+      if (element) {
+        setTimeout(() => {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }, 100);
+      }
+    } else {
+      window.scrollTo(0, 0);
+    }
+  }, [location.pathname, location.hash]);
 
   return (
     <main className="relative bg-[#F9F7F2]">
       <Navbar />
       
-      <div className="space-y-0">
-        <Hero />
-        <Pricing />
-        <About />
-        <Testimonials />
-        <BreathingExercise />
-        <FAQ />
-        <Contact />
-      </div>
+      {children}
 
       <footer className="py-20 px-6 border-t border-[#3C3633]/5 bg-white">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center text-center md:text-left">
-          <div className="mb-8 md:mb-0">
-            <h2 className="text-2xl serif-font mb-2 text-[#3C3633]">Calm Tax Co.</h2>
+        <div className="max-w-7xl mx-auto">
+          <div className="flex flex-col md:flex-row justify-between items-start gap-12">
+            <div className="max-w-xs">
+              <h2 className="text-2xl serif-font mb-2 text-[#3C3633]">Calm Tax Co.</h2>
+              <p className="text-xs text-[#3C3633]/50 leading-relaxed">A small, careful tax practice. Conducted entirely by correspondence. Arizona, U.S. — serving all 50 states, year-round.</p>
+              <div className="mt-4 flex flex-col gap-1">
+                <span className="text-xs text-[#3C3633]/40 uppercase tracking-widest">Credentials</span>
+                <span className="text-xs text-[#3C3633]/60">IRS PTIN holder</span>
+                <span className="text-xs text-[#3C3633]/60">IRS Authorized E-File Provider</span>
+                <span className="text-xs text-[#3C3633]/60">Proton-secured communications</span>
+              </div>
+            </div>
+            <div className="flex flex-wrap gap-8 text-xs uppercase tracking-[0.2em] text-[#3C3633]">
+              <button 
+                onClick={() => setActiveLegal('privacy')}
+                className="hover:text-[#7D8E7E] transition-colors cursor-pointer"
+              >
+                Privacy Policy
+              </button>
+              <button 
+                onClick={() => setActiveLegal('terms')}
+                className="hover:text-[#7D8E7E] transition-colors cursor-pointer"
+              >
+                Terms of Service
+              </button>
+              <button 
+                onClick={() => setActiveLegal('accessibility')}
+                className="hover:text-[#7D8E7E] transition-colors cursor-pointer"
+              >
+                Accessibility
+              </button>
+            </div>
           </div>
-          
-          <div className="flex flex-wrap justify-center gap-8 text-xs uppercase tracking-[0.2em] text-[#3C3633]">
-            <button 
-              onClick={() => setActiveLegal('privacy')}
-              className="hover:text-[#7D8E7E] transition-colors cursor-pointer"
-            >
-              Privacy Policy
-            </button>
-            <button 
-              onClick={() => setActiveLegal('terms')}
-              className="hover:text-[#7D8E7E] transition-colors cursor-pointer"
-            >
-              Terms of Service
-            </button>
-            <button 
-              onClick={() => setActiveLegal('accessibility')}
-              className="hover:text-[#7D8E7E] transition-colors cursor-pointer"
-            >
-              Accessibility
-            </button>
-            <p className="opacity-40">© 2026 Calm Tax Co. All rights reserved.</p>
+          <div className="mt-12 pt-6 border-t border-[#3C3633]/5">
+            <p className="text-xs text-[#3C3633]/30 text-center">© 2026 Calm Tax Co. All rights reserved.</p>
           </div>
         </div>
       </footer>
@@ -84,6 +97,20 @@ const App: React.FC = () => {
         }
       `}</style>
     </main>
+  );
+};
+
+const App: React.FC = () => {
+  return (
+    <BrowserRouter>
+      <Layout>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/blog/:slug" element={<BlogPostPage />} />
+        </Routes>
+      </Layout>
+    </BrowserRouter>
   );
 };
 

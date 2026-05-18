@@ -16,3 +16,11 @@ export interface ChatMessage {
   role: 'user' | 'assistant';
   content: string;
 }
+
+export interface BlogPost {
+  title: string;
+  slug: string;
+  description: string;
+  date: string;
+  content: string;
+}

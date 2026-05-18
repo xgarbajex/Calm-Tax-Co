@@ -27,7 +27,7 @@ const BreathingExercise: React.FC = () => {
   };
 
   return (
-    <section className="py-32 bg-[#F9F7F2] overflow-hidden">
+    <section className="py-32 bg-white overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 flex flex-col items-center">
         <div className="text-center mb-0 flex flex-col items-center">
           <h3 className="text-5xl md:text-6xl serif-font text-[#3C3633] leading-tight">A moment of calm, on us.</h3>

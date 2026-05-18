@@ -1,11 +1,15 @@
 import React from 'react';
-import { ShieldCheck, Lock, FileCheck, UserCheck } from 'lucide-react';
+import { ShieldCheck, Lock, FileCheck, UserCheck, Globe } from 'lucide-react';
 
 const TrustBadges: React.FC = () => {
   const badges = [
     {
       icon: <ShieldCheck className="w-5 h-5" />,
       text: "Secure & Confidential"
+    },
+    {
+      icon: <Globe className="w-5 h-5" />,
+      text: "Serving all 50 states"
     },
     {
       icon: <UserCheck className="w-5 h-5" />,
@@ -22,13 +26,13 @@ const TrustBadges: React.FC = () => {
   ];
 
   return (
-    <div className="pt-12 flex flex-wrap items-center justify-center gap-8 md:gap-12">
+    <div className="pt-12 flex flex-row flex-wrap items-center justify-center gap-6 md:gap-10">
       {badges.map((badge, index) => (
-        <div key={index} className="flex items-center gap-3 text-[#7D8E7E]">
-          <div className="p-2 bg-[#F9F7F2] rounded-full border border-[#3C3633]/5 flex items-center justify-center">
+        <div key={index} className="flex items-center gap-2 text-[#7D8E7E] whitespace-nowrap">
+          <div className="flex-none">
             {badge.icon}
           </div>
-          <span className="text-[12px] uppercase tracking-[0.15em] font-medium leading-tight text-left max-w-[130px]">
+          <span className="text-[10px] md:text-[11px] uppercase tracking-[0.15em] font-medium">
             {badge.text}
           </span>
         </div>

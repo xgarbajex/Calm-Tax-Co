@@ -11,20 +11,20 @@ const Contact: React.FC = () => {
   };
 
   return (
-    <section id="contact" className="py-32 bg-[#F9F7F2]">
+    <section id="contact" className="py-32 bg-white">
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-24">
           <div>
             <img src="/logo-alone.png" alt="Calm Tax Co. Logo" className="h-16 mb-8" />
             <h2 className="text-5xl md:text-6xl mb-8 leading-tight">Let's <br /><span className="italic">connect.</span></h2>
             <p className="text-[#5D6D7E] mb-12 max-w-md leading-relaxed">
-              We're here to help you navigate taxes year-round. Drop us a message and we'll connect via email.
+              We handle the filing so you don't have to. Drop us a message and we'll connect via email. No phone calls, no scheduling. Just write when you are ready.
             </p>
             
             <div className="space-y-8">
               <div>
                 <h4 className="text-xs uppercase tracking-widest text-[#7D8E7E] mb-2">Service Area</h4>
-                <p className="text-[#3C3633]">Serving All 50 States, year-round with our modern, online-only workflow.</p>
+                <p className="text-[#3C3633]">Serving all 50 states with our modern, online-only workflow.</p>
               </div>
               <div>
                 <h4 className="text-xs uppercase tracking-widest text-[#7D8E7E] mb-4">Connect</h4>
@@ -42,7 +42,7 @@ const Contact: React.FC = () => {
             </div>
           </div>
 
-          <div className="bg-white p-8 md:p-12 rounded-[2.5rem] border border-[#3C3633]/5 shadow-sm">
+          <div className="bg-[#F9F7F2] p-8 md:p-12 rounded-[2.5rem] border border-[#3C3633]/5">
             {status === 'sent' ? (
               <div className="h-full flex flex-col items-center justify-center text-center py-20 animate-fade-in">
                 <div className="w-16 h-16 bg-[#7D8E7E] rounded-full flex items-center justify-center mb-6">

@@ -1,6 +1,8 @@
 {
-  "name": "Calm Tax Co.",
+  "name": "Remix: Remix: Calm Tax Co.",
   "description": "A boutique tax preparation service website with AI-powered calm concierge.",
   "requestFramePermissions": [],
-  "majorCapabilities": []
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
 }

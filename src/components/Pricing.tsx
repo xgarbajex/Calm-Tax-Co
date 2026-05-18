@@ -1,17 +1,13 @@
 import React from 'react';
 import { SERVICES } from '../constants';
-import TrustBadges from './TrustBadges';
 
 const Pricing: React.FC = () => {
   return (
     <section id="pricing" className="py-32 bg-white">
       <div className="max-w-7xl mx-auto px-6">
-        <div className="text-center mb-24 max-w-4xl mx-auto">
-          <h2 className="text-4xl md:text-5xl mb-8 font-light italic tracking-[0.05em]">Taxes, Simplified</h2>
-          <p className="text-[#5D6D7E] leading-relaxed max-w-2xl mx-auto">
-            We've designed our practice to be entirely asynchronous. No stressful phone calls or scheduled meetings. We handle everything via secure document uploads and email, allowing you to provide what's needed whenever it's convenient for you.
-          </p>
-          <TrustBadges />
+        <div className="text-center mb-24">
+          <h2 className="text-5xl md:text-6xl serif-font text-[#3C3633]">Pricing</h2>
+          <div className="w-16 h-px bg-[#3C3633]/20 mx-auto mt-8" />
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-5xl mx-auto">
@@ -50,7 +46,7 @@ const Pricing: React.FC = () => {
         
         <div className="mt-24 text-center">
           <p className="text-sm italic text-[#7D8E7E]">
-            *Starting rates for standard filings. We'll always provide a clear, custom quote if your situation has some extra moving parts.
+            Payment is due in full before work begins. You will always receive a clear quote first.
           </p>
         </div>
       </div>

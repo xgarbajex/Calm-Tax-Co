@@ -21,7 +21,7 @@ const Testimonials: React.FC = () => {
   ];
 
   return (
-    <section className="py-32 bg-white">
+    <section className="py-32 bg-[#F9F7F2]">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-20">
           <p className="text-4xl md:text-5xl serif-font text-[#3C3633]">Client Experiences</p>
@@ -35,7 +35,7 @@ const Testimonials: React.FC = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.2 }}
               viewport={{ once: true }}
-              className="bg-[#F9F7F2] p-12 rounded-[2.5rem] border border-[#3C3633]/5 flex flex-col justify-between"
+              className="bg-white p-12 rounded-[2.5rem] border border-[#3C3633]/5 flex flex-col justify-between shadow-sm"
             >
               <div className="mb-8">
                 <p className="text-lg text-[#3C3633] italic leading-relaxed">"{t.text}"</p>

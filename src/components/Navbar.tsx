@@ -25,13 +25,23 @@ const Navbar: React.FC = () => {
           
           <div className="hidden md:flex space-x-12">
             {NAV_ITEMS.map((item) => (
-              <a 
-                key={item.href} 
-                href={item.href}
-                className="text-sm uppercase tracking-widest text-[#3C3633] hover:text-[#7D8E7E] transition-colors duration-300"
-              >
-                {item.label}
-              </a>
+              item.href.includes('#') ? (
+                <a 
+                  key={item.href} 
+                  href={item.href}
+                  className="text-sm uppercase tracking-widest text-[#3C3633] hover:text-[#7D8E7E] transition-colors duration-300"
+                >
+                  {item.label}
+                </a>
+              ) : (
+                <Link 
+                  key={item.href} 
+                  to={item.href}
+                  className="text-sm uppercase tracking-widest text-[#3C3633] hover:text-[#7D8E7E] transition-colors duration-300"
+                >
+                  {item.label}
+                </Link>
+              )
             ))}
           </div>
 
