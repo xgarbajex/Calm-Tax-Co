@@ -41,7 +41,7 @@ const Testimonials: React.FC = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.2 }}
               viewport={{ once: true }}
-              className="bg-white p-12 rounded-[2.5rem] border border-[#3C3633]/5 flex flex-col justify-between shadow-sm"
+              className="bg-[#FCFBFA] p-12 rounded-[2.5rem] border border-[#3C3633]/5 flex flex-col justify-between shadow-sm"
             >
               <div className="mb-8">
                 <p className="text-lg text-[#3C3633] italic leading-relaxed">"{t.text}"</p>

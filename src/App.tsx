@@ -31,8 +31,13 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
       
       {children}
 
-      <footer className="py-20 px-6 border-t border-[#3C3633]/5 bg-[#FCFBFA]">
-        <div className="max-w-7xl mx-auto">
+      <footer className="relative py-20 px-6 border-t border-[#3C3633]/5 bg-[#FCFBFA] overflow-hidden">
+        {/* Background Graphic */}
+        <div className="absolute inset-0 z-0 opacity-20 pointer-events-none">
+          <img src="/hero_background.png" alt="" className="w-full h-full object-cover" />
+        </div>
+
+        <div className="relative z-10 max-w-7xl mx-auto">
           <div className="flex flex-col md:flex-row justify-between items-start gap-12">
             <div className="max-w-xs">
               <h2 className="text-2xl serif-font mb-2 text-[#3C3633]">Calm Tax Co.</h2>

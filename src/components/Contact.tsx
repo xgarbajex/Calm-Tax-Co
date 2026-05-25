@@ -24,7 +24,7 @@ const Contact: React.FC = () => {
             <h2 className="text-5xl md:text-6xl mb-4 leading-tight">Let's <br /><span className="italic">connect.</span></h2>
             <div className="w-48 h-px bg-[#3C3633]/20 mb-8" />
             <p className="text-[#5D6D7E] mb-12 max-w-md leading-relaxed">
-              We handle the filing so you don't have to. Drop us a message and we'll connect via email. No phone calls, no scheduling. Just write when you are ready.
+              We handle the filing so you don't have to. Drop us a message and we'll connect via email. No phone calls, no scheduling. Just write when you're ready.
             </p>
             
             <div className="space-y-8">

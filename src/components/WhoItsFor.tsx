@@ -34,7 +34,7 @@ const WhoItsFor: React.FC = () => {
           {cards.map((card, index) => (
             <div key={index} className="relative overflow-hidden bg-[#F9F7F2] p-8 md:p-12 rounded-2xl border border-[#3C3633]/5 hover:shadow-lg transition-all duration-500">
               {/* Background Graphic */}
-              <div className="absolute inset-0 z-0 opacity-40 pointer-events-none">
+              <div className="absolute inset-0 z-0 opacity-30 pointer-events-none">
                 <img src="/hero_background.png" alt="" className="w-full h-full object-cover" />
               </div>
 

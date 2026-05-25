@@ -95,9 +95,7 @@ const FAQ: React.FC = () => {
 
   return (
     <section id="faq" className="py-24 bg-[#F9F7F2]">
-      <script type="application/ld+json">
-        {JSON.stringify(faqSchema)}
-      </script>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl serif-font text-[#3C3633]">Common Questions</h2>
