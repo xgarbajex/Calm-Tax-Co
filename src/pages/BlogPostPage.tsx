@@ -1,7 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { motion } from 'motion/react';
-import { Helmet } from 'react-helmet-async';
 import ReactMarkdown from 'react-markdown';
 import { BLOG_POSTS } from '../blogData';
 import { ArrowLeft } from 'lucide-react';
@@ -9,6 +8,15 @@ import { ArrowLeft } from 'lucide-react';
 const BlogPostPage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
   const post = BLOG_POSTS.find((p) => p.slug === slug);
+
+  useEffect(() => {
+    if (post) {
+      document.title = `${post.title} | Calm Tax Co.`;
+    }
+    return () => {
+      document.title = 'Calm Tax Co.'; // Reset title on unmount
+    };
+  }, [post]);
 
   if (!post) {
     return (
@@ -22,11 +30,6 @@ const BlogPostPage: React.FC = () => {
   }
 
   return (
-    <>
-      <Helmet>
-        <title>{post.title} | Calm Tax Co.</title>
-        <meta name="description" content={post.description} />
-      </Helmet>
       <motion.article 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -71,7 +74,6 @@ const BlogPostPage: React.FC = () => {
         </footer>
       </div>
     </motion.article>
-    </>
   );
 };
 
