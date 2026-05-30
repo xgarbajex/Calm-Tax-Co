@@ -29,9 +29,9 @@ const BreathingExercise: React.FC = () => {
   return (
     <section className="py-32 bg-[#FCFBFA] overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16 md:items-center">
-        <div className="text-left mb-0 flex flex-col items-start">
+        <div className="text-center md:text-left mb-8 md:mb-0 flex flex-col items-center md:items-start">
           <h3 className="text-5xl md:text-6xl serif-font text-[#3C3633] leading-tight">A moment of calm, on us.</h3>
-          <div className="w-48 h-px bg-[#3C3633]/20 my-6" />
+          <div className="w-48 h-px bg-[#3C3633]/20 my-6 mx-auto md:mx-0" />
           <p className="text-lg text-[#5D6D7E] mt-6 max-w-xl leading-relaxed">
             Just follow along with the animation.
             <br />

@@ -26,14 +26,14 @@ const About: React.FC = () => {
             <div className="w-48 h-px bg-[#3C3633]/20 mb-8" />
             <div className="space-y-6 text-[#5D6D7E] text-lg leading-relaxed">
               <p>
-                I started Calm Tax Co. because I genuinely believe taxes can be handled clearly without being a lot to manage. Every return is handled with personal care and precision, with your peace of mind at the center of everything. I run this as a solo practice from Arizona. I am an IRS-registered tax preparer with an EFIN, currently completing additional certification, and I work with clients across the country.
+                I started Calm Tax Co. because I genuinely believe taxes can be handled clearly without being a lot to manage. Every return is handled with personal care and precision, with your peace of mind at the center of everything. I run this as a solo practice from Arizona. I am an IRS-registered tax preparer with an EFIN, continuing professional education and additional tax certification, and I work with clients across the country.
               </p>
               <p>
                 I work with a small number of clients at a time so every return gets real attention. Everything happens by email, on your schedule, with no pressure to move faster than makes sense for you.
               </p>
             </div>
             <div className="mt-8 pt-6 border-t border-[#3C3633]/10 text-[#7D8E7E] text-sm font-medium">
-              IRS-registered tax preparer · EFIN holder · Additional certification in progress
+              IRS-registered tax preparer · EFIN holder · Continuing tax specialization coursework
             </div>
           </div>
         </div>

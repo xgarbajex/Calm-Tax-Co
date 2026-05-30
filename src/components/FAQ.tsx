@@ -4,40 +4,40 @@ import { Plus, Minus } from 'lucide-react';
 const FAQ: React.FC = () => {
   const faqs = [
     {
-      question: "What documents do I need to file my taxes as a freelancer or self-employed worker?",
-      answer: "The exact documents depend on your situation, but most freelancers and self-employed filers need: all 1099-NEC or 1099-MISC forms from clients, categorized records of business expenses, a mileage log, any 1099-K forms from payment platforms like PayPal or Stripe, and your prior year return if you have it. If you also have W-2 income, bring that too. When you reach out, we will send you a short checklist based on your specific situation."
+      question: "What documents will I need to pull together?",
+      answer: "It depends on your situation. We send every client a customized checklist before they upload anything, so you know exactly what to gather and how to organize it. You won't have to guess."
     },
     {
-      question: "How long does the tax preparation process take from start to finish?",
-      answer: "Most returns are completed within 10 to 14 days from the day we have your complete documents."
+      question: "How long does tax preparation take?",
+      answer: "Tax preparation at Calm Tax Co. typically takes 10 to 14 days from the time we receive your complete document set. We review your materials carefully and will reach out by email if anything specific is missing during that time."
     },
     {
-      question: "Do I need to come in for an appointment or get on a phone call?",
-      answer: "No. Everything happens by email and secure document upload. There are no office visits, no phone calls, and no scheduled meetings. Having time to research and respond carefully in writing is part of how we deliver accurate work."
+      question: "Do I need to come into an office or get on a phone call?",
+      answer: "No office visit, no phone call, no scheduled appointment of any kind. Everything happens by email and secure document upload, on your schedule. Most clients complete the entire process without a single real-time interaction."
     },
     {
-      question: "How do I send my documents securely?",
-      answer: "Documents are uploaded through an encrypted folder, not emailed as attachments. We use Proton Drive to share your documents: a privacy-first platform with end-to-end encryption, meaning no third parties can access your files, not even Proton. Only you and our office can view them. You will receive upload instructions when you reach out."
+      question: "How do I send you my documents?",
+      answer: "When you come on as a client, we set up a private encrypted Proton Drive folder just for you and send you a link to access it. You upload your documents there at your own pace. Nothing sensitive goes through standard email."
     },
     {
-      question: "What happens if I get an IRS letter after you file?",
-      answer: "Most letters are routine: payment reminders, verification requests, matching notices, or simple corrections. If you have a question, we will review the notice with you and help you understand what is being asked. For anything requiring formal representation, we refer you to a specialist."
+      question: "What if I get an IRS letter after my return is filed?",
+      answer: "Reach out and we will review the notice with you to help clarify what the IRS is asking. Most letters are routine and do not require formal action. If yours does require representation, we will refer you to a qualified specialist."
     },
     {
-      question: "What if I am running late getting my documents together?",
-      answer: "No worries. We can file extensions for clients who need them."
+      question: "Can you file an extension if I am not ready by the deadline?",
+      answer: "Yes. If you need more time, we file the extension on your behalf. An extension gives you additional time to file but not additional time to pay, so if you expect to owe, it helps to know that early."
     },
     {
-      question: "Do you handle back taxes or unfiled returns from prior years?",
-      answer: "Yes, with some limits. We can help you catch up on prior-year filings and work through them systematically."
+      question: "Can you help with back taxes from prior years?",
+      answer: "In many cases, yes. We help clients catch up on unfiled returns and submit delayed federal and state returns. We will let you know upfront if a situation is outside our scope."
     },
     {
-      question: "What is your pricing, and are there hidden fees?",
-      answer: "Personal returns start at $175. Self-employed and freelance returns start at $375. Both include federal and one state return. If your situation has additional complexity, we quote the full price before any work begins."
+      question: "How much does professional tax preparation cost?",
+      answer: "Professional tax preparation at Calm Tax Co. starts at $175 for personal returns and $375 for self-employed or freelance filing. Both prices include your federal return and one state return, and we provide a full quote before any work begins so there are no surprises."
     },
     {
       question: "When do I pay?",
-      answer: "Payment is due in full before work begins. Once you reach out and we confirm your situation is a good fit, we will send a quote and a secure payment link. We start on your return as soon as payment is received. We do not bill hourly or add fees after the fact. The price you are quoted is the price you pay."
+      answer: "Payment is due in full before we begin work on your return. We send a secure payment link after confirming we are a good fit. The price we quote is the price you pay. We do not bill hourly."
     }
   ];
 
@@ -72,7 +72,7 @@ const FAQ: React.FC = () => {
           aria-expanded={isOpen}
           className="w-full flex items-center justify-between py-5 text-left hover:text-[#7D8E7E] transition-colors group"
         >
-          <span className="text-lg font-medium text-[#3C3633] group-hover:text-[#7D8E7E] pr-8">{faq.question}</span>
+          <span className="text-xl font-bold text-[#3C3633] group-hover:text-[#7D8E7E] pr-8">{faq.question}</span>
           <div className={`flex-none transform transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}>
             {isOpen ? (
               <Minus className="w-5 h-5 text-[#7D8E7E]" />

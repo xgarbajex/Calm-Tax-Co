@@ -4,7 +4,7 @@ import TrustBadges from './TrustBadges';
 
 const Hero: React.FC = () => {
   return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-24 bg-[#F9F7F2]">
+    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-48 pb-28 md:pt-40 md:pb-32 lg:pt-48 bg-[#F9F7F2]">
       {/* Background Graphic */}
       <div className="absolute inset-0 z-0 opacity-40">
         <img src="/hero_background.png" alt="" className="w-full h-full object-cover" />
@@ -16,11 +16,17 @@ const Hero: React.FC = () => {
           <span className="text-[#7D8E7E]">calmly</span> handled.
         </h1>
         <div className="w-48 h-px bg-[#3C3633]/20 mx-auto mb-10" />
-        <p className="text-lg md:text-xl text-[#5D6D7E] max-w-xl mx-auto mb-8 leading-relaxed">
+        <p className="text-xl md:text-2xl text-[#3C3633] max-w-2xl mx-auto mb-6 leading-relaxed serif-font italic opacity-90">
           All online. All on your schedule. All year round.
         </p>
-        <p className="text-md md:text-lg italic serif-font text-[#3C3633] max-w-xl mx-auto mb-16">
-          You bring the documents. We bring the calm.
+        <p className="text-[15px] md:text-[17px] text-[#5D6D7E] max-w-2xl mx-auto mb-6 leading-relaxed tracking-[0.02em] font-light">
+          Secure tax preparation for W-2 employees, freelancers, gig workers, and self-employed individuals.
+        </p>
+        <p className="text-[11px] md:text-[13px] text-[#A66D5E] max-w-2xl mx-auto mb-12 uppercase tracking-[0.2em] font-medium">
+          No office visits or scheduled calls required.
+        </p>
+        <p className="text-2xl md:text-3xl italic serif-font text-[#3C3633] max-w-xl mx-auto mb-16 opacity-90">
+          You bring the documents. <br className="block sm:hidden" />We bring the calm.
         </p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
           <a 

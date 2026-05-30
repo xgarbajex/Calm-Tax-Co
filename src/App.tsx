@@ -1,10 +1,17 @@
 import React, { useState } from 'react';
-import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useLocation, Link } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import Blog from './pages/Blog';
 import BlogPostPage from './pages/BlogPostPage';
 import LegalNotice from './components/LegalNotice';
+
+// Service Pages
+import FreelanceTax from './pages/services/FreelanceTax';
+import GigWorkerTax from './pages/services/GigWorkerTax';
+import SelfEmployedTax from './pages/services/SelfEmployedTax';
+import RemoteTax from './pages/services/RemoteTax';
+import PhoenixOnlineTax from './pages/services/PhoenixOnlineTax';
 
 const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [activeLegal, setActiveLegal] = useState<'privacy' | 'terms' | 'accessibility' | null>(null);
@@ -41,7 +48,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
           <div className="flex flex-col md:flex-row justify-between items-start gap-12">
             <div className="max-w-xs">
               <h2 className="text-2xl serif-font mb-2 text-[#3C3633]">Calm Tax Co.</h2>
-              <p className="text-xs text-[#3C3633]/50 leading-relaxed">A small, careful tax practice. Conducted entirely by correspondence. Arizona, U.S. — serving all 50 states, year-round.</p>
+              <p className="text-xs text-[#3C3633]/50 leading-relaxed">A small, careful tax practice. Conducted entirely by correspondence. Arizona, U.S. - serving all 50 states, year-round.</p>
               <div className="mt-4 flex flex-col gap-1">
                 <span className="text-xs text-[#3C3633]/40 uppercase tracking-widest">Credentials</span>
                 <span className="text-xs text-[#3C3633]/60">IRS PTIN holder</span>
@@ -49,25 +56,38 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
                 <span className="text-xs text-[#3C3633]/60">Proton-secured communications</span>
               </div>
             </div>
-            <div className="flex flex-wrap gap-8 text-xs uppercase tracking-[0.2em] text-[#3C3633]">
-              <button 
-                onClick={() => setActiveLegal('privacy')}
-                className="hover:text-[#7D8E7E] transition-colors cursor-pointer"
-              >
-                Privacy Policy
-              </button>
-              <button 
-                onClick={() => setActiveLegal('terms')}
-                className="hover:text-[#7D8E7E] transition-colors cursor-pointer"
-              >
-                Terms of Service
-              </button>
-              <button 
-                onClick={() => setActiveLegal('accessibility')}
-                className="hover:text-[#7D8E7E] transition-colors cursor-pointer"
-              >
-                Accessibility
-              </button>
+
+            <div className="flex max-w-lg flex-wrap gap-x-12 gap-y-8">
+              <div className="flex flex-col gap-3">
+                <span className="text-xs text-[#3C3633]/40 uppercase tracking-widest mb-1">Services</span>
+                <Link to="/services/remote-tax-preparation-services" className="text-xs text-[#3C3633]/70 hover:text-[#7D8E7E] transition-colors">Remote Tax Services</Link>
+                <Link to="/services/phoenix-online-tax-preparation" className="text-xs text-[#3C3633]/70 hover:text-[#7D8E7E] transition-colors">Phoenix Online Tax Prep</Link>
+                <Link to="/services/freelance-tax-preparation" className="text-xs text-[#3C3633]/70 hover:text-[#7D8E7E] transition-colors">Freelance Tax Preparation</Link>
+                <Link to="/services/gig-worker-tax-filing" className="text-xs text-[#3C3633]/70 hover:text-[#7D8E7E] transition-colors">Gig Worker Tax Filing</Link>
+                <Link to="/services/self-employed-tax-preparation" className="text-xs text-[#3C3633]/70 hover:text-[#7D8E7E] transition-colors">Self-Employed Tax Prep</Link>
+              </div>
+
+              <div className="flex flex-col gap-3">
+                <span className="text-xs text-[#3C3633]/40 uppercase tracking-widest mb-1">Legal</span>
+                <button 
+                  onClick={() => setActiveLegal('privacy')}
+                  className="text-left text-xs text-[#3C3633]/70 hover:text-[#7D8E7E] transition-colors cursor-pointer"
+                >
+                  Privacy Policy
+                </button>
+                <button 
+                  onClick={() => setActiveLegal('terms')}
+                  className="text-left text-xs text-[#3C3633]/70 hover:text-[#7D8E7E] transition-colors cursor-pointer"
+                >
+                  Terms of Service
+                </button>
+                <button 
+                  onClick={() => setActiveLegal('accessibility')}
+                  className="text-left text-xs text-[#3C3633]/70 hover:text-[#7D8E7E] transition-colors cursor-pointer"
+                >
+                  Accessibility
+                </button>
+              </div>
             </div>
           </div>
           <div className="mt-12 pt-6 border-t border-[#3C3633]/5">
@@ -113,6 +133,11 @@ const App: React.FC = () => {
           <Route path="/" element={<Home />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:slug" element={<BlogPostPage />} />
+          <Route path="/services/freelance-tax-preparation" element={<FreelanceTax />} />
+          <Route path="/services/gig-worker-tax-filing" element={<GigWorkerTax />} />
+          <Route path="/services/self-employed-tax-preparation" element={<SelfEmployedTax />} />
+          <Route path="/services/remote-tax-preparation-services" element={<RemoteTax />} />
+          <Route path="/services/phoenix-online-tax-preparation" element={<PhoenixOnlineTax />} />
         </Routes>
       </Layout>
     </BrowserRouter>

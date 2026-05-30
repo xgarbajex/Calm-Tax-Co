@@ -9,29 +9,34 @@ const DeadlineBanner: React.FC = () => {
   ];
 
   return (
-    <div className="bg-[#F9F7F2] py-4 border-y border-[#A66D5E]/10">
-      <div className="max-w-7xl mx-auto px-6 overflow-hidden relative">
-        <div className="flex flex-wrap items-center justify-center gap-6 whitespace-normal md:whitespace-nowrap md:gap-12 md:animate-marquee">
-          {deadlines.map((d, i) => (
-            <div key={i} className="flex items-center gap-3 text-[#A66D5E]">
-              <Calendar className="w-4 h-4 opacity-60" />
-              <span className="text-xs uppercase tracking-[0.2em] font-medium">
-                <span className="font-bold">{d.date}:</span> {d.event}
-              </span>
-            </div>
-          ))}
-          {/* Duplicate for seamless loop if needed, but for a fixed width it might just center */}
-        </div>
+    <div className="bg-[#F9F7F2] py-3 border-y border-[#A66D5E]/10 flex overflow-hidden whitespace-nowrap">
+      <div className="flex items-center gap-8 md:gap-12 animate-marquee min-w-full justify-around px-4 shrink-0">
+        {deadlines.map((d, i) => (
+          <div key={i} className="flex items-center gap-2 text-[#A66D5E]">
+            <Calendar className="w-3.5 h-3.5 opacity-60 shrink-0" />
+            <span className="text-[10px] md:text-xs uppercase tracking-[0.2em] font-medium">
+              <span className="font-bold">{d.date}:</span> {d.event}
+            </span>
+          </div>
+        ))}
+      </div>
+      <div aria-hidden="true" className="flex items-center gap-8 md:gap-12 animate-marquee min-w-full justify-around px-4 shrink-0">
+        {deadlines.map((d, i) => (
+          <div key={i} className="flex items-center gap-2 text-[#A66D5E]">
+            <Calendar className="w-3.5 h-3.5 opacity-60 shrink-0" />
+            <span className="text-[10px] md:text-xs uppercase tracking-[0.2em] font-medium">
+              <span className="font-bold">{d.date}:</span> {d.event}
+            </span>
+          </div>
+        ))}
       </div>
       <style>{`
-        @media (min-width: 768px) {
-          .animate-marquee {
-            animation: marquee 20s linear infinite alternate;
-          }
+        .animate-marquee {
+          animation: marquee 25s linear infinite;
         }
         @keyframes marquee {
-          0% { transform: translateX(10%); }
-          100% { transform: translateX(-10%); }
+          0% { transform: translateX(0%); }
+          100% { transform: translateX(-100%); }
         }
       `}</style>
     </div>

@@ -4,10 +4,34 @@ import { Mail, Phone } from 'lucide-react';
 const Contact: React.FC = () => {
   const [status, setStatus] = useState<'idle' | 'sending' | 'sent'>('idle');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setStatus('sending');
-    setTimeout(() => setStatus('sent'), 1500);
+
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+
+    try {
+      const response = await fetch("https://formsubmit.co/ajax/calmtaxco@proton.me", {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify(Object.fromEntries(formData))
+      });
+
+      if (response.ok) {
+        setStatus('sent');
+        form.reset();
+      } else {
+        throw new Error('Form submission failed');
+      }
+    } catch (error) {
+      console.error(error);
+      setStatus('idle');
+      alert("There was an error sending your message. Please try again or email us directly at calmtaxco@proton.me.");
+    }
   };
 
   return (
@@ -67,9 +91,15 @@ const Contact: React.FC = () => {
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-6">
+                {/* Honeypot field for spam prevention */}
+                <input type="text" name="_honey" style={{ display: 'none' }} />
+                {/* Disable captcha since we're using AJAX */}
+                <input type="hidden" name="_captcha" value="false" />
+
                 <div>
                   <label className="text-xs uppercase tracking-widest text-[#3C3633] block mb-2">Full Name</label>
                   <input 
+                    name="name"
                     required
                     type="text" 
                     className="w-full bg-transparent border-b border-[#3C3633]/20 py-3 focus:border-[#7D8E7E] outline-none transition-all duration-300 placeholder:text-[#3C3633]/30"
@@ -79,6 +109,7 @@ const Contact: React.FC = () => {
                 <div>
                   <label className="text-xs uppercase tracking-widest text-[#3C3633] block mb-2">Email Address</label>
                   <input 
+                    name="email"
                     required
                     type="email" 
                     className="w-full bg-transparent border-b border-[#3C3633]/20 py-3 focus:border-[#7D8E7E] outline-none transition-all duration-300 placeholder:text-[#3C3633]/30"
@@ -87,7 +118,7 @@ const Contact: React.FC = () => {
                 </div>
                 <div>
                   <label className="text-xs uppercase tracking-widest text-[#3C3633] block mb-2">Service of Interest</label>
-                  <select className="w-full bg-transparent border-b border-[#3C3633]/20 py-3 focus:border-[#7D8E7E] outline-none transition-all duration-300">
+                  <select name="service" className="w-full bg-transparent border-b border-[#3C3633]/20 py-3 focus:border-[#7D8E7E] outline-none transition-all duration-300">
                     <option>Personal Filing</option>
                     <option>Self-Employed & Gig</option>
                     <option>Other / General Inquiry</option>
@@ -96,6 +127,7 @@ const Contact: React.FC = () => {
                 <div>
                   <label className="text-xs uppercase tracking-widest text-[#3C3633] block mb-2">Message</label>
                   <textarea 
+                    name="message"
                     required
                     rows={4}
                     className="w-full bg-transparent border-b border-[#3C3633]/20 py-3 focus:border-[#7D8E7E] outline-none transition-all duration-300 placeholder:text-[#3C3633]/30 resize-none"
