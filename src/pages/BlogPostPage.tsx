@@ -55,7 +55,20 @@ const BlogPostPage: React.FC = () => {
           </header>
 
           <div className="markdown-body">
-            <ReactMarkdown>{post.content}</ReactMarkdown>
+            <ReactMarkdown
+              components={{
+                a: ({ node, ...props }) => (
+                  <Link 
+                    to={props.href || "#"} 
+                    className="font-bold underline text-[#A66D5E] hover:text-[#3C3633]"
+                  >
+                    {props.children}
+                  </Link>
+                )
+              }}
+            >
+              {post.content}
+            </ReactMarkdown>
           </div>
 
         <footer className="mt-24 pt-12 border-t border-[#3C3633]/10">

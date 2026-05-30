@@ -21,25 +21,25 @@ const PhoenixOnlineTax: React.FC = () => {
       <div className="max-w-3xl mx-auto">
         <header className="mb-16">
           <p className="text-xs uppercase tracking-widest text-[#7D8E7E] mb-4">Tax Preparation Services</p>
-          <h1 className="text-4xl md:text-5xl serif-font text-[#3C3633] leading-tight mb-8">
+          <h1 className="text-4xl md:text-6xl serif-font font-normal text-[#3C3633] leading-tight mb-8">
             Phoenix Online Tax Preparation
           </h1>
         </header>
 
-        <div className="space-y-8 text-[#5D6D7E] leading-relaxed text-lg">
+        <div className="space-y-8 text-[#4A4441] leading-relaxed text-lg">
           <p>
             Calm Tax Co. is a solo tax practice based in Arizona, serving clients in the Phoenix area and across all 50 states.
           </p>
 
           <p>
-            This is a fully online practice, by design. No office, no waiting room, no appointment to schedule. Whether you're a W-2 employee who wants a real professional looking at your return, a freelancer navigating 1099s, or a self-employed person tired of doing it alone, the process is the same: straightforward, private, and handled entirely by email and secure document sharing.
+            This is a fully online practice, by design. No office, no waiting room, no appointment to schedule. Whether you're a W-2 employee who wants a real professional looking at your return, a <Link to="/services/freelance-tax-preparation" className="font-bold underline text-[#A66D5E] hover:text-[#3C3633]">freelancer</Link> navigating 1099s, or a <Link to="/services/self-employed-tax-preparation" className="font-bold underline text-[#A66D5E] hover:text-[#3C3633]">self-employed</Link> person tired of doing it alone, the process is the same: straightforward, private, and handled entirely by email and secure document sharing.
           </p>
 
           <p>
             The Phoenix area is home to a lot of people doing a lot of different kinds of work. This practice is built to serve all of them.
           </p>
 
-          <h2 className="text-2xl serif-font text-[#3C3633] mt-12 mb-6">Common Client Situations</h2>
+          <h2 className="text-3xl serif-font font-normal text-[#3C3633] mt-16 mb-6 border-b border-[#3C3633]/10 pb-3">Common Client Situations</h2>
           <ul className="list-disc pl-6 space-y-4">
             <li>You're a W-2 employee with a straightforward return, but you've always done it yourself and you'd like someone to actually check it. Maybe your situation got a little more complicated this year. A new job, a home purchase, some investment activity. You want it done right.</li>
             <li>You're a freelancer or contractor who's been filing on your own and suspects you might be missing deductions or miscalculating your quarterly estimates.</li>
@@ -47,9 +47,9 @@ const PhoenixOnlineTax: React.FC = () => {
             <li>You've had impersonal experiences at big tax chains and you'd like something that actually feels like working with a person who's paying attention.</li>
           </ul>
 
-          <h2 className="text-2xl serif-font text-[#3C3633] mt-12 mb-6">How The Process Works</h2>
+          <h2 className="text-3xl serif-font font-normal text-[#3C3633] mt-16 mb-6 border-b border-[#3C3633]/10 pb-3">How The Process Works</h2>
           <p>
-            Being based in Arizona doesn't mean you need to come to us. We operate entirely online, by choice.
+            Being based in Arizona doesn't mean you need to come to us. We operate <Link to="/services/remote-tax-preparation-services" className="font-bold underline text-[#A66D5E] hover:text-[#3C3633]">entirely online</Link>, by choice.
           </p>
           <p>
             You upload your documents through your private Proton folder. We review everything carefully, prepare your return, and communicate by email if we have questions. We e-file directly with the IRS and your state.
@@ -58,7 +58,7 @@ const PhoenixOnlineTax: React.FC = () => {
             It's the same careful, asynchronous process we use for clients across the country.
           </p>
 
-          <h2 className="text-2xl serif-font text-[#3C3633] mt-12 mb-6">The Solo Practice Difference</h2>
+          <h2 className="text-3xl serif-font font-normal text-[#3C3633] mt-16 mb-6 border-b border-[#3C3633]/10 pb-3">The Solo Practice Difference</h2>
           <p>
             Large tax prep chains move fast. They have volume targets. Your return gets handed off, reviewed quickly, and filed.
           </p>
@@ -69,9 +69,9 @@ const PhoenixOnlineTax: React.FC = () => {
             That's the model here. Careful, personal attention to each client's situation, without the overhead or formality of a larger firm.
           </p>
 
-          <h2 className="text-2xl serif-font text-[#3C3633] mt-12 mb-6">Who This Is For</h2>
+          <h2 className="text-3xl serif-font font-normal text-[#3C3633] mt-16 mb-6 border-b border-[#3C3633]/10 pb-3">Who This Is For</h2>
           <p>
-            This is a good fit for W-2 employees, freelancers, gig workers, and self-employed individuals who want a trusted professional handling their return without sacrificing the convenience of a fully online process.
+            This is a good fit for W-2 employees, <Link to="/services/freelance-tax-preparation" className="font-bold underline text-[#A66D5E] hover:text-[#3C3633]">freelancers</Link>, <Link to="/services/gig-worker-tax-filing" className="font-bold underline text-[#A66D5E] hover:text-[#3C3633]">gig workers</Link>, and <Link to="/services/self-employed-tax-preparation" className="font-bold underline text-[#A66D5E] hover:text-[#3C3633]">self-employed</Link> individuals who want a trusted professional handling their return without sacrificing the convenience of a fully online process.
           </p>
           <p>
             It's also well-suited for people who've had frustrating experiences with impersonal tax services and want something that actually feels like working with a real person who's paying attention.
@@ -80,22 +80,22 @@ const PhoenixOnlineTax: React.FC = () => {
             We work with clients across all 50 states, so if you're outside the Phoenix area but were drawn here by how this practice works, you're welcome here too.
           </p>
 
-          <h2 className="text-2xl serif-font text-[#3C3633] mt-12 mb-6">Frequently Asked Questions</h2>
-          <div className="space-y-6">
+          <h2 className="text-3xl serif-font font-normal text-[#3C3633] mt-16 mb-8 border-b border-[#3C3633]/10 pb-3">Frequently Asked Questions</h2>
+          <div className="space-y-8 divide-y divide-[#3C3633]/10">
             <div>
-              <h3 className="text-xl text-[#3C3633] font-bold mb-2">Can an Arizona tax preparer file out-of-state returns?</h3>
+              <h3 className="text-xl md:text-2xl serif-font font-normal text-[#3C3633] mb-3">Can an Arizona tax preparer file out-of-state returns?</h3>
               <p>An Arizona-based tax preparer can file returns for any state. We are an IRS-registered practice and handle federal and state returns for clients in all 50 states.</p>
             </div>
-            <div>
-              <h3 className="text-xl text-[#3C3633] font-bold mb-2">Do online tax preparers accept physical document drop-offs?</h3>
+            <div className="pt-6">
+              <h3 className="text-xl md:text-2xl serif-font font-normal text-[#3C3633] mb-3">Do online tax preparers accept physical document drop-offs?</h3>
               <p>We do not accept physical drop-offs or in-person meetings. All documents are uploaded to your private Proton folder. This keeps the process efficient and your information handled consistently.</p>
             </div>
-            <div>
-              <h3 className="text-xl text-[#3C3633] font-bold mb-2">How secure is online tax document uploading?</h3>
+            <div className="pt-6">
+              <h3 className="text-xl md:text-2xl serif-font font-normal text-[#3C3633] mb-3">How secure is online tax document uploading?</h3>
               <p>Online tax document uploading is secure when using dedicated encryption tools. We provide each client with a private encrypted Proton folder. Your documents go there directly and never travel through standard email.</p>
             </div>
-            <div>
-              <h3 className="text-xl text-[#3C3633] font-bold mb-2">How do I file taxes with both W-2 and freelance income?</h3>
+            <div className="pt-6">
+              <h3 className="text-xl md:text-2xl serif-font font-normal text-[#3C3633] mb-3">How do I file taxes with both W-2 and freelance income?</h3>
               <p>Filing taxes with both W-2 and freelance income means combining all earnings on one return. We handle the full picture including your W-2s, 1099s, Schedule C, and applicable deductions.</p>
             </div>
           </div>
@@ -104,7 +104,7 @@ const PhoenixOnlineTax: React.FC = () => {
         <footer className="mt-24 pt-12 border-t border-[#3C3633]/10">
           <div className="bg-white p-8 md:p-12 rounded-[2.5rem] text-center border border-[#3C3633]/5">
             <h3 className="text-2xl serif-font text-[#3C3633] mb-4">Local roots. Fully remote.</h3>
-            <p className="text-[#5D6D7E] mb-8">
+            <p className="text-[#4A4441] mb-8 font-medium">
               Taxes handled by someone who's actually paying attention.
             </p>
             <Link 

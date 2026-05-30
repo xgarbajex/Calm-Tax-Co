@@ -21,12 +21,12 @@ const FreelanceTax: React.FC = () => {
       <div className="max-w-3xl mx-auto">
         <header className="mb-16">
           <p className="text-xs uppercase tracking-widest text-[#7D8E7E] mb-4">Tax Preparation Services</p>
-          <h1 className="text-4xl md:text-5xl serif-font text-[#3C3633] leading-tight mb-8">
+          <h1 className="text-4xl md:text-6xl serif-font font-normal text-[#3C3633] leading-tight mb-8">
             Freelance Tax Preparation
           </h1>
         </header>
 
-        <div className="space-y-8 text-[#5D6D7E] leading-relaxed text-lg">
+        <div className="space-y-8 text-[#4A4441] leading-relaxed text-lg">
           <p>
             You did the work. You invoiced the clients. Now it's tax time, and you want someone competent handling the filing side so you can stay focused on the work itself.
           </p>
@@ -35,7 +35,7 @@ const FreelanceTax: React.FC = () => {
             Calm Tax Co. is a solo remote tax practice based in Arizona, serving freelancers, consultants, creatives, and independent contractors across all 50 states. No office. No phone tag. No pressure to move faster than makes sense for you.
           </p>
 
-          <h2 className="text-2xl serif-font text-[#3C3633] mt-12 mb-6">Common Client Situations</h2>
+          <h2 className="text-3xl serif-font font-normal text-[#3C3633] mt-16 mb-6 border-b border-[#3C3633]/10 pb-3">Common Client Situations</h2>
           <p>
             The freelancers we work with tend to fall into a few familiar patterns:
           </p>
@@ -47,9 +47,9 @@ const FreelanceTax: React.FC = () => {
           </ul>
           <p>Any of these sound familiar? You're in the right place.</p>
 
-          <h2 className="text-2xl serif-font text-[#3C3633] mt-12 mb-6">How The Process Works</h2>
+          <h2 className="text-3xl serif-font font-normal text-[#3C3633] mt-16 mb-6 border-b border-[#3C3633]/10 pb-3">How The Process Works</h2>
           <p>
-            Everything happens online, on your schedule. There's no appointment to book, no office to visit, no call you have to be mentally prepared for.
+            Everything happens <Link to="/services/remote-tax-preparation-services" className="font-bold underline text-[#A66D5E] hover:text-[#3C3633]">entirely online</Link>, on your schedule. There's no appointment to book, no office to visit, no call you have to be mentally prepared for.
           </p>
           <p>Here's how it works:</p>
 
@@ -63,40 +63,40 @@ const FreelanceTax: React.FC = () => {
             That's it. Most clients hear from us within a few business days of submitting their documents.
           </p>
 
-          <h2 className="text-2xl serif-font text-[#3C3633] mt-12 mb-6">Common Concerns</h2>
+          <h2 className="text-3xl serif-font font-normal text-[#3C3633] mt-16 mb-6 border-b border-[#3C3633]/10 pb-3">Common Concerns</h2>
           <p>
             <strong>"I'm not sure what I can deduct."</strong><br />
-            Common deductions for freelancers include home office, equipment, software, and mileage. As long as expenses are documented and business-related, we'll apply them correctly on your return. The documentation is on your end; the filing is on ours.
+            Common deductions for freelancers include <Link to="/blog/freelancer-tax-deductions-guide" className="font-bold underline text-[#A66D5E] hover:text-[#3C3633]">home office, equipment, software</Link>, and mileage. As long as expenses are documented and business-related, we'll apply them correctly on your return. The documentation is on your end; the filing is on ours.
           </p>
           <p>
             <strong>"I've been underpaying quarterly taxes."</strong><br />
             It happens. Your completed return will include your estimated payment amounts for the coming year based on your current figures.
           </p>
 
-          <h2 className="text-2xl serif-font text-[#3C3633] mt-12 mb-6">Who This Is For</h2>
+          <h2 className="text-3xl serif-font font-normal text-[#3C3633] mt-16 mb-6 border-b border-[#3C3633]/10 pb-3">Who This Is For</h2>
           <p>
-            This service is a good fit if you earn income on 1099s, operate as a sole proprietor or single-member LLC, and want a calm, competent professional handling your return. No large firm overhead, no anxiety of doing it yourself.
+            This service is a good fit if you earn income on 1099s, operate as a sole proprietor, <Link to="/services/gig-worker-tax-filing" className="font-bold underline text-[#A66D5E] hover:text-[#3C3633]">gig worker</Link>, or single-member LLC, and want a calm, competent professional handling your return. No large firm overhead, no anxiety of doing it yourself.
           </p>
           <p>
             If you're comfortable with email and can take a few photos of your documents, the rest is straightforward.
           </p>
 
-          <h2 className="text-2xl serif-font text-[#3C3633] mt-12 mb-6">Frequently Asked Questions</h2>
-          <div className="space-y-6">
+          <h2 className="text-3xl serif-font font-normal text-[#3C3633] mt-16 mb-8 border-b border-[#3C3633]/10 pb-3">Frequently Asked Questions</h2>
+          <div className="space-y-8 divide-y divide-[#3C3633]/10">
             <div>
-              <h3 className="text-xl text-[#3C3633] font-bold mb-2">How do I calculate quarterly estimated taxes for freelance work?</h3>
+              <h3 className="text-xl md:text-2xl serif-font font-normal text-[#3C3633] mb-3">How do I calculate quarterly estimated taxes for freelance work?</h3>
               <p>Quarterly estimated payment amounts are included with every completed return. We calculate these figures based on your current year's income and deductions so you know what to pay and when.</p>
             </div>
-            <div>
-              <h3 className="text-xl text-[#3C3633] font-bold mb-2">How do I file taxes with no 1099 form from clients?</h3>
+            <div className="pt-6">
+              <h3 className="text-xl md:text-2xl serif-font font-normal text-[#3C3633] mb-3">How do I file taxes with no 1099 form from clients?</h3>
               <p>Filing freelance taxes without a 1099 form is normal and fully legitimate. We report self-reported freelance income correctly using your own income records, so all earnings are documented regardless of whether clients sent formal paperwork.</p>
             </div>
-            <div>
-              <h3 className="text-xl text-[#3C3633] font-bold mb-2">Is it safe to send tax documents online?</h3>
+            <div className="pt-6">
+              <h3 className="text-xl md:text-2xl serif-font font-normal text-[#3C3633] mb-3">Is it safe to send tax documents online?</h3>
               <p>Sending tax documents online is secure when using the right tools. We set up a private encrypted Proton folder for each client so your files go directly to us and never travel through standard email.</p>
             </div>
-            <div>
-              <h3 className="text-xl text-[#3C3633] font-bold mb-2">Can an out-of-state tax preparer file my taxes?</h3>
+            <div className="pt-6">
+              <h3 className="text-xl md:text-2xl serif-font font-normal text-[#3C3633] mb-3">Can an out-of-state tax preparer file my taxes?</h3>
               <p>An out-of-state tax preparer can file both your federal and state returns. We prepare returns for clients in all 50 states and handle each state's filing requirements as part of the standard process.</p>
             </div>
           </div>
@@ -105,7 +105,7 @@ const FreelanceTax: React.FC = () => {
         <footer className="mt-24 pt-12 border-t border-[#3C3633]/10">
           <div className="bg-white p-8 md:p-12 rounded-[2.5rem] text-center border border-[#3C3633]/5">
             <h3 className="text-2xl serif-font text-[#3C3633] mb-4">When you're ready, the checklist makes it simple.</h3>
-            <p className="text-[#5D6D7E] mb-8">
+            <p className="text-[#4A4441] mb-8 font-medium">
               We take it from there.
             </p>
             <Link 
