@@ -27,8 +27,16 @@ body { margin:0; background:var(--bg); color:var(--ink); font-family:Inter,sans-
 .num { display:inline-flex; align-items:center; justify-content:center; width:32px; height:32px; border-radius:50%; border:1px solid var(--sage); font-family:Lora,serif; font-weight:600; }
 .step h3 { font-family:Lora,serif; font-style:italic; font-size:21px; margin:12px 0 8px; }
 .step p { font-size:14px; line-height:1.55; color:var(--mid); margin:0; }
-.upload-box { display:flex; align-items:center; justify-content:space-between; gap:18px; flex-wrap:wrap; background:rgba(125,142,126,.07); border:1.5px solid var(--sage); border-radius:var(--r); padding:22px; margin:28px 0 14px; }
+.upload-box { background:rgba(125,142,126,.07); border:1.5px solid var(--sage); border-radius:var(--r); padding:22px; margin:28px 0 22px; }
+.upload-top { display:flex; align-items:flex-start; justify-content:space-between; gap:18px; flex-wrap:wrap; }
+.upload-main { flex:1 1 420px; min-width:260px; }
 .upload-box h3 { font-family:Lora,serif; font-size:22px; margin:0 0 6px; }
+.upload-controls { display:flex; flex-direction:column; gap:10px; align-items:flex-start; margin-top:14px; }
+.doc-select-wrap { margin-top:14px; }
+.doc-select-label { display:block; font-size:12px; text-transform:uppercase; letter-spacing:.08em; color:var(--mid); margin-bottom:6px; font-weight:600; }
+.doc-select { width:min(100%,520px); border:1px solid var(--border); border-radius:12px; padding:11px 12px; font-family:Inter,sans-serif; font-size:14px; color:var(--ink); background:#fff; }
+.uploaded-in-card { margin-top:20px; padding-top:16px; border-top:1px solid rgba(125,142,126,.28); }
+.uploaded-in-card-title { font-family:Lora,serif; font-size:20px; margin:0 0 10px; }
 .btn { font-family:Inter,sans-serif; font-size:13px; font-weight:600; letter-spacing:.07em; text-transform:uppercase; color:#fff; background:var(--ink); border:0; border-radius:999px; padding:14px 28px; cursor:pointer; text-decoration:none; display:inline-block; }
 .btn:hover { background:var(--sage); }
 .btn[disabled] { opacity:.55; cursor:wait; }
@@ -36,6 +44,7 @@ body { margin:0; background:var(--bg); color:var(--ink); font-family:Inter,sans-
 .upload-status-line { display:flex; align-items:center; gap:10px; margin-top:10px; font-size:14px; color:var(--mid); }
 .upload-spinner { width:20px; height:20px; border-radius:50%; border:3px solid rgba(125,142,126,.22); border-top-color:var(--sage); animation:spin .8s linear infinite; flex:0 0 auto; }
 .upload-check { width:22px; height:22px; border-radius:50%; background:var(--success); color:#fff; display:inline-flex; align-items:center; justify-content:center; font-size:14px; font-weight:700; flex:0 0 auto; }
+.mini-spinner { width:14px; height:14px; border-radius:50%; border:2px solid rgba(125,142,126,.22); border-top-color:var(--sage); animation:spin .8s linear infinite; display:inline-block; vertical-align:-2px; margin-right:6px; }
 @keyframes spin { to { transform:rotate(360deg); } }
 .privacy { border-left:4px solid var(--sage); background:var(--bg2); border-radius:0 var(--r) var(--r) 0; padding:16px 18px 16px 24px; font-size:14px; line-height:1.65; color:var(--mid); margin:22px 0; }
 .group-title { font-family:Lora,serif; font-size:23px; margin:30px 0 12px; border-bottom:1px solid var(--border); padding-bottom:8px; }
@@ -55,6 +64,8 @@ body { margin:0; background:var(--bg); color:var(--ink); font-family:Inter,sans-
 .file { display:flex; justify-content:space-between; align-items:center; gap:10px; padding:10px 12px; border:1px solid var(--border); border-radius:10px; background:#fff; margin-top:8px; font-size:14px; }
 .delete-btn { border:1px solid #e4b6b6; background:#fff5f5; color:#8a3434; border-radius:999px; padding:6px 10px; cursor:pointer; font-size:12px; }
 .delete-btn:hover { background:#ffecec; }
+.delete-btn[disabled] { opacity:.7; cursor:wait; }
+.file.deleting { opacity:.7; background:#fafafa; }
 .err { background:#fff0f0; border:1px solid #f2c1c1; color:#7a2828; padding:14px; border-radius:12px; }
 .loading { text-align:center; padding:60px; color:var(--mid); }
 .progress-row { margin-top:8px; padding:8px 10px; border:1px dashed var(--border); border-radius:10px; background:#fff; font-size:13px; color:var(--mid); }
@@ -238,6 +249,24 @@ function fileHtml(file) {
   );
 }
 
+function uploadTypeSelectHtml(items) {
+  const options = (items || []).map(function (item, idx) {
+    const prefix = checked.has(idx) ? '✓ ' : '';
+    return '<option value="' + idx + '">' + esc(prefix + item) + '</option>';
+  }).join('');
+
+  return (
+    '<div class="doc-select-wrap">' +
+      '<label class="doc-select-label" for="uploadDocType">What are you uploading?</label>' +
+      '<select class="doc-select" id="uploadDocType">' +
+        '<option value="">Select checklist item, optional</option>' +
+        options +
+      '</select>' +
+      '<div class="status">Optional: choose the checklist item this upload belongs to, and it will be checked off automatically after upload.</div>' +
+    '</div>'
+  );
+}
+
 
 function setUploadMessage(type, message) {
   const status = document.getElementById('uploadStatus');
@@ -311,10 +340,12 @@ function render() {
       '<div class="step"><div class="num">03</div><h3>Receive Quote</h3><p>Once we review your documents, we’ll send your quote before preparation begins.</p></div>' +
     '</div>' +
     '<div class="upload-box">' +
-      '<div><h3>📂 Secure Upload</h3><div class="status" id="uploadStatus">Choose files to add them to your Calm Tax Co. folder.</div><div id="uploadProgress"></div></div>' +
-      '<button class="btn" id="uploadBtn" onclick="document.getElementById(\'fileInput\').click()">Upload Documents</button>' +
+      '<div class="upload-top">' +
+        '<div class="upload-main"><h3>📂 Secure Upload</h3><div class="status" id="uploadStatus">Choose files to add them to your Calm Tax Co. folder.</div><div id="uploadProgress"></div>' + uploadTypeSelectHtml(items) + '</div>' +
+        '<div class="upload-controls"><button class="btn" id="uploadBtn" onclick="document.getElementById(\'fileInput\').click()">Upload Documents</button></div>' +
+      '</div>' +
+      '<div class="uploaded-in-card"><div class="uploaded-in-card-title">Uploaded Files</div><div id="filesList">' + (files || '<div class="status">No files uploaded yet.</div>') + '</div></div>' +
     '</div>' +
-    '<div class="files"><div class="group-title">Uploaded Files</div><div id="filesList">' + (files || '<div class="status">No files uploaded yet.</div>') + '</div></div>' +
     '<div class="privacy"><strong>Privacy & security:</strong> Your privacy matters to us. We use secure cloud storage and encryption to help protect your tax documents. Access is limited to the people involved in preparing your return, and we never sell your information.</div>' +
     (state.hasItemizedDeductions ? '<div class="reminder">💡 <strong>Itemized deduction reminder:</strong> Because you selected possible itemized deductions, you do not need to track down every small receipt before getting started. The most helpful records are usually larger or official documents, such as mortgage interest statements, property tax records, larger charitable donation records, and significant medical expense records. Upload what you already have, and we will let you know if anything else is likely to help.</div>' : '') +
     '<div id="items">' + checklistHtml + '</div>';
@@ -355,6 +386,8 @@ function readFileAsDataURL(file) {
 async function uploadSelectedFiles(files) {
   const button = document.getElementById('uploadBtn');
   const progress = document.getElementById('uploadProgress');
+  const select = document.getElementById('uploadDocType');
+  const selectedIdx = select && select.value !== '' ? Number(select.value) : null;
 
   button.disabled = true;
   progress.innerHTML = '';
@@ -384,13 +417,19 @@ async function uploadSelectedFiles(files) {
       progress.innerHTML = '<div class="progress-row">✓ Uploaded ' + esc(file.name) + '</div>';
     }
 
+    if (selectedIdx !== null && !Number.isNaN(selectedIdx)) {
+      checked.add(selectedIdx);
+      await api({ form_type: 'saveChecklistState', clientId: CLIENT_ID, checkedIndexes: Array.from(checked) });
+    }
+
     render();
     setUploadMessage('success', files.length > 1 ? 'Upload complete. ' + files.length + ' files uploaded.' : 'Upload complete.');
   } catch (error) {
     alert('Upload failed: ' + error.message);
     setUploadMessage('error', 'Upload failed. Please try again.');
   } finally {
-    button.disabled = false;
+    const freshButton = document.getElementById('uploadBtn');
+    if (freshButton) freshButton.disabled = false;
     document.getElementById('fileInput').value = '';
   }
 }
@@ -401,6 +440,16 @@ async function deleteFile(fileId, event) {
   if (!fileId) return;
   if (!confirm('Delete this uploaded file?')) return;
 
+  const button = event.currentTarget;
+  const row = button ? button.closest('.file') : null;
+  const originalButtonHtml = button ? button.innerHTML : '';
+
+  if (row) row.classList.add('deleting');
+  if (button) {
+    button.disabled = true;
+    button.innerHTML = '<span class="mini-spinner"></span>Deleting...';
+  }
+
   try {
     await api({ form_type: 'deleteFile', clientId: CLIENT_ID, fileId: fileId });
     state.uploadedFiles = (state.uploadedFiles || []).filter(function (file) {
@@ -408,6 +457,11 @@ async function deleteFile(fileId, event) {
     });
     render();
   } catch (error) {
+    if (row) row.classList.remove('deleting');
+    if (button) {
+      button.disabled = false;
+      button.innerHTML = originalButtonHtml || 'Delete';
+    }
     alert('Could not delete file: ' + error.message);
   }
 }
