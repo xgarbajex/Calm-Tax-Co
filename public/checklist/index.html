@@ -45,9 +45,9 @@ body { margin:0; background:var(--bg); color:var(--ink); font-family:Inter,sans-
 .btn:hover { background:var(--sage); }
 .btn[disabled] { opacity:.55; cursor:wait; }
 .status { font-size:14px; color:var(--mid); margin-top:10px; }
-.upload-status-line { display:flex; align-items:center; gap:10px; margin-top:10px; font-size:14px; color:var(--mid); }
-.upload-spinner { width:20px; height:20px; border-radius:50%; border:3px solid rgba(125,142,126,.22); border-top-color:var(--sage); animation:spin .8s linear infinite; flex:0 0 auto; }
-.upload-check { width:22px; height:22px; border-radius:50%; background:var(--success); color:#fff; display:inline-flex; align-items:center; justify-content:center; font-size:14px; font-weight:700; flex:0 0 auto; }
+.upload-status-line { display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; gap:8px; margin-top:10px; font-size:14px; color:var(--mid); }
+.upload-spinner { width:24px; height:24px; border-radius:50%; border:3px solid rgba(125,142,126,.22); border-top-color:var(--sage); animation:spin .8s linear infinite; flex:0 0 auto; }
+.upload-check { width:26px; height:26px; border-radius:50%; background:var(--success); color:#fff; display:inline-flex; align-items:center; justify-content:center; font-size:15px; font-weight:700; flex:0 0 auto; }
 .mini-spinner { width:14px; height:14px; border-radius:50%; border:2px solid rgba(125,142,126,.22); border-top-color:var(--sage); animation:spin .8s linear infinite; display:inline-block; vertical-align:-2px; margin-right:6px; }
 @keyframes spin { to { transform:rotate(360deg); } }
 .privacy { border-left:4px solid var(--sage); background:var(--bg2); border-radius:0 var(--r) var(--r) 0; padding:16px 18px 16px 24px; font-size:14px; line-height:1.65; color:var(--mid); margin:22px 0; }
@@ -303,6 +303,16 @@ function setUploadMessage(type, message) {
   }
 }
 
+
+function resetUploadMessageSoon() {
+  window.clearTimeout(window.uploadResetTimer);
+  window.uploadResetTimer = window.setTimeout(function () {
+    setUploadMessage('default', 'Optional: Select a document type to automatically mark a checklist item complete.');
+    const progress = document.getElementById('uploadProgress');
+    if (progress) progress.innerHTML = '';
+  }, 4500);
+}
+
 function render() {
   if (!state) return;
 
@@ -419,6 +429,7 @@ async function uploadSelectedFiles(files) {
   const select = document.getElementById('uploadDocType');
   const selectedIdx = select && select.value !== '' && select.value !== 'other' ? Number(select.value) : null;
 
+  window.clearTimeout(window.uploadResetTimer);
   button.disabled = true;
   progress.innerHTML = '';
 
@@ -456,6 +467,7 @@ async function uploadSelectedFiles(files) {
 
     render();
     setUploadMessage('success', files.length > 1 ? 'Upload complete. ' + files.length + ' files uploaded.' : 'Upload complete.');
+    resetUploadMessageSoon();
   } catch (error) {
     alert('Upload failed: ' + error.message);
     setUploadMessage('error', 'Upload failed. Please try again.');
