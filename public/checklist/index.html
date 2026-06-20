@@ -32,6 +32,10 @@ body { margin:0; background:var(--bg); color:var(--ink); font-family:Inter,sans-
 .upload-main { flex:1 1 420px; min-width:260px; }
 .upload-box h3 { font-family:Lora,serif; font-size:22px; margin:0 0 6px; }
 .upload-controls { display:flex; flex-direction:column; gap:10px; align-items:flex-start; margin-top:14px; }
+.drop-zone { margin-top:14px; width:min(100%,520px); border:2px dashed rgba(125,142,126,.55); background:rgba(255,255,255,.65); border-radius:14px; padding:18px; text-align:center; color:var(--mid); transition:background .15s ease, border-color .15s ease, transform .15s ease; cursor:pointer; }
+.drop-zone strong { color:var(--ink); }
+.drop-zone.drag-over { background:#fff; border-color:var(--sage); transform:scale(1.01); }
+.drop-zone-small { display:block; margin-top:5px; font-size:12px; color:var(--mid); }
 .doc-select-wrap { margin-top:14px; }
 .doc-select-label { display:block; font-size:12px; text-transform:uppercase; letter-spacing:.08em; color:var(--mid); margin-bottom:6px; font-weight:600; }
 .doc-select { width:min(100%,520px); border:1px solid var(--border); border-radius:12px; padding:11px 12px; font-family:Inter,sans-serif; font-size:14px; color:var(--ink); background:#fff; }
@@ -80,7 +84,7 @@ body { margin:0; background:var(--bg); color:var(--ink); font-family:Inter,sans-
 </head>
 <body>
 <div class="wrap"><div class="card" id="app"><div class="loading">Loading your checklist…</div></div></div>
-<input type="file" id="fileInput" multiple hidden>
+<input type="file" id="fileInput" multiple hidden accept=".pdf,.jpg,.jpeg,.png,.heic,.webp,.doc,.docx,.txt,.rtf,.csv,.xls,.xlsx,.ods,.numbers">
 
 <script>
 const AS_URL = 'https://script.google.com/macros/s/AKfycbxIqzdrwed8JgxdUUMMtTqVUQDmEmChlm7411oMGUUAF4Jn_8HinPHNDmNwZKb6vddiXg/exec';
@@ -267,6 +271,22 @@ function uploadTypeSelectHtml(items) {
   );
 }
 
+function selectedUploadLabel() {
+  const select = document.getElementById('uploadDocType');
+  if (!select || select.value === '') return '';
+  const idx = Number(select.value);
+  const item = state && state.items ? state.items[idx] : '';
+  return item || '';
+}
+
+function cleanDocLabel(label) {
+  return String(label || '')
+    .replace(/[\\/:*?"<>|#%{}~&]/g, '-')
+    .replace(/\s+/g, ' ')
+    .trim()
+    .slice(0, 80);
+}
+
 
 function setUploadMessage(type, message) {
   const status = document.getElementById('uploadStatus');
@@ -341,7 +361,7 @@ function render() {
     '</div>' +
     '<div class="upload-box">' +
       '<div class="upload-top">' +
-        '<div class="upload-main"><h3>📂 Secure Upload</h3><div class="status" id="uploadStatus">Choose files to add them to your Calm Tax Co. folder.</div><div id="uploadProgress"></div>' + uploadTypeSelectHtml(items) + '</div>' +
+        '<div class="upload-main"><h3>📂 Secure Upload</h3><div class="status" id="uploadStatus">Choose files to add them to your Calm Tax Co. folder.</div><div id="uploadProgress"></div>' + uploadTypeSelectHtml(items) + '<div class="drop-zone" id="dropZone" onclick="document.getElementById(\'fileInput\').click()"><strong>Drag & drop files here</strong><span class="drop-zone-small">or use the upload button. You can upload multiple files at once.</span></div></div>' +
         '<div class="upload-controls"><button class="btn" id="uploadBtn" onclick="document.getElementById(\'fileInput\').click()">Upload Documents</button></div>' +
       '</div>' +
       '<div class="uploaded-in-card"><div class="uploaded-in-card-title">Uploaded Files</div><div id="filesList">' + (files || '<div class="status">No files uploaded yet.</div>') + '</div></div>' +
@@ -349,6 +369,8 @@ function render() {
     '<div class="privacy"><strong>Privacy & security:</strong> Your privacy matters to us. We use secure cloud storage and encryption to help protect your tax documents. Access is limited to the people involved in preparing your return, and we never sell your information.</div>' +
     (state.hasItemizedDeductions ? '<div class="reminder">💡 <strong>Itemized deduction reminder:</strong> Because you selected possible itemized deductions, you do not need to track down every small receipt before getting started. The most helpful records are usually larger or official documents, such as mortgage interest statements, property tax records, larger charitable donation records, and significant medical expense records. Upload what you already have, and we will let you know if anything else is likely to help.</div>' : '') +
     '<div id="items">' + checklistHtml + '</div>';
+
+  setupDropZone();
 }
 
 async function load() {
@@ -395,6 +417,8 @@ async function uploadSelectedFiles(files) {
   try {
     for (let i = 0; i < files.length; i++) {
       const file = files[i];
+      const docLabel = selectedUploadLabel();
+      const cleanLabel = cleanDocLabel(docLabel);
       const countText = files.length > 1 ? 'Uploading ' + (i + 1) + ' of ' + files.length + ': ' + file.name : 'Uploading ' + file.name;
 
       setUploadMessage('loading', countText);
@@ -404,7 +428,7 @@ async function uploadSelectedFiles(files) {
       const result = await api({
         form_type: 'uploadFile',
         clientId: CLIENT_ID,
-        file: { name: file.name, mimeType: file.type, dataUrl: dataUrl }
+        file: { name: file.name, mimeType: file.type, dataUrl: dataUrl, docType: docLabel, docTypeLabel: cleanLabel }
       });
 
       if (!state.uploadedFiles) state.uploadedFiles = [];
@@ -464,6 +488,34 @@ async function deleteFile(fileId, event) {
     }
     alert('Could not delete file: ' + error.message);
   }
+}
+
+
+function setupDropZone() {
+  const dropZone = document.getElementById('dropZone');
+  if (!dropZone) return;
+
+  ['dragenter', 'dragover'].forEach(function (eventName) {
+    dropZone.addEventListener(eventName, function (event) {
+      event.preventDefault();
+      event.stopPropagation();
+      dropZone.classList.add('drag-over');
+    });
+  });
+
+  ['dragleave', 'drop'].forEach(function (eventName) {
+    dropZone.addEventListener(eventName, function (event) {
+      event.preventDefault();
+      event.stopPropagation();
+      dropZone.classList.remove('drag-over');
+    });
+  });
+
+  dropZone.addEventListener('drop', function (event) {
+    const files = Array.from(event.dataTransfer && event.dataTransfer.files ? event.dataTransfer.files : []);
+    if (!files.length) return;
+    uploadSelectedFiles(files);
+  });
 }
 
 document.getElementById('fileInput').addEventListener('change', function (event) {
