@@ -27,6 +27,25 @@ body { margin:0; background:var(--bg); color:var(--ink); font-family:Inter,sans-
 .num { display:inline-flex; align-items:center; justify-content:center; width:32px; height:32px; border-radius:50%; border:1px solid var(--sage); font-family:Lora,serif; font-weight:600; }
 .step h3 { font-family:Lora,serif; font-style:italic; font-size:21px; margin:12px 0 8px; }
 .step p { font-size:14px; line-height:1.55; color:var(--mid); margin:0; }
+.journey { margin:28px 0; padding:22px 18px; border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
+.journey-title { text-align:center; font-family:Lora,serif; font-size:21px; font-style:italic; margin:0 0 18px; color:var(--ink); }
+.journey-track { display:flex; align-items:flex-start; justify-content:space-between; gap:10px; position:relative; }
+.journey-track::before { content:""; position:absolute; left:8%; right:8%; top:19px; height:1.5px; border-top:2px dashed rgba(125,142,126,.28); z-index:0; }
+.journey-step { position:relative; z-index:1; flex:1; text-align:center; color:var(--mid); }
+.journey-dot { width:40px; height:40px; border-radius:50%; border:1px solid var(--border); background:#fff; display:inline-flex; align-items:center; justify-content:center; font-family:Lora,serif; font-size:15px; box-shadow:0 2px 8px rgba(60,54,51,.06); margin-bottom:9px; }
+.journey-label { display:block; font-size:12px; line-height:1.35; font-weight:600; color:var(--mid); }
+.journey-step.done .journey-dot { background:var(--sage); border-color:var(--sage); color:#fff; }
+.journey-step.current .journey-dot { background:var(--ink); border-color:var(--ink); color:#fff; transform:scale(1.08); }
+.journey-step.current .journey-label { color:var(--ink); }
+.journey-note { display:block; margin-top:4px; font-size:11px; color:var(--sage); font-weight:600; }
+.journey-step.future { opacity:.55; }
+@media(max-width:700px) {
+  .journey { padding:18px 6px; }
+  .journey-track { gap:4px; }
+  .journey-dot { width:34px; height:34px; font-size:13px; }
+  .journey-label { font-size:11px; }
+  .journey-track::before { top:16px; left:10%; right:10%; }
+}
 .upload-box { background:rgba(125,142,126,.07); border:1.5px solid var(--sage); border-radius:var(--r); padding:22px; margin:28px 0 22px; }
 .upload-top { display:block; }
 .upload-main { width:100%; }
@@ -364,10 +383,15 @@ function render() {
     '</div>' +
     '<div class="title">Upload Documents<br>& Checklist</div>' +
     '<p class="intro">Thank you for completing your walkthrough, ' + esc(firstName) + '. This checklist will help you gather the documents and information needed for your return. Upload what you already have, and you can come back later as you find more.</p>' +
-    '<div class="steps">' +
-      '<div class="step"><div class="num">01</div><h3>Review</h3><p>Use your checklist to gather the documents and information needed for your return.</p></div>' +
-      '<div class="step"><div class="num">02</div><h3>Upload Securely</h3><p>Add files directly from this secure page as you locate them.</p></div>' +
-      '<div class="step"><div class="num">03</div><h3>Receive Quote</h3><p>Once we review your documents, we’ll send your quote before preparation begins.</p></div>' +
+    '<div class="journey">' +
+      '<div class="journey-title">Your tax return progress</div>' +
+      '<div class="journey-track">' +
+        '<div class="journey-step done"><div class="journey-dot">✓</div><span class="journey-label">Intake</span></div>' +
+        '<div class="journey-step current"><div class="journey-dot">02</div><span class="journey-label">Upload<span class="journey-note">You are here</span></span></div>' +
+        '<div class="journey-step future"><div class="journey-dot">03</div><span class="journey-label">Quote</span></div>' +
+        '<div class="journey-step future"><div class="journey-dot">04</div><span class="journey-label">Prepare</span></div>' +
+        '<div class="journey-step future"><div class="journey-dot">05</div><span class="journey-label">E-file</span></div>' +
+      '</div>' +
     '</div>' +
     '<div class="upload-box">' +
       '<div class="upload-top">' +
