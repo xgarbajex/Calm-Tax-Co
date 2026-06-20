@@ -30,8 +30,7 @@ body { margin:0; background:var(--bg); color:var(--ink); font-family:Inter,sans-
 .journey { margin:28px 0; padding:22px 18px; border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
 .journey-title { text-align:center; font-family:Lora,serif; font-size:21px; font-style:italic; margin:0 0 18px; color:var(--ink); }
 .journey-track { display:flex; align-items:flex-start; justify-content:space-between; gap:10px; position:relative; }
-.journey-wave { position:absolute; left:7%; right:7%; top:0; width:86%; height:70px; z-index:0; overflow:visible; pointer-events:none; }
-.journey-wave path { fill:none; stroke:rgba(125,142,126,.48); stroke-width:2.2; stroke-linecap:round; stroke-dasharray:7 10; }
+.journey-track::before { content:""; position:absolute; left:12%; right:12%; top:19px; height:1.5px; border-top:2px dashed rgba(125,142,126,.28); z-index:0; }
 .journey-step { position:relative; z-index:1; flex:1; text-align:center; color:var(--mid); }
 .journey-dot { width:40px; height:40px; border-radius:50%; border:1px solid var(--border); background:#fff; display:inline-flex; align-items:center; justify-content:center; font-family:Lora,serif; font-size:15px; box-shadow:0 2px 8px rgba(60,54,51,.06); margin-bottom:9px; }
 .journey-label { display:block; font-size:12px; line-height:1.35; font-weight:600; color:var(--mid); }
@@ -39,14 +38,14 @@ body { margin:0; background:var(--bg); color:var(--ink); font-family:Inter,sans-
 .journey-step.current .journey-dot { background:var(--ink); border-color:var(--ink); color:#fff; transform:scale(1.08); }
 .journey-step.current .journey-label { color:var(--ink); }
 .journey-note { display:block; margin-top:4px; font-size:11px; color:var(--sage); font-weight:600; }
-.journey-step.future { opacity:.62; }
+.journey-step.future { opacity:.55; }
 @media(max-width:700px) {
   .journey { padding:18px 6px; }
   .journey-track { gap:4px; }
-  .journey-wave { left:8%; right:8%; width:84%; height:58px; top:-2px; }
   .journey-dot { width:34px; height:34px; font-size:13px; }
   .journey-label { font-size:11px; }
-  }
+  .journey-track::before { top:16px; left:12%; right:12%; }
+}
 .upload-box { background:rgba(125,142,126,.07); border:1.5px solid var(--sage); border-radius:var(--r); padding:22px; margin:28px 0 22px; }
 .upload-top { display:block; }
 .upload-main { width:100%; }
@@ -387,13 +386,10 @@ function render() {
     '<div class="journey">' +
       '<div class="journey-title">Your tax return progress</div>' +
       '<div class="journey-track">' +
-        '<svg class="journey-wave" viewBox="0 0 1000 90" preserveAspectRatio="none" aria-hidden="true">' +
-          '<path d="M80 45 C150 15, 215 75, 285 45 S420 15, 500 45 S650 75, 715 45 S850 15, 920 45" />' +
-        '</svg>' +
-        '<div class="journey-step done"><div class="journey-dot">✓</div><span class="journey-label">Short Intake<span class="journey-note">Complete</span></span></div>' +
+        '<div class="journey-step done"><div class="journey-dot">✓</div><span class="journey-label">Short Intake</span></div>' +
         '<div class="journey-step current"><div class="journey-dot">02</div><span class="journey-label">Gather &amp; Upload<span class="journey-note">You are here</span></span></div>' +
-        '<div class="journey-step future"><div class="journey-dot">03</div><span class="journey-label">Quote &amp; Pay<span class="journey-note">Upcoming</span></span></div>' +
-        '<div class="journey-step future"><div class="journey-dot">04</div><span class="journey-label">Prepare &amp; E-file<span class="journey-note">Upcoming</span></span></div>' +
+        '<div class="journey-step future"><div class="journey-dot">03</div><span class="journey-label">Quote &amp; Pay</span></div>' +
+        '<div class="journey-step future"><div class="journey-dot">04</div><span class="journey-label">Prepare &amp; E-file</span></div>' +
       '</div>' +
     '</div>' +
     '<div class="upload-box">' +
