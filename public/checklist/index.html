@@ -30,7 +30,7 @@ body { margin:0; background:var(--bg); color:var(--ink); font-family:Inter,sans-
 .journey { margin:28px 0; padding:22px 18px; border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
 .journey-title { text-align:center; font-family:Lora,serif; font-size:21px; font-style:italic; margin:0 0 18px; color:var(--ink); }
 .journey-track { display:flex; align-items:flex-start; justify-content:space-between; gap:10px; position:relative; }
-.journey-track::before { content:""; position:absolute; left:8%; right:8%; top:19px; height:1.5px; border-top:2px dashed rgba(125,142,126,.28); z-index:0; }
+.journey-track::before { content:""; position:absolute; left:12%; right:12%; top:19px; height:1.5px; border-top:2px dashed rgba(125,142,126,.28); z-index:0; }
 .journey-step { position:relative; z-index:1; flex:1; text-align:center; color:var(--mid); }
 .journey-dot { width:40px; height:40px; border-radius:50%; border:1px solid var(--border); background:#fff; display:inline-flex; align-items:center; justify-content:center; font-family:Lora,serif; font-size:15px; box-shadow:0 2px 8px rgba(60,54,51,.06); margin-bottom:9px; }
 .journey-label { display:block; font-size:12px; line-height:1.35; font-weight:600; color:var(--mid); }
@@ -44,7 +44,7 @@ body { margin:0; background:var(--bg); color:var(--ink); font-family:Inter,sans-
   .journey-track { gap:4px; }
   .journey-dot { width:34px; height:34px; font-size:13px; }
   .journey-label { font-size:11px; }
-  .journey-track::before { top:16px; left:10%; right:10%; }
+  .journey-track::before { top:16px; left:12%; right:12%; }
 }
 .upload-box { background:rgba(125,142,126,.07); border:1.5px solid var(--sage); border-radius:var(--r); padding:22px; margin:28px 0 22px; }
 .upload-top { display:block; }
@@ -386,11 +386,10 @@ function render() {
     '<div class="journey">' +
       '<div class="journey-title">Your tax return progress</div>' +
       '<div class="journey-track">' +
-        '<div class="journey-step done"><div class="journey-dot">✓</div><span class="journey-label">Intake</span></div>' +
-        '<div class="journey-step current"><div class="journey-dot">02</div><span class="journey-label">Upload<span class="journey-note">You are here</span></span></div>' +
-        '<div class="journey-step future"><div class="journey-dot">03</div><span class="journey-label">Quote</span></div>' +
-        '<div class="journey-step future"><div class="journey-dot">04</div><span class="journey-label">Prepare</span></div>' +
-        '<div class="journey-step future"><div class="journey-dot">05</div><span class="journey-label">E-file</span></div>' +
+        '<div class="journey-step done"><div class="journey-dot">✓</div><span class="journey-label">Short Intake</span></div>' +
+        '<div class="journey-step current"><div class="journey-dot">02</div><span class="journey-label">Gather &amp; Upload<span class="journey-note">You are here</span></span></div>' +
+        '<div class="journey-step future"><div class="journey-dot">03</div><span class="journey-label">Quote &amp; Pay</span></div>' +
+        '<div class="journey-step future"><div class="journey-dot">04</div><span class="journey-label">Prepare &amp; E-file</span></div>' +
       '</div>' +
     '</div>' +
     '<div class="upload-box">' +
