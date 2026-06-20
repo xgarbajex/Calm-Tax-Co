@@ -255,18 +255,17 @@ function fileHtml(file) {
 
 function uploadTypeSelectHtml(items) {
   const options = (items || []).map(function (item, idx) {
-    const prefix = checked.has(idx) ? '✓ ' : '';
-    return '<option value="' + idx + '">' + esc(prefix + item) + '</option>';
+    if (checked.has(idx)) return '';
+    return '<option value="' + idx + '">' + esc(item) + '</option>';
   }).join('');
 
   return (
     '<div class="doc-select-wrap">' +
-      '<label class="doc-select-label" for="uploadDocType">What are you uploading?</label>' +
-      '<select class="doc-select" id="uploadDocType">' +
-        '<option value="">Select checklist item, optional</option>' +
+      '<select class="doc-select" id="uploadDocType" aria-label="Document type">' +
+        '<option value="">Select document type (optional)</option>' +
+        '<option value="other">Other Documents</option>' +
         options +
       '</select>' +
-      '<div class="status">Optional: choose the checklist item this upload belongs to, and it will be checked off automatically after upload.</div>' +
     '</div>'
   );
 }
@@ -274,6 +273,7 @@ function uploadTypeSelectHtml(items) {
 function selectedUploadLabel() {
   const select = document.getElementById('uploadDocType');
   if (!select || select.value === '') return '';
+  if (select.value === 'other') return 'Other Documents';
   const idx = Number(select.value);
   const item = state && state.items ? state.items[idx] : '';
   return item || '';
@@ -364,10 +364,10 @@ function render() {
         '<div class="upload-main">' +
           '<div class="drop-zone" id="dropZone">' +
             '<h3>📂 Secure Upload</h3>' +
-            '<div class="status" id="uploadStatus">Choose files to add them to your Calm Tax Co. folder.</div>' +
+            '<div class="status" id="uploadStatus">Optional: Select a document type to automatically mark a checklist item complete.</div>' +
             '<div id="uploadProgress"></div>' +
             uploadTypeSelectHtml(items) +
-            '<span class="drop-zone-small">Drag & drop files anywhere in this outlined area, or use the upload button below. You can upload multiple files at once.</span>' +
+            '<span class="drop-zone-small">Drag & drop files here.</span>' +
           '</div>' +
         '</div>' +
         '<div class="upload-controls"><button class="btn" id="uploadBtn" onclick="document.getElementById(\'fileInput\').click()">Upload Documents</button></div>' +
@@ -417,7 +417,7 @@ async function uploadSelectedFiles(files) {
   const button = document.getElementById('uploadBtn');
   const progress = document.getElementById('uploadProgress');
   const select = document.getElementById('uploadDocType');
-  const selectedIdx = select && select.value !== '' ? Number(select.value) : null;
+  const selectedIdx = select && select.value !== '' && select.value !== 'other' ? Number(select.value) : null;
 
   button.disabled = true;
   progress.innerHTML = '';
