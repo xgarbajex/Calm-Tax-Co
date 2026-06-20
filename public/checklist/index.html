@@ -28,17 +28,17 @@ body { margin:0; background:var(--bg); color:var(--ink); font-family:Inter,sans-
 .step h3 { font-family:Lora,serif; font-style:italic; font-size:21px; margin:12px 0 8px; }
 .step p { font-size:14px; line-height:1.55; color:var(--mid); margin:0; }
 .upload-box { background:rgba(125,142,126,.07); border:1.5px solid var(--sage); border-radius:var(--r); padding:22px; margin:28px 0 22px; }
-.upload-top { display:flex; align-items:flex-start; justify-content:space-between; gap:18px; flex-wrap:wrap; }
-.upload-main { flex:1 1 420px; min-width:260px; }
+.upload-top { display:block; }
+.upload-main { width:100%; }
 .upload-box h3 { font-family:Lora,serif; font-size:22px; margin:0 0 6px; }
-.upload-controls { display:flex; flex-direction:column; gap:10px; align-items:flex-start; margin-top:14px; }
-.drop-zone { margin-top:14px; width:min(100%,520px); border:2px dashed rgba(125,142,126,.55); background:rgba(255,255,255,.65); border-radius:14px; padding:18px; text-align:center; color:var(--mid); transition:background .15s ease, border-color .15s ease, transform .15s ease; cursor:pointer; }
+.upload-controls { display:flex; justify-content:center; margin-top:16px; }
+.drop-zone { width:100%; border:2px dashed rgba(125,142,126,.55); background:rgba(255,255,255,.65); border-radius:14px; padding:24px 18px; text-align:center; color:var(--mid); transition:background .15s ease, border-color .15s ease, transform .15s ease; }
 .drop-zone strong { color:var(--ink); }
 .drop-zone.drag-over { background:#fff; border-color:var(--sage); transform:scale(1.01); }
-.drop-zone-small { display:block; margin-top:5px; font-size:12px; color:var(--mid); }
-.doc-select-wrap { margin-top:14px; }
+.drop-zone-small { display:block; margin-top:12px; font-size:13px; color:var(--mid); }
+.doc-select-wrap { margin:16px auto 0; text-align:center; }
 .doc-select-label { display:block; font-size:12px; text-transform:uppercase; letter-spacing:.08em; color:var(--mid); margin-bottom:6px; font-weight:600; }
-.doc-select { width:min(100%,520px); border:1px solid var(--border); border-radius:12px; padding:11px 12px; font-family:Inter,sans-serif; font-size:14px; color:var(--ink); background:#fff; }
+.doc-select { width:min(100%,520px); border:1px solid var(--border); border-radius:12px; padding:11px 12px; font-family:Inter,sans-serif; font-size:14px; color:var(--ink); background:#fff; text-align:left; }
 .uploaded-in-card { margin-top:20px; padding-top:16px; border-top:1px solid rgba(125,142,126,.28); }
 .uploaded-in-card-title { font-family:Lora,serif; font-size:20px; margin:0 0 10px; }
 .btn { font-family:Inter,sans-serif; font-size:13px; font-weight:600; letter-spacing:.07em; text-transform:uppercase; color:#fff; background:var(--ink); border:0; border-radius:999px; padding:14px 28px; cursor:pointer; text-decoration:none; display:inline-block; }
@@ -361,7 +361,15 @@ function render() {
     '</div>' +
     '<div class="upload-box">' +
       '<div class="upload-top">' +
-        '<div class="upload-main"><h3>📂 Secure Upload</h3><div class="status" id="uploadStatus">Choose files to add them to your Calm Tax Co. folder.</div><div id="uploadProgress"></div>' + uploadTypeSelectHtml(items) + '<div class="drop-zone" id="dropZone" onclick="document.getElementById(\'fileInput\').click()"><strong>Drag & drop files here</strong><span class="drop-zone-small">or use the upload button. You can upload multiple files at once.</span></div></div>' +
+        '<div class="upload-main">' +
+          '<div class="drop-zone" id="dropZone">' +
+            '<h3>📂 Secure Upload</h3>' +
+            '<div class="status" id="uploadStatus">Choose files to add them to your Calm Tax Co. folder.</div>' +
+            '<div id="uploadProgress"></div>' +
+            uploadTypeSelectHtml(items) +
+            '<span class="drop-zone-small">Drag & drop files anywhere in this outlined area, or use the upload button below. You can upload multiple files at once.</span>' +
+          '</div>' +
+        '</div>' +
         '<div class="upload-controls"><button class="btn" id="uploadBtn" onclick="document.getElementById(\'fileInput\').click()">Upload Documents</button></div>' +
       '</div>' +
       '<div class="uploaded-in-card"><div class="uploaded-in-card-title">Uploaded Files</div><div id="filesList">' + (files || '<div class="status">No files uploaded yet.</div>') + '</div></div>' +
