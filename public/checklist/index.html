@@ -441,7 +441,7 @@ async function uploadSelectedFiles(files) {
       const countText = files.length > 1 ? 'Uploading ' + (i + 1) + ' of ' + files.length + ': ' + file.name : 'Uploading ' + file.name;
 
       setUploadMessage('loading', countText);
-      progress.innerHTML = '<div class="progress-row">' + esc(countText) + '</div>';
+      progress.innerHTML = '';
 
       const dataUrl = await readFileAsDataURL(file);
       const result = await api({
@@ -457,7 +457,7 @@ async function uploadSelectedFiles(files) {
         timestamp: new Date().toISOString()
       });
 
-      progress.innerHTML = '<div class="progress-row">✓ Uploaded ' + esc(file.name) + '</div>';
+      progress.innerHTML = '';
     }
 
     if (selectedIdx !== null && !Number.isNaN(selectedIdx)) {
