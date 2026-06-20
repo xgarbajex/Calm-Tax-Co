@@ -9,7 +9,7 @@
 :root {
   --bg:#faf8f5; --bg2:#f4f1ea; --white:#fff; --ink:#3C3633; --mid:#4A545C;
   --sage:#7D8E7E; --clay:#A66D5E; --border:rgba(60,54,51,.12);
-  --r:14px; --rl:20px;
+  --success:#2e7d32; --r:14px; --rl:20px;
 }
 * { box-sizing:border-box; }
 body { margin:0; background:var(--bg); color:var(--ink); font-family:Inter,sans-serif; -webkit-font-smoothing:antialiased; }
@@ -33,6 +33,10 @@ body { margin:0; background:var(--bg); color:var(--ink); font-family:Inter,sans-
 .btn:hover { background:var(--sage); }
 .btn[disabled] { opacity:.55; cursor:wait; }
 .status { font-size:14px; color:var(--mid); margin-top:10px; }
+.upload-status-line { display:flex; align-items:center; gap:10px; margin-top:10px; font-size:14px; color:var(--mid); }
+.upload-spinner { width:20px; height:20px; border-radius:50%; border:3px solid rgba(125,142,126,.22); border-top-color:var(--sage); animation:spin .8s linear infinite; flex:0 0 auto; }
+.upload-check { width:22px; height:22px; border-radius:50%; background:var(--success); color:#fff; display:inline-flex; align-items:center; justify-content:center; font-size:14px; font-weight:700; flex:0 0 auto; }
+@keyframes spin { to { transform:rotate(360deg); } }
 .privacy { border-left:4px solid var(--sage); background:var(--bg2); border-radius:0 var(--r) var(--r) 0; padding:16px 18px 16px 24px; font-size:14px; line-height:1.65; color:var(--mid); margin:22px 0; }
 .group-title { font-family:Lora,serif; font-size:23px; margin:30px 0 12px; border-bottom:1px solid var(--border); padding-bottom:8px; }
 .item { display:flex; gap:12px; align-items:flex-start; padding:13px 10px; border-bottom:1px solid rgba(60,54,51,.07); border-radius:8px; cursor:pointer; }
@@ -43,7 +47,7 @@ body { margin:0; background:var(--bg); color:var(--ink); font-family:Inter,sans-
 .checked .label { text-decoration:line-through; }
 .label { font-size:15px; line-height:1.45; font-weight:500; }
 .help { position:relative; display:inline-flex; align-items:center; justify-content:center; margin-left:6px; width:18px; height:18px; border-radius:50%; border:1px solid var(--sage); color:var(--sage); font-size:12px; cursor:help; vertical-align:middle; text-decoration:none; }
-.tip { display:none; position:absolute; left:22px; top:-10px; z-index:20; width:min(340px,78vw); background:#fff; border:1px solid var(--border); box-shadow:0 8px 20px rgba(60,54,51,.14); border-radius:10px; padding:12px; text-align:left; color:var(--ink); font-size:13px; line-height:1.45; font-weight:400; text-decoration:none; }
+.tip { display:none; position:absolute; left:22px; top:-10px; z-index:20; width:min(360px,78vw); background:#fff; border:1px solid var(--border); box-shadow:0 8px 20px rgba(60,54,51,.14); border-radius:10px; padding:12px; text-align:left; color:var(--ink); font-size:13px; line-height:1.45; font-weight:400; text-decoration:none; }
 .help:hover .tip, .help:focus .tip, .tip:hover { display:block; }
 .tip a { color:var(--sage); font-weight:600; text-decoration:underline; }
 .reminder { background:#fff8ea; border:1px solid #ead9b6; border-left:4px solid #d6aa4d; border-radius:0 12px 12px 0; padding:16px 18px 16px 24px; margin:24px 0; font-size:14px; line-height:1.6; }
@@ -118,25 +122,90 @@ function helpFor(item) {
   if (t.includes('ssn') || t.includes('itin')) {
     return 'If this number already appears on another uploaded tax form, such as a W-2, you do not need a separate document. If it does not, upload a clear image of a Social Security card, ITIN letter, prior-year return page, or a typed note with the name and number.';
   }
-  if (t.includes('w-2')) return 'Usually available from your employer or payroll portal, such as ADP, Gusto, Workday, Paychex, or your employer’s HR site.';
-  if (t.includes('1099-b')) return 'Usually available from your brokerage account tax documents section. This reports investment sales.';
-  if (t.includes('1099-div')) return 'Usually available from your bank or brokerage tax documents section. This reports dividends.';
-  if (t.includes('1099-int')) return 'Usually available from your bank or financial institution tax documents section. This reports interest income.';
-  if (t.includes('1099-nec')) return 'Usually sent by clients or platforms that paid you as a contractor. Check email, payment portals, or client tax document areas.';
-  if (t.includes('1099-k')) return 'Usually available inside PayPal, Venmo, Stripe, Square, Cash App for Business, Etsy, eBay, or other payment platform tax document sections.';
-  if (t.includes('1099-g')) return 'Usually available from your state unemployment or tax agency website. This often reports unemployment or state tax refunds.';
-  if (t.includes('ssa-1099') || t.includes('1099-r')) return 'SSA-1099 is usually available from Social Security. 1099-R is usually available from your retirement account, pension provider, IRA custodian, or plan administrator.';
-  if (t.includes('rental income summary')) return 'A simple document or spreadsheet with total rent received for the year is usually enough to get started.';
-  if (t.includes('business expense totals')) {
-    return 'You can upload a spreadsheet or document showing totals by category. Include cost of goods sold if you sell products. <br><br><a href="https://www.irs.gov/instructions/i1040sc" target="_blank" rel="noopener">View IRS Schedule C instructions</a>';
+
+  if (t.includes('prior year return')) {
+    return 'Upload last year’s federal and state tax returns if you have them. These help us check carryovers, prior-year credits, depreciation, estimated payments, and basic identifying information.';
   }
-  if (t.includes('mileage')) return 'Upload your mileage summary or log showing business miles, total miles, dates or date range, and how you tracked the mileage.';
-  if (t.includes('1095-a')) return 'Download this from Healthcare.gov or your state Marketplace account. This is required if you had Marketplace insurance.';
-  if (t.includes('1098 mortgage')) return 'Usually available from your mortgage lender online account or year-end statement.';
-  if (t.includes('1098-t')) return 'Usually available from the school’s student account, bursar, or financial portal.';
-  if (t.includes('1098-e')) return 'Usually available from your student loan servicer.';
-  if (t.includes('estimated tax')) return 'Upload IRS/state confirmation emails, EFTPS confirmations, bank records, or a list of dates and amounts paid.';
-  if (t.includes('bank routing')) return 'Upload a voided check or a typed note with routing number, account number, account type, and bank name.';
+
+  if (t.includes('w-2')) {
+    return 'Usually available from your employer or payroll portal, such as ADP, Gusto, Workday, Paychex, or your employer’s HR site.';
+  }
+
+  if (t.includes('1099-b')) {
+    return 'For stocks, crypto, mutual funds, or other investment sales. Usually available from your brokerage tax documents section. Please upload the full consolidated 1099 if available.';
+  }
+
+  if (t.includes('1099-div')) {
+    return 'For dividend income from stocks, funds, or brokerage accounts. Usually included in a consolidated 1099 from your brokerage or financial institution.';
+  }
+
+  if (t.includes('1099-int')) {
+    return 'For interest income from banks, credit unions, savings accounts, CDs, TreasuryDirect, or other financial accounts. Usually available in your bank’s tax documents section.';
+  }
+
+  if (t.includes('1099-nec')) {
+    return 'Usually sent by clients or platforms that paid you as a contractor. Check email, payment portals, or client tax document areas.';
+  }
+
+  if (t.includes('1099-k')) {
+    return 'Usually available inside PayPal, Venmo, Stripe, Square, Cash App for Business, Etsy, eBay, or other payment platform tax document sections.';
+  }
+
+  if (t.includes('ssa-1099')) {
+    return 'For Social Security benefits. You can usually download this from your Social Security online account or use the mailed copy if you received one.';
+  }
+
+  if (t.includes('1099-r')) {
+    return 'For retirement, pension, IRA, annuity, or similar distributions. Usually available from your retirement account provider, pension administrator, IRA custodian, or plan website.';
+  }
+
+  if (t.includes('1099-g')) {
+    return 'Often used for unemployment compensation or a state/local tax refund. Usually available from your state unemployment agency or state tax agency website.';
+  }
+
+  if (t.includes('rental income summary')) {
+    return 'Upload a simple document or spreadsheet showing total rent received, rental expenses by category, property address, and any major repairs or improvements.';
+  }
+
+  if (t.includes('business expense totals')) {
+    return 'You can upload a spreadsheet or document showing totals by category. Include cost of goods sold if you sell products, mileage if applicable, and large assets or equipment because depreciation may apply.<br><br><a href="https://www.irs.gov/instructions/i1040sc" target="_blank" rel="noopener">View IRS Schedule C instructions</a>';
+  }
+
+  if (t.includes('gross business income')) {
+    return 'This means your total business income before subtracting expenses. You can upload a sales report, payment platform report, bookkeeping summary, or a spreadsheet/document with your total.';
+  }
+
+  if (t.includes('mileage')) {
+    return 'Upload your mileage summary or log showing business miles, total miles, dates or date range, and how you tracked the mileage.';
+  }
+
+  if (t.includes('large business assets') || t.includes('equipment')) {
+    return 'Examples include computers, cameras, furniture, tools, machinery, or other higher-cost items used for business. These may need special tax treatment or depreciation.';
+  }
+
+  if (t.includes('1095-a')) {
+    return 'Download this from Healthcare.gov or your state Marketplace account. This is required if you had Marketplace insurance.';
+  }
+
+  if (t.includes('1098 mortgage')) {
+    return 'Usually available from your mortgage lender online account or year-end statement.';
+  }
+
+  if (t.includes('1098-t')) {
+    return 'Usually available from the school’s student account, bursar, or financial portal.';
+  }
+
+  if (t.includes('1098-e')) {
+    return 'Usually available from your student loan servicer.';
+  }
+
+  if (t.includes('estimated tax')) {
+    return 'Upload IRS/state confirmation emails, EFTPS confirmations, bank records, or a list of dates and amounts paid.';
+  }
+
+  if (t.includes('bank routing')) {
+    return 'Upload a voided check or a typed note with routing number, account number, account type, and bank name.';
+  }
 
   return '';
 }
@@ -167,6 +236,22 @@ function fileHtml(file) {
       '<span>' + esc(date) + (id ? ' <button class="delete-btn" onclick="deleteFile(\'' + id + '\', event)">Delete</button>' : '') + '</span>' +
     '</div>'
   );
+}
+
+
+function setUploadMessage(type, message) {
+  const status = document.getElementById('uploadStatus');
+  if (!status) return;
+
+  if (type === 'loading') {
+    status.innerHTML = '<div class="upload-status-line"><span class="upload-spinner"></span><span>' + esc(message) + '</span></div>';
+  } else if (type === 'success') {
+    status.innerHTML = '<div class="upload-status-line"><span class="upload-check">✓</span><span>' + esc(message) + '</span></div>';
+  } else if (type === 'error') {
+    status.innerHTML = '<div class="upload-status-line"><span>⚠️</span><span>' + esc(message) + '</span></div>';
+  } else {
+    status.textContent = message;
+  }
 }
 
 function render() {
@@ -269,7 +354,6 @@ function readFileAsDataURL(file) {
 
 async function uploadSelectedFiles(files) {
   const button = document.getElementById('uploadBtn');
-  const status = document.getElementById('uploadStatus');
   const progress = document.getElementById('uploadProgress');
 
   button.disabled = true;
@@ -278,8 +362,10 @@ async function uploadSelectedFiles(files) {
   try {
     for (let i = 0; i < files.length; i++) {
       const file = files[i];
-      status.textContent = 'Uploading ' + file.name + '…';
-      progress.innerHTML = '<div class="progress-row">Uploading ' + esc(file.name) + '…</div>';
+      const countText = files.length > 1 ? 'Uploading ' + (i + 1) + ' of ' + files.length + ': ' + file.name : 'Uploading ' + file.name;
+
+      setUploadMessage('loading', countText);
+      progress.innerHTML = '<div class="progress-row">' + esc(countText) + '</div>';
 
       const dataUrl = await readFileAsDataURL(file);
       const result = await api({
@@ -298,11 +384,11 @@ async function uploadSelectedFiles(files) {
       progress.innerHTML = '<div class="progress-row">✓ Uploaded ' + esc(file.name) + '</div>';
     }
 
-    status.textContent = 'Upload complete.';
     render();
+    setUploadMessage('success', files.length > 1 ? 'Upload complete. ' + files.length + ' files uploaded.' : 'Upload complete.');
   } catch (error) {
     alert('Upload failed: ' + error.message);
-    status.textContent = 'Upload failed. Please try again.';
+    setUploadMessage('error', 'Upload failed. Please try again.');
   } finally {
     button.disabled = false;
     document.getElementById('fileInput').value = '';
