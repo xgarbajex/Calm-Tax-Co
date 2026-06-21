@@ -498,7 +498,7 @@ main {
 .hiw-svg {
   position: absolute;
   top: 0; left: 0;
-  width: 100%; height: 130px;
+  width: 100%; height: 52px;
   z-index: 0;
   overflow: visible;
 }
@@ -519,24 +519,96 @@ main {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  padding: 0 6px;
+  padding: 0 12px;
   padding-top: 0;
 }
-
-/* Even-numbered steps (02, 04) pushed down to match the dip in the path */
-.hiw-low { padding-top: 72px; }
 
 .hiw-bubble {
   width: 52px; height: 52px;
   border-radius: 50%;
-  background: var(--bg3);
+  background: var(--bg);
   border: 1.5px solid var(--border2);
   display: flex; align-items: center; justify-content: center;
   font-family: 'Lora', serif;
-  font-size: .95rem; font-weight: 400;
-  color: var(--mid);
+  font-size: .95rem; font-weight: 500;
+  color: var(--ink);
   margin-bottom: 14px;
   flex-shrink: 0;
+  position: relative;
+  z-index: 2;
+}
+
+.hiw-bubble.active {
+  background: var(--sage);
+  border-color: var(--sage);
+  color: var(--white);
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(125,142,126,0.25);
+}
+
+.hiw-col.faded .hiw-title,
+.hiw-col.faded .hiw-body {
+  opacity: 0.55;
+  transition: opacity 0.2s ease;
+}
+
+.hiw-col.faded .hiw-bubble {
+  color: rgba(60, 54, 51, 0.45);
+  border-color: rgba(60, 54, 51, 0.12);
+  background: var(--bg);
+  font-weight: 400;
+  transition: all 0.2s ease;
+}
+
+.hiw-col.faded:hover .hiw-title,
+.hiw-col.faded:hover .hiw-body {
+  opacity: 0.85;
+}
+
+.hiw-col.faded:hover .hiw-bubble {
+  color: var(--ink);
+  border-color: var(--border2);
+}
+
+.you-are-here-badge {
+  font-size: 0.64rem;
+  font-weight: 600;
+  color: var(--sage);
+  background: rgba(125, 142, 126, 0.12);
+  border: 1px solid rgba(125, 142, 126, 0.24);
+  padding: 3px 10px;
+  border-radius: 9999px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-top: -6px;
+  margin-bottom: 12px;
+  display: inline-block;
+  animation: pulse-subtle 3s infinite ease-in-out;
+}
+
+@keyframes pulse-subtle {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.02); opacity: 0.95; }
+}
+
+.hiw-col.clickable {
+  cursor: pointer;
+  transition: transform 0.22s cubic-bezier(.4,0,.2,1), background-color 0.22s ease, box-shadow 0.22s ease;
+  border-radius: var(--rd);
+  padding: 16px 12px;
+  margin: -16px -12px;
+}
+
+.hiw-col.clickable:hover {
+  transform: translateY(-4px);
+  background: rgba(125, 142, 126, 0.05);
+  box-shadow: 0 6px 16px rgba(60, 54, 51, 0.02);
+}
+
+.hiw-col.clickable:hover .hiw-bubble.active {
+  background: var(--ink);
+  border-color: var(--ink);
+  box-shadow: 0 4px 14px rgba(60, 54, 51, 0.15);
 }
 
 .hiw-title {
@@ -569,7 +641,6 @@ main {
 
 @media(max-width:520px){
   .hiw-cols { flex-direction: column; align-items: center; gap: 24px; }
-  .hiw-low { padding-top: 0; }
   .hiw-svg { display: none; }
   .hiw-pricing { flex-direction: column; }
   .hiw-price-div { width: auto; height: 1px; }
@@ -756,39 +827,32 @@ footer { text-align:center; padding:24px; font-size:.75rem; font-weight:300; col
 
     <!-- Horizontal steps with continuous SVG path -->
     <div class="hiw-outer">
-      <!-- The continuous connecting line drawn as one SVG behind the bubbles -->
-      <svg class="hiw-svg" viewBox="0 0 560 130" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="
-          M 70 26
-          C 110 26, 135 26, 155 60
-          C 175 94, 195 108, 210 108
-          C 225 108, 245 94, 265 60
-          C 285 26, 315 26, 350 26
-          C 385 26, 405 26, 425 60
-          C 445 94, 470 108, 490 108
-        " stroke="#c5d0c6" stroke-width="1.5" stroke-dasharray="6 5" stroke-linecap="round"/>
+      <!-- The continuous connecting line drawn as a straight horizontal line -->
+      <svg class="hiw-svg" viewBox="0 0 560 52" style="height: 52px; top: 0;" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <line x1="70" y1="26" x2="490" y2="26" stroke="#c5d0c6" stroke-width="1.5" stroke-dasharray="6 5" stroke-linecap="round"/>
       </svg>
 
       <!-- Step columns -->
       <div class="hiw-cols">
-        <div class="hiw-col">
-          <div class="hiw-bubble">01</div>
-          <div class="hiw-title">Complete a Short Walkthrough</div>
-          <div class="hiw-body">Tell us about your tax situation and receive a personalized document checklist.</div>
+        <div class="hiw-col clickable" onclick="go('scope')">
+          <div class="hiw-bubble active">01</div>
+          <div class="you-are-here-badge">You are here</div>
+          <div class="hiw-title">Short Intake Walkthrough</div>
+          <div class="hiw-body">Do it anytime, no tax knowledge needed, then we'll send your personalized document checklist. Takes about 10 minutes.</div>
         </div>
-        <div class="hiw-col hiw-low">
+        <div class="hiw-col faded">
           <div class="hiw-bubble">02</div>
-          <div class="hiw-title">Upload Your Documents</div>
+          <div class="hiw-title">Gather &amp; Upload</div>
           <div class="hiw-body">Securely submit your tax documents.</div>
         </div>
-        <div class="hiw-col">
+        <div class="hiw-col faded">
           <div class="hiw-bubble">03</div>
-          <div class="hiw-title">Approve Your Quote</div>
+          <div class="hiw-title">Quote &amp; Pay</div>
           <div class="hiw-body">Review your fixed-price quote and pay online.</div>
         </div>
-        <div class="hiw-col hiw-low">
+        <div class="hiw-col faded">
           <div class="hiw-bubble">04</div>
-          <div class="hiw-title">We Handle the Rest</div>
+          <div class="hiw-title">Prepare &amp; E-file</div>
           <div class="hiw-body">We prepare and e-file your return.</div>
         </div>
       </div>
@@ -814,6 +878,10 @@ footer { text-align:center; padding:24px; font-size:.75rem; font-weight:300; col
   <div class="callout" style="margin-top:32px">
     <span>🔒</span>
     <span>This form is fully encrypted. Your responses are protected in transit and only seen by Calm Tax Co. As a best practice in tax preparation, Social Security Numbers are <b>never</b> collected through intake forms. Yours will be requested through your personal encrypted folder when you upload your documents.</span>
+  </div>
+
+  <div style="text-align:center; margin: 48px 0 24px;">
+    <button class="btn" onclick="go('scope')">Get started</button>
   </div>
 
 </div>
@@ -1558,7 +1626,7 @@ footer { text-align:center; padding:24px; font-size:.75rem; font-weight:300; col
 </div>
 
 </div></main>
-<footer>© 2026 Calm Tax Co. · Encrypted & confidential via secure upload · hello@calmtax.co · <a href="/checklist-preview.html" target="_blank" style="color:var(--sage); text-decoration: underline; font-weight: 500; margin-left: 6px;">🔍 View Master Checklist Guide</a></footer>
+<footer>© 2026 Calm Tax Co. · Encrypted & confidential via secure upload · hello@calmtax.co</footer>
 
 <form id="gForm" style="display:none">
   <input type="hidden" name="timestamp"           id="g_ts">
