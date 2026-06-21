@@ -14,7 +14,7 @@
 * { box-sizing:border-box; }
 body { margin:0; background:var(--bg); color:var(--ink); font-family:Inter,sans-serif; -webkit-font-smoothing:antialiased; }
 .wrap { max-width:980px; margin:0 auto; padding:32px 18px 80px; }
-.card { background:var(--white); border:1px solid var(--border); border-radius:var(--rl); box-shadow:0 4px 16px rgba(60,54,51,.035); padding:34px; }
+.card { background:transparent; border:0; border-radius:0; box-shadow:none; padding:0; }
 .brand { display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid var(--border); padding-bottom:24px; margin-bottom:30px; gap:16px; }
 .logo-svg { width:260px; max-width:58vw; height:auto; display:block; }
 .year { text-align:right; }
@@ -38,7 +38,7 @@ body { margin:0; background:var(--bg); color:var(--ink); font-family:Inter,sans-
 .journey-step.current .journey-dot { background:var(--ink); border-color:var(--ink); color:#fff; transform:scale(1.08); }
 .journey-step.current .journey-label { color:var(--ink); }
 .journey-note { display:block; margin-top:4px; font-size:11px; color:var(--sage); font-weight:600; }
-.journey-step.future { opacity:.55; }
+.journey-step.future { opacity:1; }
 
 .checklist-legend { display:flex; align-items:center; gap:18px; flex-wrap:wrap; background:rgba(125,142,126,.06); border:1px solid rgba(125,142,126,.18); border-radius:12px; padding:12px 14px; margin:22px 0 10px; font-size:13px; color:var(--mid); }
 .legend-item { display:inline-flex; align-items:center; gap:7px; }
@@ -157,6 +157,41 @@ body { margin:0; background:var(--bg); color:var(--ink); font-family:Inter,sans-
   .card { padding:22px; }
   .year-num { font-size:26px; }
 }
+
+/* Row-based checklist polish */
+.title { margin-bottom:18px; }
+.intro { margin-bottom:24px; }
+.journey { background:transparent; }
+.journey-label { font-family:Lora,serif; color:var(--ink); }
+.journey-note { display:inline-block; margin-top:6px; padding:4px 10px; border-radius:999px; background:rgba(125,142,126,.12); color:var(--sage); font-family:Inter,sans-serif; font-size:11px; font-weight:600; }
+.journey-step.future { opacity:1; }
+.journey-dot { background:#fff; position:relative; z-index:2; box-shadow:0 0 0 8px var(--bg), 0 2px 8px rgba(60,54,51,.06); }
+.journey-track::before { z-index:0; }
+.journey-step.current .journey-dot { background:rgba(125,142,126,.22); border-color:var(--sage); color:var(--ink); }
+.checklist-card { background:var(--white); border:1px solid var(--border); border-radius:var(--rl); box-shadow:0 4px 16px rgba(60,54,51,.035); padding:30px; margin:24px 0 16px; }
+.checklist-card-title { font-family:Lora,serif; font-size:30px; font-weight:400; font-style:italic; text-align:center; margin:0 0 18px; color:var(--ink); }
+.checklist-legend { margin:0 0 18px; justify-content:center; background:rgba(125,142,126,.05); }
+.checklist-helper { text-align:center; color:var(--mid); font-size:14px; line-height:1.55; margin:10px auto 22px; max-width:720px; }
+.item.row-upload { border:1px solid rgba(60,54,51,.09); border-radius:13px; padding:15px 12px; }
+.item.row-upload.checked { opacity:1; background:#fff; }
+.item.row-upload.checked .label { text-decoration:none; }
+.item.row-upload.checked .check { background:#6F9B6A; border-color:#6F9B6A; color:#fff; }
+.check { background:#fff; border-color:#c7c7c7; color:transparent; }
+.label { font-family:Lora,serif; font-size:17px; font-weight:500; color:var(--ink); }
+.tip { font-family:Lora,serif; font-size:14px; line-height:1.5; }
+.row-upload-btn { display:inline-flex; align-items:center; gap:6px; font-family:Inter,sans-serif; background:#fff; border:1px solid rgba(125,142,126,.38); color:var(--ink); padding:8px 13px; }
+.row-upload-btn::before { content:"☁"; font-size:13px; color:var(--sage); line-height:1; }
+.delete-btn::before { content:""; }
+.contact-card { display:flex; align-items:center; justify-content:center; gap:12px; margin:30px auto 0; padding:18px 20px; max-width:680px; border:1px solid rgba(125,142,126,.20); border-radius:16px; background:rgba(255,255,255,.58); color:var(--mid); font-size:14px; line-height:1.5; text-align:center; }
+.contact-icon { width:34px; height:34px; border-radius:50%; background:rgba(125,142,126,.12); color:var(--sage); display:inline-flex; align-items:center; justify-content:center; flex:0 0 auto; font-size:16px; }
+.contact-card a { color:var(--sage); font-weight:600; text-decoration:none; }
+.contact-card a:hover { text-decoration:underline; }
+@media(max-width:700px) {
+  .checklist-card { padding:22px 14px; }
+  .checklist-card-title { font-size:26px; }
+  .contact-card { align-items:flex-start; text-align:left; }
+}
+
 </style>
 </head>
 <body>
@@ -168,6 +203,10 @@ const params = new URLSearchParams(location.search);
 const CLIENT_ID = params.get('c') || params.get('checklist');
 let state = null;
 let checked = new Set();
+
+function cleanItemLabel(value) {
+  return String(value || '').replace(/^•\s*/, '').trim();
+}
 
 function esc(value) {
   return String(value || '').replace(/[&<>"']/g, function (char) {
@@ -324,7 +363,7 @@ function itemHtml(item, idx) {
       '<div class="item-main">' +
         '<div class="item-head">' +
           '<div class="check">✓</div>' +
-          '<div><div class="label">' + esc(item) + help + '</div></div>' +
+          '<div><div class="label">' + esc(cleanItemLabel(item)) + help + '</div></div>' +
           '<div class="item-actions">' +
             '<button class="row-upload-btn" type="button" id="uploadBtn-' + idx + '" onclick="openRowFilePicker(' + idx + ', event)">Upload</button>' +
           '</div>' +
@@ -373,7 +412,7 @@ function selectedUploadLabel() {
   if (select.value === 'other') return 'Other Documents';
   const idx = Number(select.value);
   const item = state && state.items ? state.items[idx] : '';
-  return item || '';
+  return cleanItemLabel(item || '');
 }
 
 function cleanDocLabel(label) {
@@ -459,8 +498,8 @@ function render() {
       '</div>' +
       '<div class="year"><div class="year-label">Tax Year</div><div class="year-num">2025</div></div>' +
     '</div>' +
-    '<div class="title">Upload Documents<br>& Checklist</div>' +
-    '<p class="intro">Thank you for completing your walkthrough, ' + esc(firstName) + '. This checklist will help you gather the documents and information needed for your return. Upload what you already have, and you can come back later as you find more.</p>' +
+    '<div class="title">Upload Your Documents</div>' +
+    '<p class="intro">Thank you for completing your walkthrough, ' + esc(firstName) + '. This personalized checklist will help you gather the documents and information needed for your return. Upload what you already have, and you can come back later as you find more.</p>' +
     '<div class="journey">' +
       '<div class="journey-title">Your tax return progress</div>' +
       '<div class="journey-track">' +
@@ -473,19 +512,23 @@ function render() {
 
     '<div class="privacy"><strong>Privacy & security:</strong> Your privacy matters to us. We use secure cloud storage and encryption to help protect your tax documents. Access is limited to the people involved in preparing your return, and we never sell your information.</div>' +
     (state.hasItemizedDeductions ? '<div class="reminder">💡 <strong>Itemized deduction reminder:</strong> Because you selected possible itemized deductions, you do not need to track down every small receipt before getting started. The most helpful records are usually larger or official documents, such as mortgage interest statements, property tax records, larger charitable donation records, and significant medical expense records. Upload what you already have, and we will let you know if anything else is likely to help.</div>' : '') +
-    '<div class="checklist-legend">' +
-      '<span class="legend-item"><span class="legend-circle complete">✓</span> Complete</span>' +
-      '<span class="legend-item"><span class="legend-circle"></span> Not yet uploaded</span>' +
-      '<span class="legend-item">Drag files directly onto a document row, or use the Upload button.</span>' +
+    '<div class="checklist-card">' +
+      '<div class="checklist-card-title">Checklist</div>' +
+      '<div class="checklist-legend">' +
+        '<span class="legend-item"><span class="legend-circle complete">✓</span> Complete</span>' +
+        '<span class="legend-item"><span class="legend-circle"></span> Not yet uploaded</span>' +
+      '</div>' +
+      '<div id="items">' + checklistHtml + '</div>' +
     '</div>' +
-    '<div id="items">' + checklistHtml + '</div>' +
+    '<div class="checklist-helper">Drag files directly onto a document row, or use the Upload button.</div>' +
     '<div class="other-upload-row" id="otherUploadRow" ondragenter="otherDragEnter(event)" ondragover="otherDragOver(event)" ondragleave="otherDragLeave(event)" ondrop="otherDrop(event)">' +
       '<h3>Other Documents</h3>' +
       '<p>Not sure where a file belongs? Upload it here.</p>' +
       '<button class="row-upload-btn" type="button" onclick="openOtherFilePicker(event)">Upload Other Documents</button>' +
       '<div class="row-status" id="otherStatus" style="justify-content:center;margin-left:0;"></div>' +
       '<input class="hidden-row-file-input" type="file" id="otherFileInput" multiple accept=".pdf,.jpg,.jpeg,.png,.heic,.webp,.doc,.docx,.txt,.rtf,.csv,.xls,.xlsx,.ods,.numbers" onchange="handleOtherFileInput(event)">' +
-    '</div>';
+    '</div>' +
+    '<div class="contact-card"><span class="contact-icon">✉</span><span>Questions? Feel free to reach out at <a href="mailto:hello@calmtax.co">hello@calmtax.co</a></span></div>';
 
   setupDropZone();
 }
@@ -630,7 +673,7 @@ function otherDrop(event) {
 }
 
 function selectedLabelForIndex(idx) {
-  return state && state.items && state.items[idx] ? state.items[idx] : '';
+  return state && state.items && state.items[idx] ? cleanItemLabel(state.items[idx]) : '';
 }
 
 async function uploadFilesForChecklistItem(idx, files) {
