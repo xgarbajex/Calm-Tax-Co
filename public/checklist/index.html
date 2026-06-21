@@ -40,9 +40,6 @@ body { margin:0; background:var(--bg); color:var(--ink); font-family:Inter,sans-
 .journey-note { display:block; margin-top:4px; font-size:11px; color:var(--sage); font-weight:600; }
 .journey-step.future { opacity:1; }
 
-.checklist-legend { display:flex; align-items:center; gap:18px; flex-wrap:wrap; background:rgba(125,142,126,.06); border:1px solid rgba(125,142,126,.18); border-radius:12px; padding:12px 14px; margin:22px 0 10px; font-size:13px; color:var(--mid); }
-.legend-item { display:inline-flex; align-items:center; gap:7px; }
-.legend-circle { width:18px; height:18px; border-radius:50%; border:1.5px solid #c9c9c9; background:#fff; display:inline-flex; align-items:center; justify-content:center; font-size:11px; color:transparent; }
 .legend-circle.complete { background:var(--sage); border-color:var(--sage); color:#fff; }
 .item.row-upload { align-items:stretch; cursor:default; background:#fff; border:1px solid rgba(60,54,51,.08); margin-bottom:8px; transition:background .16s ease, border-color .16s ease, box-shadow .16s ease, transform .16s ease; }
 .item.row-upload:hover { background:#fff; }
@@ -122,9 +119,6 @@ body { margin:0; background:var(--bg); color:var(--ink); font-family:Inter,sans-
 .loading { text-align:center; padding:60px; color:var(--mid); }
 .progress-row { margin-top:8px; padding:8px 10px; border:1px dashed var(--border); border-radius:10px; background:#fff; font-size:13px; color:var(--mid); }
 
-.checklist-legend { display:flex; align-items:center; gap:18px; flex-wrap:wrap; background:rgba(125,142,126,.06); border:1px solid rgba(125,142,126,.18); border-radius:12px; padding:12px 14px; margin:22px 0 10px; font-size:13px; color:var(--mid); }
-.legend-item { display:inline-flex; align-items:center; gap:7px; }
-.legend-circle { width:18px; height:18px; border-radius:50%; border:1.5px solid #c9c9c9; background:#fff; display:inline-flex; align-items:center; justify-content:center; font-size:11px; color:transparent; }
 .legend-circle.complete { background:var(--sage); border-color:var(--sage); color:#fff; }
 .item.row-upload { align-items:stretch; cursor:default; background:#fff; border:1px solid rgba(60,54,51,.08); margin-bottom:8px; transition:background .16s ease, border-color .16s ease, box-shadow .16s ease, transform .16s ease; }
 .item.row-upload:hover { background:#fff; }
@@ -170,7 +164,6 @@ body { margin:0; background:var(--bg); color:var(--ink); font-family:Inter,sans-
 .journey-step.current .journey-dot { background:rgba(125,142,126,.22); border-color:var(--sage); color:var(--ink); }
 .checklist-card { background:var(--white); border:1px solid var(--border); border-radius:var(--rl); box-shadow:0 4px 16px rgba(60,54,51,.035); padding:30px; margin:24px 0 16px; }
 .checklist-card-title { font-family:Lora,serif; font-size:30px; font-weight:400; font-style:italic; text-align:center; margin:0 0 18px; color:var(--ink); }
-.checklist-legend { margin:0 0 18px; justify-content:center; background:rgba(125,142,126,.05); }
 .checklist-helper { text-align:center; color:var(--mid); font-size:14px; line-height:1.55; margin:10px auto 22px; max-width:720px; }
 .item.row-upload { border:1px solid rgba(60,54,51,.09); border-radius:13px; padding:15px 12px; }
 .item.row-upload.checked { opacity:1; background:#fff; }
@@ -195,7 +188,6 @@ body { margin:0; background:var(--bg); color:var(--ink); font-family:Inter,sans-
 
 /* Second-pass checklist layout polish */
 .checklist-card-title { font-weight:700 !important; }
-.legend-circle { width:24px !important; height:24px !important; font-size:13px !important; }
 .check { width:28px !important; height:28px !important; font-size:14px !important; box-shadow:0 0 0 8px #fff; }
 .item-head { align-items:center !important; }
 .journey-label { letter-spacing:.035em; }
@@ -232,8 +224,6 @@ body { margin:0; background:var(--bg); color:var(--ink); font-family:Inter,sans-
 .journey::before { content:""; display:block; border-top:1px solid var(--border); margin-bottom:24px; }
 .journey::after { content:""; display:block; border-bottom:1px solid var(--border); margin-top:28px; }
 .checklist-card-title { letter-spacing:.055em; }
-.checklist-legend { font-family:Inter,sans-serif !important; }
-.checklist-legend .legend-item { font-family:Inter,sans-serif !important; font-size:13px; }
 .security-icon { font-size:0 !important; position:relative; }
 .security-icon::before { content:""; width:18px; height:21px; display:block; background:var(--sage); clip-path:path("M9 0 L18 4 V10 C18 15 14.2 19.2 9 21 C3.8 19.2 0 15 0 10 V4 Z"); }
 
@@ -690,10 +680,6 @@ function render() {
     (state.hasItemizedDeductions ? '<div class="reminder">💡 <strong>Itemized deduction reminder:</strong> Because you selected possible itemized deductions, you do not need to track down every small receipt before getting started. The most helpful records are usually larger or official documents, such as mortgage interest statements, property tax records, larger charitable donation records, and significant medical expense records. Upload what you already have, and we will let you know if anything else is likely to help.</div>' : '') +
     '<div class="checklist-card">' +
       '<div class="checklist-card-title">Checklist</div>' +
-      '<div class="checklist-legend">' +
-        '<span class="legend-item"><span class="legend-circle complete">✓</span> Complete</span>' +
-        '<span class="legend-item"><span class="legend-circle"></span> Not yet uploaded</span>' +
-      '</div>' +
       '<div id="items">' + checklistHtml + '</div>' +
       '<div class="other-upload-row in-card" id="otherUploadRow" ondragenter="otherDragEnter(event)" ondragover="otherDragOver(event)" ondragleave="otherDragLeave(event)" ondrop="otherDrop(event)">' +
         '<h3>Other Documents</h3>' +
