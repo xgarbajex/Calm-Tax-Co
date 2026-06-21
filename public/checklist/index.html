@@ -375,7 +375,13 @@ function esc(value) {
 
 async function api(payload) {
   const controller = new AbortController();
-  const timeoutId = setTimeout(function () { controller.abort(); }, 20000);
+
+  // Uploads can take longer because the browser must send the encoded file
+  // and Apps Script must create it in Google Drive. Keep ordinary checklist
+  // requests relatively short, but allow uploads up to two minutes.
+  const isUpload = payload && payload.form_type === 'uploadFile';
+  const timeoutMs = isUpload ? 120000 : 30000;
+  const timeoutId = setTimeout(function () { controller.abort(); }, timeoutMs);
 
   let response;
   try {
@@ -387,6 +393,9 @@ async function api(payload) {
     });
   } catch (error) {
     if (error && error.name === 'AbortError') {
+      if (payload && payload.form_type === 'uploadFile') {
+        throw new Error('The upload is taking longer than expected. Before trying again, refresh this page and check whether the file appears under this checklist item.');
+      }
       throw new Error('The checklist server took too long to respond. Please refresh and try again.');
     }
     throw error;
@@ -738,6 +747,97 @@ function readFileAsDataURL(file) {
   });
 }
 
+function formatFileSize(bytes) {
+  if (!Number.isFinite(bytes) || bytes <= 0) return '0 KB';
+  if (bytes < 1024 * 1024) return Math.max(1, Math.round(bytes / 1024)) + ' KB';
+  return (bytes / (1024 * 1024)).toFixed(bytes >= 10 * 1024 * 1024 ? 0 : 1) + ' MB';
+}
+
+function loadImageFromFile(file) {
+  return new Promise(function (resolve, reject) {
+    const url = URL.createObjectURL(file);
+    const img = new Image();
+    img.onload = function () {
+      URL.revokeObjectURL(url);
+      resolve(img);
+    };
+    img.onerror = function () {
+      URL.revokeObjectURL(url);
+      reject(new Error('Could not prepare this image.'));
+    };
+    img.src = url;
+  });
+}
+
+function canvasToBlob(canvas, mimeType, quality) {
+  return new Promise(function (resolve, reject) {
+    canvas.toBlob(function (blob) {
+      if (blob) resolve(blob);
+      else reject(new Error('Could not optimize this image.'));
+    }, mimeType, quality);
+  });
+}
+
+async function prepareFileForUpload(file, statusCallback) {
+  const MAX_FILE_SIZE = 25 * 1024 * 1024;
+  const IMAGE_COMPRESSION_THRESHOLD = 2.5 * 1024 * 1024;
+  const MAX_IMAGE_DIMENSION = 2200;
+
+  if (file.size > MAX_FILE_SIZE) {
+    throw new Error(
+      file.name + ' is ' + formatFileSize(file.size) +
+      '. Please use a file smaller than 25 MB or split it into smaller files.'
+    );
+  }
+
+  const isCompressibleImage =
+    file.type === 'image/jpeg' ||
+    file.type === 'image/png';
+
+  if (!isCompressibleImage || file.size < IMAGE_COMPRESSION_THRESHOLD) {
+    return file;
+  }
+
+  if (statusCallback) {
+    statusCallback('Optimizing large image (' + formatFileSize(file.size) + ')…');
+  }
+
+  const img = await loadImageFromFile(file);
+  const scale = Math.min(
+    1,
+    MAX_IMAGE_DIMENSION / Math.max(img.naturalWidth || img.width, img.naturalHeight || img.height)
+  );
+
+  const width = Math.max(1, Math.round((img.naturalWidth || img.width) * scale));
+  const height = Math.max(1, Math.round((img.naturalHeight || img.height) * scale));
+
+  const canvas = document.createElement('canvas');
+  canvas.width = width;
+  canvas.height = height;
+
+  const ctx = canvas.getContext('2d');
+  if (!ctx) return file;
+
+  // Tax documents are normally viewed on a white page. Filling the canvas
+  // also prevents transparent PNG areas from turning black when saved as JPEG.
+  ctx.fillStyle = '#ffffff';
+  ctx.fillRect(0, 0, width, height);
+  ctx.drawImage(img, 0, 0, width, height);
+
+  const blob = await canvasToBlob(canvas, 'image/jpeg', 0.88);
+
+  // Keep the original if optimization did not save at least 15%.
+  if (!blob || blob.size >= file.size * 0.85) {
+    return file;
+  }
+
+  const baseName = file.name.replace(/\.[^.]+$/, '');
+  return new File([blob], baseName + '.jpg', {
+    type: 'image/jpeg',
+    lastModified: file.lastModified || Date.now()
+  });
+}
+
 function setRowStatus(idx, type, message) {
   const el = document.getElementById(idx === 'other' ? 'otherStatus' : 'rowStatus-' + idx);
   if (!el) return;
@@ -855,13 +955,26 @@ async function uploadFilesForChecklistItem(idx, files) {
 
   try {
     for (let i = 0; i < files.length; i++) {
-      const file = files[i];
-      const countText = files.length > 1 ? 'Uploading ' + (i + 1) + ' of ' + files.length + ': ' + file.name : 'Uploading ' + file.name;
-      setRowStatus(idx, 'loading', countText);
+      const originalFile = files[i];
+      const prefix = files.length > 1 ? 'File ' + (i + 1) + ' of ' + files.length + ': ' : '';
+
+      setRowStatus(idx, 'loading', prefix + 'Preparing ' + originalFile.name + '…');
+
+      const file = await prepareFileForUpload(originalFile, function (message) {
+        setRowStatus(idx, 'loading', prefix + message);
+      });
+
+      setRowStatus(
+        idx,
+        'loading',
+        prefix + 'Uploading ' + file.name + ' (' + formatFileSize(file.size) + ') to your secure folder…'
+      );
 
       const dataUrl = await readFileAsDataURL(file);
       const label = selectedLabelForIndex(idx);
       const cleanLabel = cleanDocLabel(label);
+
+      setRowStatus(idx, 'loading', prefix + 'Saving document details…');
 
       const result = await api({
         form_type: 'uploadFile',
@@ -891,8 +1004,7 @@ async function uploadFilesForChecklistItem(idx, files) {
     render();
     setRowStatus(idx, 'success', files.length > 1 ? files.length + ' files uploaded.' : 'Upload complete.');
   } catch (error) {
-    alert('Upload failed: ' + error.message);
-    setRowStatus(idx, 'error', 'Upload failed. Please try again.');
+    setRowStatus(idx, 'error', 'Upload failed: ' + error.message);
   } finally {
     const freshButton = document.getElementById('uploadBtn-' + idx);
     if (freshButton) freshButton.disabled = false;
@@ -902,11 +1014,25 @@ async function uploadFilesForChecklistItem(idx, files) {
 async function uploadFilesAsOther(files) {
   try {
     for (let i = 0; i < files.length; i++) {
-      const file = files[i];
-      const countText = files.length > 1 ? 'Uploading ' + (i + 1) + ' of ' + files.length + ': ' + file.name : 'Uploading ' + file.name;
-      setRowStatus('other', 'loading', countText);
+      const originalFile = files[i];
+      const prefix = files.length > 1 ? 'File ' + (i + 1) + ' of ' + files.length + ': ' : '';
+
+      setRowStatus('other', 'loading', prefix + 'Preparing ' + originalFile.name + '…');
+
+      const file = await prepareFileForUpload(originalFile, function (message) {
+        setRowStatus('other', 'loading', prefix + message);
+      });
+
+      setRowStatus(
+        'other',
+        'loading',
+        prefix + 'Uploading ' + file.name + ' (' + formatFileSize(file.size) + ') to your secure folder…'
+      );
 
       const dataUrl = await readFileAsDataURL(file);
+
+      setRowStatus('other', 'loading', prefix + 'Saving document details…');
+
       const result = await api({
         form_type: 'uploadFile',
         clientId: CLIENT_ID,
@@ -933,8 +1059,7 @@ async function uploadFilesAsOther(files) {
     render();
     setRowStatus('other', 'success', files.length > 1 ? files.length + ' files uploaded.' : 'Upload complete.');
   } catch (error) {
-    alert('Upload failed: ' + error.message);
-    setRowStatus('other', 'error', 'Upload failed. Please try again.');
+    setRowStatus('other', 'error', 'Upload failed: ' + error.message);
   }
 }
 
