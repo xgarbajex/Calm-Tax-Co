@@ -246,12 +246,8 @@ body { margin:0; background:var(--bg); color:var(--ink); font-family:Inter,sans-
   font-weight:300 !important;
   letter-spacing:.015em !important;
 }
-.checklist-card-title {
-  font-size:38px !important;
-}
-.journey-label {
-  font-size:22px !important;
-}
+.checklist-card-title { font-size:38px !important; }
+.journey-label { font-size:22px !important; }
 @media(max-width:700px) {
   .checklist-card-title { font-size:32px !important; }
   .journey-label { font-size:16px !important; }
@@ -261,6 +257,27 @@ body { margin:0; background:var(--bg); color:var(--ink); font-family:Inter,sans-
 </head>
 <body>
 <div class="wrap"><div class="card" id="app"><div class="loading">Loading your checklist…</div></div></div>
+
+
+<script>
+window.addEventListener('error', function (event) {
+  var app = document.getElementById('app');
+  if (app && app.textContent.indexOf('Loading your checklist') !== -1) {
+    app.innerHTML = '<div class="err"><strong>The checklist could not load.</strong><br>' +
+      String(event.message || 'A page error occurred.') +
+      '<br><br>Please refresh the page. If the problem continues, contact hello@calmtax.co.</div>';
+  }
+});
+window.addEventListener('unhandledrejection', function (event) {
+  var app = document.getElementById('app');
+  if (app && app.textContent.indexOf('Loading your checklist') !== -1) {
+    var reason = event.reason && event.reason.message ? event.reason.message : String(event.reason || 'A request error occurred.');
+    app.innerHTML = '<div class="err"><strong>The checklist could not load.</strong><br>' +
+      reason +
+      '<br><br>Please refresh the page. If the problem continues, contact hello@calmtax.co.</div>';
+  }
+});
+</script>
 
 <script>
 const AS_URL = 'https://script.google.com/macros/s/AKfycbxIqzdrwed8JgxdUUMMtTqVUQDmEmChlm7411oMGUUAF4Jn_8HinPHNDmNwZKb6vddiXg/exec';
@@ -307,11 +324,25 @@ function esc(value) {
 }
 
 async function api(payload) {
-  const response = await fetch(AS_URL, {
-    method: 'POST',
-    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-    body: JSON.stringify(payload)
-  });
+  const controller = new AbortController();
+  const timeoutId = setTimeout(function () { controller.abort(); }, 20000);
+
+  let response;
+  try {
+    response = await fetch(AS_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify(payload),
+      signal: controller.signal
+    });
+  } catch (error) {
+    if (error && error.name === 'AbortError') {
+      throw new Error('The checklist server took too long to respond. Please refresh and try again.');
+    }
+    throw error;
+  } finally {
+    clearTimeout(timeoutId);
+  }
 
   const text = await response.text();
   let data;
