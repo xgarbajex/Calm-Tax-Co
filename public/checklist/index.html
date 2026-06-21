@@ -237,6 +237,26 @@ body { margin:0; background:var(--bg); color:var(--ink); font-family:Inter,sans-
 .security-icon { font-size:0 !important; position:relative; }
 .security-icon::before { content:""; width:18px; height:21px; display:block; background:var(--sage); clip-path:path("M9 0 L18 4 V10 C18 15 14.2 19.2 9 21 C3.8 19.2 0 15 0 10 V4 Z"); }
 
+
+/* Brand font polish */
+.checklist-card-title,
+.journey-label {
+  font-family:"Cormorant Garamond", Georgia, serif !important;
+  font-style:italic !important;
+  font-weight:300 !important;
+  letter-spacing:.015em !important;
+}
+.checklist-card-title {
+  font-size:38px !important;
+}
+.journey-label {
+  font-size:22px !important;
+}
+@media(max-width:700px) {
+  .checklist-card-title { font-size:32px !important; }
+  .journey-label { font-size:16px !important; }
+}
+
 </style>
 </head>
 <body>
@@ -366,15 +386,15 @@ function helpFor(item) {
   }
 
   if (t.includes('rental income summary')) {
-    return 'Upload a simple document or spreadsheet showing total rent received, rental expenses by category, property address, and any major repairs or improvements.<br><br><a href="https://quickbooks.intuit.com/learn-support/en-us/help-article/expense-accounts/schedule-c-expense-categories-quickbooks-self/L1viz8KIU_US_en_US" target="_blank" rel="noopener">View common Schedule C expense categories</a>';
+    return 'Upload a simple document or spreadsheet showing total rent received, rental expenses by category, property address, and any major repairs or improvements.<br><br><a href="https://calmtax.co/blog/business-expense-categories-guide" target="_blank" rel="noopener">View our business expense category guide</a>';
   }
 
   if (t.includes('business expense totals') || t.includes('total annual expense amount')) {
-    return 'Please upload a spreadsheet or document showing business expense totals by category. Common categories include supplies, equipment, tools, advertising, fees, insurance, office expenses, software, professional services, travel, meals, utilities, vehicle expenses, and cost of goods sold if applicable.<br><br><a href="https://quickbooks.intuit.com/learn-support/en-us/help-article/expense-accounts/schedule-c-expense-categories-quickbooks-self/L1viz8KIU_US_en_US" target="_blank" rel="noopener">View common Schedule C expense categories</a>';
+    return 'Please upload a spreadsheet or document showing your expense totals by category. If you're unsure how to categorize an expense, see our business expense category guide.<br><br><a href="https://calmtax.co/blog/business-expense-categories-guide" target="_blank" rel="noopener">View our business expense category guide</a>';
   }
 
   if ((t.includes('supplies') && t.includes('equipment') && t.includes('tools')) || (t.includes('total amount spent') && (t.includes('supplies') || t.includes('equipment') || t.includes('tools')))) {
-    return 'Please provide totals by category rather than one combined number. For example: supplies total, equipment total, tools total, software total, and any large purchases listed separately with item, purchase date, cost, and date first used for work.<br><br><a href="https://quickbooks.intuit.com/learn-support/en-us/help-article/expense-accounts/schedule-c-expense-categories-quickbooks-self/L1viz8KIU_US_en_US" target="_blank" rel="noopener">View common Schedule C expense categories</a>';
+    return 'Please provide totals by category rather than one combined number. For example: supplies total, equipment total, tools total, software total, and any large purchases listed separately with item, purchase date, cost, and date first used for work. If you're unsure where something belongs, see our business expense category guide.<br><br><a href="https://calmtax.co/blog/business-expense-categories-guide" target="_blank" rel="noopener">View our business expense category guide</a>';
   }
 
   if (t.includes('gross business income')) {
