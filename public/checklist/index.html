@@ -253,6 +253,29 @@ body { margin:0; background:var(--bg); color:var(--ink); font-family:Inter,sans-
   .journey-label { font-size:16px !important; }
 }
 
+
+/* Requested header and tracker refinements */
+.checklist-card-title {
+  font-weight:600 !important;
+}
+
+/* Keep only one line directly beneath the logo/header area. */
+.journey::before {
+  display:none !important;
+}
+
+/* Move the shorter divider to directly above the Upload Your Documents title. */
+.title {
+  border-top:1px solid var(--border);
+  padding-top:24px;
+}
+
+/* Make the current step circle fully opaque. */
+.journey-step.current .journey-dot {
+  background:var(--sage) !important;
+  opacity:1 !important;
+}
+
 </style>
 </head>
 <body>
