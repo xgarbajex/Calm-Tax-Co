@@ -16,7 +16,7 @@ const SelfEmployedTax: React.FC = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.8 }}
-      className="py-32 px-6 bg-[#F9F7F2] min-h-screen"
+      className="pt-40 md:pt-48 pb-32 px-6 bg-[#F9F7F2] min-h-screen"
     >
       <div className="max-w-3xl mx-auto">
         <header className="mb-16">
@@ -52,12 +52,12 @@ const SelfEmployedTax: React.FC = () => {
             Our workflow is built around the reality that self-employed people are busy. There's no appointment to schedule, no office to drive to, no time blocked off in the middle of your workday.
           </p>
           <p>
-            You upload your income records and expense documentation through your own private Proton folder. We'll send you a checklist so you know exactly what to prepare before you upload. If you use accounting software, an export works perfectly. A categorized spreadsheet works too.
+            You upload your income records and expense documentation through your own private, secure cloud folder. We'll send you a checklist so you know exactly what to prepare before you upload. If you use accounting software, an export works perfectly. A categorized spreadsheet works too.
           </p>
 
           <ul className="list-disc pl-6 space-y-4">
             <li>We review your Schedule C carefully, check your quarterly payment history, and build an accurate return from the records you provide.</li>
-            <li>If we have questions, we ask them by email. Specific, short, easy to respond to when you have a moment.</li>
+            <li>If we have questions, we reach out via email. Specific, short, easy to respond to when you have a moment.</li>
             <li>We e-file your federal and state returns. Your completed return will also include your <Link to="/blog/quarterly-estimated-taxes-explained" className="font-bold underline text-[#A66D5E] hover:text-[#3C3633]">estimated payment</Link> amounts for each quarter of the coming year.</li>
           </ul>
 
@@ -99,7 +99,7 @@ const SelfEmployedTax: React.FC = () => {
             </div>
             <div className="pt-6">
               <h3 className="text-xl md:text-2xl serif-font font-normal text-[#3C3633] mb-3">Do I need to get on a phone call with my tax preparer?</h3>
-              <p>You do not need a phone call at any point. Everything happens by email and document upload. We ask questions in writing when we need something and you respond when it works for you.</p>
+              <p>You do not need a phone call at any point. Everything happens online through our secure portal and document upload. We ask questions in writing through our secure system when we need something and you respond when it works for you.</p>
             </div>
           </div>
         </div>
@@ -110,12 +110,12 @@ const SelfEmployedTax: React.FC = () => {
             <p className="text-[#4A4441] mb-8 font-medium">
               We'll handle it carefully.
             </p>
-            <Link 
-              to="/#contact" 
+            <a 
+              href="/intake.html" 
               className="inline-block py-4 px-10 rounded-full bg-[#3C3633] text-white text-xs uppercase tracking-[0.2em] hover:bg-[#4d4642] transition-all duration-500"
             >
               Get Started
-            </Link>
+            </a>
           </div>
         </footer>
       </div>

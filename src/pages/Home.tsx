@@ -14,8 +14,8 @@ const Home: React.FC = () => {
   return (
     <div className="space-y-0">
       <Hero />
-      <WhoItsFor />
       <HowItWorks />
+      <WhoItsFor />
       <Pricing />
       <WhoWeAreNot />
       <About />

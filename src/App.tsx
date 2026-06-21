@@ -12,6 +12,7 @@ import GigWorkerTax from './pages/services/GigWorkerTax';
 import SelfEmployedTax from './pages/services/SelfEmployedTax';
 import RemoteTax from './pages/services/RemoteTax';
 import PhoenixOnlineTax from './pages/services/PhoenixOnlineTax';
+import { Logo } from './components/Logo';
 
 const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [activeLegal, setActiveLegal] = useState<'privacy' | 'terms' | 'accessibility' | null>(null);
@@ -38,26 +39,28 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
       
       {children}
 
-      <footer className="relative py-20 px-6 border-t border-[#3C3633]/5 bg-[#FCFBFA] overflow-hidden">
+      <footer className="relative py-8 px-6 border-t border-[#3C3633]/5 bg-[#FCFBFA] overflow-hidden">
         {/* Background Graphic */}
         <div className="absolute inset-0 z-0 opacity-20 pointer-events-none">
           <img src="/hero_background.png" alt="" className="w-full h-full object-cover" />
         </div>
 
         <div className="relative z-10 max-w-7xl mx-auto">
-          <div className="flex flex-col md:flex-row justify-between items-start gap-12">
+          <div className="flex flex-col md:flex-row justify-between items-start gap-8">
             <div className="max-w-xs">
-              <h2 className="text-2xl serif-font mb-2 text-[#3C3633]">Calm Tax Co.</h2>
+              <Link to="/" onClick={() => window.scrollTo(0, 0)} className="block hover:opacity-80 transition-opacity mb-4">
+                <Logo className="h-16 sm:h-20 md:h-24 w-auto" />
+              </Link>
               <p className="text-xs text-[#3C3633]/50 leading-relaxed">A small, careful tax practice. Conducted entirely by correspondence. Arizona, U.S. - serving all 50 states, year-round.</p>
               <div className="mt-4 flex flex-col gap-1">
                 <span className="text-xs text-[#3C3633]/40 uppercase tracking-widest">Credentials</span>
                 <span className="text-xs text-[#3C3633]/60">IRS PTIN holder</span>
                 <span className="text-xs text-[#3C3633]/60">IRS Authorized E-File Provider</span>
-                <span className="text-xs text-[#3C3633]/60">Proton-secured communications</span>
+                <span className="text-xs text-[#3C3633]/60">Secure, encrypted cloud storage</span>
               </div>
             </div>
 
-            <div className="flex max-w-lg flex-wrap gap-x-12 gap-y-8">
+            <div className="flex max-w-lg flex-wrap gap-x-12 gap-y-6">
               <div className="flex flex-col gap-3">
                 <span className="text-xs text-[#3C3633]/40 uppercase tracking-widest mb-1">Services</span>
                 <Link to="/services/remote-tax-preparation-services" className="text-xs text-[#3C3633]/70 hover:text-[#7D8E7E] transition-colors">Remote Tax Services</Link>
@@ -90,7 +93,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
               </div>
             </div>
           </div>
-          <div className="mt-12 pt-6 border-t border-[#3C3633]/5">
+          <div className="mt-8 pt-4 border-t border-[#3C3633]/5">
             <p className="text-xs text-[#3C3633]/30 text-center">© 2026 Calm Tax Co. All rights reserved.</p>
           </div>
         </div>

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { NAV_ITEMS } from '../constants';
 import DeadlineBanner from './DeadlineBanner';
+import { Logo } from './Logo';
 
 const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -25,7 +26,7 @@ const Navbar: React.FC = () => {
 
   const isSolid = !isHomePage || isScrolled || isMenuOpen;
   const navBackgroundClass = isSolid 
-    ? 'bg-[#F9F7F2] md:bg-[#F9F7F2]/95 md:backdrop-blur-md py-4 shadow-sm border-b border-[#3C3633]/5' 
+    ? 'bg-[#F9F7F2] md:bg-[#F9F7F2]/95 md:backdrop-blur-md py-4' 
     : 'bg-transparent py-4';
 
   return (
@@ -34,8 +35,8 @@ const Navbar: React.FC = () => {
       
       <nav className={`transition-all duration-300 relative z-50 ${navBackgroundClass}`}>
         <div className="max-w-7xl mx-auto px-6 flex justify-between items-center relative z-50">
-          <Link to="/" onClick={() => setIsMenuOpen(false)} className="h-10 md:h-12 hover:opacity-80 transition-opacity">
-            <img src="/logo.png" alt="Calm Tax Co." className="h-full w-auto" />
+          <Link to="/" onClick={() => setIsMenuOpen(false)} className="block hover:opacity-80 transition-opacity">
+            <Logo className="h-20 sm:h-24 md:h-28 w-auto" />
           </Link>
           
           {/* Desktop Navigation */}

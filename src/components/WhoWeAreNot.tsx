@@ -13,10 +13,10 @@ const WhoWeAreNot: React.FC = () => {
 
   return (
     <section className="py-16 px-6 bg-[#F9F7F2]">
-      <div className="max-w-5xl mx-auto text-center">
+      <div className="max-w-5xl mx-auto text-center bg-white p-8 md:py-10 md:px-16 rounded-[2.5rem] border border-[#3C3633]/20 shadow-md">
         <h2 className="text-3xl serif-font text-[#3C3633] mb-4">A few situations we refer out</h2>
-        <div className="w-16 h-px bg-[#3C3633]/20 mx-auto mb-8" />
-        <p className="text-[#4A4542] text-base max-w-2xl mb-8 leading-relaxed mx-auto">
+        <div className="w-16 h-px bg-[#3C3633]/20 mx-auto mb-6" />
+        <p className="text-[#4A4542] text-base max-w-3xl mb-8 leading-relaxed mx-auto">
           Honesty saves everyone time. There are situations we don't currently take on because they are better served by someone with different specialization. We expect this list to shrink as the practice grows.
         </p>
         <div className="grid sm:grid-cols-2 gap-x-12 gap-y-2 mb-8 text-left">

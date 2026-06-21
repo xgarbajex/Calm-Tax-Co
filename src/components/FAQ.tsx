@@ -9,15 +9,15 @@ const FAQ: React.FC = () => {
     },
     {
       question: "How long does tax preparation take?",
-      answer: "Tax preparation at Calm Tax Co. typically takes 10 to 14 days from the time we receive your complete document set. We review your materials carefully and will reach out by email if anything specific is missing during that time."
+      answer: "Tax preparation at Calm Tax Co. typically takes 10 to 14 days from the time we receive your complete document set. We review your materials carefully and will reach out via email if anything specific is missing during that time."
     },
     {
       question: "Do I need to come into an office or get on a phone call?",
-      answer: "No office visit, no phone call, no scheduled appointment of any kind. Everything happens by email and secure document upload, on your schedule. Most clients complete the entire process without a single real-time interaction."
+      answer: "No office visit, no phone call, no scheduled appointment of any kind. Everything happens online via secure email and secure document upload, on your schedule. Most clients complete the entire process without a single real-time interaction."
     },
     {
       question: "How do I send you my documents?",
-      answer: "When you come on as a client, we set up a private encrypted Proton Drive folder just for you and send you a link to access it. You upload your documents there at your own pace. Nothing sensitive goes through standard email."
+      answer: "When you come on as a client, we set up a private, secure cloud storage folder just for you and send you a link to access it. You upload your documents there at your own pace. Nothing sensitive goes through standard email."
     },
     {
       question: "What if I get an IRS letter after my return is filed?",

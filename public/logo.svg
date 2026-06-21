@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="500"
+   height="175"
+   viewBox="0 0 500 175"
+   fill="none"
+   version="1.1"
+   id="svg846"
+   sodipodi:docname="my calm-tax-co-b3-wave-italic.svg"
+   inkscape:version="1.1.1 (3bf5ae0d25, 2021-09-20)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview848"
+     pagecolor="#ffffff"
+     bordercolor="#111111"
+     borderopacity="1"
+     inkscape:pageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="1"
+     showgrid="false"
+     inkscape:zoom="2.388"
+     inkscape:cx="41.457286"
+     inkscape:cy="87.311558"
+     inkscape:window-width="1284"
+     inkscape:window-height="1041"
+     inkscape:window-x="182"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg846" />
+  <!--
+    Calm Tax Co. — B3 Italic + Sans with Wave
+    ─────────────────────────────────────────────────
+    EDITABLE ELEMENTS:
+
+    #wordmark-calm      → "Calm" italic serif wordmark
+    #separator          → vertical hairline between serif and sans
+    #label-tax          → "TAX" sans-serif label
+    #label-co           → "CO." sans-serif label
+    #wave               → gentle flowing underline
+
+    COLORS:
+    Charcoal   #2A2A2A  (Calm wordmark)
+    Mid-grey   #C4BDB3  (separator hairline)
+    Warm grey  #9A9590  (TAX / CO. labels)
+    Sage Mid   #7A8C78  (wave)
+
+    FONTS:
+    Primary   — Cormorant Garamond, 500 italic
+    Secondary — Inter, 500
+    Convert to outlines before final production use.
+  -->
+  <defs
+     id="defs839">
+    <style
+       id="style837">
+      @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,400;1,500;1,600&amp;family=Inter:wght@400;500;600&amp;display=swap');
+    </style>
+  </defs>
+  <!-- ── "Calm" italic serif wordmark ── -->
+  <text
+     id="wordmark-calm"
+     x="46"
+     y="92"
+     font-family="'Cormorant Garamond', 'Georgia', serif"
+     font-size="96"
+     font-weight="500"
+     font-style="italic"
+     fill="#2A2A2A">Calm</text>
+  <!-- ── vertical hairline separator ── -->
+  <!-- nudged right slightly to account for italic slant -->
+  <line
+     id="separator"
+     x1="272"
+     y1="38"
+     x2="272"
+     y2="100"
+     stroke="#C4BDB3"
+     stroke-width="2.0" />
+  <!-- ── "TAX" sans label ── -->
+  <text
+     id="label-tax"
+     x="288"
+     y="65"
+     font-family="'Inter', 'Helvetica Neue', sans-serif"
+     font-size="20"
+     font-weight="500"
+     letter-spacing="6"
+     fill="#9A9590">TAX</text>
+  <!-- ── "CO." sans label ── -->
+  <text
+     id="label-co"
+     x="288"
+     y="92"
+     font-family="'Inter', 'Helvetica Neue', sans-serif"
+     font-size="20"
+     font-weight="500"
+     letter-spacing="6"
+     fill="#9A9590">CO.</text>
+  <!-- ── wave: gentle S-curve spanning full mark width ── -->
+  <path
+     id="wave"
+     d="m 18.361809,116.41876 q 94.000001,-12 196.000001,0 102,12 174,0"
+     stroke="#9a9590"
+     stroke-width="2.8"
+     fill="none"
+     stroke-linecap="round"
+     style="stroke-width:2.19968504;stroke-miterlimit:4;stroke-dasharray:none" />
+</svg>

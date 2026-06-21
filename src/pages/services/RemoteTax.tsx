@@ -16,7 +16,7 @@ const RemoteTax: React.FC = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.8 }}
-      className="py-32 px-6 bg-[#F9F7F2] min-h-screen"
+      className="pt-40 md:pt-48 pb-32 px-6 bg-[#F9F7F2] min-h-screen"
     >
       <div className="max-w-3xl mx-auto">
         <header className="mb-16">
@@ -40,7 +40,7 @@ const RemoteTax: React.FC = () => {
           </p>
 
           <p>
-            We serve clients in all 50 states. Each client gets their own private encrypted Proton folder. We'll send you a link to access yours.
+            We serve clients in all 50 states. Each client gets their own private, secure cloud folder. We'll send you a link to access yours.
           </p>
 
           <h2 className="text-3xl serif-font font-normal text-[#3C3633] mt-16 mb-6 border-b border-[#3C3633]/10 pb-3">How The Process Works</h2>
@@ -49,9 +49,9 @@ const RemoteTax: React.FC = () => {
           </p>
 
           <ul className="list-disc pl-6 space-y-4">
-            <li>You receive a link to your own private Proton folder. You upload your documents there. PDFs from your payroll provider, photos of paper forms, exports from accounting software. Whatever format you have is fine.</li>
+            <li>You receive a link to your own private, secure cloud folder. You upload your documents there. PDFs from your payroll provider, photos of paper forms, exports from accounting software. Whatever format you have is fine.</li>
             <li>We review your documents carefully, outside of a live appointment, which means we're not rushing. We prepare your return with full attention on the details.</li>
-            <li>If we have questions, we send them by email. Specific, easy to answer, no phone tag involved. You respond when you have a few minutes.</li>
+            <li>If we have questions, we reach out via email. Specific, easy to answer, no phone tag involved. You respond when you have a few minutes.</li>
             <li>We <Link to="/blog/how-to-file-taxes-remotely" className="font-bold underline text-[#A66D5E] hover:text-[#3C3633]">e-file directly</Link> with the IRS and your state. For returns that can't be filed electronically, we handle the mailing process.</li>
           </ul>
 
@@ -64,7 +64,7 @@ const RemoteTax: React.FC = () => {
             The most common concern about remote tax preparation is a reasonable one: is it safe to send financial documents online?
           </p>
           <p>
-            We don't use standard email for document collection. Each client has their own private encrypted Proton folder. Files go there directly. Your Social Security number, income data, and personal documents are handled with the same care you'd expect from any professional handling sensitive financial information.
+            We don't use standard insecure communication for document collection. Each client has their own private, secure cloud folder. Files go there directly. Your Social Security number, income data, and personal documents are handled with the same care you'd expect from any professional handling sensitive financial information.
           </p>
           <p>
             We don't store documents beyond what's required for your return. We don't share your information with third parties. Your data stays between you and us.
@@ -80,14 +80,14 @@ const RemoteTax: React.FC = () => {
           </p>
 
           <p>
-            You don't need to be technically sophisticated. If you can follow a link and upload a file, you can <Link to="/#contact" className="font-bold underline text-[#A66D5E] hover:text-[#3C3633]">work with us</Link>.
+            You don't need to be technically sophisticated. If you can follow a link and upload a file, you can <a href="/intake.html" className="font-bold underline text-[#A66D5E] hover:text-[#3C3633]">work with us</a>.
           </p>
 
           <h2 className="text-3xl serif-font font-normal text-[#3C3633] mt-16 mb-8 border-b border-[#3C3633]/10 pb-3">Frequently Asked Questions</h2>
           <div className="space-y-8 divide-y divide-[#3C3633]/10">
             <div>
               <h3 className="text-xl md:text-2xl serif-font font-normal text-[#3C3633] mb-3">How do I send tax documents to a remote tax preparer?</h3>
-              <p>You can send tax documents to us by uploading them to your own private Proton folder. We send you a link to access it. You submit PDFs, photos of paper forms, or spreadsheet exports there at your own pace.</p>
+              <p>You can send tax documents to us by uploading them to your own private, secure cloud folder. We send you a link to access it. You submit PDFs, photos of paper forms, or spreadsheet exports there at your own pace.</p>
             </div>
             <div className="pt-6">
               <h3 className="text-xl md:text-2xl serif-font font-normal text-[#3C3633] mb-3">Can I take a picture of my tax forms instead of scanning them?</h3>
@@ -110,12 +110,12 @@ const RemoteTax: React.FC = () => {
             <p className="text-[#4A4441] mb-8 font-medium">
               Secure, careful, fully remote.
             </p>
-            <Link 
-              to="/#contact" 
+            <a 
+              href="/intake.html" 
               className="inline-block py-4 px-10 rounded-full bg-[#3C3633] text-white text-xs uppercase tracking-[0.2em] hover:bg-[#4d4642] transition-all duration-500"
             >
               Get Started
-            </Link>
+            </a>
           </div>
         </footer>
       </div>

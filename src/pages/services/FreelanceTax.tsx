@@ -16,7 +16,7 @@ const FreelanceTax: React.FC = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.8 }}
-      className="py-32 px-6 bg-[#F9F7F2] min-h-screen"
+      className="pt-40 md:pt-48 pb-32 px-6 bg-[#F9F7F2] min-h-screen"
     >
       <div className="max-w-3xl mx-auto">
         <header className="mb-16">
@@ -54,8 +54,8 @@ const FreelanceTax: React.FC = () => {
           <p>Here's how it works:</p>
 
           <ul className="list-disc pl-6 space-y-4">
-            <li>You upload your documents through your own private Proton folder. We'll send you a checklist of what to gather so nothing gets missed. Once we have everything, we get to work.</li>
-            <li>We review everything carefully and prepare your return. If something's unclear or missing, we'll send a short email. Specific, easy to answer, no technical language.</li>
+            <li>You upload your documents through your own private, secure cloud folder. We'll send you a checklist of what to gather so nothing gets missed. Once we have everything, we get to work.</li>
+            <li>We review everything carefully and prepare your return. If something's unclear or missing, we'll reach out via email. Specific, easy to answer, no technical language.</li>
             <li>We e-file directly with the IRS and your state. For returns that can't be filed electronically, we'll handle the mailing process.</li>
             <li>We'll also include your quarterly estimated payment amounts for the year ahead with your completed return.</li>
           </ul>
@@ -78,7 +78,7 @@ const FreelanceTax: React.FC = () => {
             This service is a good fit if you earn income on 1099s, operate as a sole proprietor, <Link to="/services/gig-worker-tax-filing" className="font-bold underline text-[#A66D5E] hover:text-[#3C3633]">gig worker</Link>, or single-member LLC, and want a calm, competent professional handling your return. No large firm overhead, no anxiety of doing it yourself.
           </p>
           <p>
-            If you're comfortable with email and can take a few photos of your documents, the rest is straightforward.
+            If you're comfortable working online and can take a few photos of your documents, the rest is straightforward.
           </p>
 
           <h2 className="text-3xl serif-font font-normal text-[#3C3633] mt-16 mb-8 border-b border-[#3C3633]/10 pb-3">Frequently Asked Questions</h2>
@@ -93,7 +93,7 @@ const FreelanceTax: React.FC = () => {
             </div>
             <div className="pt-6">
               <h3 className="text-xl md:text-2xl serif-font font-normal text-[#3C3633] mb-3">Is it safe to send tax documents online?</h3>
-              <p>Sending tax documents online is secure when using the right tools. We set up a private encrypted Proton folder for each client so your files go directly to us and never travel through standard email.</p>
+              <p>Sending tax documents online is secure when using the right tools. We set up a private, secure cloud folder for each client so your files go directly to us and never travel through standard email.</p>
             </div>
             <div className="pt-6">
               <h3 className="text-xl md:text-2xl serif-font font-normal text-[#3C3633] mb-3">Can an out-of-state tax preparer file my taxes?</h3>
@@ -108,12 +108,12 @@ const FreelanceTax: React.FC = () => {
             <p className="text-[#4A4441] mb-8 font-medium">
               We take it from there.
             </p>
-            <Link 
-              to="/#contact" 
+            <a 
+              href="/intake.html" 
               className="inline-block py-4 px-10 rounded-full bg-[#3C3633] text-white text-xs uppercase tracking-[0.2em] hover:bg-[#4d4642] transition-all duration-500"
             >
               Get Started
-            </Link>
+            </a>
           </div>
         </footer>
       </div>

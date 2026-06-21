@@ -16,7 +16,7 @@ const PhoenixOnlineTax: React.FC = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.8 }}
-      className="py-32 px-6 bg-[#F9F7F2] min-h-screen"
+      className="pt-40 md:pt-48 pb-32 px-6 bg-[#F9F7F2] min-h-screen"
     >
       <div className="max-w-3xl mx-auto">
         <header className="mb-16">
@@ -32,7 +32,7 @@ const PhoenixOnlineTax: React.FC = () => {
           </p>
 
           <p>
-            This is a fully online practice, by design. No office, no waiting room, no appointment to schedule. Whether you're a W-2 employee who wants a real professional looking at your return, a <Link to="/services/freelance-tax-preparation" className="font-bold underline text-[#A66D5E] hover:text-[#3C3633]">freelancer</Link> navigating 1099s, or a <Link to="/services/self-employed-tax-preparation" className="font-bold underline text-[#A66D5E] hover:text-[#3C3633]">self-employed</Link> person tired of doing it alone, the process is the same: straightforward, private, and handled entirely by email and secure document sharing.
+            This is a fully online practice, by design. No office, no waiting room, no appointment to schedule. Whether you're a W-2 employee who wants a real professional looking at your return, a <Link to="/services/freelance-tax-preparation" className="font-bold underline text-[#A66D5E] hover:text-[#3C3633]">freelancer</Link> navigating 1099s, or a <Link to="/services/self-employed-tax-preparation" className="font-bold underline text-[#A66D5E] hover:text-[#3C3633]">self-employed</Link> person tired of doing it alone, the process is the same: straightforward, private, and handled entirely online through our secure portal and document sharing.
           </p>
 
           <p>
@@ -52,7 +52,7 @@ const PhoenixOnlineTax: React.FC = () => {
             Being based in Arizona doesn't mean you need to come to us. We operate <Link to="/services/remote-tax-preparation-services" className="font-bold underline text-[#A66D5E] hover:text-[#3C3633]">entirely online</Link>, by choice.
           </p>
           <p>
-            You upload your documents through your private Proton folder. We review everything carefully, prepare your return, and communicate by email if we have questions. We e-file directly with the IRS and your state.
+            You upload your documents through your private, secure cloud folder. We review everything carefully, prepare your return, and reach out by email if we have questions. We e-file directly with the IRS and your state.
           </p>
           <p>
             It's the same careful, asynchronous process we use for clients across the country.
@@ -88,11 +88,11 @@ const PhoenixOnlineTax: React.FC = () => {
             </div>
             <div className="pt-6">
               <h3 className="text-xl md:text-2xl serif-font font-normal text-[#3C3633] mb-3">Do online tax preparers accept physical document drop-offs?</h3>
-              <p>We do not accept physical drop-offs or in-person meetings. All documents are uploaded to your private Proton folder. This keeps the process efficient and your information handled consistently.</p>
+              <p>We do not accept physical drop-offs or in-person meetings. All documents are uploaded to your private, secure cloud folder. This keeps the process efficient and your information handled consistently.</p>
             </div>
             <div className="pt-6">
               <h3 className="text-xl md:text-2xl serif-font font-normal text-[#3C3633] mb-3">How secure is online tax document uploading?</h3>
-              <p>Online tax document uploading is secure when using dedicated encryption tools. We provide each client with a private encrypted Proton folder. Your documents go there directly and never travel through standard email.</p>
+              <p>Online tax document uploading is secure when using dedicated encryption tools. We provide each client with a private, secure cloud folder. Your documents go there directly and never travel through standard electronic communication.</p>
             </div>
             <div className="pt-6">
               <h3 className="text-xl md:text-2xl serif-font font-normal text-[#3C3633] mb-3">How do I file taxes with both W-2 and freelance income?</h3>
@@ -107,12 +107,12 @@ const PhoenixOnlineTax: React.FC = () => {
             <p className="text-[#4A4441] mb-8 font-medium">
               Taxes handled by someone who's actually paying attention.
             </p>
-            <Link 
-              to="/#contact" 
+            <a 
+              href="/intake.html" 
               className="inline-block py-4 px-10 rounded-full bg-[#3C3633] text-white text-xs uppercase tracking-[0.2em] hover:bg-[#4d4642] transition-all duration-500"
             >
               Get Started
-            </Link>
+            </a>
           </div>
         </footer>
       </div>

@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, Fragment } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { motion } from 'motion/react';
 import ReactMarkdown from 'react-markdown';
 import { BLOG_POSTS } from '../blogData';
 import { ArrowLeft } from 'lucide-react';
+import { ExpenseCategoriesGuide } from '../components/ExpenseCategoriesGuide';
 
 const BlogPostPage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -20,7 +21,7 @@ const BlogPostPage: React.FC = () => {
 
   if (!post) {
     return (
-      <div className="py-32 px-6 text-center bg-[#F9F7F2] min-h-screen">
+      <div className="pt-40 md:pt-48 pb-32 px-6 text-center bg-[#F9F7F2] min-h-screen">
         <h1 className="text-4xl serif-font mb-8">Article not found</h1>
         <Link to="/blog" className="text-[#7D8E7E] hover:underline flex items-center justify-center gap-2">
           <ArrowLeft className="w-4 h-4" /> Back to Tax Resources
@@ -29,12 +30,15 @@ const BlogPostPage: React.FC = () => {
     );
   }
 
+  // Handle custom embedded components
+  const contentParts = post.content.split('<!-- INSERT EXPENSE GUIDE HERE -->');
+
   return (
       <motion.article 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
-        className="py-32 px-6 bg-[#F9F7F2] min-h-screen"
+        className="pt-40 md:pt-48 pb-32 px-6 bg-[#F9F7F2] min-h-screen"
       >
         <div className="max-w-3xl mx-auto">
           <Link 
@@ -55,20 +59,25 @@ const BlogPostPage: React.FC = () => {
           </header>
 
           <div className="markdown-body">
-            <ReactMarkdown
-              components={{
-                a: ({ node, ...props }) => (
-                  <Link 
-                    to={props.href || "#"} 
-                    className="font-bold underline text-[#A66D5E] hover:text-[#3C3633]"
-                  >
-                    {props.children}
-                  </Link>
-                )
-              }}
-            >
-              {post.content}
-            </ReactMarkdown>
+            {contentParts.map((part, index) => (
+              <Fragment key={index}>
+                <ReactMarkdown
+                  components={{
+                    a: ({ node, ...props }) => (
+                      <Link 
+                        to={props.href || "#"} 
+                        className="font-bold underline text-[#A66D5E] hover:text-[#3C3633]"
+                      >
+                        {props.children}
+                      </Link>
+                    )
+                  }}
+                >
+                  {part}
+                </ReactMarkdown>
+                {index < contentParts.length - 1 && <ExpenseCategoriesGuide />}
+              </Fragment>
+            ))}
           </div>
 
         <footer className="mt-24 pt-12 border-t border-[#3C3633]/10">
@@ -77,12 +86,12 @@ const BlogPostPage: React.FC = () => {
             <p className="text-[#5D6D7E] mb-8">
               We help freelancers and remote workers handle their filing with clarity and precision.
             </p>
-            <Link 
-              to="/#contact" 
+            <a 
+              href="/intake.html" 
               className="inline-block py-4 px-10 rounded-full bg-[#3C3633] text-white text-xs uppercase tracking-[0.2em] hover:bg-[#4d4642] transition-all duration-500"
             >
               Get in touch
-            </Link>
+            </a>
           </div>
         </footer>
       </div>

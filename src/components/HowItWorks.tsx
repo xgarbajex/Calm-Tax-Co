@@ -3,29 +3,25 @@ import React from 'react';
 const HowItWorks: React.FC = () => {
   const steps = [
     {
-      title: "A short intake form",
-      desc: "A few questions about your year. Usually takes about five minutes via email."
+      title: "Short Intake Walkthrough",
+      desc: "Do it anytime, no tax knowledge needed, then we'll send your personalized document checklist. Takes about 10 minutes."
     },
     {
-      title: "Secure document upload",
-      desc: "Upload your documents to your personal encrypted folder whenever you're ready. We discuss questions in writing so nothing gets lost or forgotten."
+      title: "Gather & Upload",
+      desc: "Securely submit your tax documents."
     },
     {
-      title: "Quote & upfront payment",
-      desc: "We will provide you with a finalized quote. Once payment is received, we proceed with preparing your return."
+      title: "Quote & Pay",
+      desc: "Review your fixed-price quote and pay online."
     },
     {
-      title: "We prepare your return",
-      desc: "We review everything carefully, research any questions, and reach out via email for any clarification we may need."
-    },
-    {
-      title: "E-file",
-      desc: "You'll receive a copy of your return and any other documentation through your secure upload folder."
+      title: "Prepare & E-file",
+      desc: "We prepare and e-file your return."
     }
   ];
 
   return (
-    <section id="how-it-works" className="py-32 px-6 bg-[#F9F7F2]">
+    <section id="how-it-works" className="py-32 px-6 bg-white">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-24">
           <h2 className="text-5xl md:text-6xl serif-font text-[#3C3633] mb-4">How it works</h2>
@@ -34,25 +30,25 @@ const HowItWorks: React.FC = () => {
         </div>
 
         <div className="relative">
-          {/* Desktop Wave Line */}
-          <div className="hidden md:block absolute top-0 left-8 right-8 z-0 pointer-events-none">
-            <svg width="100%" height="192" viewBox="0 0 1000 192" preserveAspectRatio="none" className="overflow-visible">
-              <path
-                d="M 0,32 C 125,32 125,160 250,160 C 375,160 375,32 500,32 C 625,32 625,160 750,160 C 875,160 875,32 1000,32"
-                fill="none"
-                stroke="#7D8E7E"
-                strokeOpacity="0.2"
-                strokeWidth="2"
-                strokeDasharray="6 6"
-                vectorEffect="non-scaling-stroke"
-              />
-            </svg>
-          </div>
-
           {/* Mobile Vertical Wave Line */}
           {/* Note: In this version, we use dynamic step-by-step wavy paths embedded inside the loop for mobile view */}
 
           <div className="flex flex-col md:flex-row justify-between relative z-10 md:gap-4 max-w-3xl md:max-w-none mx-auto">
+            {/* Desktop Wave Line */}
+            <div className="hidden md:block absolute top-[32px] left-[8.5%] right-[8.5%] z-0 pointer-events-none">
+              <svg width="100%" height="128" viewBox="0 0 1000 128" preserveAspectRatio="none" className="overflow-visible">
+                <path
+                  d="M 0,0 C 166,0 166,128 333,128 C 500,128 500,0 666,0 C 833,0 833,128 1000,128"
+                  fill="none"
+                  stroke="#7D8E7E"
+                  strokeOpacity="0.4"
+                  strokeWidth="2"
+                  strokeDasharray="6 6"
+                  vectorEffect="non-scaling-stroke"
+                />
+              </svg>
+            </div>
+            
             {steps.map((step, index) => {
               const isEven = index % 2 === 0;
               const isLast = index === steps.length - 1;
@@ -65,16 +61,16 @@ const HowItWorks: React.FC = () => {
                 >
                   {/* Mobile/Tablet Connecting S-Curve Line */}
                   {!isLast && (
-                    <div className="absolute top-[44px] bottom-[-44px] sm:top-[48px] sm:bottom-[-48px] left-0 right-0 pointer-events-none md:hidden z-0">
-                      <svg className="w-full h-full overflow-visible animate-pulse" preserveAspectRatio="none" viewBox="0 0 100 100">
+                    <div className="absolute top-[36px] sm:top-[40px] h-full left-[calc(50%-44px)] right-[calc(50%-44px)] sm:left-[calc(50%-56px)] sm:right-[calc(50%-56px)] pointer-events-none md:hidden z-0">
+                      <svg className="w-full h-full overflow-visible" preserveAspectRatio="none" viewBox="0 0 100 100">
                         <path
                           d={isEven 
-                            ? "M 58,0 C 58,50 42,50 42,100" 
-                            : "M 42,0 C 42,50 58,50 58,100"
+                            ? "M 100,0 C 100,50 0,50 0,100" 
+                            : "M 0,0 C 0,50 100,50 100,100"
                           }
                           fill="none"
                           stroke="#7D8E7E"
-                          strokeOpacity="0.3"
+                          strokeOpacity="0.4"
                           strokeWidth="2"
                           strokeDasharray="6 6"
                           vectorEffect="non-scaling-stroke"
@@ -136,6 +132,14 @@ const HowItWorks: React.FC = () => {
               );
             })}
           </div>
+        </div>
+        <div className="text-center mt-16">
+          <a
+            href="/intake.html"
+            className="inline-block bg-[#3C3633] text-white px-8 py-4 rounded-full text-lg hover:bg-[#5D6D7E] transition-colors duration-300"
+          >
+            Get Started
+          </a>
         </div>
       </div>
     </section>

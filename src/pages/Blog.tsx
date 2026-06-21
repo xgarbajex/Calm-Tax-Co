@@ -6,7 +6,7 @@ import { ArrowRight } from 'lucide-react';
 
 const Blog: React.FC = () => {
   return (
-    <section className="py-32 px-6 bg-[#F9F7F2] min-h-screen">
+    <section className="pt-40 md:pt-48 pb-32 px-6 bg-[#F9F7F2] min-h-screen">
       <div className="max-w-5xl mx-auto">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}

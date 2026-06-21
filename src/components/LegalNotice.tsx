@@ -19,7 +19,7 @@ const LegalNotice: React.FC<LegalNoticeProps> = ({ isOpen, onClose, type }) => {
         },
         {
           heading: "Data Security",
-          text: "Your documents are transmitted securely via encrypted file sharing. We do not transfer sensitive records through unsecured email systems."
+          text: "Your documents are transmitted securely via encrypted file sharing. We do not transfer sensitive records through unsecured systems."
         },
         {
           heading: "Information Sharing",
@@ -57,7 +57,7 @@ const LegalNotice: React.FC<LegalNoticeProps> = ({ isOpen, onClose, type }) => {
         },
         {
           heading: "Assistance",
-          text: "If you have difficulty accessing any part of this website, please contact us at calmtaxco@proton.me and we will work with you to provide the information or service you need through a communication method that is accessible for you."
+          text: "If you have difficulty accessing any part of this website, please contact us at hello@calmtax.co and we will work with you to provide the information or service you need through a communication method that is accessible for you."
         }
       ]
     }

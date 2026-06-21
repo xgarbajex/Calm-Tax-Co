@@ -3,7 +3,7 @@ import { SERVICES } from '../constants';
 
 const Pricing: React.FC = () => {
   return (
-    <section id="pricing" className="relative py-32 bg-white overflow-hidden">
+    <section id="pricing" className="relative py-32 bg-white overflow-hidden scroll-mt-24 md:scroll-mt-32">
       {/* Background Graphic */}
       <div className="absolute inset-0 z-0 opacity-40">
         <img src="/hero_background.png" alt="" className="w-full h-full object-cover" />
@@ -17,7 +17,7 @@ const Pricing: React.FC = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-5xl mx-auto">
           {SERVICES.map((service) => (
-            <div key={service.id} className="bg-[#F2F0ED] p-12 rounded-[2.5rem] border border-[#3C3633]/5 hover:shadow-xl hover:shadow-[#3C3633]/5 transition-all duration-700 flex flex-col items-center text-center">
+            <div key={service.id} className="bg-[#F2F0ED] p-12 rounded-[2.5rem] border border-[#3C3633]/20 shadow-md hover:shadow-xl hover:shadow-[#3C3633]/10 transition-all duration-700 flex flex-col items-center text-center">
               <div className="mb-12 text-center flex flex-col items-center">
                 <h3 className="text-3xl md:text-4xl serif-font italic text-[#3C3633] mb-6">{service.title}</h3>
                 <div className="flex items-center justify-center gap-2 mb-6">

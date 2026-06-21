@@ -12,7 +12,7 @@ const Contact: React.FC = () => {
     const formData = new FormData(form);
 
     try {
-      const response = await fetch("https://formsubmit.co/ajax/calmtaxco@proton.me", {
+      const response = await fetch("https://formsubmit.co/ajax/hello@calmtax.co", {
         method: "POST",
         headers: {
           'Content-Type': 'application/json',
@@ -30,12 +30,12 @@ const Contact: React.FC = () => {
     } catch (error) {
       console.error(error);
       setStatus('idle');
-      alert("There was an error sending your message. Please try again or email us directly at calmtaxco@proton.me.");
+      alert("There was an error sending your message. Please try again or contact us directly at hello@calmtax.co.");
     }
   };
 
   return (
-    <section id="contact" className="relative py-32 bg-white overflow-hidden">
+    <section id="contact" className="relative py-32 bg-white overflow-hidden scroll-mt-24 md:scroll-mt-32">
       {/* Background Graphic */}
       <div className="absolute inset-0 z-0 opacity-40 pointer-events-none">
         <img src="/hero_background.png" alt="" className="w-full h-full object-cover" />
@@ -44,11 +44,10 @@ const Contact: React.FC = () => {
       <div className="relative z-10 max-w-7xl mx-auto px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-24">
           <div>
-            <img src="/logo-alone.png" alt="Calm Tax Co. Logo" className="h-16 mb-8" />
             <h2 className="text-5xl md:text-6xl mb-4 leading-tight">Let's <br /><span className="italic">connect.</span></h2>
             <div className="w-48 h-px bg-[#3C3633]/20 mb-8" />
             <p className="text-[#5D6D7E] mb-12 max-w-md leading-relaxed">
-              We handle the filing so you don't have to. Drop us a message and we'll connect via email. No phone calls, no scheduling. Just write when you're ready.
+              We handle the filing so you don't have to. Drop us a message and we'll be in touch. No phone calls, no scheduling. Just write when you're ready.
             </p>
             
             <div className="space-y-8">
@@ -59,9 +58,9 @@ const Contact: React.FC = () => {
               <div>
                 <h4 className="text-xs uppercase tracking-widest text-[#7D8E7E] mb-4">Connect</h4>
                 <div className="space-y-3">
-                  <a href="mailto:calmtaxco@proton.me" className="flex items-center gap-3 text-[#3C3633] hover:text-[#A66D5E] transition-colors">
+                  <a href="mailto:hello@calmtax.co" className="flex items-center gap-3 text-[#3C3633] hover:text-[#A66D5E] transition-colors">
                     <Mail className="w-5 h-5 text-[#A66D5E]" />
-                    <span>calmtaxco@proton.me</span>
+                    <span>hello@calmtax.co</span>
                   </a>
                   <a href="tel:+15203692256" className="flex items-center gap-3 text-[#3C3633] hover:text-[#A66D5E] transition-colors">
                     <Phone className="w-5 h-5 text-[#A66D5E]" />
@@ -72,7 +71,7 @@ const Contact: React.FC = () => {
             </div>
           </div>
 
-          <div className="bg-[#F9F7F2] p-8 md:p-12 rounded-[2.5rem] border border-[#3C3633]/5">
+          <div className="bg-[#F9F7F2] p-8 md:p-12 rounded-[2.5rem] border border-[#3C3633]/20 shadow-md">
             {status === 'sent' ? (
               <div className="h-full flex flex-col items-center justify-center text-center py-20 animate-fade-in">
                 <div className="w-16 h-16 bg-[#7D8E7E] rounded-full flex items-center justify-center mb-6">

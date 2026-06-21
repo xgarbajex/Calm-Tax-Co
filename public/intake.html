@@ -1,0 +1,1200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calm Tax Co. Get Started</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,400;1,500;1,600&family=Lora:ital,wght@0,400;0,500;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<style>
+:root {
+  --bg:      #f9f7f2;
+  --bg2:     #f2efe8;
+  --bg3:     #eeebe3;
+  --white:   #FFFFFF;
+  --ink:     #3C3633;
+  --mid:     #5D6D7E;
+  --sage:    #7D8E7E;
+  --clay:    #A66D5E;
+  --border:  rgba(60,54,51,.12);
+  --border2: rgba(60,54,51,.2);
+  --glow:    rgba(125,142,126,.13);
+  --r:       14px;
+  --rl:      20px;
+}
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  -webkit-font-smoothing: antialiased;
+  font-size: 16px;
+}
+
+/* ── HEADER ── */
+header {
+  position: fixed; top:0; left:0; right:0; z-index:100;
+  background: var(--bg);
+  height: 120px;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 40px;
+  border-bottom: 1px solid rgba(60,54,51,.1);
+}
+.logo-img { height: 112px; width: auto; display: block; filter: brightness(0.12) saturate(0.5); opacity: 0.92; }
+.htag { display:flex; flex-direction:column; align-items:flex-end; gap:0px; line-height:1; }
+.htag-label { font-size: .68rem; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:var(--ink); opacity:.5; }
+.htag-year { font-family:'Lora',serif; font-size:1.35rem; font-weight:400; color:var(--ink); letter-spacing:.02em; line-height:1.1; }
+
+/* ── PROGRESS ── */
+.pw { position:fixed; top:120px; left:0; right:0; z-index:99; height:5px; background:rgba(60,54,51,.1); }
+.pf { height:5px; background:var(--sage); transition:width .55s cubic-bezier(.4,0,.2,1); width:0%; box-shadow:0 1px 8px rgba(125,142,126,.6); }
+
+/* ── MAIN ── */
+main {
+  flex:1;
+  display: flex; justify-content: center; align-items: flex-start;
+  padding: 160px 32px 80px;
+}
+.shell { width:100%; max-width:720px; }
+
+/* ── STEPS ── */
+.step { display:none; }
+.step.active { display:block; animation: rise .38s cubic-bezier(.4,0,.2,1) both; }
+@keyframes rise { from { opacity:0; transform:translateY(18px); } to { opacity:1; transform:translateY(0); } }
+
+/* ── STEP HEADER ── */
+.ey {
+  font-size: .68rem; font-weight:600;
+  letter-spacing: .2em; text-transform: uppercase;
+  color: var(--sage); margin-bottom: 18px; text-align:center;
+}
+.qt {
+  font-family: 'Lora', serif;
+  font-size: 2.15rem; font-weight:400; line-height:1.2;
+  color: var(--ink); margin-bottom: 12px; text-align:center;
+}
+.qs {
+  font-size: 1rem; font-weight:300;
+  color: var(--mid); line-height:1.7;
+  margin-bottom: 36px; text-align:center;
+  max-width: 500px; margin-left:auto; margin-right:auto;
+}
+
+/* ── FIELDS ── */
+.fields { display:flex; flex-direction:column; gap:16px; }
+.r2 { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+.r3 { display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px; }
+.field { display:flex; flex-direction:column; gap:6px; }
+.field label {
+  font-size: .72rem; font-weight:600;
+  letter-spacing: .1em; text-transform:uppercase;
+  color: var(--mid);
+}
+.field input, .field select, .field textarea {
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem; font-weight:400;
+  color: var(--ink); background: var(--white);
+  border: 1.5px solid var(--border2);
+  border-radius: var(--r);
+  padding: 14px 16px; outline:none; width:100%; -webkit-appearance:none;
+  transition: border-color .18s, box-shadow .18s;
+}
+.field input::placeholder, .field textarea::placeholder { color: #bbb7b2; }
+.field input:focus, .field select:focus, .field textarea:focus {
+  border-color: var(--sage); box-shadow: 0 0 0 4px var(--glow);
+}
+.field select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='7'%3E%3Cpath d='M0 0l5.5 7L11 0z' fill='%237D8E7E'/%3E%3C/svg%3E");
+  background-repeat:no-repeat; background-position: right 15px center; padding-right:38px; cursor:pointer;
+}
+.field textarea { resize:vertical; min-height:96px; line-height:1.6; }
+
+/* ── CARDS ── */
+.cards { display:flex; flex-direction:column; gap:9px; }
+.card {
+  display:flex; align-items:center; gap:16px;
+  padding: 16px 18px;
+  background: var(--white);
+  border: 1.5px solid var(--border2);
+  border-radius: var(--r);
+  cursor:pointer; user-select:none;
+  transition: border-color .17s, background .17s, box-shadow .17s;
+}
+.card:hover { border-color: var(--sage); }
+.card.on {
+  border-color: var(--sage);
+  background: rgba(125,142,126,.07);
+  box-shadow: 0 0 0 4px var(--glow);
+}
+.ci {
+  width:40px; height:40px; border-radius:50%;
+  background: var(--bg3);
+  display:flex; align-items:center; justify-content:center;
+  font-size:1.05rem; flex-shrink:0;
+  transition: background .17s;
+}
+.card.on .ci { background: rgba(125,142,126,.18); }
+.cb { flex:1; min-width:0; }
+.ct { font-size:.97rem; font-weight:500; color:var(--ink); }
+.cd { font-size:.82rem; font-weight:300; color:var(--mid); margin-top:3px; line-height:1.45; }
+.dot {
+  width:19px; height:19px; border-radius:50%;
+  border:2px solid var(--border2); flex-shrink:0;
+  transition:all .17s; position:relative;
+}
+.card.on .dot { border-color:var(--sage); background:var(--sage); }
+.card.on .dot::after { content:''; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:6px; height:6px; border-radius:50%; background:#fff; }
+.sq {
+  width:19px; height:19px; border-radius:5px;
+  border:2px solid var(--border2); flex-shrink:0;
+  transition:all .17s; position:relative;
+}
+.card.on .sq { border-color:var(--sage); background:var(--sage); }
+.card.on .sq::after { content:'✓'; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); font-size:.65rem; color:#fff; font-weight:700; line-height:1; }
+
+/* ── CALLOUT & NOTE ── */
+.callout {
+  display:flex; gap:12px; align-items:flex-start;
+  background: var(--bg3);
+  border-left: 3px solid var(--sage);
+  border-radius: 0 var(--r) var(--r) 0;
+  padding: 15px 17px;
+  font-size: .9rem; font-weight:300; color:var(--ink); line-height:1.65;
+  margin-bottom:24px; text-align:left;
+}
+.callout b { font-weight:500; }
+.note {
+  background: var(--bg3); border-radius:var(--r);
+  padding:13px 16px; margin-top:14px;
+  font-size:.85rem; font-weight:300; color:var(--mid); line-height:1.6; text-align:left;
+}
+
+/* ── BUTTONS ── */
+.brow { display:flex; align-items:center; gap:16px; margin-top:36px; justify-content:center; }
+.btn {
+  font-family:'Inter',sans-serif; font-size:.85rem; font-weight:600;
+  letter-spacing:.06em; text-transform:uppercase;
+  color: var(--bg); background: var(--ink);
+  border:none; border-radius:50px;
+  padding: 15px 34px; cursor:pointer;
+  transition: background .18s, transform .13s, box-shadow .18s;
+  box-shadow: 0 2px 12px rgba(60,54,51,.15);
+}
+.btn:hover { background:var(--sage); transform:translateY(-1px); box-shadow:0 4px 18px rgba(125,142,126,.25); }
+.btn.sage { background:var(--sage); }
+.btn.sage:hover { background:var(--ink); }
+.bk {
+  font-family:'Inter',sans-serif; font-size:.85rem; font-weight:400;
+  color:var(--mid); background:transparent; border:none; cursor:pointer;
+  padding:6px 2px; opacity:.7; transition:opacity .17s;
+}
+.bk:hover { opacity:1; }
+
+/* ── MISC ── */
+.opt { font-size:.64rem; font-weight:600; letter-spacing:.09em; text-transform:uppercase; color:var(--mid); background:var(--bg3); border-radius:20px; padding:2px 8px; margin-left:6px; vertical-align:middle; opacity:.8; }
+.hr { height:1px; background:var(--border); margin:22px 0; }
+.hidden { display:none !important; }
+.slbl { font-size:.7rem; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--mid); margin-bottom:10px; opacity:.8; }
+.subsec {
+  background:var(--bg3); border:1.5px solid var(--border);
+  border-radius:var(--rl); padding:20px 20px 16px; margin-top:18px;
+}
+.subsec-title { font-size:.72rem; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--clay); margin-bottom:16px; }
+
+/* ── WELCOME ── */
+.wlogo { display:block; height:36px; margin:0 auto 32px; filter:opacity(.85); }
+.wh1 { font-family:'Lora',serif; font-size:2.7rem; font-weight:400; line-height:1.15; color:var(--ink); margin-bottom:16px; text-align:center; }
+.wlead { font-size:1.05rem; font-weight:300; color:var(--mid); line-height:1.75; margin-bottom:32px; text-align:center; max-width:560px; margin-left:auto; margin-right:auto; }
+
+.pcard { background:var(--white); border:1.5px solid var(--border2); border-radius:var(--rl); overflow:hidden; margin-bottom:24px; }
+.prow { display:grid; grid-template-columns:1fr 1fr; }
+.pcell { padding:20px 22px; text-align:center; }
+.pcell+.pcell { border-left:1px solid var(--border); }
+.plbl { font-size:.68rem; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--sage); margin-bottom:6px; }
+.pamt { font-family:'Lora',serif; font-size:1.7rem; font-weight:400; color:var(--ink); }
+.pnote { font-size:.78rem; font-weight:300; color:var(--mid); margin-top:4px; }
+.pfooter { padding:14px 22px; border-top:1px solid var(--border); font-size:.85rem; font-weight:300; color:var(--mid); text-align:center; line-height:1.6; }
+.tpill { display:inline-flex; align-items:center; gap:6px; background:var(--bg3); border-radius:50px; padding:6px 15px; font-size:.8rem; font-weight:400; color:var(--mid); margin-bottom:28px; }
+
+/* ── THANK YOU ── */
+.ty { text-align:center; padding:36px 0; }
+.tyring { width:68px; height:68px; border-radius:50%; background:var(--sage); display:flex; align-items:center; justify-content:center; font-size:1.6rem; margin:0 auto 28px; color:#fff; box-shadow:0 4px 20px rgba(125,142,126,.3); }
+.tyh { font-family:'Lora',serif; font-size:2.2rem; font-weight:400; color:var(--ink); margin-bottom:14px; }
+.typ { font-size:.97rem; font-weight:300; color:var(--mid); line-height:1.75; max-width:400px; margin:0 auto 12px; }
+.ncard { background:var(--white); border:1.5px solid var(--border2); border-radius:var(--rl); padding:26px; margin:28px auto 0; max-width:440px; text-align:left; }
+.nctit { font-size:.68rem; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:var(--sage); margin-bottom:20px; }
+.ns { display:flex; gap:14px; align-items:flex-start; margin-bottom:16px; }
+.ns:last-child { margin-bottom:0; }
+.nsn { width:24px; height:24px; border-radius:50%; background:var(--ink); color:var(--bg); font-size:.7rem; font-weight:600; display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:1px; }
+.nst { font-size:.9rem; font-weight:300; color:var(--ink); line-height:1.6; }
+.nst strong { font-weight:500; }
+
+
+/* ── HOW IT WORKS ── */
+.hiw-wrap { margin-bottom: 0; }
+.hiw-h {
+  font-family: 'Lora', serif;
+  font-size: 2.3rem; font-weight: 400;
+  color: var(--ink); text-align: center; margin-bottom: 14px;
+}
+.hiw-rule { width: 1px; height: 44px; background: var(--border2); margin: 0 auto 20px; }
+.hiw-tag {
+  font-size: .88rem; font-weight: 300; color: var(--mid);
+  text-align: center; line-height: 1.65; max-width: 540px;
+  margin: 0 auto 40px;
+}
+
+/* Outer container: positions SVG behind columns */
+.hiw-outer {
+  position: relative;
+  width: 100%;
+  overflow: visible;
+}
+
+/* The continuous SVG path sits at the top, z-index behind bubbles */
+.hiw-svg {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 130px;
+  z-index: 0;
+  overflow: visible;
+}
+
+/* Five columns side by side */
+.hiw-cols {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  position: relative;
+  z-index: 1;
+  padding-bottom: 24px;
+}
+
+.hiw-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 0 6px;
+  padding-top: 0;
+}
+
+/* Even-numbered steps (02, 04) pushed down to match the dip in the path */
+.hiw-low { padding-top: 72px; }
+
+.hiw-bubble {
+  width: 52px; height: 52px;
+  border-radius: 50%;
+  background: var(--bg3);
+  border: 1.5px solid var(--border2);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Lora', serif;
+  font-size: .95rem; font-weight: 400;
+  color: var(--mid);
+  margin-bottom: 14px;
+  flex-shrink: 0;
+}
+
+.hiw-title {
+  font-family: 'Lora', serif;
+  font-size: 1rem; font-weight: 400;
+  color: var(--ink); margin-bottom: 8px;
+  line-height: 1.25;
+}
+.hiw-body {
+  font-size: .78rem; font-weight: 300;
+  color: var(--mid); line-height: 1.6;
+}
+
+/* Pricing row below steps */
+.hiw-pricing {
+  display: flex;
+  align-items: stretch;
+  background: var(--white);
+  border: 1.5px solid var(--border2);
+  border-radius: var(--r);
+  overflow: hidden;
+  margin-top: 28px;
+}
+.hiw-price-col { flex: 1; padding: 16px 20px; text-align: center; }
+.hiw-price-div { width: 1px; background: var(--border); flex-shrink: 0; }
+.hiw-price-lbl { font-size: .67rem; font-weight: 600; letter-spacing: .13em; text-transform: uppercase; color: var(--sage); margin-bottom: 5px; }
+.hiw-price-amt { font-family: 'Lora', serif; font-size: 1.35rem; font-weight: 400; color: var(--ink); margin-bottom: 3px; }
+.hiw-price-note { font-size: .75rem; font-weight: 300; color: var(--mid); }
+
+@media(max-width:520px){
+  .hiw-cols { flex-direction: column; align-items: center; gap: 24px; }
+  .hiw-low { padding-top: 0; }
+  .hiw-svg { display: none; }
+  .hiw-pricing { flex-direction: column; }
+  .hiw-price-div { width: auto; height: 1px; }
+}
+
+
+footer { text-align:center; padding:24px; font-size:.75rem; font-weight:300; color:var(--mid); border-top:1px solid var(--border); opacity:.7; }
+
+@media(max-width:520px) {
+  header { padding:0 20px; }
+  .wh1 { font-size:2.1rem; } .qt { font-size:1.7rem; }
+  .r2, .r3 { grid-template-columns:1fr; }
+  .prow { grid-template-columns:1fr; }
+  .pcell+.pcell { border-left:none; border-top:1px solid var(--border); }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <a href="/" style="display:block; text-decoration:none;">
+    <svg class="logo-img" viewBox="0 0 500 175" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <text x="46" y="92" font-family="'Cormorant Garamond', 'Georgia', serif" font-size="96" font-weight="500" font-style="italic" fill="#2A2A2A">Calm</text>
+      <line x1="272" y1="38" x2="272" y2="100" stroke="#C4BDB3" stroke-width="2.0" />
+      <text x="288" y="65" font-family="'Inter', 'Helvetica Neue', sans-serif" font-size="20" font-weight="500" letter-spacing="6" fill="#9A9590">TAX</text>
+      <text x="288" y="92" font-family="'Inter', 'Helvetica Neue', sans-serif" font-size="20" font-weight="500" letter-spacing="6" fill="#9A9590">CO.</text>
+      <path d="m 18.361809,116.41876 q 94.000001,-12 196.000001,0 102,12 174,0" stroke="#9a9590" stroke-width="2.8" fill="none" stroke-linecap="round" />
+    </svg>
+  </a>
+  <div class="htag"><span class="htag-label">Tax Year</span><span class="htag-year">2025</span></div>
+</header>
+<div class="pw"><div class="pf" id="bar"></div></div>
+
+<main><div class="shell">
+
+<!-- S0: WELCOME -->
+<div class="step active" id="s0">
+
+  <div class="wh1" style="margin-bottom:14px">Let's get your<br><em>2025 taxes</em> started.</div>
+  <p class="wlead" style="margin-bottom:16px">This short walkthrough helps us understand your situation so we can prepare your return accurately. One question at a time, no tax knowledge required.</p>
+  <p style="text-align:center;font-size:.82rem;font-weight:400;color:var(--sage);margin-bottom:28px;letter-spacing:.04em">About 10 minutes</p>
+  <div style="text-align:center;margin-bottom:48px">
+    <button class="btn" onclick="go(1)">Get started</button>
+  </div>
+
+  <!-- HOW IT WORKS -->
+  <div class="hiw-wrap">
+    <div class="hiw-h">How it works</div>
+    <div class="hiw-rule"></div>
+    <p class="hiw-tag">Most returns are completed within 10 to 14 days from the day we have your documents.</p>
+
+    <!-- Horizontal steps with continuous SVG path -->
+    <div class="hiw-outer">
+      <!-- The continuous connecting line drawn as one SVG behind the bubbles -->
+      <svg class="hiw-svg" viewBox="0 0 560 130" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="
+          M 70 26
+          C 110 26, 135 26, 155 60
+          C 175 94, 195 108, 210 108
+          C 225 108, 245 94, 265 60
+          C 285 26, 315 26, 350 26
+          C 385 26, 405 26, 425 60
+          C 445 94, 470 108, 490 108
+        " stroke="#c5d0c6" stroke-width="1.5" stroke-dasharray="6 5" stroke-linecap="round"/>
+      </svg>
+
+      <!-- Step columns -->
+      <div class="hiw-cols">
+        <div class="hiw-col">
+          <div class="hiw-bubble">01</div>
+          <div class="hiw-title">Complete a Short Walkthrough</div>
+          <div class="hiw-body">Tell us about your tax situation and receive a personalized document checklist.</div>
+        </div>
+        <div class="hiw-col hiw-low">
+          <div class="hiw-bubble">02</div>
+          <div class="hiw-title">Upload Your Documents</div>
+          <div class="hiw-body">Securely submit your tax documents.</div>
+        </div>
+        <div class="hiw-col">
+          <div class="hiw-bubble">03</div>
+          <div class="hiw-title">Approve Your Quote</div>
+          <div class="hiw-body">Review your fixed-price quote and pay online.</div>
+        </div>
+        <div class="hiw-col hiw-low">
+          <div class="hiw-bubble">04</div>
+          <div class="hiw-title">We Handle the Rest</div>
+          <div class="hiw-body">We prepare and e-file your return.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pricing below the steps -->
+    <div class="hiw-pricing">
+      <div class="hiw-price-col">
+        <div class="hiw-price-lbl">Individual Return</div>
+        <div class="hiw-price-amt">starting at $175</div>
+        <div class="hiw-price-note">W-2, Investments, Deductions</div>
+      </div>
+      <div class="hiw-price-div"></div>
+      <div class="hiw-price-col">
+        <div class="hiw-price-lbl">Self-Employed &amp; Gig</div>
+        <div class="hiw-price-amt">starting at $375</div>
+        <div class="hiw-price-note">Sole Proprietor, Freelance, Gig, etc.</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="callout" style="margin-top:32px">
+    <span>🔒</span>
+    <span>This walkthrough is secure. Your responses are protected in transit and only seen by Calm Tax Co. As a best practice in tax preparation, Social Security Numbers are <b>never</b> collected through online walkthroughs. Yours will be requested through your personal, secure folder when you upload your documents.</span>
+  </div>
+
+</div>
+
+<!-- S1: NAME -->
+<div class="step" id="s1">
+  <div class="ey">Step 1 of 14</div>
+  <div class="qt">What's your name?</div>
+  <div class="qs">As it appears on your government-issued ID and tax documents.</div>
+  <div class="fields">
+    <div class="r2">
+      <div class="field"><label>First Name</label><input type="text" id="fFirst" placeholder="Jane" autocomplete="given-name"></div>
+      <div class="field"><label>Last Name</label><input type="text" id="fLast" placeholder="Smith" autocomplete="family-name"></div>
+    </div>
+  </div>
+  <div class="brow"><button class="bk" onclick="go(0)">← Back</button><button class="btn" onclick="go(2)">Continue →</button></div>
+</div>
+
+<!-- S2: CONTACT + DOB + OCCUPATION -->
+<div class="step" id="s2">
+  <div class="ey">Step 2 of 14</div>
+  <div class="qt">A few basics about you.</div>
+  <div class="qs">We'll send your personalized document checklist to your email right after you submit. Check your inbox and your spam folder just in case.</div>
+  <div class="fields">
+    <div class="field"><label>Email Address</label><input type="email" id="fEmail" placeholder="jane@email.com" autocomplete="email"></div>
+    <div class="r2">
+      <div class="field"><label>Phone <span class="opt">Optional</span></label><input type="tel" id="fPhone" placeholder="(602) 555-0100" autocomplete="tel" oninput="document.getElementById('textOptWrap').classList.toggle('hidden', !this.value)"></div>
+    <div id="textOptWrap" class="hidden">
+      <div class="cards" style="margin-top:4px" id="textOpt">
+        <div class="card" onclick="toggleBox(this)" style="padding:11px 15px"><div class="ci" style="width:28px;height:28px;font-size:.8rem">📱</div><div class="cb"><div class="ct" style="font-size:.85rem">Yes, send me text updates when my return is ready and filed</div></div><div class="sq"></div></div>
+      </div>
+    </div>
+      <div class="field"><label>Date of Birth</label><input type="date" id="fDOB"></div>
+    </div>
+    <div class="field"><label>Current Occupation or Job Title</label><input type="text" id="fOccupation" placeholder="e.g. Teacher, Driver, Nurse, Self-employed"></div>
+  </div>
+  <div class="brow"><button class="bk" onclick="go(1)">← Back</button><button class="btn" onclick="go(3)">Continue →</button></div>
+</div>
+
+<!-- S3: ADDRESS + STATE SITUATION -->
+<div class="step" id="s3">
+  <div class="ey">Step 3 of 14</div>
+  <div class="qt">Where do you live?</div>
+  <div class="qs">Your current home address. This is where any IRS correspondence will be sent.</div>
+  <div class="fields">
+    <div class="field"><label>Street Address</label><input type="text" id="fStreet" placeholder="123 Main St" autocomplete="street-address"></div>
+    <div class="r3">
+      <div class="field"><label>City</label><input type="text" id="fCity" placeholder="Phoenix" autocomplete="address-level2"></div>
+      <div class="field"><label>State</label>
+        <select id="fState" autocomplete="address-level1">
+          <option value=""> </option>
+          <option>AL</option><option>AK</option><option>AZ</option><option>AR</option><option>CA</option>
+          <option>CO</option><option>CT</option><option>DE</option><option>FL</option><option>GA</option>
+          <option>HI</option><option>ID</option><option>IL</option><option>IN</option><option>IA</option>
+          <option>KS</option><option>KY</option><option>LA</option><option>ME</option><option>MD</option>
+          <option>MA</option><option>MI</option><option>MN</option><option>MS</option><option>MO</option>
+          <option>MT</option><option>NE</option><option>NV</option><option>NH</option><option>NJ</option>
+          <option>NM</option><option>NY</option><option>NC</option><option>ND</option><option>OH</option>
+          <option>OK</option><option>OR</option><option>PA</option><option>RI</option><option>SC</option>
+          <option>SD</option><option>TN</option><option>TX</option><option>UT</option><option>VT</option>
+          <option>VA</option><option>WA</option><option>WV</option><option>WI</option><option>WY</option>
+          <option>DC</option>
+        </select>
+      </div>
+      <div class="field"><label>ZIP Code</label><input type="text" id="fZip" placeholder="85001" autocomplete="postal-code" maxlength="10"></div>
+    </div>
+  </div>
+  <div class="hr"></div>
+  <div class="slbl">State tax situation</div>
+  <div class="cards" id="stateSit">
+    <div class="card" onclick="radio(this,'stateSit')"><div class="ci">🏠</div><div class="cb"><div class="ct">I lived and worked in one state all year</div></div><div class="dot"></div></div>
+    <div class="card" onclick="radio(this,'stateSit')"><div class="ci">🚚</div><div class="cb"><div class="ct">I moved to a different state during 2025</div><div class="cd">I may need to file in both states</div></div><div class="dot"></div></div>
+    <div class="card" onclick="radio(this,'stateSit')"><div class="ci">🗺️</div><div class="cb"><div class="ct">I lived in one state but worked in another</div><div class="cd">e.g. commute across state lines, or remote worker</div></div><div class="dot"></div></div>
+    <div class="card" onclick="radio(this,'stateSit')"><div class="ci">🌐</div><div class="cb"><div class="ct">I earned income in multiple states</div><div class="cd">e.g. gig work, freelance, or business across state lines</div></div><div class="dot"></div></div>
+    <div class="card" onclick="radio(this,'stateSit')"><div class="ci">❓</div><div class="cb"><div class="ct">I'm not sure</div></div><div class="dot"></div></div>
+  </div>
+  <div class="note">💡 Multi-state situations may require filing additional state returns, which can affect your total price. We'll confirm once we review your documents.</div>
+  <div class="brow"><button class="bk" onclick="go(2)">← Back</button><button class="btn" onclick="go(4)">Continue →</button></div>
+</div>
+
+<!-- S4: INCOME SOURCES -->
+<div class="step" id="s4">
+  <div class="ey">Step 4 of 14</div>
+  <div class="qt">Where did your income come from in 2025?</div>
+  <div class="callout" style="margin-bottom:28px;text-align:left">
+    <span>💡</span>
+    <span>Select everything that applies. Your answers shape the rest of this form.</span>
+  </div>
+  <div class="cards" id="incomeSrc">
+    <div class="card" onclick="toggleBox(this)"><div class="ci">💼</div><div class="cb"><div class="ct">W-2 from an employer</div><div class="cd">Regular job taxes withheld from your paycheck</div></div><div class="sq"></div></div>
+    <div class="card" onclick="toggleBox(this)"><div class="ci">🚗</div><div class="cb"><div class="ct">Gig work or app-based income</div><div class="cd">DoorDash, Uber, Lyft, Instacart, TaskRabbit, Airbnb, etc.</div></div><div class="sq"></div></div>
+    <div class="card" onclick="toggleBox(this)"><div class="ci">🧾</div><div class="cb"><div class="ct">Freelance or contract work</div><div class="cd">Invoiced clients directly, received 1099-NEC forms</div></div><div class="sq"></div></div>
+    <div class="card" onclick="toggleBox(this)"><div class="ci">🏢</div><div class="cb"><div class="ct">Small business or LLC</div><div class="cd">I own a registered business or LLC</div></div><div class="sq"></div></div>
+    <div class="card" onclick="toggleBox(this)"><div class="ci">📈</div><div class="cb"><div class="ct">Investments, dividends, or crypto</div><div class="cd">Stocks, mutual funds, ETFs, cryptocurrency</div></div><div class="sq"></div></div>
+    <div class="card" onclick="toggleBox(this)"><div class="ci">🏠</div><div class="cb"><div class="ct">Rental income</div><div class="cd">Income from a property you rent out</div></div><div class="sq"></div></div>
+    <div class="card" onclick="toggleBox(this)"><div class="ci">🏛️</div><div class="cb"><div class="ct">Social Security or retirement distributions</div><div class="cd">SSA-1099, pension, IRA or 401(k) distributions</div></div><div class="sq"></div></div>
+    <div class="card" onclick="toggleBox(this)"><div class="ci">📦</div><div class="cb"><div class="ct">Unemployment or government benefits</div><div class="cd">1099-G forms</div></div><div class="sq"></div></div>
+    <div class="card" onclick="toggleBox(this)"><div class="ci">🌍</div><div class="cb"><div class="ct">Foreign income or foreign financial accounts</div><div class="cd">Income earned outside the US, or accounts held abroad</div></div><div class="sq"></div></div>
+    <div class="card" onclick="toggleBox(this)"><div class="ci">🌐</div><div class="cb"><div class="ct">Other income</div><div class="cd">Alimony, gambling, prizes, tips, or cash income not listed above</div></div><div class="sq"></div></div>
+  </div>
+  <div class="brow"><button class="bk" onclick="go(3)">← Back</button><button class="btn" onclick="go(5)">Continue →</button></div>
+</div>
+
+<!-- S5: SELF-EMPLOYMENT DETAILS (conditional) -->
+<div class="step" id="s5">
+  <div class="ey">Step 5 of 14</div>
+  <div class="qt" id="s5t">Tell us more about your work.</div>
+  <div class="qs">This helps us know what forms and records to expect from you.</div>
+
+  <div id="gigSec">
+    <div class="slbl">Which platforms did you work on?</div>
+    <div class="cards" id="gigP" style="margin-bottom:8px">
+      <div class="card" onclick="toggleBox(this)"><div class="ci">🍔</div><div class="cb"><div class="ct">DoorDash</div></div><div class="sq"></div></div>
+      <div class="card" onclick="toggleBox(this)"><div class="ci">🚗</div><div class="cb"><div class="ct">Uber / Uber Eats</div></div><div class="sq"></div></div>
+      <div class="card" onclick="toggleBox(this)"><div class="ci">🚕</div><div class="cb"><div class="ct">Lyft</div></div><div class="sq"></div></div>
+      <div class="card" onclick="toggleBox(this)"><div class="ci">🛒</div><div class="cb"><div class="ct">Instacart</div></div><div class="sq"></div></div>
+      <div class="card" onclick="toggleBox(this)"><div class="ci">🏠</div><div class="cb"><div class="ct">Airbnb / VRBO</div></div><div class="sq"></div></div>
+      <div class="card" onclick="toggleBox(this)"><div class="ci">📦</div><div class="cb"><div class="ct">Amazon Flex</div></div><div class="sq"></div></div>
+      <div class="card" onclick="toggleBox(this)"><div class="ci">🔧</div><div class="cb"><div class="ct">TaskRabbit or similar</div></div><div class="sq"></div></div>
+      <div class="card" onclick="toggleBox(this)"><div class="ci">🌐</div><div class="cb"><div class="ct">Other platform</div></div><div class="sq"></div></div>
+    </div>
+    <div class="hr"></div>
+  </div>
+
+  <div id="freeSec">
+    <div class="slbl">Freelance / contract work</div>
+    <div class="cards" id="freeP" style="margin-bottom:8px">
+      <div class="card" onclick="toggleBox(this)"><div class="ci">💻</div><div class="cb"><div class="ct">Upwork or Fiverr</div></div><div class="sq"></div></div>
+      <div class="card" onclick="toggleBox(this)"><div class="ci">🛍️</div><div class="cb"><div class="ct">Etsy or online store</div></div><div class="sq"></div></div>
+      <div class="card" onclick="toggleBox(this)"><div class="ci">📋</div><div class="cb"><div class="ct">Direct clients (I invoiced them myself)</div></div><div class="sq"></div></div>
+      <div class="card" onclick="toggleBox(this)"><div class="ci">🌐</div><div class="cb"><div class="ct">Other freelance work</div></div><div class="sq"></div></div>
+    </div>
+    <div class="hr"></div>
+  </div>
+
+  <div id="bizSec">
+    <div class="slbl">About your business</div>
+    <div class="fields" style="margin-bottom:8px">
+      <div class="field">
+        <label>Your name or business name <span class="opt">If registered</span></label>
+        <input type="text" id="fBizName" placeholder="e.g. Jane Smith or Desert Grounds LLC">
+      </div>
+      <div class="r2">
+        <div class="field"><label>Type of work or business</label><input type="text" id="fBizType" placeholder="e.g. Cleaning, Consulting…"></div>
+        <div class="field"><label>Business structure</label>
+          <select id="fBizStr">
+            <option value="">Select…</option>
+            <option>Sole Proprietorship (just me)</option>
+            <option>Single-Member LLC</option>
+            <option>Multi-Member LLC</option>
+            <option>S-Corporation</option>
+            <option>Partnership</option>
+            <option>Not sure</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="hr"></div>
+  </div>
+
+  <div class="slbl">How do you track income &amp; expenses? <span class="opt">Select all that apply</span></div>
+  <div class="cards" id="tracking">
+    <div class="card" onclick="toggleBox(this)"><div class="ci">📱</div><div class="cb"><div class="ct">App summaries</div><div class="cd">What the platform shows me</div></div><div class="sq"></div></div>
+    <div class="card" onclick="toggleBox(this)"><div class="ci">📊</div><div class="cb"><div class="ct">Spreadsheet or notes</div><div class="cd">Excel, Google Sheets, or a notebook</div></div><div class="sq"></div></div>
+    <div class="card" onclick="toggleBox(this)"><div class="ci">💼</div><div class="cb"><div class="ct">Accounting software</div><div class="cd">QuickBooks, Wave, FreshBooks, etc.</div></div><div class="sq"></div></div>
+    <div class="card" onclick="toggleBox(this)"><div class="ci">🏦</div><div class="cb"><div class="ct">Bank statements</div><div class="cd">Everything runs through my bank account</div></div><div class="sq"></div></div>
+    <div class="card" onclick="toggleBox(this)"><div class="ci">🤷</div><div class="cb"><div class="ct">I haven't been tracking</div><div class="cd">I'll need some guidance</div></div><div class="sq"></div></div>
+  </div>
+  <div class="hr"></div>
+  <div class="slbl">Did you make estimated tax payments in 2025?</div>
+  <div style="font-size:.82rem;font-weight:300;color:var(--mid);margin-bottom:10px">Quarterly payments sent directly to the IRS or your state outside of payroll withholding.</div>
+  <div class="cards" id="estPay">
+    <div class="card" onclick="radio(this,'estPay')"><div class="ci">✅</div><div class="cb"><div class="ct">Yes</div><div class="cd">I made quarterly payments to the IRS and/or state</div></div><div class="dot"></div></div>
+    <div class="card" onclick="radio(this,'estPay')"><div class="ci">➖</div><div class="cb"><div class="ct">No</div></div><div class="dot"></div></div>
+    <div class="card" onclick="radio(this,'estPay')"><div class="ci">❓</div><div class="cb"><div class="ct">I'm not sure</div></div><div class="dot"></div></div>
+  </div>
+  <div class="brow"><button class="bk" onclick="go(4)">← Back</button><button class="btn" onclick="go(6)">Continue →</button></div>
+</div>
+
+<!-- S6: DEDUCTIONS -->
+<div class="step" id="s6">
+  <div class="ey">Step 6 of 14</div>
+  <div class="qt">Did any of these apply to you in 2025?</div>
+  <div class="qs">These can lower what you owe. Select everything that applies.</div>
+  <div class="cards" id="deds">
+    <div class="card" onclick="toggleBox(this);toggleVehicle(this)"><div class="ci">🚗</div><div class="cb"><div class="ct">Used a vehicle for work</div><div class="cd">Deliveries, client visits, or business travel</div></div><div class="sq"></div></div>
+  <div id="vehicleSec" class="hidden">
+    <div class="subsec" style="margin-bottom:10px">
+      <div class="subsec-title">Vehicle details</div>
+      <div class="fields">
+        <div class="r3">
+          <div class="field"><label>Year</label><input type="text" id="vYear" placeholder="e.g. 2019" maxlength="4"></div>
+          <div class="field"><label>Make</label><input type="text" id="vMake" placeholder="e.g. Toyota"></div>
+          <div class="field"><label>Model</label><input type="text" id="vModel" placeholder="e.g. Camry"></div>
+        </div>
+        <div class="r2">
+          <div class="field"><label>Business Miles in 2025</label><input type="text" id="vBizMiles" placeholder="e.g. 8,500"></div>
+          <div class="field"><label>Total Miles Driven in 2025</label><input type="text" id="vTotalMiles" placeholder="e.g. 14,000"></div>
+        </div>
+        <div class="field"><label>Date first used for business</label><input type="date" id="vDateService"></div>
+        <div class="slbl" style="margin-top:4px">Was another vehicle available for your personal use?</div>
+        <div class="cards" id="vOtherCar" style="margin-bottom:0">
+          <div class="card" onclick="radio(this,'vOtherCar')" style="padding:10px 14px"><div class="cb"><div class="ct" style="font-size:.85rem">Yes</div></div><div class="dot"></div></div>
+          <div class="card" onclick="radio(this,'vOtherCar')" style="padding:10px 14px"><div class="cb"><div class="ct" style="font-size:.85rem">No</div></div><div class="dot"></div></div>
+        </div>
+      </div>
+      <div class="note" style="margin-top:12px">💡 If you don't have exact mileage, your app (DoorDash, Uber, etc.) has an annual earnings/mileage summary you can download. Total miles can be found on your odometer or in your vehicle service records.</div>
+    </div>
+  </div>
+    <div class="card" onclick="toggleBox(this)"><div class="ci">🏠</div><div class="cb"><div class="ct">Home office</div><div class="cd">A dedicated space in your home used only for work</div></div><div class="sq"></div></div>
+    <div class="card" onclick="toggleBox(this);togglePhone(this)"><div class="ci">📱</div><div class="cb"><div class="ct">Phone or internet for work</div><div class="cd">Only the business-use portion is deductible</div></div><div class="sq"></div></div>
+  <div id="phoneSec" class="hidden">
+    <div class="subsec" style="margin-bottom:10px">
+      <div class="subsec-title">Phone and internet usage</div>
+      <div class="fields">
+        <div class="field"><label>Estimated % of phone used for business</label>
+          <select id="phonePercent">
+            <option value="">Select...</option>
+            <option>100% (dedicated business line only)</option>
+            <option>75% mostly business, some personal</option>
+            <option>50% roughly half and half</option>
+            <option>25% mostly personal, some business</option>
+            <option>Not sure</option>
+          </select>
+        </div>
+        <div class="field"><label>Estimated % of internet used for business</label>
+          <select id="internetPercent">
+            <option value="">Select...</option>
+            <option>100% (business-only connection)</option>
+            <option>75% mostly business, some personal</option>
+            <option>50% roughly half and half</option>
+            <option>25% mostly personal, some business</option>
+            <option>Not sure</option>
+          </select>
+        </div>
+      </div>
+      <div class="note">💡 The IRS only allows you to deduct the business portion. Claiming 100% on a personal phone or home internet is a red flag. Be honest even 50% adds up.</div>
+    </div>
+  </div>
+    <div class="card" onclick="toggleBox(this)"><div class="ci">🎒</div><div class="cb"><div class="ct">Supplies, equipment, or tools for work</div></div><div class="sq"></div></div>
+    <div class="card" onclick="toggleBox(this)"><div class="ci">🏡</div><div class="cb"><div class="ct">Mortgage interest</div><div class="cd">You should have a 1098 form from your lender</div></div><div class="sq"></div></div>
+    <div class="card" onclick="toggleBox(this)"><div class="ci">🏘️</div><div class="cb"><div class="ct">Property taxes paid</div><div class="cd">On your home or other real estate you own</div></div><div class="sq"></div></div>
+    <div class="card" onclick="toggleBox(this)"><div class="ci">🎓</div><div class="cb"><div class="ct">Student loan interest or tuition</div><div class="cd">1098-E or 1098-T forms</div></div><div class="sq"></div></div>
+    <div class="card" onclick="toggleBox(this)"><div class="ci">💝</div><div class="cb"><div class="ct">Charitable donations</div><div class="cd">Cash or non-cash donations to qualified organizations</div></div><div class="sq"></div></div>
+    <div class="card" onclick="toggleBox(this)"><div class="ci">🏥</div><div class="cb"><div class="ct">Medical expenses or health insurance premiums</div><div class="cd">Out-of-pocket costs, HSA/FSA contributions, or self-paid premiums</div></div><div class="sq"></div></div>
+  
+    <div class="card" onclick="toggleBox(this)"><div class="ci">🏦</div><div class="cb"><div class="ct">IRA or retirement contributions</div></div><div class="sq"></div></div>
+    <div class="card" onclick="toggleBox(this)"><div class="ci">🧸</div><div class="cb"><div class="ct">Childcare or dependent care expenses</div></div><div class="sq"></div></div>
+    <div class="card" onclick="toggleBox(this)"><div class="ci">👶</div><div class="cb"><div class="ct">Adoption expenses</div></div><div class="sq"></div></div>
+    <div class="card" onclick="toggleBox(this)"><div class="ci">⚡</div><div class="cb"><div class="ct">Electric vehicle or home energy upgrades</div></div><div class="sq"></div></div>
+    <div class="card" onclick="toggleBox(this)"><div class="ci">💸</div><div class="cb"><div class="ct">Alimony paid</div><div class="cd">For divorces finalized before 2019</div></div><div class="sq"></div></div>
+    <div class="card" onclick="toggleBox(this)"><div class="ci">➖</div><div class="cb"><div class="ct">None of these apply</div></div><div class="sq"></div></div>
+  </div>
+  <div class="brow"><button class="bk" id="s6bk" onclick="go(isSE()?5:4)">← Back</button><button class="btn" onclick="go(7)">Continue →</button></div>
+</div>
+
+<!-- S7: FILING STATUS + SPOUSE -->
+<div class="step" id="s7">
+  <div class="ey">Step 7 of 14</div>
+  <div class="qt">What is your filing status?</div>
+  <div class="qs"><span style="font-weight:500;color:var(--ink);">Your situation as of December 31, 2025.</span></div>
+  <div class="cards" id="filStat">
+    <div class="card" onclick="radio(this,'filStat');showSpouse(false)"><div class="ci">👤</div><div class="cb"><div class="ct">Single</div><div class="cd">Unmarried or legally separated</div></div><div class="dot"></div></div>
+    <div class="card" onclick="radio(this,'filStat');showSpouse(true)"><div class="ci">💑</div><div class="cb"><div class="ct">Married Filing Jointly</div><div class="cd">One return together with your spouse</div></div><div class="dot"></div></div>
+    <div class="card" onclick="radio(this,'filStat');showSpouse(true)"><div class="ci">📋</div><div class="cb"><div class="ct">Married Filing Separately</div><div class="cd">Married but filing your own separate return</div></div><div class="dot"></div></div>
+    <div class="card" onclick="radio(this,'filStat');showSpouse(false)"><div class="ci">🏠</div><div class="cb"><div class="ct">Head of Household</div><div class="cd">Unmarried and supporting a child or dependent</div></div><div class="dot"></div></div>
+    <div class="card" onclick="radio(this,'filStat');showSpouse(false)"><div class="ci">🕊️</div><div class="cb"><div class="ct">Qualifying Surviving Spouse</div><div class="cd">Widowed in the past two years with a dependent child</div></div><div class="dot"></div></div>
+    <div class="card" onclick="radio(this,'filStat');showSpouse(false)"><div class="ci">❓</div><div class="cb"><div class="ct">I'm not sure</div><div class="cd">We'll work this out together when we review your return</div></div><div class="dot"></div></div>
+  </div>
+  <div class="hidden" id="spouseFields">
+    <div class="subsec">
+      <div class="subsec-title">Spouse information</div>
+      <div class="fields">
+        <div class="r2">
+          <div class="field"><label>Spouse First Name</label><input type="text" id="fSFirst" placeholder="John"></div>
+          <div class="field"><label>Spouse Last Name</label><input type="text" id="fSLast" placeholder="Smith"></div>
+        </div>
+        <div class="r2">
+          <div class="field"><label>Spouse Date of Birth</label><input type="date" id="fSDOB"></div>
+          <div class="field"><label>Spouse Occupation</label><input type="text" id="fSOcc" placeholder="e.g. Nurse, Engineer"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="brow"><button class="bk" onclick="go(6)">← Back</button><button class="btn" onclick="go(8)">Continue →</button></div>
+</div>
+
+<!-- S8: DEPENDENTS -->
+<div class="step" id="s8">
+  <div class="ey">Step 8 of 14</div>
+  <div class="qt">Did you have any dependents in 2025?</div>
+  <div class="qs">Usually children or relatives you financially support.</div>
+  <div class="cards" id="hasDeps">
+    <div class="card" onclick="radio(this,'hasDeps');showDeps(true)"><div class="ci">✅</div><div class="cb"><div class="ct">Yes I claim one or more dependents</div></div><div class="dot"></div></div>
+    <div class="card" onclick="radio(this,'hasDeps');showDeps(false)"><div class="ci">➖</div><div class="cb"><div class="ct">No dependents</div></div><div class="dot"></div></div>
+  </div>
+  <div class="hidden" id="depFields">
+    <div class="subsec" style="margin-top:18px">
+      <div class="subsec-title">Dependent 1</div>
+      <div class="fields">
+        <div class="r2">
+          <div class="field"><label>First Name</label><input type="text" id="d1First" placeholder="Alex"></div>
+          <div class="field"><label>Last Name</label><input type="text" id="d1Last" placeholder="Smith"></div>
+        </div>
+        <div class="r2">
+          <div class="field"><label>Date of Birth</label><input type="date" id="d1DOB"></div>
+          <div class="field"><label>Relationship</label>
+            <select id="d1Rel"><option value="">Select…</option><option>Child (biological or adopted)</option><option>Stepchild</option><option>Foster child</option><option>Sibling</option><option>Parent</option><option>Other relative</option></select>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="dep2wrap" class="hidden">
+      <div class="subsec" style="margin-top:10px">
+        <div class="subsec-title">Dependent 2</div>
+        <div class="fields">
+          <div class="r2">
+            <div class="field"><label>First Name</label><input type="text" id="d2First" placeholder="Riley"></div>
+            <div class="field"><label>Last Name</label><input type="text" id="d2Last" placeholder="Smith"></div>
+          </div>
+          <div class="r2">
+            <div class="field"><label>Date of Birth</label><input type="date" id="d2DOB"></div>
+            <div class="field"><label>Relationship</label>
+              <select id="d2Rel"><option value="">Select…</option><option>Child (biological or adopted)</option><option>Stepchild</option><option>Foster child</option><option>Sibling</option><option>Parent</option><option>Other relative</option></select>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="dep3wrap" class="hidden">
+      <div class="subsec" style="margin-top:10px">
+        <div class="subsec-title">Dependent 3</div>
+        <div class="fields">
+          <div class="r2">
+            <div class="field"><label>First Name</label><input type="text" id="d3First" placeholder="Morgan"></div>
+            <div class="field"><label>Last Name</label><input type="text" id="d3Last" placeholder="Smith"></div>
+          </div>
+          <div class="r2">
+            <div class="field"><label>Date of Birth</label><input type="date" id="d3DOB"></div>
+            <div class="field"><label>Relationship</label>
+              <select id="d3Rel"><option value="">Select…</option><option>Child (biological or adopted)</option><option>Stepchild</option><option>Foster child</option><option>Sibling</option><option>Parent</option><option>Other relative</option></select>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:14px;display:flex;gap:12px;justify-content:center">
+      <button type="button" id="addDep2" onclick="showDepN(2)" style="font-family:'Inter',sans-serif;font-size:.85rem;font-weight:400;color:var(--sage);background:transparent;border:none;cursor:pointer;text-decoration:underline;text-underline-offset:3px;">+ Add another dependent</button>
+      <button type="button" id="addDep3" class="hidden" onclick="showDepN(3)" style="font-family:'Inter',sans-serif;font-size:.85rem;font-weight:400;color:var(--sage);background:transparent;border:none;cursor:pointer;text-decoration:underline;text-underline-offset:3px;">+ Add a third</button>
+    </div>
+    <div class="note">If you have more than 3 dependents, add names and dates of birth in the "Anything else?" field at the end of this form.</div>
+  </div>
+  <div class="brow"><button class="bk" onclick="go(7)">← Back</button><button class="btn" onclick="go(9)">Continue →</button></div>
+</div>
+
+<!-- S9: LIFE CHANGES -->
+<div class="step" id="s9">
+  <div class="ey">Step 9 of 14</div>
+  <div class="qt">Did anything major change in 2025?</div>
+  <div class="qs">Life events can affect your taxes. Select all that apply.</div>
+  <div class="cards" id="life">
+    <div class="card" onclick="toggleBox(this)"><div class="ci">💍</div><div class="cb"><div class="ct">Got married or divorced</div></div><div class="sq"></div></div>
+    <div class="card" onclick="toggleBox(this)"><div class="ci">👶</div><div class="cb"><div class="ct">Had or adopted a child</div></div><div class="sq"></div></div>
+    <div class="card" onclick="toggleBox(this)"><div class="ci">🏠</div><div class="cb"><div class="ct">Bought or sold a home</div></div><div class="sq"></div></div>
+    <div class="card" onclick="toggleBox(this)"><div class="ci">💼</div><div class="cb"><div class="ct">Started or lost a job</div></div><div class="sq"></div></div>
+    <div class="card" onclick="toggleBox(this)"><div class="ci">🚀</div><div class="cb"><div class="ct">Started a business or side hustle</div></div><div class="sq"></div></div>
+    <div class="card" onclick="toggleBox(this)"><div class="ci">🎓</div><div class="cb"><div class="ct">Started or finished college</div></div><div class="sq"></div></div>
+    <div class="card" onclick="toggleBox(this)"><div class="ci">🏥</div><div class="cb"><div class="ct">Major health or insurance changes</div></div><div class="sq"></div></div>
+    <div class="card" onclick="toggleBox(this)"><div class="ci">📬</div><div class="cb"><div class="ct">Received a letter or notice from the IRS</div></div><div class="sq"></div></div>
+    <div class="card" onclick="toggleBox(this)"><div class="ci">💰</div><div class="cb"><div class="ct">Received an inheritance</div></div><div class="sq"></div></div>
+    <div class="card" onclick="toggleBox(this)"><div class="ci">✏️</div><div class="cb"><div class="ct">This is my first time filing taxes</div></div><div class="sq"></div></div>
+    <div class="card" onclick="toggleBox(this)"><div class="ci">➖</div><div class="cb"><div class="ct">Nothing major changed</div></div><div class="sq"></div></div>
+  </div>
+  <div class="brow"><button class="bk" onclick="go(8)">← Back</button><button class="btn" onclick="go(10)">Continue →</button></div>
+</div>
+
+<!-- S10: HEALTH COVERAGE -->
+<div class="step" id="s10">
+  <div class="ey">Step 10 of 14</div>
+  <div class="qt">Did you have health insurance in 2025?</div>
+  <div class="qs">This affects certain credits and deductions on your return.</div>
+  <div class="cards" id="healthCov">
+    <div class="card" onclick="radio(this,'healthCov');showACA(false);showPartialHealth(false)"><div class="ci">✅</div><div class="cb"><div class="ct">Yes covered all year</div><div class="cd">Through an employer, Medicare, Medicaid, or other plan</div></div><div class="dot"></div></div>
+    <div class="card" onclick="radio(this,'healthCov');showACA(true);showPartialHealth(false)"><div class="ci">🏪</div><div class="cb"><div class="ct">Yes through the Marketplace (ACA / Healthcare.gov)</div><div class="cd">You should have a 1095-A form this is important to include</div></div><div class="dot"></div></div>
+    <div class="card" onclick="radio(this,'healthCov');showACA(false);showPartialHealth(true)"><div class="ci">⏱️</div><div class="cb"><div class="ct">Covered part of the year only</div><div class="cd">Had a gap in coverage at some point in 2025</div></div><div class="dot"></div></div>
+    <div class="card" onclick="radio(this,'healthCov');showACA(false);showPartialHealth(false)"><div class="ci">➖</div><div class="cb"><div class="ct">No health insurance in 2025</div></div><div class="dot"></div></div>
+    <div class="card" onclick="radio(this,'healthCov');showACA(false);showPartialHealth(false)"><div class="ci">❓</div><div class="cb"><div class="ct">I'm not sure</div></div><div class="dot"></div></div>
+  </div>
+  <div class="hidden" id="acaNote">
+    <div class="note">📋 Your 1095-A from Healthcare.gov is required to complete your return. Please include it when you upload your documents.</div>
+  </div>
+  <div class="hidden" id="partialHealthSec">
+    <div class="subsec" style="margin-top:14px">
+      <div class="subsec-title">Coverage details</div>
+      <div style="font-size:.85rem;font-weight:300;color:var(--mid);margin-bottom:14px">What type of coverage did you have during the months you were covered? Select all that apply.</div>
+      <div class="cards" id="partialHealthType">
+        <div class="card" onclick="toggleBox(this)"><div class="ci">💼</div><div class="cb"><div class="ct">Employer-sponsored plan</div><div class="cd">Coverage through your job or a family member's job</div></div><div class="sq"></div></div>
+        <div class="card" onclick="toggleBox(this)"><div class="ci">🏪</div><div class="cb"><div class="ct">Marketplace plan (ACA / Healthcare.gov)</div><div class="cd">You should have a 1095-A. This is required to complete your return.</div></div><div class="sq"></div></div>
+        <div class="card" onclick="toggleBox(this)"><div class="ci">🏛️</div><div class="cb"><div class="ct">Medicaid or Medicare</div></div><div class="sq"></div></div>
+        <div class="card" onclick="toggleBox(this)"><div class="ci">🎓</div><div class="cb"><div class="ct">Student health plan</div></div><div class="sq"></div></div>
+        <div class="card" onclick="toggleBox(this)"><div class="ci">🌐</div><div class="cb"><div class="ct">Other coverage</div></div><div class="sq"></div></div>
+      </div>
+    </div>
+  </div>
+  <div class="brow"><button class="bk" onclick="go(9)">← Back</button><button class="btn" onclick="go(11)">Continue →</button></div>
+</div>
+
+<!-- S11: REFUND + ESTIMATED PAYMENTS -->
+<div class="step" id="s11">
+  <div class="ey">Step 11 of 14</div>
+  <div class="qt">If you receive a refund, how would you like it?</div>
+  <div class="cards" id="refundPref" style="margin-bottom:22px">
+    <div class="card" onclick="radio(this,'refundPref')"><div class="ci">🏦</div><div class="cb"><div class="ct">Direct deposit to my bank account</div><div class="cd">Fastest option usually within 21 days. You'll provide your bank info securely when you upload your documents.</div></div><div class="dot"></div></div>
+    <div class="card" onclick="radio(this,'refundPref')"><div class="ci">📬</div><div class="cb"><div class="ct">Paper check mailed to me</div></div><div class="dot"></div></div>
+    <div class="card" onclick="radio(this,'refundPref')"><div class="ci">➡️</div><div class="cb"><div class="ct">Apply it toward next year's taxes</div><div class="cd">We'll credit it to your 2026 estimated taxes</div></div><div class="dot"></div></div>
+  </div>
+
+  <div class="brow"><button class="bk" onclick="go(10)">← Back</button><button class="btn" onclick="go(12)">Continue →</button></div>
+</div>
+
+<!-- S12: IF YOU OWE -->
+<div class="step" id="s12">
+  <div class="ey">Step 12 of 14</div>
+  <div class="qt">If you owe taxes, how would you like to pay the IRS?</div>
+  <div class="qs">If you end up owing, the IRS offers several ways to pay. Choosing now saves a step later.</div>
+  <div class="cards" id="owePay">
+    <div class="card" onclick="radio(this,'owePay')"><div class="ci">🏦</div><div class="cb"><div class="ct">Direct debit from my bank account</div><div class="cd">We include your routing and account number in the return and the IRS withdraws automatically on the filing date. Provide your bank info securely when uploading documents.</div></div><div class="dot"></div></div>
+    <div class="card" onclick="radio(this,'owePay')"><div class="ci">💻</div><div class="cb"><div class="ct">I will pay on my own via IRS Direct Pay</div><div class="cd">Free, no account needed. We will include instructions in your finalization letter.</div></div><div class="dot"></div></div>
+    <div class="card" onclick="radio(this,'owePay')"><div class="ci">📅</div><div class="cb"><div class="ct">Installment plan</div><div class="cd">If you cannot pay in full, the IRS offers monthly payment plans. We can request one when we file.</div></div><div class="dot"></div></div>
+    <div class="card" onclick="radio(this,'owePay')"><div class="ci">❓</div><div class="cb"><div class="ct">Not sure yet</div><div class="cd">We will discuss options once we know what you owe.</div></div><div class="dot"></div></div>
+  </div>
+  <div class="note">💡 If you select direct debit, please include a voided check or your routing and account number in your secure document upload folder. We never store banking information in this form.</div>
+  <div class="brow"><button class="bk" onclick="go(11)">← Back</button><button class="btn" onclick="go(13)">Continue →</button></div>
+</div>
+
+<!-- S13: PRIOR YEAR -->
+<div class="step" id="s13">
+  <div class="ey">Step 13 of 14</div>
+  <div class="qt">Do you have a copy of your 2024 tax return?</div>
+  <div class="qs">Last year's return helps us prepare your 2025 return faster and more accurately.</div>
+  <div class="cards" id="prior">
+    <div class="card" onclick="radio(this,'prior')"><div class="ci">✅</div><div class="cb"><div class="ct">Yes I can send it</div><div class="cd">I'll include it when I upload my documents later</div></div><div class="dot"></div></div>
+    <div class="card" onclick="radio(this,'prior')"><div class="ci">🌿</div><div class="cb"><div class="ct">Calm Tax Co. prepared my 2024 return</div></div><div class="dot"></div></div>
+    <div class="card" onclick="radio(this,'prior')"><div class="ci">🆕</div><div class="cb"><div class="ct">This is my first time filing</div><div class="cd">No prior return exists</div></div><div class="dot"></div></div>
+    <div class="card" onclick="radio(this,'prior')"><div class="ci">❌</div><div class="cb"><div class="ct">I cannot get a copy of my 2024 return</div></div><div class="dot"></div></div>
+  </div>
+  <div class="brow"><button class="bk" onclick="go(11)">← Back</button><button class="btn" onclick="go(14)">Continue →</button></div>
+</div>
+
+<!-- S14: NOTES + REFERRAL -->
+<div class="step" id="s14">
+  <div class="ey">Step 14 of 14</div>
+  <div class="qt">Almost done.</div>
+  <div class="qs">Two optional questions and you're finished.</div>
+  <div class="fields">
+    <div class="field">
+      <label>Anything else we should know? <span class="opt">Optional</span></label>
+      <textarea id="fNotes" placeholder="Questions, concerns, anything unusual about your situation, or more than 3 dependents. No detail is too small."></textarea>
+    </div>
+    <div class="hr" style="margin:8px 0"></div>
+    <div class="field">
+      <label>How did you hear about us? <span class="opt">Optional</span></label>
+      <select id="fRefSrc" onchange="toggleRef()">
+        <option value="">Select one…</option>
+        <option value="Google search">Google search</option>
+        <option value="Referral">Referral from someone I know</option>
+        <option value="Social media">Social media</option>
+        <option value="Other">Other</option>
+      </select>
+    </div>
+    <div class="field hidden" id="refDetail">
+      <label id="refLbl">Details</label>
+      <input type="text" id="fRefDtl" placeholder="">
+    </div>
+  </div>
+  <div class="brow"><button class="bk" onclick="go(13)">← Back</button><button class="btn" onclick="submitForm()">Submit →</button></div>
+</div>
+
+<!-- DONE -->
+<div class="step" id="sDone">
+  <div class="ty">
+    <div class="tyring">✓</div>
+    <div class="tyh">You're all set.</div>
+    <p class="typ">Your personalized document checklist is on its way to your inbox. Check your spam folder if you don't see it within a few minutes.</p>
+    <div class="ncard">
+      <div class="nctit">What happens next</div>
+      <div class="ns"><div class="nsn">1</div><div class="nst"><strong>Check your email.</strong> Your personalized document checklist is on its way. It lists exactly what to gather based on your answers. If you don't see it in your inbox, check your spam folder.</div></div>
+      <div class="ns"><div class="nsn">2</div><div class="nst"><strong>Upload your documents.</strong> Within 24 hours you'll receive a second email with your secure upload link.</div></div>
+      <div class="ns"><div class="nsn">3</div><div class="nst"><strong>Quote and payment.</strong> Once we review your documents, you'll receive a personalized quote. Full payment is due before we begin. Pay via Zelle, PayPal, or Stripe.</div></div>
+      <div class="ns"><div class="nsn">4</div><div class="nst"><strong>We handle the rest.</strong> We prepare your return and send it for your review. Once approved, we file and you're done. 🌿</div></div>
+    </div>
+    <p style="margin-top:24px;font-size:.75rem;color:var(--mid);opacity:.7">  Calm Tax Co.</p>
+  </div>
+</div>
+
+</div></main>
+<footer>© 2026 Calm Tax Co. · Secure &amp; confidential · hello@calmtax.co</footer>
+
+<form id="gForm" style="display:none">
+  <input type="hidden" name="timestamp"           id="g_ts">
+  <input type="hidden" name="name"                id="g_name">
+  <input type="hidden" name="email"               id="g_email">
+  <input type="hidden" name="phone"               id="g_phone">
+  <input type="hidden" name="dob"                 id="g_dob">
+  <input type="hidden" name="occupation"          id="g_occ">
+  <input type="hidden" name="address"             id="g_addr">
+  <input type="hidden" name="state_situation"     id="g_statesit">
+  <input type="hidden" name="client_type"         id="g_type">
+  <input type="hidden" name="income_sources"      id="g_inc">
+  <input type="hidden" name="gig_platforms"       id="g_gig">
+  <input type="hidden" name="freelance_platforms" id="g_free">
+  <input type="hidden" name="business_name"       id="g_biz">
+  <input type="hidden" name="business_type"       id="g_btype">
+  <input type="hidden" name="business_structure"  id="g_bstr">
+  <input type="hidden" name="tracking"            id="g_track">
+  <input type="hidden" name="deductions"          id="g_ded">
+  <input type="hidden" name="filing_status"       id="g_fil">
+  <input type="hidden" name="spouse"              id="g_spouse">
+  <input type="hidden" name="dependents"          id="g_deps">
+  <input type="hidden" name="life_changes"        id="g_life">
+  <input type="hidden" name="health_coverage"     id="g_health">
+  <input type="hidden" name="refund_preference"   id="g_refund">
+  <input type="hidden" name="estimated_payments"  id="g_est">
+  <input type="hidden" name="owe_payment_method"  id="g_owe">
+  <input type="hidden" name="prior_return"        id="g_prior">
+  <input type="hidden" name="notes"               id="g_notes">
+  <input type="hidden" name="referral_source"     id="g_rsrc">
+  <input type="hidden" name="referral_detail"     id="g_rdtl">
+  <input type="hidden" name="doc_checklist"       id="g_list">
+  <input type="hidden" name="vehicle_details"    id="g_vehicle">
+  <input type="hidden" name="phone_internet_pct" id="g_phone_pct">
+  <input type="hidden" name="text_opt_in"        id="g_text">
+  <input type="hidden" name="status"              value="Walkthrough Completed">
+</form>
+
+<script>
+const EJS_KEY = 'YOUR_EMAILJS_PUBLIC_KEY';
+const EJS_SVC = 'YOUR_EMAILJS_SERVICE_ID';
+const EJS_TPL = 'YOUR_EMAILJS_TEMPLATE_ID';
+const AS_URL  = 'YOUR_GOOGLE_APPS_SCRIPT_URL';
+
+emailjs.init(EJS_KEY);
+
+let cur = 0;
+const TOTAL = 14;
+
+function go(n) {
+  const pid = cur === 0 ? 's0' : 's' + cur;
+  document.getElementById(pid).classList.remove('active');
+  if (n === 5 && !isSE()) n = 6;
+  cur = n;
+  const nid = (n === 99) ? 'sDone' : 's' + n;
+  document.getElementById(nid).classList.add('active');
+  if (n === 5) buildS5();
+  document.getElementById('bar').style.width = (n === 0 ? 0 : Math.min(Math.round(n / TOTAL * 100), 100)) + '%';
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+function hasInc(t) { return [...document.querySelectorAll('#incomeSrc .card.on')].some(c => c.querySelector('.ct').textContent.includes(t)); }
+function isSE() { return hasInc('Gig') || hasInc('Freelance') || hasInc('Small business'); }
+
+function buildS5() {
+  document.getElementById('gigSec').style.display  = hasInc('Gig')            ? 'block' : 'none';
+  document.getElementById('freeSec').style.display = hasInc('Freelance')      ? 'block' : 'none';
+  document.getElementById('bizSec').style.display  = hasInc('Small business') ? 'block' : 'none';
+}
+
+function toggleBox(el) { el.classList.toggle('on'); }
+function toggleVehicle(el) { document.getElementById('vehicleSec').classList.toggle('hidden', !el.classList.contains('on')); }
+function togglePhone(el)   { document.getElementById('phoneSec').classList.toggle('hidden', !el.classList.contains('on')); }
+function radio(el, g)  { document.querySelectorAll('#' + g + ' .card').forEach(c => c.classList.remove('on')); el.classList.add('on'); }
+function showSpouse(v) { document.getElementById('spouseFields').classList.toggle('hidden', !v); }
+function showDeps(v)   { document.getElementById('depFields').classList.toggle('hidden', !v); }
+function showDepN(n) {
+  document.getElementById('dep' + n + 'wrap').classList.remove('hidden');
+  document.getElementById('addDep' + n).classList.add('hidden');
+  if (n === 2) document.getElementById('addDep3').classList.remove('hidden');
+}
+function showACA(v) { document.getElementById('acaNote').classList.toggle('hidden', !v); }
+function showPartialHealth(v) { document.getElementById('partialHealthSec').classList.toggle('hidden', !v); }
+
+function toggleRef() {
+  const v = document.getElementById('fRefSrc').value;
+  const w = document.getElementById('refDetail');
+  const l = document.getElementById('refLbl');
+  if (v === 'Referral')   { w.classList.remove('hidden'); l.textContent = 'Who referred you? (first name is fine)'; document.getElementById('fRefDtl').placeholder = 'e.g. Sarah M.'; }
+  else if (v === 'Other') { w.classList.remove('hidden'); l.textContent = 'Tell us more'; document.getElementById('fRefDtl').placeholder = 'e.g. local Facebook group'; }
+  else                    { w.classList.add('hidden'); }
+}
+
+function v(id)   { const el = document.getElementById(id); return el ? el.value : ''; }
+function chk(id) { return [...document.querySelectorAll('#' + id + ' .card.on')].map(c => c.querySelector('.ct').textContent.trim()).join(', '); }
+function sel(id) { const e = document.querySelector('#' + id + ' .card.on'); return e ? e.querySelector('.ct').textContent.trim() : ''; }
+
+function clientType() {
+  if (hasInc('Small business') && (hasInc('Gig') || hasInc('Freelance'))) return 'Business + Self-Employed';
+  if (hasInc('Small business')) return 'Small Business / LLC';
+  if (hasInc('Gig') || hasInc('Freelance')) return 'Self-Employed / Contractor';
+  return 'Individual';
+}
+
+function depInfo() {
+  const parts = [];
+  const deps = [{f:'d1First',l:'d1Last',d:'d1DOB',r:'d1Rel'},{f:'d2First',l:'d2Last',d:'d2DOB',r:'d2Rel'},{f:'d3First',l:'d3Last',d:'d3DOB',r:'d3Rel'}];
+  deps.forEach((dep, i) => {
+    const fn = v(dep.f), ln = v(dep.l), dob = v(dep.d), rel = v(dep.r);
+    if (fn) parts.push('Dep ' + (i+1) + ': ' + fn + ' ' + ln + (dob ? ', DOB ' + dob : '') + (rel ? ', ' + rel : ''));
+  });
+  return parts.join(' | ');
+}
+
+function buildChecklist() {
+  const l = [];
+  l.push('• Photo ID (driver\'s license or passport)');
+  l.push('• Prior year return (2024) if available');
+  if (hasInc('W-2'))         l.push('• W-2 form(s) from each employer');
+  if (hasInc('Gig') || hasInc('Freelance')) {
+    l.push('• All 1099-NEC forms received');
+    l.push('• 1099-K from payment apps if applicable (PayPal, Venmo, Stripe, Cash App)');
+    l.push('• Mileage log or app earnings summary (if you drove for work)');
+    l.push('• Records of work-related expenses (supplies, phone, equipment, etc.)');
+  }
+  if (hasInc('Small business')) {
+    l.push('• Profit & Loss statement or income/expense summary');
+    l.push('• Business bank statements');
+    l.push('• Records of all business expenses with receipts');
+    l.push('• Any 1099s issued to contractors (if applicable)');
+    l.push('• Asset or equipment purchase receipts');
+  }
+  if (hasInc('Investments') || hasInc('crypto')) {
+    l.push('• 1099-B (investment sales / crypto)');
+    l.push('• 1099-DIV (dividends)');
+    l.push('• 1099-INT (bank interest)');
+  }
+  if (hasInc('Rental'))  { l.push('• Rental income records'); l.push('• Rental expense receipts (repairs, insurance, HOA, mortgage interest, etc.)'); }
+  if (hasInc('Social Security') || hasInc('retirement')) l.push('• SSA-1099 and/or 1099-R');
+  if (hasInc('Unemployment')) l.push('• 1099-G from your state');
+  if (hasInc('Foreign'))  { l.push('• Documentation of foreign income'); l.push('• Foreign bank account information (FBAR may be required)'); }
+  if (hasInc('Other'))    l.push('• Documentation for any other income (alimony received, gambling, tips, etc.)');
+
+  const d = chk('deds');
+  if (d.includes('vehicle') || d.includes('Vehicle')) l.push('• Mileage log (total miles, business miles, and dates)');
+  if (d.includes('Mortgage interest')) l.push('• 1098 mortgage interest statement from your lender');
+  if (d.includes('Property taxes'))    l.push('• Property tax payment records or statements');
+  if (d.includes('Student loan'))      l.push('• 1098-E (student loan interest) and/or 1098-T (tuition)');
+  if (d.includes('Charitable'))        l.push('• Charitable donation receipts or acknowledgment letters');
+  if (d.includes('Medical') || d.includes('health')) l.push('• Medical expense receipts and health insurance premium records');
+  if (d.includes('IRA') || d.includes('retirement')) l.push('• IRA contribution records (Form 5498 if available)');
+  if (d.includes('Childcare'))         l.push('• Childcare provider\'s name, address, and EIN or SSN, plus total amount paid');
+  if (d.includes('Home office'))       l.push('• Home office square footage and total home square footage');
+  if (d.includes('Adoption'))          l.push('• Adoption expense documentation');
+  if (d.includes('Electric') || d.includes('energy')) l.push('• EV purchase documents or energy upgrade receipts and certifications');
+  if (d.includes('Alimony'))           l.push('• Alimony payment records and divorce agreement date');
+
+  if (sel('healthCov').includes('Marketplace') || sel('healthCov').includes('ACA')) l.push('• 1095-A form from Healthcare.gov (required very important)');
+  if (sel('refundPref').includes('deposit')) l.push('• Bank routing number and account number (for direct deposit of refund)');
+  if (sel('owePay').includes('direct debit') || sel('owePay').includes('Direct debit')) l.push('• Bank routing number and account number (for direct debit of any taxes owed) — include a voided check or your bank info in your upload folder');
+  if (sel('estPay').includes('Yes')) l.push('• Records of estimated tax payments in 2025 (dates and amounts paid to IRS and/or state)');
+
+  // Itemized deduction guidance note
+  const itemizedDeds = ['Mortgage interest','Property taxes','Charitable','Medical','Student loan','Alimony'];
+  const hasItemized = itemizedDeds.some(t => chk('deds').includes(t));
+  if (hasItemized) {
+    const filing = sel('filStat');
+    let stdDed = '$15,750';
+    if (filing.includes('Jointly')) stdDed = '$31,500';
+    else if (filing.includes('Household')) stdDed = '$22,500';
+    l.push('');
+    l.push('--- A NOTE ON ITEMIZED DEDUCTIONS ---');
+    l.push('You selected some itemized deductions (mortgage interest, charitable donations, medical expenses, etc.).');
+    l.push('These only reduce your taxes if your total itemized deductions exceed your standard deduction of ' + stdDed + ' for your filing status.');
+    l.push('If you think your combined deductions (mortgage interest + property taxes + donations + medical expenses) are well below that amount, you likely will not need to gather those receipts.');
+    l.push('If you are unsure, gather what you can and we will run the numbers and let you know what helps. You will never owe more by giving us more information.');
+    l.push('--------------------------------------');
+  }
+
+  return l.join('\n');
+}
+
+function submitForm() {
+  const name     = (v('fFirst') + ' ' + v('fLast')).trim();
+  const email    = v('fEmail').trim();
+  const checklist = buildChecklist();
+  const type     = clientType();
+  const addr     = [v('fStreet'), v('fCity'), v('fState'), v('fZip')].filter(Boolean).join(', ');
+  const spouse   = v('fSFirst') ? v('fSFirst') + ' ' + v('fSLast') + (v('fSDOB') ? ', DOB ' + v('fSDOB') : '') + (v('fSOcc') ? ', ' + v('fSOcc') : '') : '';
+
+  document.getElementById('g_ts').value      = new Date().toLocaleString();
+  document.getElementById('g_name').value    = name + (v('fMI') ? ' ' + v('fMI') + '.' : '');
+  document.getElementById('g_email').value   = email;
+  document.getElementById('g_phone').value   = v('fPhone');
+  document.getElementById('g_dob').value     = v('fDOB');
+  document.getElementById('g_occ').value     = v('fOccupation');
+  document.getElementById('g_addr').value    = addr;
+  document.getElementById('g_statesit').value = sel('stateSit');
+  document.getElementById('g_type').value    = type;
+  document.getElementById('g_inc').value     = chk('incomeSrc');
+  document.getElementById('g_gig').value     = chk('gigP');
+  document.getElementById('g_free').value    = chk('freeP');
+  document.getElementById('g_biz').value     = v('fBizName');
+  document.getElementById('g_btype').value   = v('fBizType');
+  document.getElementById('g_bstr').value    = v('fBizStr');
+  document.getElementById('g_track').value   = chk('tracking');
+  document.getElementById('g_ded').value     = chk('deds');
+  document.getElementById('g_fil').value     = sel('filStat');
+  document.getElementById('g_spouse').value  = spouse;
+  document.getElementById('g_deps').value    = depInfo();
+  document.getElementById('g_life').value    = chk('life');
+  const partialTypes = [...document.querySelectorAll('#partialHealthType .card.on')].map(c=>c.querySelector('.ct').textContent.trim()).join(', ');
+  document.getElementById('g_health').value  = sel('healthCov') + (partialTypes ? ' (' + partialTypes + ')' : '');
+  document.getElementById('g_refund').value  = sel('refundPref');
+  document.getElementById('g_est').value     = sel('estPay');
+  document.getElementById('g_owe').value     = sel('owePay');
+  document.getElementById('g_prior').value   = sel('prior');
+  document.getElementById('g_notes').value   = v('fNotes');
+  document.getElementById('g_rsrc').value    = v('fRefSrc');
+  document.getElementById('g_rdtl').value    = v('fRefDtl');
+  document.getElementById('g_list').value    = checklist;
+
+  // Vehicle
+  const vehParts = [];
+  if (v('vYear')) vehParts.push(v('vYear') + ' ' + v('vMake') + ' ' + v('vModel'));
+  if (v('vBizMiles')) vehParts.push('Business miles: ' + v('vBizMiles'));
+  if (v('vTotalMiles')) vehParts.push('Total miles: ' + v('vTotalMiles'));
+  if (v('vDateService')) vehParts.push('In service: ' + v('vDateService'));
+  const vOther = document.querySelector('#vOtherCar .card.on');
+  if (vOther) vehParts.push('Other vehicle available: ' + vOther.querySelector('.ct').textContent.trim());
+  document.getElementById('g_vehicle').value = vehParts.join(' | ');
+
+  // Phone/internet
+  const phonePct = v('phonePercent') + (v('internetPercent') ? ' / Internet: ' + v('internetPercent') : '');
+  document.getElementById('g_phone_pct').value = phonePct;
+
+  // Text opt-in
+  const textCard = document.querySelector('#textOpt .card.on');
+  document.getElementById('g_text').value = textCard ? 'Yes' : 'No';
+
+  if (AS_URL !== 'YOUR_GOOGLE_APPS_SCRIPT_URL') {
+    fetch(AS_URL, {method:'POST', body: new FormData(document.getElementById('gForm'))}).catch(()=>{});
+  }
+  if (EJS_KEY !== 'YOUR_EMAILJS_PUBLIC_KEY') {
+    emailjs.send(EJS_SVC, EJS_TPL, {
+      to_name: name, to_email: email, client_type: type,
+      checklist: checklist, reply_to: 'hello@calmtax.co'
+    }).catch(()=>{});
+  }
+
+  document.getElementById('s14').classList.remove('active');
+  document.getElementById('sDone').classList.add('active');
+  document.getElementById('bar').style.width = '100%';
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+</script>
+</body>
+</html>

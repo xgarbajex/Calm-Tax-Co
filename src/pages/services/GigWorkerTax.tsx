@@ -16,7 +16,7 @@ const GigWorkerTax: React.FC = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.8 }}
-      className="py-32 px-6 bg-[#F9F7F2] min-h-screen"
+      className="pt-40 md:pt-48 pb-32 px-6 bg-[#F9F7F2] min-h-screen"
     >
       <div className="max-w-3xl mx-auto">
         <header className="mb-16">
@@ -49,12 +49,12 @@ const GigWorkerTax: React.FC = () => {
 
           <h2 className="text-3xl serif-font font-normal text-[#3C3633] mt-16 mb-6 border-b border-[#3C3633]/10 pb-3">How The Process Works</h2>
           <p>
-            We'll send you a clear checklist of what to pull together before you upload. Once your 1099s, mileage logs, and expense records are in your Proton folder, we get to work.
+            We'll send you a clear checklist of what to pull together before you upload. Once your 1099s, mileage logs, and expense records are in your private, secure cloud folder, we get to work.
           </p>
 
           <ul className="list-disc pl-6 space-y-4">
             <li>We review your platform income and apply the deductions you're legitimately entitled to. Mileage, phone, supplies, platform fees. We prepare your return accurately.</li>
-            <li>If we have questions, we'll send a short, clear email. No phone calls.</li>
+            <li>If we have questions, we'll reach out via email. No phone calls.</li>
             <li>We e-file with the IRS and your state. Done.</li>
           </ul>
 
@@ -96,7 +96,7 @@ const GigWorkerTax: React.FC = () => {
             </div>
             <div className="pt-6">
               <h3 className="text-xl md:text-2xl serif-font font-normal text-[#3C3633] mb-3">How do I send tax documents securely?</h3>
-              <p>You can send tax documents securely by uploading them to your own private encrypted Proton folder. We provide a link to access it directly. Your files go there and never travel through standard email.</p>
+              <p>You can send tax documents securely by uploading them to your own private, secure cloud folder. We provide a link to access it directly. Your files go there and never travel through standard email.</p>
             </div>
           </div>
         </div>
@@ -107,12 +107,12 @@ const GigWorkerTax: React.FC = () => {
             <p className="text-[#4A4441] mb-8 font-medium">
               Let's make sure you're not overpaying taxes on it, or underpaying and getting surprised.
             </p>
-            <Link 
-              to="/#contact" 
+            <a 
+              href="/intake.html" 
               className="inline-block py-4 px-10 rounded-full bg-[#3C3633] text-white text-xs uppercase tracking-[0.2em] hover:bg-[#4d4642] transition-all duration-500"
             >
               Get Started
-            </Link>
+            </a>
           </div>
         </footer>
       </div>
