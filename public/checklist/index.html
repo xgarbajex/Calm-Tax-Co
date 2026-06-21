@@ -293,6 +293,16 @@ body { margin:0; background:var(--bg); color:var(--ink); font-family:Inter,sans-
   );
 }
 
+
+/* Contact email brand styling */
+.contact-email {
+  font-family:"Cormorant Garamond", Georgia, serif !important;
+  font-style:italic;
+  font-size:1.18em;
+  font-weight:500;
+  letter-spacing:.01em;
+}
+
 </style>
 </head>
 <body>
@@ -689,9 +699,9 @@ function render() {
         '<input class="hidden-row-file-input" type="file" id="otherFileInput" multiple accept=".pdf,.jpg,.jpeg,.png,.heic,.webp,.doc,.docx,.txt,.rtf,.csv,.xls,.xlsx,.ods,.numbers" onchange="handleOtherFileInput(event)">' +
       '</div>' +
     '</div>' +
-    '<div class="checklist-helper">Drag files directly onto a document row, or use the Upload button.</div>' +
+    '<div class="checklist-helper">Drag and drop files directly onto a document row, or use the Upload button.</div>' +
     '<div class="privacy security-note"><span class="security-icon">◆</span><span><strong>Privacy &amp; security:</strong> Your tax documents are uploaded to your client folder in secure cloud storage. Access is limited to the people involved in preparing your return, and we never sell your information. Please use this upload page for tax documents instead of regular email.</span></div>' +
-    '<div class="contact-card"><span class="contact-icon">✉</span><span>Questions? Feel free to reach out at <a href="mailto:hello@calmtax.co">hello@calmtax.co</a></span></div><div class="footer-note">© 2026 Calm Tax Co. All rights reserved.</div>';
+    '<div class="contact-card"><span class="contact-icon">✉</span><span>Questions? Feel free to reach out at <a class="contact-email" href="mailto:hello@calmtax.co">hello@calmtax.co</a></span></div><div class="footer-note">© 2026 Calm Tax Co. All rights reserved.</div>';
 
   setupDropZone();
 }
