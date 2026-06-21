@@ -39,7 +39,36 @@ body { margin:0; background:var(--bg); color:var(--ink); font-family:Inter,sans-
 .journey-step.current .journey-label { color:var(--ink); }
 .journey-note { display:block; margin-top:4px; font-size:11px; color:var(--sage); font-weight:600; }
 .journey-step.future { opacity:.55; }
+
+.checklist-legend { display:flex; align-items:center; gap:18px; flex-wrap:wrap; background:rgba(125,142,126,.06); border:1px solid rgba(125,142,126,.18); border-radius:12px; padding:12px 14px; margin:22px 0 10px; font-size:13px; color:var(--mid); }
+.legend-item { display:inline-flex; align-items:center; gap:7px; }
+.legend-circle { width:18px; height:18px; border-radius:50%; border:1.5px solid #c9c9c9; background:#fff; display:inline-flex; align-items:center; justify-content:center; font-size:11px; color:transparent; }
+.legend-circle.complete { background:var(--sage); border-color:var(--sage); color:#fff; }
+.item.row-upload { align-items:stretch; cursor:default; background:#fff; border:1px solid rgba(60,54,51,.08); margin-bottom:8px; transition:background .16s ease, border-color .16s ease, box-shadow .16s ease, transform .16s ease; }
+.item.row-upload:hover { background:#fff; }
+.item.row-upload.drag-over { background:rgba(125,142,126,.10); border-color:var(--sage); box-shadow:0 8px 22px rgba(60,54,51,.08); transform:translateY(-1px); }
+.item-main { flex:1; min-width:0; }
+.item-head { display:flex; gap:12px; align-items:flex-start; }
+.item-actions { display:flex; align-items:flex-start; justify-content:flex-end; gap:8px; margin-left:auto; padding-left:10px; }
+.row-upload-btn { border:1px solid rgba(125,142,126,.36); background:#fff; color:var(--ink); border-radius:999px; padding:8px 13px; cursor:pointer; font-size:12px; font-weight:600; letter-spacing:.04em; text-transform:uppercase; white-space:nowrap; }
+.row-upload-btn:hover { background:rgba(125,142,126,.10); }
+.row-upload-btn[disabled] { opacity:.65; cursor:wait; }
+.row-files { margin:10px 0 0 34px; display:flex; flex-direction:column; gap:6px; }
+.row-file { display:flex; justify-content:space-between; align-items:center; gap:8px; border:1px solid var(--border); background:#fafafa; border-radius:9px; padding:8px 10px; font-size:13px; color:var(--mid); }
+.row-file-name { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.row-status { margin:8px 0 0 34px; font-size:13px; color:var(--mid); display:flex; align-items:center; gap:8px; }
+.other-upload-row { margin-top:18px; border:1px dashed rgba(125,142,126,.45); background:rgba(125,142,126,.05); border-radius:14px; padding:16px; text-align:center; transition:background .16s ease, border-color .16s ease, transform .16s ease; }
+.other-upload-row.drag-over { background:rgba(125,142,126,.12); border-color:var(--sage); transform:translateY(-1px); }
+.other-upload-row h3 { font-family:Lora,serif; font-size:20px; margin:0 0 5px; }
+.other-upload-row p { margin:0 0 12px; font-size:13px; color:var(--mid); line-height:1.5; }
+.hidden-row-file-input { display:none; }
+
 @media(max-width:700px) {
+
+  .item.row-upload { flex-direction:column; }
+  .item-head { width:100%; }
+  .item-actions { margin-left:34px; padding-left:0; justify-content:flex-start; }
+  .row-files, .row-status { margin-left:34px; }
   .journey { padding:18px 6px; }
   .journey-track { gap:4px; }
   .journey-dot { width:34px; height:34px; font-size:13px; }
@@ -92,7 +121,36 @@ body { margin:0; background:var(--bg); color:var(--ink); font-family:Inter,sans-
 .err { background:#fff0f0; border:1px solid #f2c1c1; color:#7a2828; padding:14px; border-radius:12px; }
 .loading { text-align:center; padding:60px; color:var(--mid); }
 .progress-row { margin-top:8px; padding:8px 10px; border:1px dashed var(--border); border-radius:10px; background:#fff; font-size:13px; color:var(--mid); }
+
+.checklist-legend { display:flex; align-items:center; gap:18px; flex-wrap:wrap; background:rgba(125,142,126,.06); border:1px solid rgba(125,142,126,.18); border-radius:12px; padding:12px 14px; margin:22px 0 10px; font-size:13px; color:var(--mid); }
+.legend-item { display:inline-flex; align-items:center; gap:7px; }
+.legend-circle { width:18px; height:18px; border-radius:50%; border:1.5px solid #c9c9c9; background:#fff; display:inline-flex; align-items:center; justify-content:center; font-size:11px; color:transparent; }
+.legend-circle.complete { background:var(--sage); border-color:var(--sage); color:#fff; }
+.item.row-upload { align-items:stretch; cursor:default; background:#fff; border:1px solid rgba(60,54,51,.08); margin-bottom:8px; transition:background .16s ease, border-color .16s ease, box-shadow .16s ease, transform .16s ease; }
+.item.row-upload:hover { background:#fff; }
+.item.row-upload.drag-over { background:rgba(125,142,126,.10); border-color:var(--sage); box-shadow:0 8px 22px rgba(60,54,51,.08); transform:translateY(-1px); }
+.item-main { flex:1; min-width:0; }
+.item-head { display:flex; gap:12px; align-items:flex-start; }
+.item-actions { display:flex; align-items:flex-start; justify-content:flex-end; gap:8px; margin-left:auto; padding-left:10px; }
+.row-upload-btn { border:1px solid rgba(125,142,126,.36); background:#fff; color:var(--ink); border-radius:999px; padding:8px 13px; cursor:pointer; font-size:12px; font-weight:600; letter-spacing:.04em; text-transform:uppercase; white-space:nowrap; }
+.row-upload-btn:hover { background:rgba(125,142,126,.10); }
+.row-upload-btn[disabled] { opacity:.65; cursor:wait; }
+.row-files { margin:10px 0 0 34px; display:flex; flex-direction:column; gap:6px; }
+.row-file { display:flex; justify-content:space-between; align-items:center; gap:8px; border:1px solid var(--border); background:#fafafa; border-radius:9px; padding:8px 10px; font-size:13px; color:var(--mid); }
+.row-file-name { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.row-status { margin:8px 0 0 34px; font-size:13px; color:var(--mid); display:flex; align-items:center; gap:8px; }
+.other-upload-row { margin-top:18px; border:1px dashed rgba(125,142,126,.45); background:rgba(125,142,126,.05); border-radius:14px; padding:16px; text-align:center; transition:background .16s ease, border-color .16s ease, transform .16s ease; }
+.other-upload-row.drag-over { background:rgba(125,142,126,.12); border-color:var(--sage); transform:translateY(-1px); }
+.other-upload-row h3 { font-family:Lora,serif; font-size:20px; margin:0 0 5px; }
+.other-upload-row p { margin:0 0 12px; font-size:13px; color:var(--mid); line-height:1.5; }
+.hidden-row-file-input { display:none; }
+
 @media(max-width:700px) {
+
+  .item.row-upload { flex-direction:column; }
+  .item-head { width:100%; }
+  .item-actions { margin-left:34px; padding-left:0; justify-content:flex-start; }
+  .row-files, .row-status { margin-left:34px; }
   .brand { align-items:flex-start; }
   .title { font-size:34px; }
   .steps { grid-template-columns:1fr; }
@@ -103,7 +161,6 @@ body { margin:0; background:var(--bg); color:var(--ink); font-family:Inter,sans-
 </head>
 <body>
 <div class="wrap"><div class="card" id="app"><div class="loading">Loading your checklist…</div></div></div>
-<input type="file" id="fileInput" multiple hidden accept=".pdf,.jpg,.jpeg,.png,.heic,.webp,.doc,.docx,.txt,.rtf,.csv,.xls,.xlsx,.ods,.numbers">
 
 <script>
 const AS_URL = 'https://script.google.com/macros/s/AKfycbxIqzdrwed8JgxdUUMMtTqVUQDmEmChlm7411oMGUUAF4Jn_8HinPHNDmNwZKb6vddiXg/exec';
@@ -244,17 +301,38 @@ function helpFor(item) {
   return '';
 }
 
+function uploadedFilesForIndex(idx) {
+  return (state.uploadedFiles || []).filter(function (file) {
+    return Number(file.checklistIndex) === Number(idx);
+  });
+}
+
 function itemHtml(item, idx) {
   const tip = helpFor(item);
-  const isChecked = checked.has(idx);
+  const relatedFiles = uploadedFilesForIndex(idx);
+  const isComplete = checked.has(idx) || relatedFiles.length > 0;
   const help = tip
     ? '<span class="help" tabindex="0" onclick="event.stopPropagation()">?<span class="tip">' + tip + '</span></span>'
     : '';
 
+  const filesHtml = relatedFiles.length
+    ? '<div class="row-files">' + relatedFiles.map(fileHtml).join('') + '</div>'
+    : '';
+
   return (
-    '<div class="item ' + (isChecked ? 'checked' : '') + '" data-idx="' + idx + '" onclick="toggleItem(' + idx + ')">' +
-      '<div class="check">✓</div>' +
-      '<div><div class="label">' + esc(item) + help + '</div></div>' +
+    '<div class="item row-upload ' + (isComplete ? 'checked' : '') + '" data-idx="' + idx + '" ondragenter="rowDragEnter(event, ' + idx + ')" ondragover="rowDragOver(event, ' + idx + ')" ondragleave="rowDragLeave(event, ' + idx + ')" ondrop="rowDrop(event, ' + idx + ')">' +
+      '<div class="item-main">' +
+        '<div class="item-head">' +
+          '<div class="check">✓</div>' +
+          '<div><div class="label">' + esc(item) + help + '</div></div>' +
+          '<div class="item-actions">' +
+            '<button class="row-upload-btn" type="button" id="uploadBtn-' + idx + '" onclick="openRowFilePicker(' + idx + ', event)">Upload</button>' +
+          '</div>' +
+        '</div>' +
+        '<div class="row-status" id="rowStatus-' + idx + '"></div>' +
+        filesHtml +
+        '<input class="hidden-row-file-input" type="file" id="rowFileInput-' + idx + '" multiple accept=".pdf,.jpg,.jpeg,.png,.heic,.webp,.doc,.docx,.txt,.rtf,.csv,.xls,.xlsx,.ods,.numbers" onchange="handleRowFileInput(' + idx + ', event)">' +
+      '</div>' +
     '</div>'
   );
 }
@@ -265,9 +343,9 @@ function fileHtml(file) {
   const date = file.timestamp ? new Date(file.timestamp).toLocaleDateString() : '';
 
   return (
-    '<div class="file">' +
-      '<span>📄 ' + name + '</span>' +
-      '<span>' + esc(date) + (id ? ' <button class="delete-btn" onclick="deleteFile(\'' + id + '\', event)">Delete</button>' : '') + '</span>' +
+    '<div class="row-file">' +
+      '<span class="row-file-name">📄 ' + name + (date ? ' <span style="opacity:.7;">(' + esc(date) + ')</span>' : '') + '</span>' +
+      (id ? '<button class="delete-btn" onclick="deleteFile(\'' + id + '\', event)">Delete</button>' : '') +
     '</div>'
   );
 }
@@ -392,24 +470,22 @@ function render() {
         '<div class="journey-step future"><div class="journey-dot">04</div><span class="journey-label">Prepare &amp; E-file</span></div>' +
       '</div>' +
     '</div>' +
-    '<div class="upload-box">' +
-      '<div class="upload-top">' +
-        '<div class="upload-main">' +
-          '<div class="drop-zone" id="dropZone">' +
-            '<h3>📂 Secure Upload</h3>' +
-            '<div class="status" id="uploadStatus">Optional: Select a document type to automatically mark a checklist item complete.</div>' +
-            '<div id="uploadProgress"></div>' +
-            uploadTypeSelectHtml(items) +
-            '<span class="drop-zone-small">Drag & drop files here.</span>' +
-          '</div>' +
-        '</div>' +
-        '<div class="upload-controls"><button class="btn" id="uploadBtn" onclick="document.getElementById(\'fileInput\').click()">Upload Documents</button></div>' +
-      '</div>' +
-      '<div class="uploaded-in-card"><div class="uploaded-in-card-title">Uploaded Files</div><div id="filesList">' + (files || '<div class="status">No files uploaded yet.</div>') + '</div></div>' +
-    '</div>' +
+
     '<div class="privacy"><strong>Privacy & security:</strong> Your privacy matters to us. We use secure cloud storage and encryption to help protect your tax documents. Access is limited to the people involved in preparing your return, and we never sell your information.</div>' +
     (state.hasItemizedDeductions ? '<div class="reminder">💡 <strong>Itemized deduction reminder:</strong> Because you selected possible itemized deductions, you do not need to track down every small receipt before getting started. The most helpful records are usually larger or official documents, such as mortgage interest statements, property tax records, larger charitable donation records, and significant medical expense records. Upload what you already have, and we will let you know if anything else is likely to help.</div>' : '') +
-    '<div id="items">' + checklistHtml + '</div>';
+    '<div class="checklist-legend">' +
+      '<span class="legend-item"><span class="legend-circle complete">✓</span> Complete</span>' +
+      '<span class="legend-item"><span class="legend-circle"></span> Not yet uploaded</span>' +
+      '<span class="legend-item">Drag files directly onto a document row, or use the Upload button.</span>' +
+    '</div>' +
+    '<div id="items">' + checklistHtml + '</div>' +
+    '<div class="other-upload-row" id="otherUploadRow" ondragenter="otherDragEnter(event)" ondragover="otherDragOver(event)" ondragleave="otherDragLeave(event)" ondrop="otherDrop(event)">' +
+      '<h3>Other Documents</h3>' +
+      '<p>Not sure where a file belongs? Upload it here.</p>' +
+      '<button class="row-upload-btn" type="button" onclick="openOtherFilePicker(event)">Upload Other Documents</button>' +
+      '<div class="row-status" id="otherStatus" style="justify-content:center;margin-left:0;"></div>' +
+      '<input class="hidden-row-file-input" type="file" id="otherFileInput" multiple accept=".pdf,.jpg,.jpeg,.png,.heic,.webp,.doc,.docx,.txt,.rtf,.csv,.xls,.xlsx,.ods,.numbers" onchange="handleOtherFileInput(event)">' +
+    '</div>';
 
   setupDropZone();
 }
@@ -446,60 +522,206 @@ function readFileAsDataURL(file) {
   });
 }
 
-async function uploadSelectedFiles(files) {
-  const button = document.getElementById('uploadBtn');
-  const progress = document.getElementById('uploadProgress');
-  const select = document.getElementById('uploadDocType');
-  const selectedIdx = select && select.value !== '' && select.value !== 'other' ? Number(select.value) : null;
+function setRowStatus(idx, type, message) {
+  const el = document.getElementById(idx === 'other' ? 'otherStatus' : 'rowStatus-' + idx);
+  if (!el) return;
 
-  window.clearTimeout(window.uploadResetTimer);
-  button.disabled = true;
-  progress.innerHTML = '';
+  if (type === 'loading') {
+    el.innerHTML = '<span class="mini-spinner"></span><span>' + esc(message) + '</span>';
+  } else if (type === 'success') {
+    el.innerHTML = '<span class="upload-check">✓</span><span>' + esc(message) + '</span>';
+    window.setTimeout(function () {
+      const fresh = document.getElementById(idx === 'other' ? 'otherStatus' : 'rowStatus-' + idx);
+      if (fresh) fresh.innerHTML = '';
+    }, 3500);
+  } else if (type === 'error') {
+    el.innerHTML = '<span>⚠️</span><span>' + esc(message) + '</span>';
+  } else {
+    el.textContent = message || '';
+  }
+}
+
+function openRowFilePicker(idx, event) {
+  if (event) event.stopPropagation();
+  const input = document.getElementById('rowFileInput-' + idx);
+  if (input) input.click();
+}
+
+function handleRowFileInput(idx, event) {
+  const files = Array.from(event.target.files || []);
+  event.target.value = '';
+  if (!files.length) return;
+  uploadFilesForChecklistItem(idx, files);
+}
+
+function rowDragEnter(event, idx) {
+  event.preventDefault();
+  event.stopPropagation();
+  const row = event.currentTarget;
+  if (row) row.classList.add('drag-over');
+}
+
+function rowDragOver(event, idx) {
+  event.preventDefault();
+  event.stopPropagation();
+  const row = event.currentTarget;
+  if (row) row.classList.add('drag-over');
+}
+
+function rowDragLeave(event, idx) {
+  event.preventDefault();
+  event.stopPropagation();
+  const row = event.currentTarget;
+  if (!row || row.contains(event.relatedTarget)) return;
+  row.classList.remove('drag-over');
+}
+
+function rowDrop(event, idx) {
+  event.preventDefault();
+  event.stopPropagation();
+  const row = event.currentTarget;
+  if (row) row.classList.remove('drag-over');
+  const files = Array.from(event.dataTransfer && event.dataTransfer.files ? event.dataTransfer.files : []);
+  if (!files.length) return;
+  uploadFilesForChecklistItem(idx, files);
+}
+
+function openOtherFilePicker(event) {
+  if (event) event.stopPropagation();
+  const input = document.getElementById('otherFileInput');
+  if (input) input.click();
+}
+
+function handleOtherFileInput(event) {
+  const files = Array.from(event.target.files || []);
+  event.target.value = '';
+  if (!files.length) return;
+  uploadFilesAsOther(files);
+}
+
+function otherDragEnter(event) {
+  event.preventDefault();
+  event.stopPropagation();
+  document.getElementById('otherUploadRow').classList.add('drag-over');
+}
+
+function otherDragOver(event) {
+  event.preventDefault();
+  event.stopPropagation();
+  document.getElementById('otherUploadRow').classList.add('drag-over');
+}
+
+function otherDragLeave(event) {
+  event.preventDefault();
+  event.stopPropagation();
+  const row = document.getElementById('otherUploadRow');
+  if (!row || row.contains(event.relatedTarget)) return;
+  row.classList.remove('drag-over');
+}
+
+function otherDrop(event) {
+  event.preventDefault();
+  event.stopPropagation();
+  const row = document.getElementById('otherUploadRow');
+  if (row) row.classList.remove('drag-over');
+  const files = Array.from(event.dataTransfer && event.dataTransfer.files ? event.dataTransfer.files : []);
+  if (!files.length) return;
+  uploadFilesAsOther(files);
+}
+
+function selectedLabelForIndex(idx) {
+  return state && state.items && state.items[idx] ? state.items[idx] : '';
+}
+
+async function uploadFilesForChecklistItem(idx, files) {
+  const button = document.getElementById('uploadBtn-' + idx);
+  if (button) button.disabled = true;
 
   try {
     for (let i = 0; i < files.length; i++) {
       const file = files[i];
-      const docLabel = selectedUploadLabel();
-      const cleanLabel = cleanDocLabel(docLabel);
       const countText = files.length > 1 ? 'Uploading ' + (i + 1) + ' of ' + files.length + ': ' + file.name : 'Uploading ' + file.name;
-
-      setUploadMessage('loading', countText);
-      progress.innerHTML = '';
+      setRowStatus(idx, 'loading', countText);
 
       const dataUrl = await readFileAsDataURL(file);
+      const label = selectedLabelForIndex(idx);
+      const cleanLabel = cleanDocLabel(label);
+
       const result = await api({
         form_type: 'uploadFile',
         clientId: CLIENT_ID,
-        file: { name: file.name, mimeType: file.type, dataUrl: dataUrl, docType: docLabel, docTypeLabel: cleanLabel }
+        file: {
+          name: file.name,
+          mimeType: file.type,
+          dataUrl: dataUrl,
+          docType: label,
+          docTypeLabel: cleanLabel,
+          checklistIndex: idx
+        }
       });
 
       if (!state.uploadedFiles) state.uploadedFiles = [];
       state.uploadedFiles.push({
         name: result.fileName || file.name,
         id: result.fileId || '',
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
+        checklistIndex: idx,
+        docTypeLabel: cleanLabel
       });
-
-      progress.innerHTML = '';
     }
 
-    if (selectedIdx !== null && !Number.isNaN(selectedIdx)) {
-      checked.add(selectedIdx);
-      await api({ form_type: 'saveChecklistState', clientId: CLIENT_ID, checkedIndexes: Array.from(checked) });
+    checked.add(Number(idx));
+    await api({ form_type: 'saveChecklistState', clientId: CLIENT_ID, checkedIndexes: Array.from(checked) });
+    render();
+    setRowStatus(idx, 'success', files.length > 1 ? files.length + ' files uploaded.' : 'Upload complete.');
+  } catch (error) {
+    alert('Upload failed: ' + error.message);
+    setRowStatus(idx, 'error', 'Upload failed. Please try again.');
+  } finally {
+    const freshButton = document.getElementById('uploadBtn-' + idx);
+    if (freshButton) freshButton.disabled = false;
+  }
+}
+
+async function uploadFilesAsOther(files) {
+  try {
+    for (let i = 0; i < files.length; i++) {
+      const file = files[i];
+      const countText = files.length > 1 ? 'Uploading ' + (i + 1) + ' of ' + files.length + ': ' + file.name : 'Uploading ' + file.name;
+      setRowStatus('other', 'loading', countText);
+
+      const dataUrl = await readFileAsDataURL(file);
+      const result = await api({
+        form_type: 'uploadFile',
+        clientId: CLIENT_ID,
+        file: {
+          name: file.name,
+          mimeType: file.type,
+          dataUrl: dataUrl,
+          docType: 'Other Documents',
+          docTypeLabel: 'Other Documents',
+          checklistIndex: ''
+        }
+      });
+
+      if (!state.uploadedFiles) state.uploadedFiles = [];
+      state.uploadedFiles.push({
+        name: result.fileName || file.name,
+        id: result.fileId || '',
+        timestamp: new Date().toISOString(),
+        checklistIndex: '',
+        docTypeLabel: 'Other Documents'
+      });
     }
 
     render();
-    setUploadMessage('success', files.length > 1 ? 'Upload complete. ' + files.length + ' files uploaded.' : 'Upload complete.');
-    resetUploadMessageSoon();
+    setRowStatus('other', 'success', files.length > 1 ? files.length + ' files uploaded.' : 'Upload complete.');
   } catch (error) {
     alert('Upload failed: ' + error.message);
-    setUploadMessage('error', 'Upload failed. Please try again.');
-  } finally {
-    const freshButton = document.getElementById('uploadBtn');
-    if (freshButton) freshButton.disabled = false;
-    document.getElementById('fileInput').value = '';
+    setRowStatus('other', 'error', 'Upload failed. Please try again.');
   }
 }
+
 
 async function deleteFile(fileId, event) {
   event.stopPropagation();
@@ -508,8 +730,12 @@ async function deleteFile(fileId, event) {
   if (!confirm('Delete this uploaded file?')) return;
 
   const button = event.currentTarget;
-  const row = button ? button.closest('.file') : null;
+  const row = button ? button.closest('.row-file, .file') : null;
   const originalButtonHtml = button ? button.innerHTML : '';
+  const fileRecord = (state.uploadedFiles || []).find(function (file) {
+    return String(file.id) === String(fileId);
+  });
+  const deletedIndex = fileRecord && fileRecord.checklistIndex !== undefined && fileRecord.checklistIndex !== '' ? Number(fileRecord.checklistIndex) : null;
 
   if (row) row.classList.add('deleting');
   if (button) {
@@ -522,6 +748,17 @@ async function deleteFile(fileId, event) {
     state.uploadedFiles = (state.uploadedFiles || []).filter(function (file) {
       return file.id !== fileId;
     });
+
+    if (deletedIndex !== null && !Number.isNaN(deletedIndex)) {
+      const stillHasFiles = state.uploadedFiles.some(function (file) {
+        return Number(file.checklistIndex) === Number(deletedIndex);
+      });
+      if (!stillHasFiles) {
+        checked.delete(deletedIndex);
+        await api({ form_type: 'saveChecklistState', clientId: CLIENT_ID, checkedIndexes: Array.from(checked) });
+      }
+    }
+
     render();
   } catch (error) {
     if (row) row.classList.remove('deleting');
@@ -561,11 +798,6 @@ function setupDropZone() {
   });
 }
 
-document.getElementById('fileInput').addEventListener('change', function (event) {
-  const files = Array.from(event.target.files || []);
-  if (!files.length) return;
-  uploadSelectedFiles(files);
-});
 
 load();
 </script>
