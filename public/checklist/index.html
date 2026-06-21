@@ -579,7 +579,7 @@ function itemHtml(item, idx) {
 
 function fileHtml(file) {
   const id = esc(file.id || '');
-  const name = esc(file.name || 'Uploaded file');
+  const name = esc(clientDisplayFileName(file) || 'Uploaded file');
   const date = file.timestamp ? new Date(file.timestamp).toLocaleDateString() : '';
 
   return (
@@ -614,6 +614,27 @@ function selectedUploadLabel() {
   const idx = Number(select.value);
   const item = state && state.items ? state.items[idx] : '';
   return cleanItemLabel(item || '');
+}
+
+
+function clientDisplayFileName(file) {
+  const storedName = String((file && file.name) || '').trim();
+  const docLabel = String(
+    (file && (file.docTypeLabel || file.docType)) || ''
+  ).trim();
+
+  if (!storedName) return '';
+
+  // Keep the organizational prefix in Google Drive, but hide it on the
+  // client-facing checklist.
+  if (docLabel) {
+    const expectedPrefix = docLabel + ' - ';
+    if (storedName.toLowerCase().startsWith(expectedPrefix.toLowerCase())) {
+      return storedName.slice(expectedPrefix.length).trim();
+    }
+  }
+
+  return storedName;
 }
 
 function cleanDocLabel(label) {
@@ -1093,7 +1114,7 @@ function deleteFile(fileId, event) {
   const fileRecord = (state.uploadedFiles || []).find(function (file) {
     return String(file.id) === String(fileId);
   });
-  const fileName = fileRecord && fileRecord.name ? fileRecord.name : 'this file';
+  const fileName = fileRecord ? (clientDisplayFileName(fileRecord) || 'this file') : 'this file';
 
   row.classList.add('confirming-delete');
   const panel = document.createElement('div');
