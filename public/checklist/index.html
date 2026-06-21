@@ -205,6 +205,23 @@ body { margin:0; background:var(--bg); color:var(--ink); font-family:Inter,sans-
 .privacy { max-width:850px; margin:22px auto !important; }
 .other-upload-row.in-card { margin:22px 0 0; }
 
+
+/* Progress tracker refinements */
+.journey { border-top:0 !important; border-bottom:1px solid var(--border) !important; padding-bottom:28px !important; margin-bottom:26px !important; }
+.journey::after { content:""; display:block; border-bottom:1px solid var(--border); margin-top:28px; }
+.brand { border-bottom:1px solid var(--border) !important; margin-bottom:24px !important; }
+.journey-dot { box-shadow:0 0 0 16px var(--bg), 0 2px 8px rgba(60,54,51,.06) !important; }
+.journey-step.current .journey-dot { box-shadow:0 0 0 18px var(--bg), 0 2px 10px rgba(125,142,126,.18) !important; }
+.journey-label { letter-spacing:.05em !important; font-family:Lora,serif !important; line-height:1.35 !important; }
+.journey-note { display:block !important; clear:both !important; margin:7px auto 0 !important; width:max-content !important; max-width:100% !important; }
+
+
+.security-note { display:flex; gap:12px; align-items:flex-start; }
+.security-icon { width:34px; height:34px; border-radius:50%; background:rgba(125,142,126,.12); color:var(--sage); display:inline-flex; align-items:center; justify-content:center; flex:0 0 auto; font-size:17px; }
+
+
+.footer-note { text-align:center; color:rgba(74,84,92,.72); font-size:12px; margin:26px 0 0; }
+
 </style>
 </head>
 <body>
@@ -217,9 +234,36 @@ const CLIENT_ID = params.get('c') || params.get('checklist');
 let state = null;
 let checked = new Set();
 
+
 function cleanItemLabel(value) {
-  return String(value || '').replace(/^•\s*/, '').trim();
+  let text = String(value || '').replace(/^•\s*/, '').trim();
+  const lower = text.toLowerCase();
+
+  if (
+    (lower.includes('supplies') && lower.includes('equipment') && lower.includes('tools')) ||
+    (lower.includes('total amount spent') && (lower.includes('supplies') || lower.includes('equipment') || lower.includes('tools')))
+  ) {
+    return 'Supplies, equipment, and tools purchased for work — provide totals by category';
+  }
+
+  if (lower.includes('business expense totals') || lower.includes('total annual expense amount')) {
+    return 'Business expense totals by category';
+  }
+
+  if (lower.includes('cost of goods')) {
+    return 'Cost of goods sold or inventory totals, if applicable';
+  }
+
+  if (lower.includes('rental expense')) {
+    return 'Rental expense totals by category';
+  }
+
+  text = text.replace(/\s*\(provide only through your secure upload folder\s*—\s*do not email it\)\s*/gi, '');
+  text = text.replace(/\s*\(do not email it\)\s*/gi, '');
+
+  return text;
 }
+
 
 function esc(value) {
   return String(value || '').replace(/[&<>"']/g, function (char) {
@@ -307,15 +351,19 @@ function helpFor(item) {
   }
 
   if (t.includes('rental income summary')) {
-    return 'Upload a simple document or spreadsheet showing total rent received, rental expenses by category, property address, and any major repairs or improvements.';
+    return 'Upload a simple document or spreadsheet showing total rent received, rental expenses by category, property address, and any major repairs or improvements.<br><br><a href="https://www.irs.gov/instructions/i1040sc" target="_blank" rel="noopener">View IRS Schedule C instructions</a>';
   }
 
-  if (t.includes('business expense totals')) {
-    return 'You can upload a spreadsheet or document showing totals by category. Include cost of goods sold if you sell products, mileage if applicable, and large assets or equipment because depreciation may apply.<br><br><a href="https://www.irs.gov/instructions/i1040sc" target="_blank" rel="noopener">View IRS Schedule C instructions</a>';
+  if (t.includes('business expense totals') || t.includes('total annual expense amount')) {
+    return 'Please upload a spreadsheet or document showing business expense totals by category. Common categories include supplies, equipment, tools, advertising, fees, insurance, office expenses, software, professional services, travel, meals, utilities, vehicle expenses, and cost of goods sold if applicable.<br><br><a href="https://www.irs.gov/instructions/i1040sc" target="_blank" rel="noopener">View IRS Schedule C instructions</a>';
+  }
+
+  if ((t.includes('supplies') && t.includes('equipment') && t.includes('tools')) || (t.includes('total amount spent') && (t.includes('supplies') || t.includes('equipment') || t.includes('tools')))) {
+    return 'Please provide totals by category rather than one combined number. For example: supplies total, equipment total, tools total, software total, and any large purchases listed separately with item, purchase date, cost, and date first used for work.<br><br><a href="https://www.irs.gov/instructions/i1040sc" target="_blank" rel="noopener">View IRS Schedule C instructions</a>';
   }
 
   if (t.includes('gross business income')) {
-    return 'This means your total business income before subtracting expenses. You can upload a sales report, payment platform report, bookkeeping summary, or a spreadsheet/document with your total.';
+    return 'This means your total business income before subtracting expenses. You can upload a sales report, payment platform report, bookkeeping summary, or spreadsheet/document with your gross income total.';
   }
 
   if (t.includes('mileage')) {
@@ -514,8 +562,8 @@ function render() {
     '<div class="journey">' +
       '<div class="journey-title">Your tax return progress</div>' +
       '<div class="journey-track">' +
-        '<div class="journey-step done"><div class="journey-dot">✓</div><span class="journey-label">Short Intake</span></div>' +
-        '<div class="journey-step current"><div class="journey-dot">2</div><span class="journey-label">Gather &amp; Upload<span class="journey-note">You are here</span></span></div>' +
+        '<div class="journey-step done"><div class="journey-dot">1</div><span class="journey-label">Short Intake</span></div>' +
+        '<div class="journey-step current"><div class="journey-dot">2</div><span class="journey-label">Gather &amp; Upload<br><span class="journey-note">You are here</span></span></div>' +
         '<div class="journey-step future"><div class="journey-dot">3</div><span class="journey-label">Quote &amp; Pay</span></div>' +
         '<div class="journey-step future"><div class="journey-dot">4</div><span class="journey-label">Prepare &amp; E-file</span></div>' +
       '</div>' +
@@ -540,8 +588,8 @@ function render() {
       '</div>' +
     '</div>' +
     '<div class="checklist-helper">Drag files directly onto a document row, or use the Upload button.</div>' +
-    '<div class="privacy"><strong>Privacy & security:</strong> Your privacy matters to us. We use secure cloud storage and encryption to help protect your tax documents. Access is limited to the people involved in preparing your return, and we never sell your information.</div>' +
-    '<div class="contact-card"><span class="contact-icon">✉</span><span>Questions? Feel free to reach out at <a href="mailto:hello@calmtax.co">hello@calmtax.co</a></span></div>';
+    '<div class="privacy security-note"><span class="security-icon">🛡</span><span><strong>Privacy &amp; security:</strong> Your tax documents are uploaded to your client folder in secure cloud storage. Access is limited to the people involved in preparing your return, and we never sell your information. Please use this upload page for tax documents instead of regular email.</span></div>' +
+    '<div class="contact-card"><span class="contact-icon">✉</span><span>Questions? Feel free to reach out at <a href="mailto:hello@calmtax.co">hello@calmtax.co</a></span></div><div class="footer-note">© 2026 Calm Tax Co. All rights reserved.</div>';
 
   setupDropZone();
 }
