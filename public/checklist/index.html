@@ -303,6 +303,21 @@ body { margin:0; background:var(--bg); color:var(--ink); font-family:Inter,sans-
   letter-spacing:.01em;
 }
 
+
+/* Inline file deletion confirmation */
+.delete-confirm { width:100%; margin-top:8px; padding:10px 12px; border:1px solid #e4c6c6; border-radius:10px; background:#fff7f7; color:var(--ink); font-size:13px; line-height:1.45; }
+.delete-confirm-text { margin-bottom:9px; }
+.delete-confirm-actions { display:flex; gap:8px; flex-wrap:wrap; }
+.delete-confirm-cancel, .delete-confirm-ok { border-radius:999px; padding:7px 12px; font-family:Inter,sans-serif; font-size:12px; font-weight:600; cursor:pointer; }
+.delete-confirm-cancel { border:1px solid var(--border); background:#fff; color:var(--ink); }
+.delete-confirm-ok { border:1px solid #d39b9b; background:#8a3434; color:#fff; }
+.delete-confirm button:focus-visible { outline:2px solid var(--sage); outline-offset:2px; }
+.row-file.confirming-delete, .file.confirming-delete { flex-wrap:wrap; }
+
+/* Match the walkthrough step-title typography */
+.journey-label { font-family:'Lora', serif !important; font-style:normal !important; font-weight:500 !important; letter-spacing:0 !important; font-size:16px !important; }
+@media(max-width:700px) { .journey-label { font-size:14px !important; } }
+
 </style>
 </head>
 <body>
@@ -1064,30 +1079,80 @@ async function uploadFilesAsOther(files) {
 }
 
 
-async function deleteFile(fileId, event) {
+function deleteFile(fileId, event) {
   event.stopPropagation();
-
   if (!fileId) return;
-  if (!confirm('Delete this uploaded file?')) return;
 
   const button = event.currentTarget;
   const row = button ? button.closest('.row-file, .file') : null;
-  const originalButtonHtml = button ? button.innerHTML : '';
+  if (!row) return;
+
+  document.querySelectorAll('.delete-confirm').forEach(function (panel) { panel.remove(); });
+  document.querySelectorAll('.confirming-delete').forEach(function (el) { el.classList.remove('confirming-delete'); });
+
+  const fileRecord = (state.uploadedFiles || []).find(function (file) {
+    return String(file.id) === String(fileId);
+  });
+  const fileName = fileRecord && fileRecord.name ? fileRecord.name : 'this file';
+
+  row.classList.add('confirming-delete');
+  const panel = document.createElement('div');
+  panel.className = 'delete-confirm';
+  panel.setAttribute('role', 'dialog');
+  panel.setAttribute('aria-label', 'Confirm file deletion');
+
+  const text = document.createElement('div');
+  text.className = 'delete-confirm-text';
+  text.textContent = 'Delete “' + fileName + '”? This cannot be undone.';
+
+  const actions = document.createElement('div');
+  actions.className = 'delete-confirm-actions';
+
+  const cancel = document.createElement('button');
+  cancel.type = 'button';
+  cancel.className = 'delete-confirm-cancel';
+  cancel.textContent = 'Cancel';
+  cancel.addEventListener('click', function (e) {
+    e.stopPropagation();
+    panel.remove();
+    row.classList.remove('confirming-delete');
+    if (button) button.focus();
+  });
+
+  const confirmButton = document.createElement('button');
+  confirmButton.type = 'button';
+  confirmButton.className = 'delete-confirm-ok';
+  confirmButton.textContent = 'Delete file';
+  confirmButton.addEventListener('click', function (e) {
+    e.stopPropagation();
+    confirmDeleteFile(fileId, row, button, confirmButton);
+  });
+
+  actions.appendChild(cancel);
+  actions.appendChild(confirmButton);
+  panel.appendChild(text);
+  panel.appendChild(actions);
+  row.appendChild(panel);
+  cancel.focus();
+}
+
+async function confirmDeleteFile(fileId, row, originalButton, confirmButton) {
   const fileRecord = (state.uploadedFiles || []).find(function (file) {
     return String(file.id) === String(fileId);
   });
   const deletedIndex = fileRecord && fileRecord.checklistIndex !== undefined && fileRecord.checklistIndex !== '' ? Number(fileRecord.checklistIndex) : null;
 
-  if (row) row.classList.add('deleting');
-  if (button) {
-    button.disabled = true;
-    button.innerHTML = '<span class="mini-spinner"></span>Deleting...';
+  row.classList.add('deleting');
+  if (originalButton) originalButton.disabled = true;
+  if (confirmButton) {
+    confirmButton.disabled = true;
+    confirmButton.innerHTML = '<span class="mini-spinner"></span>Deleting...';
   }
 
   try {
     await api({ form_type: 'deleteFile', clientId: CLIENT_ID, fileId: fileId });
     state.uploadedFiles = (state.uploadedFiles || []).filter(function (file) {
-      return file.id !== fileId;
+      return String(file.id) !== String(fileId);
     });
 
     if (deletedIndex !== null && !Number.isNaN(deletedIndex)) {
@@ -1102,12 +1167,17 @@ async function deleteFile(fileId, event) {
 
     render();
   } catch (error) {
-    if (row) row.classList.remove('deleting');
-    if (button) {
-      button.disabled = false;
-      button.innerHTML = originalButtonHtml || 'Delete';
+    row.classList.remove('deleting');
+    if (originalButton) originalButton.disabled = false;
+    if (confirmButton) {
+      confirmButton.disabled = false;
+      confirmButton.textContent = 'Delete file';
     }
-    alert('Could not delete file: ' + error.message);
+    const panel = row.querySelector('.delete-confirm');
+    if (panel) {
+      const text = panel.querySelector('.delete-confirm-text');
+      if (text) text.textContent = 'Delete failed: ' + error.message;
+    }
   }
 }
 
