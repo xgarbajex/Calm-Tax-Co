@@ -715,9 +715,69 @@ footer { text-align:center; padding:24px; font-size:.75rem; font-weight:300; col
 .validation-summary-list li:last-child {
   margin-bottom: 0;
 }
+
+/* Submission loading state */
+.submit-loading-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 20000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 22px;
+  background: rgba(250, 248, 245, 0.94);
+  backdrop-filter: blur(5px);
+}
+.submit-loading-overlay.active {
+  display: flex;
+}
+.submit-loading-card {
+  width: min(100%, 460px);
+  background: #fff;
+  border: 1px solid rgba(60,54,51,.12);
+  border-radius: 20px;
+  padding: 34px 28px;
+  text-align: center;
+  box-shadow: 0 16px 42px rgba(60,54,51,.12);
+}
+.submit-loading-spinner {
+  width: 42px;
+  height: 42px;
+  margin: 0 auto 18px;
+  border-radius: 50%;
+  border: 4px solid rgba(125,142,126,.20);
+  border-top-color: var(--sage);
+  animation: submitSpin .8s linear infinite;
+}
+.submit-loading-title {
+  margin: 0 0 9px;
+  font-family: "Lora", Georgia, serif;
+  font-size: 24px;
+  font-weight: 500;
+  color: var(--ink);
+}
+.submit-loading-message {
+  margin: 0;
+  color: var(--mid);
+  font-size: 14px;
+  line-height: 1.6;
+}
+@keyframes submitSpin {
+  to { transform: rotate(360deg); }
+}
+
 </style>
 </head>
 <body>
+
+<div id="submitLoadingOverlay" class="submit-loading-overlay" role="status" aria-live="polite" aria-hidden="true">
+  <div class="submit-loading-card">
+    <div class="submit-loading-spinner" aria-hidden="true"></div>
+    <h2 class="submit-loading-title">Creating your personalized checklist…</h2>
+    <p class="submit-loading-message">Your intake was submitted. Please keep this page open while we prepare your secure checklist.</p>
+  </div>
+</div>
+
 
 <header>
   <a href="https://calmtax.co" class="logo-link">
@@ -2229,7 +2289,16 @@ function submitForm() {
   if (!validateCurrentStep()) return;
   isSubmitting = true;
   const submitBtn = document.getElementById('finalSubmitBtn');
-  if (submitBtn) submitBtn.disabled = true;
+  if (submitBtn) {
+    submitBtn.disabled = true;
+    submitBtn.dataset.originalText = submitBtn.textContent;
+    submitBtn.textContent = 'Submitting…';
+  }
+  const loadingOverlay = document.getElementById('submitLoadingOverlay');
+  if (loadingOverlay) {
+    loadingOverlay.classList.add('active');
+    loadingOverlay.setAttribute('aria-hidden', 'false');
+  }
 
   const name     = (v('fFirst') + ' ' + v('fLast')).trim();
   const email    = v('fEmail').trim();
@@ -2530,7 +2599,15 @@ function submitForm() {
       alert('There was an error submitting your intake form. Please try again. Error: ' + err.message);
       isSubmitting = false;
       const submitBtn = document.getElementById('finalSubmitBtn');
-      if (submitBtn) submitBtn.disabled = false;
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.textContent = submitBtn.dataset.originalText || 'Submit →';
+      }
+      const loadingOverlay = document.getElementById('submitLoadingOverlay');
+      if (loadingOverlay) {
+        loadingOverlay.classList.remove('active');
+        loadingOverlay.setAttribute('aria-hidden', 'true');
+      }
     });
     
     // Update progress bar
@@ -2538,6 +2615,17 @@ function submitForm() {
   } else {
     // Fallback if no AS_URL set
     alert('Configuration error: No Apps Script URL set.');
+    isSubmitting = false;
+    const submitBtn = document.getElementById('finalSubmitBtn');
+    if (submitBtn) {
+      submitBtn.disabled = false;
+      submitBtn.textContent = submitBtn.dataset.originalText || 'Submit →';
+    }
+    const loadingOverlay = document.getElementById('submitLoadingOverlay');
+    if (loadingOverlay) {
+      loadingOverlay.classList.remove('active');
+      loadingOverlay.setAttribute('aria-hidden', 'true');
+    }
   }
 }
 </script>
