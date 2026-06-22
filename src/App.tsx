@@ -18,19 +18,37 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [activeLegal, setActiveLegal] = useState<'privacy' | 'terms' | 'accessibility' | null>(null);
   const location = useLocation();
 
-  // Scroll logic
+  // Scroll logic with pathname tracking to eliminate jerky scrolls
+  const prevPathnameRef = React.useRef(location.pathname);
+
   React.useEffect(() => {
     if (location.hash) {
       const id = location.hash.replace('#', '');
       const element = document.getElementById(id);
+      const hostPathChanged = prevPathnameRef.current !== location.pathname;
+
       if (element) {
-        setTimeout(() => {
+        if (hostPathChanged) {
+          // If path changed (different page), wait briefly for render before scroll
+          setTimeout(() => {
+            const el = document.getElementById(id);
+            if (el) el.scrollIntoView({ behavior: 'smooth' });
+          }, 100);
+        } else {
+          // Same page routing is a gentle smooth glide
           element.scrollIntoView({ behavior: 'smooth' });
+        }
+      } else if (hostPathChanged) {
+        // Fallback for async layouts when path changes
+        setTimeout(() => {
+          const el = document.getElementById(id);
+          if (el) el.scrollIntoView({ behavior: 'smooth' });
         }, 100);
       }
     } else {
       window.scrollTo(0, 0);
     }
+    prevPathnameRef.current = location.pathname;
   }, [location.pathname, location.hash]);
 
   return (

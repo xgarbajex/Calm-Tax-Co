@@ -88,9 +88,9 @@ const BlogPostPage: React.FC = () => {
             </p>
             <a 
               href="/intake.html" 
-              className="inline-block py-4 px-10 rounded-full bg-[#3C3633] text-white text-xs uppercase tracking-[0.2em] hover:bg-[#4d4642] transition-all duration-500"
+              className="inline-block py-4 px-10 rounded-full bg-[#3C3633] text-white text-xs uppercase tracking-[0.2em] cursor-pointer hover:bg-[#4d4642] hover:-translate-y-1 hover:shadow-lg hover:shadow-[#3C3633]/20 active:translate-y-0 transition-all duration-300"
             >
-              Get in touch
+              Get Started
             </a>
           </div>
         </footer>

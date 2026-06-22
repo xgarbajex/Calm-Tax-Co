@@ -136,7 +136,7 @@ const HowItWorks: React.FC = () => {
         <div className="text-center mt-16">
           <a
             href="/intake.html"
-            className="inline-block bg-[#3C3633] text-white px-8 py-4 rounded-full text-lg hover:bg-[#5D6D7E] transition-colors duration-300"
+            className="inline-block bg-[#3C3633] text-white px-8 py-4 rounded-full text-lg hover:bg-[#4d4642] hover:-translate-y-1 hover:shadow-lg hover:shadow-[#3C3633]/20 active:translate-y-0 transition-all duration-300"
           >
             Get Started
           </a>

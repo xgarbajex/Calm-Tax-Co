@@ -11,13 +11,27 @@ const Hero: React.FC = () => {
       </div>
 
       <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
-        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl mb-6 leading-tight animate-fade-in-up italic font-light tracking-[0.05em] px-4">
-          You bring the documents.<br />
-          We bring the calm.
+        <h1 className="cormorant-font text-4xl sm:text-5xl md:text-6xl lg:text-7xl mb-6 leading-tight font-light tracking-[0.015em] px-4 text-[#3C3633]">
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.2, ease: "easeOut" }}
+            className="block"
+          >
+            You bring the documents.
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.2, ease: "easeOut", delay: 0.8 }}
+            className="block mt-2"
+          >
+            We bring the <span className="italic font-normal text-[#7D8E7E]">calm.</span>
+          </motion.div>
         </h1>
         <div className="w-48 h-px bg-[#3C3633]/20 mx-auto mb-10" />
         <div className="flex flex-col gap-6 mb-12">
-          <p className="text-lg md:text-xl text-[#5D6D7E] max-w-2xl mx-auto leading-relaxed font-sans font-light">
+          <p className="text-sm md:text-base text-[#5D6D7E] max-w-xl mx-auto leading-relaxed font-sans font-light">
             A simple, self-guided online walkthrough creates your <strong className="font-medium text-[#3C3633]">personalized document checklist</strong>, where you can gather and upload everything in one place.
           </p>
           <p className="text-2xl md:text-3xl text-[#3C3633] max-w-4xl mx-auto leading-relaxed serif-font italic">
@@ -37,13 +51,13 @@ const Hero: React.FC = () => {
         <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
           <a 
             href="#pricing" 
-            className="px-10 py-4 rounded-full border border-[#3C3633] text-[#3C3633] hover:bg-[#3C3633] hover:text-[#F9F7F2] transition-all duration-500 text-sm uppercase tracking-widest"
+            className="px-10 py-4 rounded-full border border-[#3C3633] text-[#3C3633] hover:bg-[#3C3633] hover:text-[#F9F7F2] hover:-translate-y-1 hover:shadow-lg hover:shadow-[#3C3633]/10 active:translate-y-0 transition-all duration-300 text-sm uppercase tracking-widest block"
           >
             See Pricing
           </a>
           <a 
             href="/intake.html" 
-            className="px-10 py-4 rounded-full bg-[#7D8E7E] text-white hover:bg-[#6c7d6d] transition-all duration-500 text-sm uppercase tracking-widest"
+            className="px-10 py-4 rounded-full bg-[#3C3633] text-white hover:bg-[#4d4642] hover:-translate-y-1 hover:shadow-lg hover:shadow-[#3C3633]/25 active:translate-y-0 transition-all duration-300 text-sm uppercase tracking-widest block"
           >
             Get Started
           </a>

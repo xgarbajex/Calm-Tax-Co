@@ -85,8 +85,8 @@ const LegalNotice: React.FC<LegalNoticeProps> = ({ isOpen, onClose, type }) => {
             <div className="p-8 md:p-12 max-h-[80vh] overflow-y-auto">
               <div className="flex justify-between items-center mb-12">
                 <div className="text-center w-full">
-                  <h2 className="text-xs uppercase tracking-[0.4em] text-[#7D8E7E] mb-4">Legal Notice</h2>
-                  <p className="text-3xl serif-font text-[#3C3633]">{currentContent.title}</p>
+                  <h2 className="cormorant-font text-xl italic text-[#7D8E7E] mb-2">Legal Notice</h2>
+                  <p className="cormorant-font text-3xl font-light text-[#3C3633] md:text-4xl">{currentContent.title}</p>
                 </div>
                 <button 
                   onClick={onClose}
@@ -99,8 +99,8 @@ const LegalNotice: React.FC<LegalNoticeProps> = ({ isOpen, onClose, type }) => {
               <div className="space-y-10">
                 {currentContent.sections.map((section, index) => (
                   <div key={index}>
-                    <h3 className="text-xs uppercase tracking-widest text-[#7D8E7E] mb-3">{section.heading}</h3>
-                    <p className="text-[#5D6D7E] leading-relaxed italic">{section.text}</p>
+                    <h3 className="cormorant-font text-xl md:text-2xl font-light text-[#3C3633] mb-3">{section.heading}</h3>
+                    <p className="text-[#5D6D7E] leading-relaxed font-sans">{section.text}</p>
                   </div>
                 ))}
               </div>

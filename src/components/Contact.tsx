@@ -10,6 +10,7 @@ const Contact: React.FC = () => {
 
     const form = e.currentTarget;
     const formData = new FormData(form);
+    const data = Object.fromEntries(formData);
 
     try {
       const response = await fetch("https://formsubmit.co/ajax/hello@calmtax.co", {
@@ -18,7 +19,7 @@ const Contact: React.FC = () => {
           'Content-Type': 'application/json',
           'Accept': 'application/json'
         },
-        body: JSON.stringify(Object.fromEntries(formData))
+        body: JSON.stringify(data)
       });
 
       if (response.ok) {
@@ -28,9 +29,25 @@ const Contact: React.FC = () => {
         throw new Error('Form submission failed');
       }
     } catch (error) {
-      console.error(error);
-      setStatus('idle');
-      alert("There was an error sending your message. Please try again or contact us directly at hello@calmtax.co.");
+      console.error('AJAX submission failed, falling back to mailto:', error);
+      
+      // Smart Fallback: generate a custom mailto link to open the pre-filled client email
+      const subject = encodeURIComponent(`Calm Tax Co. Inquiry - ${data.name}`);
+      const body = encodeURIComponent(
+        `Hi Calm Tax Co.,\n\nI filled out the contact form with the following details:\n\n` +
+        `• Name: ${data.name}\n` +
+        `• Email: ${data.email}\n` +
+        `• Service of Interest: ${data.service || 'General Inquiry'}\n\n` +
+        `Message:\n${data.message}\n\n` +
+        `Please reach out to me regarding this inquiry.`
+      );
+      
+      // Redirect to mail client
+      window.location.href = `mailto:hello@calmtax.co?subject=${subject}&body=${body}`;
+      
+      // Set to sent state as user was transferred
+      setStatus('sent');
+      form.reset();
     }
   };
 
@@ -136,7 +153,7 @@ const Contact: React.FC = () => {
                 <button 
                   disabled={status === 'sending'}
                   type="submit"
-                  className="w-full py-5 rounded-full bg-[#3C3633] text-white text-xs uppercase tracking-[0.2em] hover:bg-[#4d4642] transition-all duration-500 disabled:opacity-50"
+                  className="w-full py-5 rounded-full bg-[#3C3633] text-white text-xs uppercase tracking-[0.2em] cursor-pointer hover:bg-[#4d4642] hover:-translate-y-1 hover:shadow-lg hover:shadow-[#3C3633]/20 active:translate-y-0 transition-all duration-300 disabled:opacity-50"
                 >
                   {status === 'sending' ? 'Sending...' : 'Send Message'}
                 </button>

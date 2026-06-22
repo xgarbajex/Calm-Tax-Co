@@ -50,7 +50,7 @@ The best thing you can do for your taxes is to keep your receipts organized thro
 
 Managing deductions does not have to be a guessing game. If you have questions about specific expenses for your freelance business, we can help you clarify what counts.
 
-**[Reach out to us](/intake.html)** if you'd like help with your [freelance filing](/services/freelance-tax-preparation).`
+**[Reach out to us](/#contact)** if you'd like help with your [freelance filing](/services/freelance-tax-preparation).`
   },
   {
     slug: 'quarterly-estimated-taxes-explained',
@@ -91,9 +91,9 @@ If you miss a deadline or underpay, the IRS may assess a penalty. The penalty is
 
 Calculating these amounts can feel like a burden when you are busy running your business. That is why Calm Tax Co. includes quarterly estimate calculations as part of our [self-employed filing package](/services/self-employed-tax-preparation). We provide you with the exact amounts to pay and the dates they are due, so you can stay focused on your work.
 
-Staying ahead of your taxes prevents stressful surprises in April. If you're ready to get a handle on your quarterly requirements, **[let's connect](/intake.html)**.
+Staying ahead of your taxes prevents stressful surprises in April. If you're ready to get a handle on your quarterly requirements, **[let's connect](/#contact)**.
 
-**[Contact us](/intake.html)** for help with your quarterly estimates.`
+**[Contact us](/#contact)** for help with your quarterly estimates.`
   },
   {
     slug: 'w2-vs-1099-tax-differences',
@@ -128,7 +128,7 @@ Because you no longer have a payroll department handling your withholdings, you 
 
 If you went freelance recently and want a calm, organized approach to getting your filing right, we handle the process from document upload to e-file. No calls, no meetings, just clear communication via email.
 
-**[Reach out to us](/intake.html)** to handle your [gig worker tax filing](/services/gig-worker-tax-filing).`
+**[Reach out to us](/#contact)** to handle your [gig worker tax filing](/services/gig-worker-tax-filing).`
   },
   {
     slug: 'how-to-file-taxes-remotely',
@@ -165,6 +165,6 @@ We built our practice specifically for the remote environment. We use secure, en
 
 Remote filing does not mean sacrificing personal service. It just means getting that service in a way that fits your actual life.
 
-If you're ready for a simpler, [remote filing experience](/services/remote-tax-preparation-services), **[reach out](/intake.html)** today.`
+If you're ready for a simpler, [remote filing experience](/services/remote-tax-preparation-services), **[reach out](/#contact)** today.`
   }
 ];
