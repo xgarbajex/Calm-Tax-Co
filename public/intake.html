@@ -773,8 +773,8 @@ footer { text-align:center; padding:24px; font-size:.75rem; font-weight:300; col
 <div id="submitLoadingOverlay" class="submit-loading-overlay" role="status" aria-live="polite" aria-hidden="true">
   <div class="submit-loading-card">
     <div class="submit-loading-spinner" aria-hidden="true"></div>
-    <h2 class="submit-loading-title">Creating your personalized checklist…</h2>
-    <p class="submit-loading-message">Your intake was submitted. Please keep this page open while we prepare your secure checklist.</p>
+    <h2 class="submit-loading-title">Creating your personalized document checklist…</h2>
+    <p class="submit-loading-message">This usually takes just a few seconds. Please keep this page open while we prepare your secure checklist.</p>
   </div>
 </div>
 
@@ -848,7 +848,7 @@ footer { text-align:center; padding:24px; font-size:.75rem; font-weight:300; col
 <div class="step active" id="s0">
 
   <div class="wh1" style="margin-bottom:36px">Let's get your<br><em>2025 taxes</em> started.</div>
-  <p class="wlead" style="margin-bottom:32px">This simple, self-guided walkthrough gets everything organized. Once complete, you'll receive your personalized document checklist and access to your secure upload folder.</p>
+  <p class="wlead" style="margin-bottom:32px">This short, self-guided walkthrough gets everything organized. Once complete, you'll receive your personalized document checklist and access to your secure document upload page.</p>
   <p style="text-align:center; margin:38px 0 24px; color:var(--mid); font-size:.98rem; line-height:1.5;">
     One question at a time. No tax knowledge required.
   </p>
@@ -964,7 +964,7 @@ footer { text-align:center; padding:24px; font-size:.75rem; font-weight:300; col
       </ul>
       <ul class="scope-col">
         <li>Real estate professional status</li>
-        <li>Other specialized tax situations</li>
+        <li>Other highly specialized tax filings not listed here</li>
         <li>Tax planning or strategy beyond return preparation</li>
         <li>Cryptocurrency or NFT buying, selling, trading, staking, mining, or similar activity</li>
       </ul>
@@ -1110,12 +1110,12 @@ footer { text-align:center; padding:24px; font-size:.75rem; font-weight:300; col
 <!-- S4: INCOME SOURCES -->
 <div class="step" id="s4">
   <div class="ey">Step 4 of 14</div>
-  <div class="qt">Where did your income come from in 2025?</div>
+  <div class="qt">How did you earn money in 2025?</div>
   <div class="qs">Select everything that applies. Your answers shape the rest of this form.</div>
   <div class="divider"></div>
   <div class="cards" id="incomeSrc">
     <div class="card" onclick="toggleBox(this)"><div class="ci">💼</div><div class="cb"><div class="ct">W-2 from an employer</div><div class="cd">Regular job taxes withheld from your paycheck</div></div><div class="sq"></div></div>
-    <div class="card" onclick="toggleBox(this)"><div class="ci">🚗</div><div class="cb"><div class="ct">Gig work or app-based income</div><div class="cd">DoorDash, Uber, Lyft, Instacart, TaskRabbit, Airbnb, etc.</div></div><div class="sq"></div></div>
+    <div class="card" onclick="toggleBox(this)"><div class="ci">🚗</div><div class="cb"><div class="ct">Gig work / delivery / rideshare</div><div class="cd">DoorDash, Uber, Lyft, Instacart, TaskRabbit, Airbnb, etc.</div></div><div class="sq"></div></div>
     <div class="card" onclick="toggleBox(this)"><div class="ci">🧾</div><div class="cb"><div class="ct">Freelance or contract work</div><div class="cd">Invoiced clients directly, received 1099-NEC forms</div></div><div class="sq"></div></div>
     <div class="card" onclick="toggleBox(this)"><div class="ci">🏢</div><div class="cb"><div class="ct">Small business or LLC</div><div class="cd">I own a registered business or LLC</div></div><div class="sq"></div></div>
     <div class="card" onclick="toggleBox(this)"><div class="ci">📈</div><div class="cb"><div class="ct">Investments or dividends</div><div class="cd">Stocks, mutual funds, ETFs, etc.</div></div><div class="sq"></div></div>
@@ -1168,7 +1168,7 @@ footer { text-align:center; padding:24px; font-size:.75rem; font-weight:300; col
         <input type="text" id="fBizName" placeholder="e.g. Jane Smith or Desert Grounds LLC">
       </div>
       <div class="r2">
-        <div class="field"><label>Type of work or business</label><input type="text" id="fBizType" placeholder="e.g. Cleaning, Consulting…"></div>
+        <div class="field"><label>What kind of work does your business do?</label><input type="text" id="fBizType" placeholder="e.g. Cleaning, consulting, photography, Etsy shop…"></div>
         <div class="field"><label>Business structure</label>
           <select id="fBizStr">
             <option value="">Select…</option>
@@ -1303,7 +1303,7 @@ footer { text-align:center; padding:24px; font-size:.75rem; font-weight:300; col
         </div>
       </div>
     </div>
-    <div class="card" onclick="radio(this,'filStat');showSpouse(false, this)"><div class="ci">🏠</div><div class="cb"><div class="ct">Head of Household</div><div class="cd">Unmarried and supporting a child or dependent</div></div><div class="dot"></div></div>
+    <div class="card" onclick="radio(this,'filStat');showSpouse(false, this)"><div class="ci">🏠</div><div class="cb"><div class="ct">Head of Household</div><div class="cd">Usually for unmarried taxpayers who paid more than half the cost of keeping up a home for a qualifying child or dependent. If you are unsure, choose the closest option and we will review it.</div></div><div class="dot"></div></div>
     <div class="card" onclick="radio(this,'filStat');showSpouse(false, this)"><div class="ci">🕊️</div><div class="cb"><div class="ct">Qualifying Surviving Spouse</div><div class="cd">Widowed in the past two years with a dependent child</div></div><div class="dot"></div></div>
     <div class="card" onclick="radio(this,'filStat');showSpouse(false, this)"><div class="ci">❓</div><div class="cb"><div class="ct">I'm not sure</div><div class="cd">We'll work this out together when we review your return</div></div><div class="dot"></div></div>
   </div>
@@ -1421,13 +1421,13 @@ footer { text-align:center; padding:24px; font-size:.75rem; font-weight:300; col
 <!-- S9: LIFE CHANGES -->
 <div class="step" id="s9">
   <div class="ey">Step 9 of 14</div>
-  <div class="qt">Did anything major change in 2025?</div>
+  <div class="qt">Did any of these major life changes happen in 2025?</div>
   <div class="qs">Life events can affect your taxes. Select all that apply.</div>
   <div class="divider"></div>
   <div class="cards" id="life">
     <div class="card" onclick="toggleBox(this)"><div class="ci">💍</div><div class="cb"><div class="ct">Got married or divorced</div></div><div class="sq"></div></div>
     <div class="card" onclick="toggleBox(this)"><div class="ci">👶</div><div class="cb"><div class="ct">Had or adopted a child</div></div><div class="sq"></div></div>
-    <div class="card" onclick="toggleBox(this)"><div class="ci">🏠</div><div class="cb"><div class="ct">Bought or sold a home</div></div><div class="sq"></div></div>
+    <div class="card" onclick="toggleBox(this)"><div class="ci">🏠</div><div class="cb"><div class="ct">Sold a home</div><div class="cd">Main home, second home, or other real estate sold during the year</div></div><div class="sq"></div></div>
     <div class="card" onclick="toggleBox(this)"><div class="ci">💼</div><div class="cb"><div class="ct">Started or lost a job</div></div><div class="sq"></div></div>
     <div class="card" onclick="toggleBox(this)"><div class="ci">🚀</div><div class="cb"><div class="ct">Started a business or side hustle</div></div><div class="sq"></div></div>
     <div class="card" onclick="toggleBox(this)"><div class="ci">🎓</div><div class="cb"><div class="ct">Started or finished college</div></div><div class="sq"></div></div>
@@ -1733,6 +1733,8 @@ footer { text-align:center; padding:24px; font-size:.75rem; font-weight:300; col
   <input type="hidden" name="vehicle_details"    id="g_vehicle">
   <input type="hidden" name="phone_internet_pct" id="g_phone_pct">
   <input type="hidden" name="text_opt_in"        id="g_text">
+  <input type="hidden" name="scope_review"       id="g_scope_review">
+  <input type="hidden" name="home_sale"          id="g_home_sale">
   <input type="hidden" name="status"              value="Intake Received">
 </form>
 
@@ -2053,11 +2055,18 @@ function go(n) {
 function checkScope() {
   if (!validateCurrentStep()) return;
   const answer = sel("scopeCheck");
-  if (answer.includes("No, none")) {
+  if (answer.includes("No, none") || answer.includes("I'm not sure")) {
     go(1);
   } else {
     go("out");
   }
+}
+
+function scopeReviewNote() {
+  const answer = sel("scopeCheck");
+  return answer.includes("I'm not sure")
+    ? "Scope review recommended — client selected I'm not sure on the out-of-scope question."
+    : "";
 }
 
 function hasInc(t) { return [...document.querySelectorAll('#incomeSrc .card.on')].some(c => c.querySelector('.ct').textContent.includes(t)); }
@@ -2218,7 +2227,7 @@ function buildChecklist() {
 
   const bizModel = sel('bizModel');
   if (bizModel.includes('physical products') || bizModel.includes('Both') || bizModel.includes("I'm not sure")) {
-    l.push('• Inventory / Cost of Goods Sold records: beginning inventory, purchases or materials for products, ending inventory, inventory reports, sales platform summaries, or cost of goods sold report if available');
+    l.push('• Inventory / Cost of Goods Sold records: If you sell physical products, upload the $ value of your inventory on Jan 1, the $ value of your inventory on Dec 31, and your inventory purchase total for the year, if available.');
   }
 
   if (hasInc('Investments')) {
@@ -2235,6 +2244,10 @@ function buildChecklist() {
   if (hasInc('Social Security') || hasInc('retirement')) l.push('• SSA-1099 and/or 1099-R');
   if (hasInc('Unemployment')) l.push('• 1099-G from your state');
   if (hasInc('Other'))    l.push('• Documentation for any other income (alimony received, gambling, tips, etc.)');
+
+  if (chk('life').includes('Sold a home')) {
+    l.push('• Home sale documents: Closing Disclosure or settlement statement from the sale, Form 1099-S if received, purchase records if available, and records of major home improvements');
+  }
 
   const d = chk('deds');
   if (d.includes('vehicle') || d.includes('Vehicle')) {
@@ -2346,7 +2359,8 @@ function submitForm() {
     "1099-NEC": "Issued by clients or contract/gig platforms (Upwork, Fiverr) for self-employed work over $600.",
     "1099-K": "Provided by payment apps (Venmo, PayPal, Stripe, Cash App) for business transactions.",
     "Total income not already shown": "Cash, checks, or direct deposits you received that were not reported on a 1099 form.",
-    "Inventory / Cost of Goods Sold": "Only applies if you sell physical products or keep inventory. Upload any reports or summaries you already have; we’ll let you know if anything else is needed.",
+    "Inventory / Cost of Goods Sold": "If you sell physical products, upload the $ value of your inventory on Jan 1, the $ value of your inventory on Dec 31, and your inventory purchase total for the year, if available.",
+    "Home sale documents": "Upload the Closing Disclosure or settlement statement from the sale, Form 1099-S if received, purchase records if available, and records of major home improvements.",
     "1099-B": "Issued by your broker (Robinhood, Schwab, Fidelity) showing brokerage stock/crypto trades.",
     "1099-DIV": "Issued by brokerages for dividend payments from stock or fund holdings.",
     "1099-INT": "Bank interest statement, usually generated if you earned more than $10 in interest.",
@@ -2541,6 +2555,10 @@ function submitForm() {
   const textVal = sel('textOpt');
   document.getElementById('g_text').value = textVal.includes('Yes') ? 'Yes' : 'No';
 
+  // Scope review + home sale flags
+  document.getElementById('g_scope_review').value = scopeReviewNote();
+  document.getElementById('g_home_sale').value = chk('life').includes('Sold a home') ? 'Yes' : '';
+
   // Send intake data to Google Apps Script as JSON.
   // Apps Script doPost(e) expects JSON.parse(e.postData.contents) and form_type: "intake".
   const payload = {
@@ -2565,6 +2583,8 @@ function submitForm() {
     business_type: document.getElementById('g_btype').value,
     business_structure: document.getElementById('g_bstr').value,
     inventory_cogs: document.getElementById('g_inventory_cogs').value,
+    home_sale: document.getElementById('g_home_sale').value,
+    scope_review: document.getElementById('g_scope_review').value,
     tracking_method: document.getElementById('g_track').value,
     deductions: document.getElementById('g_ded').value,
     phone_internet_pct: document.getElementById('g_phone_pct').value,
