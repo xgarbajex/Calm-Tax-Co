@@ -1183,6 +1183,18 @@ footer { text-align:center; padding:24px; font-size:.75rem; font-weight:300; col
     <div class="hr"></div>
   </div>
 
+  <div id="productSec">
+    <div class="slbl">What best describes this self-employed or business income?</div>
+    <div style="font-size:.82rem;font-weight:300;color:var(--mid);margin-bottom:10px">This helps us know whether to ask for inventory or cost of goods sold records later.</div>
+    <div class="cards" id="bizModel">
+      <div class="card" onclick="radio(this,'bizModel')"><div class="ci">🛠️</div><div class="cb"><div class="ct">Services only / no physical products</div><div class="cd">Examples: consulting, design, bookkeeping, cleaning, driving, delivery, contracting, freelance services</div></div><div class="dot"></div></div>
+      <div class="card" onclick="radio(this,'bizModel')"><div class="ci">📦</div><div class="cb"><div class="ct">I sell physical products or keep inventory</div><div class="cd">Examples: retail merchandise, handmade products, online store items, products you make or buy to resell</div></div><div class="dot"></div></div>
+      <div class="card" onclick="radio(this,'bizModel')"><div class="ci">🧾</div><div class="cb"><div class="ct">Both services and physical products</div><div class="cd">For example, you provide services and also sell products or merchandise</div></div><div class="dot"></div></div>
+      <div class="card" onclick="radio(this,'bizModel')"><div class="ci">❓</div><div class="cb"><div class="ct">I'm not sure</div><div class="cd">We'll review your records and let you know what applies</div></div><div class="dot"></div></div>
+    </div>
+    <div class="hr"></div>
+  </div>
+
   <div class="slbl">How do you track income &amp; expenses? <span class="opt">Select all that apply</span></div>
   <div class="cards" id="tracking">
     <div class="card" onclick="toggleBox(this)"><div class="ci">📱</div><div class="cb"><div class="ct">App summaries</div><div class="cd">What the platform shows me</div></div><div class="sq"></div></div>
@@ -1702,6 +1714,7 @@ footer { text-align:center; padding:24px; font-size:.75rem; font-weight:300; col
   <input type="hidden" name="business_name"       id="g_biz">
   <input type="hidden" name="business_type"       id="g_btype">
   <input type="hidden" name="business_structure"  id="g_bstr">
+  <input type="hidden" name="inventory_cogs"      id="g_inventory_cogs">
   <input type="hidden" name="tracking"            id="g_track">
   <input type="hidden" name="deductions"          id="g_ded">
   <input type="hidden" name="filing_status"       id="g_fil">
@@ -1851,6 +1864,9 @@ function validateCurrentStep() {
       if (!v("fBizStr")) {
         flagField("fBizStr", "Please select your Business structure.");
       }
+    }
+    if (!sel("bizModel")) {
+      flagCards("bizModel", "Please select whether this work is services, physical products, both, or not sure.");
     }
     if (!chk("tracking")) {
       flagCards("tracking", "Please select how you track income & expenses.");
@@ -2048,9 +2064,10 @@ function hasInc(t) { return [...document.querySelectorAll('#incomeSrc .card.on')
 function isSE() { return hasInc('Gig') || hasInc('Freelance') || hasInc('Small business'); }
 
 function buildS5() {
-  document.getElementById('gigSec').style.display  = hasInc('Gig')            ? 'block' : 'none';
-  document.getElementById('freeSec').style.display = hasInc('Freelance')      ? 'block' : 'none';
-  document.getElementById('bizSec').style.display  = hasInc('Small business') ? 'block' : 'none';
+  document.getElementById('gigSec').style.display     = hasInc('Gig')            ? 'block' : 'none';
+  document.getElementById('freeSec').style.display    = hasInc('Freelance')      ? 'block' : 'none';
+  document.getElementById('bizSec').style.display     = hasInc('Small business') ? 'block' : 'none';
+  document.getElementById('productSec').style.display = isSE()                   ? 'block' : 'none';
 }
 
 function toggleBox(el) {
@@ -2199,6 +2216,11 @@ function buildChecklist() {
     l.push('• Any 1099s issued to contractors, if applicable');
   }
 
+  const bizModel = sel('bizModel');
+  if (bizModel.includes('physical products') || bizModel.includes('Both') || bizModel.includes("I'm not sure")) {
+    l.push('• Inventory / Cost of Goods Sold records: beginning inventory, purchases or materials for products, ending inventory, inventory reports, sales platform summaries, or cost of goods sold report if available');
+  }
+
   if (hasInc('Investments')) {
     l.push('• 1099-B (investment sales)');
     l.push('• 1099-DIV (dividends)');
@@ -2324,6 +2346,7 @@ function submitForm() {
     "1099-NEC": "Issued by clients or contract/gig platforms (Upwork, Fiverr) for self-employed work over $600.",
     "1099-K": "Provided by payment apps (Venmo, PayPal, Stripe, Cash App) for business transactions.",
     "Total income not already shown": "Cash, checks, or direct deposits you received that were not reported on a 1099 form.",
+    "Inventory / Cost of Goods Sold": "Only applies if you sell physical products or keep inventory. Upload any reports or summaries you already have; we’ll let you know if anything else is needed.",
     "1099-B": "Issued by your broker (Robinhood, Schwab, Fidelity) showing brokerage stock/crypto trades.",
     "1099-DIV": "Issued by brokerages for dividend payments from stock or fund holdings.",
     "1099-INT": "Bank interest statement, usually generated if you earned more than $10 in interest.",
@@ -2479,6 +2502,7 @@ function submitForm() {
   document.getElementById('g_biz').value     = v('fBizName');
   document.getElementById('g_btype').value   = v('fBizType');
   document.getElementById('g_bstr').value    = v('fBizStr');
+  document.getElementById('g_inventory_cogs').value = sel('bizModel');
   document.getElementById('g_track').value   = chk('tracking');
   document.getElementById('g_ded').value     = chk('deds');
   document.getElementById('g_fil').value     = sel('filStat');
@@ -2540,6 +2564,7 @@ function submitForm() {
     business_name: document.getElementById('g_biz').value,
     business_type: document.getElementById('g_btype').value,
     business_structure: document.getElementById('g_bstr').value,
+    inventory_cogs: document.getElementById('g_inventory_cogs').value,
     tracking_method: document.getElementById('g_track').value,
     deductions: document.getElementById('g_ded').value,
     phone_internet_pct: document.getElementById('g_phone_pct').value,
