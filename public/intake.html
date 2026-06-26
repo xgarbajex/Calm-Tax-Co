@@ -1119,11 +1119,25 @@ footer { text-align:center; padding:24px; font-size:.75rem; font-weight:300; col
     <div class="card" onclick="toggleBox(this)"><div class="ci">🧾</div><div class="cb"><div class="ct">Freelance or contract work</div><div class="cd">Invoiced clients directly, received 1099-NEC forms</div></div><div class="sq"></div></div>
     <div class="card" onclick="toggleBox(this)"><div class="ci">🏢</div><div class="cb"><div class="ct">Small business or LLC</div><div class="cd">I own a registered business or LLC</div></div><div class="sq"></div></div>
     <div class="card" onclick="toggleBox(this)"><div class="ci">📈</div><div class="cb"><div class="ct">Investments or dividends</div><div class="cd">Stocks, mutual funds, ETFs, etc.</div></div><div class="sq"></div></div>
-    <div class="card" onclick="toggleBox(this)"><div class="ci">🏠</div><div class="cb"><div class="ct">Rental income</div><div class="cd">Income from a property you rent out</div></div><div class="sq"></div></div>
+    <div class="card" onclick="toggleBox(this);toggleRentalPurchaseSection()"><div class="ci">🏠</div><div class="cb"><div class="ct">Rental income</div><div class="cd">Income from a property you rent out</div></div><div class="sq"></div></div>
     <div class="card" onclick="toggleBox(this)"><div class="ci">🏛️</div><div class="cb"><div class="ct">Social Security or retirement distributions</div><div class="cd">SSA-1099, pension, IRA or 401(k) distributions</div></div><div class="sq"></div></div>
     <div class="card" onclick="toggleBox(this)"><div class="ci">📦</div><div class="cb"><div class="ct">Unemployment or government benefits</div><div class="cd">1099-G forms</div></div><div class="sq"></div></div>
     <div class="card" onclick="toggleBox(this)"><div class="ci">🌐</div><div class="cb"><div class="ct">Other income</div><div class="cd">Alimony, gambling, prizes, tips, or cash income not listed above</div></div><div class="sq"></div></div>
   </div>
+
+  <div id="rentalPurchaseSec" class="hidden">
+    <div class="subsec" style="margin-top:18px">
+      <div class="subsec-title">Rental property purchase</div>
+      <div class="slbl">Did you purchase this rental property during 2025?</div>
+      <div class="cards" id="rentalPurchase">
+        <div class="card" onclick="radio(this,'rentalPurchase')"><div class="ci">✅</div><div class="cb"><div class="ct">Yes, I purchased a rental property during 2025</div></div><div class="dot"></div></div>
+        <div class="card" onclick="radio(this,'rentalPurchase')"><div class="ci">➖</div><div class="cb"><div class="ct">No, I already owned the rental property</div></div><div class="dot"></div></div>
+        <div class="card" onclick="radio(this,'rentalPurchase')"><div class="ci">❓</div><div class="cb"><div class="ct">I'm not sure</div></div><div class="dot"></div></div>
+      </div>
+      <div class="note">💡 If you bought a rental property during the year, your closing paperwork helps establish the property basis and depreciation.</div>
+    </div>
+  </div>
+
   <div class="brow"><button class="bk" onclick="go(3)">← Back</button><button class="btn" onclick="go(5)">Continue →</button></div>
 </div>
 
@@ -1735,6 +1749,7 @@ footer { text-align:center; padding:24px; font-size:.75rem; font-weight:300; col
   <input type="hidden" name="text_opt_in"        id="g_text">
   <input type="hidden" name="scope_review"       id="g_scope_review">
   <input type="hidden" name="home_sale"          id="g_home_sale">
+  <input type="hidden" name="rental_property_purchase" id="g_rental_purchase">
   <input type="hidden" name="status"              value="Intake Received">
 </form>
 
@@ -1847,6 +1862,9 @@ function validateCurrentStep() {
   } else if (cur === 4) {
     if (!chk("incomeSrc")) {
       flagCards("incomeSrc", "Please select at least one income source.");
+    }
+    if (hasInc("Rental") && !sel("rentalPurchase")) {
+      flagCards("rentalPurchase", "Please select whether you purchased the rental property during 2025.");
     }
   } else if (cur === 5) {
     if (hasInc("Gig")) {
@@ -2088,6 +2106,16 @@ function toggleBox(el) {
 }
 function toggleVehicle(el) { document.getElementById('vehicleSec').classList.toggle('hidden', !el.classList.contains('on')); }
 function togglePhone(el)   { document.getElementById('phoneSec').classList.toggle('hidden', !el.classList.contains('on')); }
+function toggleRentalPurchaseSection() {
+  const sec = document.getElementById('rentalPurchaseSec');
+  if (!sec) return;
+  const show = hasInc('Rental');
+  sec.classList.toggle('hidden', !show);
+  if (!show) {
+    document.querySelectorAll('#rentalPurchase .card').forEach(c => c.classList.remove('on'));
+    document.getElementById('rentalPurchase').classList.remove('invalid');
+  }
+}
 function radio(el, g)  {
   document.querySelectorAll('#' + g + ' .card').forEach(c => c.classList.remove('on'));
   el.classList.add('on');
@@ -2239,6 +2267,9 @@ function buildChecklist() {
   if (hasInc('Rental')) {
     l.push('• Rental income summary');
     l.push('• Rental expense summary by category (repairs, insurance, HOA, mortgage interest, etc.)');
+    if (sel('rentalPurchase').includes('purchased') || sel('rentalPurchase').includes("I'm not sure")) {
+      l.push('• Closing Disclosure or settlement statement for rental property purchased during the year');
+    }
   }
 
   if (hasInc('Social Security') || hasInc('retirement')) l.push('• SSA-1099 and/or 1099-R');
@@ -2246,7 +2277,7 @@ function buildChecklist() {
   if (hasInc('Other'))    l.push('• Documentation for any other income (alimony received, gambling, tips, etc.)');
 
   if (chk('life').includes('Sold a home')) {
-    l.push('• Home sale documents: Closing Disclosure or settlement statement from the sale, Form 1099-S if received, purchase records if available, and records of major home improvements');
+    l.push('• Closing Disclosure (or settlement statement), Form 1099-S (if received), and records of major home improvements');
   }
 
   const d = chk('deds');
@@ -2370,6 +2401,8 @@ function submitForm() {
     "SSA-1099": "Social Security benefit statement from ssa.gov.",
     "Rental income summary": "Gross rent collected from tenants and any other related rental receipts.",
     "Rental expense summary": "Totals categorized by repairs, business insurance, HOA fees, mortgage interest, and utilities.",
+    "Closing Disclosure or settlement statement for rental property purchased during the year": "If you purchased a rental property during the year, upload your Closing Disclosure (or HUD-1 if applicable). This helps establish your tax basis and depreciation.",
+    "Closing Disclosure (or settlement statement), Form 1099-S (if received), and records of major home improvements": "If you sold your home during the year, upload your Closing Disclosure (or settlement statement), Form 1099-S if you received one, and records of major improvements if available. These help determine any taxable gain and any applicable home sale exclusion.",
     "Vehicle details": "Your vehicle's year, make, model and mileage records (business vs. total miles driven in 2025).",
     "Keep your mileage log": "Keep detailed records in case of an IRS audit. We don't need the individual logs unless requested.",
     "Property tax payment records": "Found on your local county assessor's statement or escrow statements.",
@@ -2558,6 +2591,7 @@ function submitForm() {
   // Scope review + home sale flags
   document.getElementById('g_scope_review').value = scopeReviewNote();
   document.getElementById('g_home_sale').value = chk('life').includes('Sold a home') ? 'Yes' : '';
+  document.getElementById('g_rental_purchase').value = hasInc('Rental') ? sel('rentalPurchase') : '';
 
   // Send intake data to Google Apps Script as JSON.
   // Apps Script doPost(e) expects JSON.parse(e.postData.contents) and form_type: "intake".
@@ -2584,6 +2618,7 @@ function submitForm() {
     business_structure: document.getElementById('g_bstr').value,
     inventory_cogs: document.getElementById('g_inventory_cogs').value,
     home_sale: document.getElementById('g_home_sale').value,
+    rental_property_purchase: document.getElementById('g_rental_purchase').value,
     scope_review: document.getElementById('g_scope_review').value,
     tracking_method: document.getElementById('g_track').value,
     deductions: document.getElementById('g_ded').value,
