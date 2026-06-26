@@ -1276,7 +1276,7 @@ footer { text-align:center; padding:24px; font-size:.75rem; font-weight:300; col
     </div>
   </div>
     <div class="card" onclick="toggleBox(this)"><div class="ci">🎒</div><div class="cb"><div class="ct">Supplies, equipment, or tools for work</div></div><div class="sq"></div></div>
-    <div class="card" onclick="toggleBox(this)"><div class="ci">🏡</div><div class="cb"><div class="ct">Mortgage interest</div><div class="cd">You should have a 1098 form from your lender</div></div><div class="sq"></div></div>
+    <div class="card" onclick="toggleBox(this)"><div class="ci">🏡</div><div class="cb"><div class="ct">Mortgage interest on your primary home</div><div class="cd">Usually reported on Form 1098 from your mortgage lender</div></div><div class="sq"></div></div>
     <div class="card" onclick="toggleBox(this)"><div class="ci">🏘️</div><div class="cb"><div class="ct">Property taxes paid</div><div class="cd">On your home or other real estate you own</div></div><div class="sq"></div></div>
     <div class="card" onclick="toggleBox(this)"><div class="ci">🎓</div><div class="cb"><div class="ct">Student loan interest or tuition</div><div class="cd">1098-E or 1098-T forms</div></div><div class="sq"></div></div>
     <div class="card" onclick="toggleBox(this)"><div class="ci">💝</div><div class="cb"><div class="ct">Charitable donations</div><div class="cd">Cash or non-cash donations to qualified organizations</div></div><div class="sq"></div></div>
@@ -2286,7 +2286,7 @@ function buildChecklist() {
     l.push('• Vehicle details: year, make, model, date first used for business, business miles, and total miles');
     l.push('• Keep your mileage log for your records. Upload it only if requested.');
   }
-  if (d.includes('Mortgage interest')) l.push('• 1098 mortgage interest statement from your lender');
+  if (d.includes('Mortgage interest')) l.push('• 1098 mortgage interest statement for your primary home');
   if (d.includes('Property taxes'))    l.push('• Property tax payment records or statements');
   if (d.includes('Student loan'))      l.push('• 1098-E (student loan interest) and/or 1098-T (tuition)');
   if (d.includes('Charitable'))        l.push('• Charitable donation total and acknowledgement letters for larger donations');
@@ -2396,7 +2396,7 @@ function submitForm() {
     "1099-B": "Issued by your broker (Robinhood, Schwab, Fidelity) showing brokerage stock/crypto trades.",
     "1099-DIV": "Issued by brokerages for dividend payments from stock or fund holdings.",
     "1099-INT": "Bank interest statement, usually generated if you earned more than $10 in interest.",
-    "1098 mortgage interest": "Annual statement from your home loan provider showing interest and property taxes paid.",
+    "1098 mortgage interest": "Annual statement from the lender for your primary home showing mortgage interest paid.",
     "Form 1095-A": "Marketplace Health Insurance Statement (essential to reconcile advance premium tax credits). Log into Healthcare.gov.",
     "1099-G": "Annual unemployment compensation state tax statement.",
     "SSA-1099": "Social Security benefit statement from ssa.gov.",
