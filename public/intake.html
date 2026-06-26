@@ -1120,23 +1120,24 @@ footer { text-align:center; padding:24px; font-size:.75rem; font-weight:300; col
     <div class="card" onclick="toggleBox(this)"><div class="ci">🏢</div><div class="cb"><div class="ct">Small business or LLC</div><div class="cd">I own a registered business or LLC</div></div><div class="sq"></div></div>
     <div class="card" onclick="toggleBox(this)"><div class="ci">📈</div><div class="cb"><div class="ct">Investments or dividends</div><div class="cd">Stocks, mutual funds, ETFs, etc.</div></div><div class="sq"></div></div>
     <div class="card" onclick="toggleBox(this);toggleRentalPurchaseSection()"><div class="ci">🏠</div><div class="cb"><div class="ct">Rental income</div><div class="cd">Income from a property you rent out</div></div><div class="sq"></div></div>
+      <div id="rentalPurchaseSec" class="hidden">
+      <div class="subsec" style="margin-top:10px;grid-column:1/-1">
+        <div class="subsec-title">Rental property purchase</div>
+        <div class="slbl">Did you purchase this rental property during 2025?</div>
+        <div class="cards" id="rentalPurchase">
+          <div class="card" onclick="radio(this,'rentalPurchase')"><div class="ci">✅</div><div class="cb"><div class="ct">Yes, I purchased a rental property during 2025</div></div><div class="dot"></div></div>
+          <div class="card" onclick="radio(this,'rentalPurchase')"><div class="ci">➖</div><div class="cb"><div class="ct">No, I already owned the rental property</div></div><div class="dot"></div></div>
+          <div class="card" onclick="radio(this,'rentalPurchase')"><div class="ci">❓</div><div class="cb"><div class="ct">I'm not sure</div></div><div class="dot"></div></div>
+        </div>
+        <div class="note">💡 If you bought a rental property during the year, your closing paperwork helps establish the property basis and depreciation.</div>
+      </div>
+    </div>
     <div class="card" onclick="toggleBox(this)"><div class="ci">🏛️</div><div class="cb"><div class="ct">Social Security or retirement distributions</div><div class="cd">SSA-1099, pension, IRA or 401(k) distributions</div></div><div class="sq"></div></div>
     <div class="card" onclick="toggleBox(this)"><div class="ci">📦</div><div class="cb"><div class="ct">Unemployment or government benefits</div><div class="cd">1099-G forms</div></div><div class="sq"></div></div>
     <div class="card" onclick="toggleBox(this)"><div class="ci">🌐</div><div class="cb"><div class="ct">Other income</div><div class="cd">Alimony, gambling, prizes, tips, or cash income not listed above</div></div><div class="sq"></div></div>
   </div>
 
-  <div id="rentalPurchaseSec" class="hidden">
-    <div class="subsec" style="margin-top:18px">
-      <div class="subsec-title">Rental property purchase</div>
-      <div class="slbl">Did you purchase this rental property during 2025?</div>
-      <div class="cards" id="rentalPurchase">
-        <div class="card" onclick="radio(this,'rentalPurchase')"><div class="ci">✅</div><div class="cb"><div class="ct">Yes, I purchased a rental property during 2025</div></div><div class="dot"></div></div>
-        <div class="card" onclick="radio(this,'rentalPurchase')"><div class="ci">➖</div><div class="cb"><div class="ct">No, I already owned the rental property</div></div><div class="dot"></div></div>
-        <div class="card" onclick="radio(this,'rentalPurchase')"><div class="ci">❓</div><div class="cb"><div class="ct">I'm not sure</div></div><div class="dot"></div></div>
-      </div>
-      <div class="note">💡 If you bought a rental property during the year, your closing paperwork helps establish the property basis and depreciation.</div>
-    </div>
-  </div>
+
 
   <div class="brow"><button class="bk" onclick="go(3)">← Back</button><button class="btn" onclick="go(5)">Continue →</button></div>
 </div>
