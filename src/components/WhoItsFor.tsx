@@ -3,16 +3,16 @@ import React from 'react';
 const WhoItsFor: React.FC = () => {
   const clientSituations = [
     {
-      title: "W-2 Employee",
-      body: "You've been filing your own taxes for years, but you'd like a professional review before you submit. You want confidence that everything is correct without turning tax season into a project."
+      title: "Employees & Families",
+      body: "You want a professional to prepare your return accurately while keeping the process simple, organized, and straightforward. Whether you're filing on your own or with your family, we'll handle the details so you don't have to."
     },
     {
-      title: "1099 or Side Income",
-      body: "You have income from a 1099 or another source outside of a traditional W-2. You want confidence that everything is reported correctly and that you're not missing deductions."
+      title: "Freelancers, Gig Workers & Side Income",
+      body: "Whether freelancing is your full-time work or a side hustle, we'll help you report your income correctly and identify the deductions you're entitled to."
     },
     {
-      title: "Small Business Owner or Independent Contractor",
-      body: "You work for yourself and want tax preparation that's accurate, organized, and tailored to your situation. Whether you're providing services, selling products, or running an established business, you'd rather focus on your work than your taxes."
+      title: "Small Business Owners",
+      body: "Whether you provide services or sell products, we'll prepare your return accurately so you can stay focused on running your business."
     }
   ];
 
@@ -21,7 +21,7 @@ const WhoItsFor: React.FC = () => {
       <div className="max-w-7xl mx-auto">
         {/* Common Situations Section */}
         <div className="text-center">
-          <h2 className="text-3xl md:text-4xl serif-font text-[#3C3633] mb-6">Common Client Situations</h2>
+          <h2 className="text-3xl md:text-4xl serif-font text-[#3C3633] mb-6">Who We Help</h2>
           <div className="w-96 h-px bg-[#3C3633]/20 mx-auto mb-16" />
           <div className="grid md:grid-cols-3 gap-8">
             {clientSituations.map((card, index) => (

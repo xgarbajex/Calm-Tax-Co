@@ -4,20 +4,36 @@ import { Plus, Minus } from 'lucide-react';
 const FAQ: React.FC = () => {
   const faqs = [
     {
+      question: "How does online tax preparation work?",
+      answer: "It's a simple, guided process. You start with our short intake walkthrough, answering one question at a time on your own schedule. Your answers automatically create a personalized document checklist. Once you upload those documents securely, we'll review them and email your personalized quote. After payment, we prepare your return, have you review and e-sign it, and e-file it for you."
+    },
+    {
+      question: "Why do you use a personalized document checklist instead of a traditional tax organizer?",
+      answer: "Traditional tax organizers ask everyone the same questions, and the forms can be long, confusing, and often ask questions that don't apply to your situation. Calm Tax uses a short, easy-to-follow walkthrough to gather your information, then creates a personalized document checklist based on your situation, so you only gather the documents that apply to you."
+    },
+    {
       question: "What documents will I need to pull together?",
-      answer: "It depends on your situation. We send every client a customized checklist before they upload anything, so you know exactly what to gather and how to organize it. You won't have to guess."
+      answer: "It depends on your situation. We create a personalized document checklist before you upload anything, so you know exactly what to gather and how to organize it. You won't have to guess."
     },
     {
       question: "How long does tax preparation take?",
-      answer: "Tax preparation at Calm Tax Co. typically takes 10 to 14 days from the time we receive your complete document set. We review your materials carefully and will reach out via email if anything specific is missing during that time."
+      answer: "Most returns are completed within 10 to 14 days after we receive all required documents and payment. We review everything carefully and will reach out by email if anything specific is missing."
     },
     {
       question: "Do I need to come into an office or get on a phone call?",
-      answer: "No office visit, no phone call, no scheduled appointment of any kind. Everything happens online via secure email and secure document upload, on your schedule. Most clients complete the entire process without a single real-time interaction."
+      answer: "No office visit, phone call, or scheduled appointment is required. Everything happens online through the guided walkthrough, secure file uploads, and email communication, on your schedule."
     },
     {
       question: "How do I send you my documents?",
-      answer: "When you come on as a client, we set up a private, secure cloud storage folder just for you and send you a link to access it. You upload your documents there at your own pace. Nothing sensitive goes through standard email."
+      answer: "After the intake walkthrough, you'll receive a link to your personalized checklist and secure upload page. You can upload documents there at your own pace. This is much more secure than sending sensitive documents through email."
+    },
+    {
+      question: "Do you work with clients outside Arizona?",
+      answer: "Yes. Calm Tax Co. is based in Arizona and provides online tax preparation for clients in all 50 states."
+    },
+    {
+      question: "What if I forget to upload something?",
+      answer: "That's okay. If you realize you've forgotten something before we begin preparing your return, simply upload the additional document to your checklist page. If we've already started work, upload the document and send us a quick email so we know to review it."
     },
     {
       question: "What if I get an IRS letter after my return is filed?",
@@ -33,11 +49,11 @@ const FAQ: React.FC = () => {
     },
     {
       question: "How much does professional tax preparation cost?",
-      answer: "Professional tax preparation at Calm Tax Co. starts at $175 for personal returns and $375 for self-employed or freelance filing. Both prices include your federal return and one state return, and we provide a full quote before any work begins so there are no surprises."
+      answer: "Professional tax preparation at Calm Tax Co. starts at $175 for personal returns and $375 for self-employed or freelance filing. Both prices include your federal return and one state return. After reviewing your uploaded documents, we'll email your personalized quote."
     },
     {
-      question: "When do I pay?",
-      answer: "Payment is due in full before we begin work on your return. We send a secure payment link after confirming we are a good fit. The price we quote is the price you pay. We do not bill hourly."
+      question: "When and How do I pay?",
+      answer: "Payment is due before work begins. After reviewing your uploaded documents, we'll email your personalized quote and secure payment link. We use Stripe to process payments securely, with options that may include credit or debit card, Apple Pay, Klarna, Cash App Pay, Amazon Pay, Link, and bank payment."
     }
   ];
 
@@ -56,9 +72,9 @@ const FAQ: React.FC = () => {
 
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
-  const firstCol = [faqs[0], faqs[1], faqs[2], faqs[8]];
-  const secondCol = [faqs[4], faqs[5], faqs[6], faqs[7], faqs[3]];
-  const half = firstCol.length;
+  const half = Math.ceil(faqs.length / 2);
+  const firstCol = faqs.slice(0, half);
+  const secondCol = faqs.slice(half);
 
   const renderFaqItem = (faq: typeof faqs[0], index: number) => {
     const isOpen = openIndex === index;

@@ -34,11 +34,20 @@ const About: React.FC = () => {
             <div className="w-48 h-px bg-[#3C3633]/20 mb-8" />
             <div className="space-y-6 text-[#5D6D7E] text-lg leading-relaxed font-light">
               <p>
-                I started Calm Tax Co. because I genuinely believe taxes can be handled clearly without being a lot to manage. Every return is handled with personal care and precision, wih a focus on keeping the process streamlined and simplified for you. I work with a small number of clients at a time so every return gets real attention. I am an IRS-registered tax preparer with an EFIN, continuing professional education and additional tax certification. I am based in Arizona, and work with clients all across the country.
+                I started Calm Tax Co. because I wanted tax preparation to feel simpler, clearer, and easier to navigate. Too often, getting your taxes prepared feels more complicated than it needs to be.
+              </p>
+              <p>
+                From the guided walkthrough to your personalized document checklist, every part of Calm Tax has been intentionally designed to make the process clear, straightforward, and easy to follow. I keep my client list small so every return receives personal attention and care.
+              </p>
+              <p>
+                I am based in Arizona and work with clients across all 50 states as an IRS Authorized E-File Provider and IRS PTIN Holder.
               </p>
             </div>
-            <div className="mt-8 pt-6 border-t border-[#3C3633]/10 text-[#7D8E7E] text-sm font-medium tracking-wide uppercase">
-              IRS-registered tax preparer · EFIN holder · Continuing tax coursework
+            <div className="mt-8 pt-6 border-t border-[#3C3633]/10">
+              <span className="block text-xs uppercase tracking-widest text-[#3C3633] font-semibold mb-2">Credentials</span>
+              <div className="text-[#7D8E7E] text-sm font-medium tracking-wide uppercase">
+                IRS Authorized E-File Provider · IRS PTIN Holder
+              </div>
             </div>
           </div>
         </div>

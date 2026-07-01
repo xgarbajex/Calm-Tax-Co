@@ -32,10 +32,7 @@ const Hero: React.FC = () => {
         <div className="w-48 h-px bg-[#3C3633]/20 mx-auto mb-10" />
         <div className="flex flex-col gap-6 mb-12">
           <p className="text-sm md:text-base text-[#5D6D7E] max-w-xl mx-auto leading-relaxed font-sans font-light">
-            A simple, self-guided online walkthrough creates your <strong className="font-medium text-[#3C3633]">personalized document checklist</strong>, where you can gather and upload everything in one place.
-          </p>
-          <p className="text-2xl md:text-3xl text-[#3C3633] max-w-4xl mx-auto leading-relaxed serif-font italic">
-            We handle the rest and prepare your return with care.
+            A quick, self-guided walkthrough creates a personalized document checklist, so you know exactly what to gather and upload. We'll handle the rest.
           </p>
         </div>
         
@@ -59,7 +56,7 @@ const Hero: React.FC = () => {
             href="/intake.html" 
             className="px-10 py-4 rounded-full bg-[#3C3633] text-white hover:bg-[#4d4642] hover:-translate-y-1 hover:shadow-lg hover:shadow-[#3C3633]/25 active:translate-y-0 transition-all duration-300 text-sm uppercase tracking-widest block"
           >
-            Get Started
+            Begin Intake Walkthrough
           </a>
         </div>
         <TrustBadges />

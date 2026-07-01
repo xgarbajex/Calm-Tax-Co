@@ -12,16 +12,16 @@ export const SERVICES: Service[] = [
   {
     id: 'personal',
     title: 'Personal Filing',
-    description: 'For personal returns, W-2 earners, investors, retirees, and families.',
+    description: 'For personal returns, W-2 employees, retirees, investors, and families.',
     price: 'Starting at $175',
-    features: ['W-2 & 1099 Support', 'Standard Deductions', 'E-Filing']
+    features: ['W-2, retirement & investment income', 'Credits & deductions', 'Federal & state e-file']
   },
   {
     id: 'self-employed',
-    title: 'Self-Employed & Gig',
-    description: 'For freelancers, contractors, sole proprietors, and gig economy workers.',
+    title: 'Self-Employed & Freelance',
+    description: 'For freelancers, contractors, sole proprietors, gig workers, and small business owners.',
     price: 'Starting at $375',
-    features: ['Schedule C Preparation', 'Expense Tracking Review', 'Quarterly Estimates', 'E-Filing']
+    features: ['Business income reporting', 'Expense & deduction review', 'Inventory / COGS support', 'Federal & state e-file']
   }
 ];
 

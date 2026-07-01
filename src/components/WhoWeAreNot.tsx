@@ -3,7 +3,7 @@ import { ArrowRight } from 'lucide-react';
 
 const WhoWeAreNot: React.FC = () => {
   const items = [
-    "S-corp returns or complex business entity structures",
+    "S-corporations and other complex business entities",
     "Significant cryptocurrency or NFT activity",
     "International filings including FBAR, FATCA, or foreign income",
     "Audit representation",
@@ -17,7 +17,7 @@ const WhoWeAreNot: React.FC = () => {
         <h2 className="text-3xl serif-font text-[#3C3633] mb-4">A few situations we refer out</h2>
         <div className="w-16 h-px bg-[#3C3633]/20 mx-auto mb-6" />
         <p className="text-[#4A4542] text-base max-w-3xl mb-8 leading-relaxed mx-auto">
-          Honesty saves everyone time. There are situations we don't currently take on because they are better served by someone with different specialization. We expect this list to shrink as the practice grows.
+          Honesty saves everyone time. Some tax situations are better served by a preparer with specialized experience. As Calm Tax grows, we expect this list to become smaller.
         </p>
         <div className="grid sm:grid-cols-2 gap-x-12 gap-y-2 mb-8 text-left">
           {items.map((item, index) => (
@@ -28,7 +28,7 @@ const WhoWeAreNot: React.FC = () => {
           ))}
         </div>
         <p className="text-[#4A4542]/80 italic text-sm mx-auto">
-          If you're unsure if you situation is covered, feel free to reach out.
+          If you're unsure whether your situation is covered, feel free to reach out.
         </p>
       </div>
     </section>

@@ -4,19 +4,19 @@ const HowItWorks: React.FC = () => {
   const steps = [
     {
       title: "Short Intake Walkthrough",
-      desc: "Do it anytime, no tax knowledge needed, then we'll send your personalized document checklist. Takes about 10 minutes."
+      desc: "Answer one question at a time. No tax knowledge needed. Your answers create a personalized document checklist."
     },
     {
       title: "Gather & Upload",
-      desc: "Securely submit your tax documents."
+      desc: "Gather the documents from your personalized checklist and upload them securely, on your own schedule."
     },
     {
       title: "Quote & Pay",
-      desc: "Review your fixed-price quote and pay online."
+      desc: "We'll review your information and email your personalized quote before preparing your return."
     },
     {
       title: "Prepare & E-file",
-      desc: "We prepare and e-file your return."
+      desc: "After payment, we'll prepare your return, have you review and e-sign it, then e-file it for you."
     }
   ];
 
@@ -26,7 +26,7 @@ const HowItWorks: React.FC = () => {
         <div className="text-center mb-24">
           <h2 className="text-5xl md:text-6xl serif-font text-[#3C3633] mb-4">How it works</h2>
           <div className="w-px h-12 bg-[#7D8E7E]/30 mx-auto my-8" />
-          <p className="text-[#3C3633] serif-font text-xl max-w-2xl mx-auto">Most returns are completed within 10 to 14 days from the day we have your documents.</p>
+          <p className="text-[#3C3633] serif-font text-xl max-w-2xl mx-auto">A simple, guided process from intake to e-file.</p>
         </div>
 
         <div className="relative">
@@ -138,7 +138,7 @@ const HowItWorks: React.FC = () => {
             href="/intake.html"
             className="inline-block bg-[#3C3633] text-white px-8 py-4 rounded-full text-lg hover:bg-[#4d4642] hover:-translate-y-1 hover:shadow-lg hover:shadow-[#3C3633]/20 active:translate-y-0 transition-all duration-300"
           >
-            Get Started
+            Begin Intake Walkthrough
           </a>
         </div>
       </div>

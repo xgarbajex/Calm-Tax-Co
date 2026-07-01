@@ -69,7 +69,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
               <Link to="/" onClick={() => window.scrollTo(0, 0)} className="block hover:opacity-80 transition-opacity mb-4">
                 <Logo className="h-16 sm:h-20 md:h-24 w-auto" />
               </Link>
-              <p className="text-xs text-[#3C3633]/50 leading-relaxed">A small, careful tax practice. Conducted entirely by correspondence. Arizona, U.S. - serving all 50 states, year-round.</p>
+              <p className="text-xs text-[#3C3633]/50 leading-relaxed">A small, careful tax practice. Conducted entirely by correspondence. Arizona-based. Serving clients remotely in all 50 states, year-round.</p>
               <div className="mt-4 flex flex-col gap-1">
                 <span className="text-xs text-[#3C3633]/40 uppercase tracking-widest">Credentials</span>
                 <span className="text-xs text-[#3C3633]/60">IRS PTIN holder</span>

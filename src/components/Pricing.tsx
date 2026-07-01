@@ -46,7 +46,7 @@ const Pricing: React.FC = () => {
                 href="/intake.html" 
                 className="w-full py-4 rounded-full border border-[#3C3633] text-[#3C3633] text-xs uppercase tracking-[0.2em] hover:bg-[#3C3633] hover:text-[#F9F7F2] hover:-translate-y-1 hover:shadow-lg hover:shadow-[#3C3633]/15 active:translate-y-0 transition-all duration-300 text-center block"
               >
-                Get started
+                Begin Intake Walkthrough
               </a>
             </div>
           ))}
@@ -54,7 +54,7 @@ const Pricing: React.FC = () => {
         
         <div className="mt-24 text-center">
           <p className="text-sm italic text-[#7D8E7E]">
-            * Payment is due in full before work begins. You will always receive a clear quote first.
+            After reviewing your uploaded documents, we'll email your personalized quote. Payment is due before work begins.
           </p>
         </div>
       </div>

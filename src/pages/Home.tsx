@@ -16,10 +16,10 @@ const Home: React.FC = () => {
       <Hero />
       <HowItWorks />
       <WhoItsFor />
+      <Testimonials />
       <Pricing />
       <WhoWeAreNot />
       <About />
-      <Testimonials />
       <BreathingExercise />
       <FAQ />
       <Contact />

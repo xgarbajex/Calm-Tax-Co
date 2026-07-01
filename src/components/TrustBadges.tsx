@@ -13,7 +13,7 @@ const TrustBadges: React.FC = () => {
     },
     {
       icon: <UserCheck className="w-5 h-5" />,
-      text: "IRS Registered Tax Preparer"
+      text: "IRS PTIN Holder"
     },
     {
       icon: <FileCheck className="w-5 h-5" />,
@@ -21,7 +21,7 @@ const TrustBadges: React.FC = () => {
     },
     {
       icon: <Lock className="w-5 h-5" />,
-      text: "Encrypted Communications"
+      text: "Secure File Uploads"
     }
   ];
 
