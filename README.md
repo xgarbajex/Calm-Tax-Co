@@ -1,20 +1,39 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://ai.google.dev/static/site-assets/images/share-ais-513315318.png" />
-</div>
+# Calm Tax Co.
 
-# Run and deploy your AI Studio app
+Calm Tax Co. is a modern online tax preparation practice focused on making tax filing simple, secure, and stress-free.
 
-This contains everything you need to run your app locally.
+The website provides a guided intake walkthrough, personalized document checklists, secure document uploads, transparent pricing, online payment processing, and secure delivery of completed tax returns.
 
-View your app in AI Studio: https://ai.studio/apps/a0e43164-5a8f-4779-9403-526472938a6d
+## Features
 
-## Run Locally
+- Guided intake walkthrough
+- Personalized document checklist
+- Secure document uploads
+- Transparent pricing
+- Online payment processing
+- Electronic filing
+- Secure return delivery
 
-**Prerequisites:**  Node.js
+## Technology
 
+Built with:
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+- React
+- TypeScript
+- Vite
+- Tailwind CSS
+- Stripe
+- Google Apps Script
+- Google Drive API
+
+## Website
+
+https://calmtax.co
+
+## License
+
+Copyright © 2026 Calm Tax Co.
+
+All rights reserved.
+
+This repository is publicly visible for deployment and portfolio purposes. The source code, design, branding, text, and other contents of this repository may not be copied, redistributed, or reused without the express written permission of Calm Tax Co.
