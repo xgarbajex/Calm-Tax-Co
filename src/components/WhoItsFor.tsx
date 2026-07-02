@@ -3,12 +3,12 @@ import React from 'react';
 const WhoItsFor: React.FC = () => {
   const clientSituations = [
     {
-      title: "Employees & Families",
-      body: "You want a professional to prepare your return accurately while keeping the process simple, organized, and straightforward. Whether you're filing on your own or with your family, we'll handle the details so you don't have to."
-    },
-    {
       title: "Freelancers, Gig Workers & Side Income",
       body: "Whether freelancing is your full-time work or a side hustle, we'll help you report your income correctly and identify the deductions you're entitled to."
+    },
+    {
+      title: "Employees & Families",
+      body: "You want a professional to prepare your return accurately while keeping the process simple, organized, and straightforward. Whether you're filing on your own or with your family, we'll handle the details so you don't have to."
     },
     {
       title: "Small Business Owners",

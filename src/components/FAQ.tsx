@@ -110,7 +110,7 @@ const FAQ: React.FC = () => {
   };
 
   return (
-    <section id="faq" className="py-24 bg-[#F9F7F2]">
+    <section id="faq" className="py-32 bg-[#F9F7F2]">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-16">

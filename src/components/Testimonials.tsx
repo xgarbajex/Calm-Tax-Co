@@ -38,10 +38,6 @@ const Testimonials: React.FC = () => {
               <p className="font-medium text-[#3C3633]">— Jason S.</p>
             </div>
           </motion.div>
-          
-          <p className="text-xs text-[#3C3633]/40 tracking-wide text-center mt-8 italic">
-            More client reviews will be added here as Calm Tax Co. grows.
-          </p>
         </div>
       </div>
     </section>

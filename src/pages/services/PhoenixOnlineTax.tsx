@@ -111,7 +111,7 @@ const PhoenixOnlineTax: React.FC = () => {
               href="/intake.html" 
               className="inline-block py-4 px-10 rounded-full bg-[#3C3633] text-white text-xs uppercase tracking-[0.2em] hover:bg-[#4d4642] transition-all duration-500"
             >
-              Get Started
+              Begin Walkthrough
             </a>
           </div>
         </footer>

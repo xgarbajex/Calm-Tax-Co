@@ -12,16 +12,16 @@ const WhoWeAreNot: React.FC = () => {
   ];
 
   return (
-    <section className="py-16 px-6 bg-[#F9F7F2]">
-      <div className="max-w-5xl mx-auto text-center bg-white p-8 md:py-10 md:px-16 rounded-[2.5rem] border border-[#3C3633]/20 shadow-md">
+    <section className="py-32 px-6 bg-[#F9F7F2]">
+      <div className="max-w-5xl mx-auto text-center bg-white p-6 md:py-8 md:px-12 rounded-[2.5rem] border border-[#3C3633]/20 shadow-md">
         <h2 className="text-3xl serif-font text-[#3C3633] mb-4">A few situations we refer out</h2>
-        <div className="w-16 h-px bg-[#3C3633]/20 mx-auto mb-6" />
-        <p className="text-[#4A4542] text-base max-w-3xl mb-8 leading-relaxed mx-auto">
+        <div className="w-16 h-px bg-[#3C3633]/20 mx-auto mb-5" />
+        <p className="text-[#4A4542] text-base max-w-3xl mb-6 leading-relaxed mx-auto">
           Honesty saves everyone time. Some tax situations are better served by a preparer with specialized experience. As Calm Tax grows, we expect this list to become smaller.
         </p>
-        <div className="grid sm:grid-cols-2 gap-x-12 gap-y-2 mb-8 text-left">
+        <div className="grid sm:grid-cols-2 gap-x-12 gap-y-1 mb-6 text-left">
           {items.map((item, index) => (
-            <div key={index} className="flex items-center gap-3 text-[#3C3633] py-3 border-b border-[#3C3633]/15 group">
+            <div key={index} className="flex items-center gap-3 text-[#3C3633] py-1.5 border-b border-[#3C3633]/15 group">
               <ArrowRight className="w-4 h-4 text-[#7D8E7E] transition-transform group-hover:translate-x-1" />
               <span className="text-sm md:text-base font-medium">{item}</span>
             </div>
