@@ -25,7 +25,7 @@ const Navbar: React.FC = () => {
 
   const isSolid = !isHomePage || isScrolled || isMenuOpen;
   const navBackgroundClass = isSolid 
-    ? 'bg-[#F9F7F2] md:bg-[#F9F7F2]/95 md:backdrop-blur-md py-4' 
+    ? 'bg-[#F9F7F2] lg:bg-[#F9F7F2]/95 lg:backdrop-blur-md py-4' 
     : 'bg-transparent py-4';
 
   return (
@@ -34,11 +34,11 @@ const Navbar: React.FC = () => {
       <nav className={`transition-all duration-300 relative z-50 ${navBackgroundClass}`}>
         <div className="max-w-7xl mx-auto px-6 flex justify-between items-center relative z-50">
           <Link to="/" onClick={() => setIsMenuOpen(false)} className="block hover:opacity-80 transition-opacity">
-            <Logo className="h-20 sm:h-24 md:h-28 w-auto" />
+            <Logo className="h-16 sm:h-20 md:h-24 w-auto" />
           </Link>
           
           {/* Desktop Navigation */}
-          <div className="hidden md:flex space-x-12">
+          <div className="hidden lg:flex space-x-12">
             {NAV_ITEMS.map((item) => (
               <Link 
                 key={item.href} 
@@ -50,9 +50,9 @@ const Navbar: React.FC = () => {
             ))}
           </div>
 
-          {/* Mobile Trigger */}
+          {/* Mobile/Tablet Trigger */}
           <button 
-            className="md:hidden text-xs uppercase tracking-widest text-[#3C3633] hover:text-[#A66D5E] transition-colors focus:outline-none focus:ring-0 select-none cursor-pointer"
+            className="lg:hidden text-xs uppercase tracking-widest text-[#3C3633] hover:text-[#A66D5E] transition-colors focus:outline-none focus:ring-0 select-none cursor-pointer"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label="Toggle navigation menu"
           >

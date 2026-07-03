@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Calm Tax Co. Get Started</title>
-<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400;1,500&family=Inter:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@1,300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400;1,500&family=Inter:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@1,300;1,400;1,500;1,600&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <style>
 :root {
@@ -21,6 +21,22 @@
   --glow:    rgba(125,142,126,.10);
   --r:       14px;
   --rl:      20px;
+  --header-h: 96px;
+  --logo-h:   64px;
+}
+
+@media (min-width: 640px) {
+  :root {
+    --header-h: 112px;
+    --logo-h:   80px;
+  }
+}
+
+@media (min-width: 768px) {
+  :root {
+    --header-h: 128px;
+    --logo-h:   96px;
+  }
 }
 
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
@@ -41,10 +57,19 @@ body {
 header {
   position: fixed; top:0; left:0; right:0; z-index:100;
   background: var(--bg);
-  height: 104px;
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 0 40px;
+  height: var(--header-h);
+  display: flex; align-items: center;
   border-bottom: 1px solid var(--border);
+  transition: height 0.3s ease;
+}
+.header-container {
+  width: 100%;
+  max-width: 80rem; /* Matches max-w-7xl */
+  margin: 0 auto;
+  padding: 0 24px; /* Matches px-6 on home page */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 .logo-link {
   display: block;
@@ -55,23 +80,25 @@ header {
   opacity: 0.82;
 }
 .logo-svg {
-  height: 74px;
+  height: var(--logo-h);
   width: auto;
   display: block;
+  transition: height 0.3s ease;
 }
 .htag { display:flex; flex-direction:column; align-items:flex-end; gap:0px; line-height:1; }
 .htag-label { font-size: .88rem; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:var(--ink); opacity:.5; margin-bottom: 2px; }
 .htag-year { font-family:'Lora',serif; font-size:2.65rem; font-weight:400; color:var(--ink); letter-spacing:.02em; line-height:1.1; }
 
 /* ── PROGRESS ── */
-.pw { position:fixed; top:104px; left:0; right:0; z-index:99; height:3px; background:rgba(60,54,51,.05); }
+.pw { position:fixed; top:var(--header-h); left:0; right:0; z-index:99; height:3px; background:rgba(60,54,51,.05); transition: top 0.3s ease; }
 .pf { height:3px; background:var(--sage); transition:width .55s cubic-bezier(.4,0,.2,1); width:0%; }
 
 /* ── MAIN ── */
 main {
   flex:1;
   display: flex; justify-content: center; align-items: flex-start;
-  padding: 124px 24px 80px;
+  padding: calc(var(--header-h) + 24px) 24px 80px;
+  transition: padding-top 0.3s ease;
 }
 .shell { width:100%; max-width:920px; }
 
@@ -154,6 +181,19 @@ main {
   transition: background .17s;
 }
 .card.on .ci { background: rgba(125,142,126,.18); }
+.ci svg {
+  width: 20px;
+  height: 20px;
+  stroke: var(--sage);
+  stroke-width: 1.8px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: none;
+  transition: stroke .17s;
+}
+.card.on .ci svg {
+  stroke: var(--sage);
+}
 .cb { flex:1; min-width:0; }
 .ct { font-size:1.04rem; font-weight:500; color:var(--ink); }
 .cd { font-size:0.9rem; font-weight:400; color:var(--mid); margin-top:5px; line-height:1.5; }
@@ -649,12 +689,10 @@ main {
 footer { text-align:center; padding:24px; font-size:.75rem; font-weight:300; color:var(--mid); border-top:1px solid var(--border); opacity:.7; }
 
 @media(max-width:520px) {
-  header { height: 72px; padding:0 20px; }
-  .logo-svg { height: 48px; }
+  .header-container { padding: 0 20px; }
   .htag-label { font-size: 0.65rem; }
   .htag-year { font-size: 1.45rem; }
-  .pw { top: 72px; }
-  main { padding: 92px 16px 40px; }
+  main { padding: calc(var(--header-h) + 16px) 16px 40px; }
   .wh1 { font-size:2.1rem; } .qt { font-size:1.7rem; }
   .r2, .r3 { grid-template-columns:1fr; }
   .prow { grid-template-columns:1fr; }
@@ -780,65 +818,67 @@ footer { text-align:center; padding:24px; font-size:.75rem; font-weight:300; col
 
 
 <header>
-  <a href="https://calmtax.co" class="logo-link">
-    <svg
-       viewBox="15 22 390 108"
-       fill="none"
-       version="1.1"
-       id="svg846"
-       class="logo-svg"
-       xmlns="http://www.w3.org/2000/svg">
-      <!-- ── "Calm" italic serif wordmark ── -->
-      <text
-         id="wordmark-calm"
-         x="46"
-         y="92"
-         font-family="'Cormorant Garamond', 'Georgia', serif"
-         font-size="96"
-         font-weight="300"
-         font-style="italic"
-         fill="#2A2A2A">Calm</text>
-      <!-- ── vertical hairline separator ── -->
-      <line
-         id="separator"
-         x1="272"
-         y1="38"
-         x2="272"
-         y2="100"
-         stroke="#C4BDB3"
-         stroke-width="1.6" />
-      <!-- ── "TAX" sans label ── -->
-      <text
-         id="label-tax"
-         x="288"
-         y="65"
-         font-family="'Inter', 'Helvetica Neue', sans-serif"
-         font-size="20"
-         font-weight="400"
-         letter-spacing="6"
-         fill="#9A9590">TAX</text>
-      <!-- ── "CO." sans label ── -->
-      <text
-         id="label-co"
-         x="288"
-         y="92"
-         font-family="'Inter', 'Helvetica Neue', sans-serif"
-         font-size="20"
-         font-weight="400"
-         letter-spacing="6"
-         fill="#9A9590">CO.</text>
-      <!-- ── wave: gentle S-curve spanning full mark width ── -->
-      <path
-         id="wave"
-         d="m 18.361809,116.41876 q 94.000001,-12 196.000001,0 102,12 174,0"
-         stroke="#9a9590"
-         stroke-width="2.2"
+  <div class="header-container">
+    <a href="/" class="logo-link">
+      <svg
+         viewBox="0 0 500 175"
          fill="none"
-         stroke-linecap="round"
-         style="stroke-width:2.19968504;stroke-miterlimit:4;stroke-dasharray:none" />
-    </svg>
-  </a>
-  <div class="htag"><span class="htag-label">Tax Year</span><span class="htag-year">2025</span></div>
+         version="1.1"
+         id="svg846"
+         class="logo-svg"
+         xmlns="http://www.w3.org/2000/svg">
+        <!-- ── "Calm" italic serif wordmark ── -->
+        <text
+           id="wordmark-calm"
+           x="46"
+           y="92"
+           font-family="'Cormorant Garamond', 'Georgia', serif"
+           font-size="96"
+           font-weight="500"
+           font-style="italic"
+           fill="#2A2A2A">Calm</text>
+        <!-- ── vertical hairline separator ── -->
+        <line
+           id="separator"
+           x1="272"
+           y1="38"
+           x2="272"
+           y2="100"
+           stroke="#C4BDB3"
+           stroke-width="2.0" />
+        <!-- ── "TAX" sans label ── -->
+        <text
+           id="label-tax"
+           x="288"
+           y="65"
+           font-family="'Inter', 'Helvetica Neue', sans-serif"
+           font-size="20"
+           font-weight="500"
+           letter-spacing="6"
+           fill="#9A9590">TAX</text>
+        <!-- ── "CO." sans label ── -->
+        <text
+           id="label-co"
+           x="288"
+           y="92"
+           font-family="'Inter', 'Helvetica Neue', sans-serif"
+           font-size="20"
+           font-weight="500"
+           letter-spacing="6"
+           fill="#9A9590">CO.</text>
+        <!-- ── wave: gentle S-curve spanning full mark width ── -->
+        <path
+           id="wave"
+           d="m 18.361809,116.41876 q 94.000001,-12 196.000001,0 102,12 174,0"
+           stroke="#9a9590"
+           stroke-width="2.2"
+           fill="none"
+           stroke-linecap="round"
+           style="stroke-width:2.19968504;stroke-miterlimit:4;stroke-dasharray:none" />
+      </svg>
+    </a>
+    <div class="htag"><span class="htag-label">Tax Year</span><span class="htag-year">2025</span></div>
+  </div>
 </header>
 <div class="pw"><div class="pf" id="bar"></div></div>
 
@@ -854,12 +894,12 @@ footer { text-align:center; padding:24px; font-size:.75rem; font-weight:300; col
   </p>
 
   <div style="text-align:center; margin-bottom:90px;">
-    <button class="btn" style="text-transform:none;" onclick="go('scope')">Begin Intake Walkthrough</button>
+    <button class="btn" style="text-transform:none;" onclick="go('scope')">Start Walkthrough</button>
 
   <div class="welcome-grid">
     <div class="welcome-card">
       <div class="welcome-card-header">
-        <span>⏱️</span> Time to Complete
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> Time to Complete
       </div>
       <div class="welcome-card-body">
         Most clients complete this intake in <strong>about 10 minutes</strong>. Clients with businesses, rental properties, or dependents may need a few extra minutes.
@@ -868,7 +908,7 @@ footer { text-align:center; padding:24px; font-size:.75rem; font-weight:300; col
 
     <div class="welcome-card">
       <div class="welcome-card-header">
-        <span>📂</span> No Documents Needed
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg> No Documents Needed
       </div>
       <div class="welcome-card-body">
         You <strong>do not need</strong> to have tax documents available to complete this. A personalized document checklist will be generated at the end.
@@ -934,12 +974,12 @@ footer { text-align:center; padding:24px; font-size:.75rem; font-weight:300; col
   </div>
 
   <div class="callout" style="margin-top:32px">
-    <span>🔒</span>
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; margin-top: 3px; color: var(--sage);"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
     <span>This form is fully encrypted. Your responses are protected in transit and only seen by Calm Tax Co. As a best practice in tax preparation, Social Security Numbers are <b>never</b> collected through intake forms. Yours will be requested through your personal encrypted folder when you upload your documents.</span>
   </div>
 
   <div style="text-align:center; margin: 48px 0 24px;">
-    <button class="btn" style="text-transform:none;" onclick="go('scope')">Begin Intake Walkthrough</button>
+    <button class="btn" style="text-transform:none;" onclick="go('scope')">Start Walkthrough</button>
   </div>
 
 </div>
@@ -980,19 +1020,19 @@ footer { text-align:center; padding:24px; font-size:.75rem; font-weight:300; col
   <div class="slbl">Please select one</div>
   <div class="cards" id="scopeCheck">
     <div class="card" onclick="radio(this,'scopeCheck')">
-      <div class="ci">✓</div>
+      <div class="ci"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
       <div class="cb"><div class="ct">No, none of these apply to me</div></div>
       <div class="dot"></div>
     </div>
 
     <div class="card" onclick="radio(this,'scopeCheck')">
-      <div class="ci">⚠️</div>
+      <div class="ci"><svg viewBox="0 0 24 24"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
       <div class="cb"><div class="ct">I have one of these situations</div></div>
       <div class="dot"></div>
     </div>
 
     <div class="card" onclick="radio(this,'scopeCheck')">
-      <div class="ci">?</div>
+      <div class="ci"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
       <div class="cb"><div class="ct">I'm not sure</div></div>
       <div class="dot"></div>
     </div>
@@ -1055,8 +1095,8 @@ footer { text-align:center; padding:24px; font-size:.75rem; font-weight:300; col
       <div class="field" style="margin-top:-6px; margin-bottom:12px">
         <label>Would you like text updates when your return is ready?</label>
         <div class="cards" id="textOpt">
-          <div class="card" onclick="radio(this, 'textOpt')" style="padding:12px 16px"><div class="ci">💬</div><div class="cb"><div class="ct" style="font-size:.85rem">Yes, send me text updates</div></div><div class="dot"></div></div>
-          <div class="card" onclick="radio(this, 'textOpt')" style="padding:12px 16px"><div class="ci">✉️</div><div class="cb"><div class="ct" style="font-size:.85rem">No texts, email is fine</div></div><div class="dot"></div></div>
+          <div class="card" onclick="radio(this, 'textOpt')" style="padding:12px 16px"><div class="ci"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><div class="cb"><div class="ct" style="font-size:.85rem">Yes, send me text updates</div></div><div class="dot"></div></div>
+          <div class="card" onclick="radio(this, 'textOpt')" style="padding:12px 16px"><div class="ci"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><div class="cb"><div class="ct" style="font-size:.85rem">No texts, email is fine</div></div><div class="dot"></div></div>
         </div>
       </div>
     </div>
@@ -1097,11 +1137,11 @@ footer { text-align:center; padding:24px; font-size:.75rem; font-weight:300; col
   <div class="hr"></div>
   <div class="slbl">State tax situation</div>
   <div class="cards" id="stateSit">
-    <div class="card" onclick="radio(this,'stateSit')"><div class="ci">🏠</div><div class="cb"><div class="ct">I lived and worked in one state all year</div></div><div class="dot"></div></div>
-    <div class="card" onclick="radio(this,'stateSit')"><div class="ci">🚚</div><div class="cb"><div class="ct">I moved to a different state during 2025</div><div class="cd">I may need to file in both states</div></div><div class="dot"></div></div>
-    <div class="card" onclick="radio(this,'stateSit')"><div class="ci">🗺️</div><div class="cb"><div class="ct">I lived in one state but worked in another</div><div class="cd">e.g. commute across state lines, or remote worker</div></div><div class="dot"></div></div>
-    <div class="card" onclick="radio(this,'stateSit')"><div class="ci">🌐</div><div class="cb"><div class="ct">I earned income in multiple states</div><div class="cd">e.g. gig work, freelance, or business across state lines</div></div><div class="dot"></div></div>
-    <div class="card" onclick="radio(this,'stateSit')"><div class="ci">❓</div><div class="cb"><div class="ct">I'm not sure</div></div><div class="dot"></div></div>
+    <div class="card" onclick="radio(this,'stateSit')"><div class="ci"><svg viewBox="0 0 24 24"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div><div class="cb"><div class="ct">I lived and worked in one state all year</div></div><div class="dot"></div></div>
+    <div class="card" onclick="radio(this,'stateSit')"><div class="ci"><svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div><div class="cb"><div class="ct">I moved to a different state during 2025</div><div class="cd">I may need to file in both states</div></div><div class="dot"></div></div>
+    <div class="card" onclick="radio(this,'stateSit')"><div class="ci"><svg viewBox="0 0 24 24"><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"/><line x1="9" y1="3" x2="9" y2="18"/><line x1="15" y1="6" x2="15" y2="21"/></svg></div><div class="cb"><div class="ct">I lived in one state but worked in another</div><div class="cd">e.g. commute across state lines, or remote worker</div></div><div class="dot"></div></div>
+    <div class="card" onclick="radio(this,'stateSit')"><div class="ci"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div><div class="cb"><div class="ct">I earned income in multiple states</div><div class="cd">e.g. gig work, freelance, or business across state lines</div></div><div class="dot"></div></div>
+    <div class="card" onclick="radio(this,'stateSit')"><div class="ci"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div><div class="cb"><div class="ct">I'm not sure</div></div><div class="dot"></div></div>
   </div>
   <div class="note">💡 Multi-state situations may require filing additional state returns, which can affect your total price. We'll confirm once we review your documents.</div>
   <div class="brow"><button class="bk" onclick="go(2)">← Back</button><button class="btn" onclick="go(4)">Continue →</button></div>
@@ -1114,27 +1154,27 @@ footer { text-align:center; padding:24px; font-size:.75rem; font-weight:300; col
   <div class="qs">Select everything that applies. Your answers shape the rest of this form.</div>
   <div class="divider"></div>
   <div class="cards" id="incomeSrc">
-    <div class="card" onclick="toggleBox(this)"><div class="ci">💼</div><div class="cb"><div class="ct">W-2 from an employer</div><div class="cd">Regular job taxes withheld from your paycheck</div></div><div class="sq"></div></div>
-    <div class="card" onclick="toggleBox(this)"><div class="ci">🚗</div><div class="cb"><div class="ct">Gig work / delivery / rideshare</div><div class="cd">DoorDash, Uber, Lyft, Instacart, TaskRabbit, Airbnb, etc.</div></div><div class="sq"></div></div>
-    <div class="card" onclick="toggleBox(this)"><div class="ci">🧾</div><div class="cb"><div class="ct">Freelance or contract work</div><div class="cd">Invoiced clients directly, received 1099-NEC forms</div></div><div class="sq"></div></div>
-    <div class="card" onclick="toggleBox(this)"><div class="ci">🏢</div><div class="cb"><div class="ct">Small business or LLC</div><div class="cd">I own a registered business or LLC</div></div><div class="sq"></div></div>
-    <div class="card" onclick="toggleBox(this)"><div class="ci">📈</div><div class="cb"><div class="ct">Investments or dividends</div><div class="cd">Stocks, mutual funds, ETFs, etc.</div></div><div class="sq"></div></div>
-    <div class="card" onclick="toggleBox(this);toggleRentalPurchaseSection()"><div class="ci">🏠</div><div class="cb"><div class="ct">Rental income</div><div class="cd">Income from a property you rent out</div></div><div class="sq"></div></div>
+    <div class="card" onclick="toggleBox(this)"><div class="ci"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div><div class="cb"><div class="ct">W-2 from an employer</div><div class="cd">Regular job taxes withheld from your paycheck</div></div><div class="sq"></div></div>
+    <div class="card" onclick="toggleBox(this)"><div class="ci"><svg viewBox="0 0 24 24"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/><path d="M9 17h6"/></svg></div><div class="cb"><div class="ct">Gig work / delivery / rideshare</div><div class="cd">DoorDash, Uber, Lyft, Instacart, TaskRabbit, Airbnb, etc.</div></div><div class="sq"></div></div>
+    <div class="card" onclick="toggleBox(this)"><div class="ci"><svg viewBox="0 0 24 24"><path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1-2-1z"/><path d="M16 8H8"/><path d="M16 12H8"/><path d="M13 16H8"/></svg></div><div class="cb"><div class="ct">Freelance or contract work</div><div class="cd">Invoiced clients directly, received 1099-NEC forms</div></div><div class="sq"></div></div>
+    <div class="card" onclick="toggleBox(this)"><div class="ci"><svg viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><line x1="9" y1="22" x2="9" y2="16"/><line x1="15" y1="22" x2="15" y2="16"/><line x1="9" y1="16" x2="15" y2="16"/><path d="M8 6h2"/><path d="M14 6h2"/><path d="M8 10h2"/><path d="M14 10h2"/></svg></div><div class="cb"><div class="ct">Small business or LLC</div><div class="cd">I own a registered business or LLC</div></div><div class="sq"></div></div>
+    <div class="card" onclick="toggleBox(this)"><div class="ci"><svg viewBox="0 0 24 24"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg></div><div class="cb"><div class="ct">Investments or dividends</div><div class="cd">Stocks, mutual funds, ETFs, etc.</div></div><div class="sq"></div></div>
+    <div class="card" onclick="toggleBox(this);toggleRentalPurchaseSection()"><div class="ci"><svg viewBox="0 0 24 24"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div><div class="cb"><div class="ct">Rental income</div><div class="cd">Income from a property you rent out</div></div><div class="sq"></div></div>
       <div id="rentalPurchaseSec" class="hidden">
       <div class="subsec" style="margin-top:10px;grid-column:1/-1">
         <div class="subsec-title">Rental property purchase</div>
         <div class="slbl">Did you purchase this rental property during 2025?</div>
         <div class="cards" id="rentalPurchase">
-          <div class="card" onclick="radio(this,'rentalPurchase')"><div class="ci">✅</div><div class="cb"><div class="ct">Yes, I purchased a rental property during 2025</div></div><div class="dot"></div></div>
-          <div class="card" onclick="radio(this,'rentalPurchase')"><div class="ci">➖</div><div class="cb"><div class="ct">No, I already owned the rental property</div></div><div class="dot"></div></div>
-          <div class="card" onclick="radio(this,'rentalPurchase')"><div class="ci">❓</div><div class="cb"><div class="ct">I'm not sure</div></div><div class="dot"></div></div>
+          <div class="card" onclick="radio(this,'rentalPurchase')"><div class="ci"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><div class="cb"><div class="ct">Yes, I purchased a rental property during 2025</div></div><div class="dot"></div></div>
+          <div class="card" onclick="radio(this,'rentalPurchase')"><div class="ci"><svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/></svg></div><div class="cb"><div class="ct">No, I already owned the rental property</div></div><div class="dot"></div></div>
+          <div class="card" onclick="radio(this,'rentalPurchase')"><div class="ci"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div><div class="cb"><div class="ct">I'm not sure</div></div><div class="dot"></div></div>
         </div>
         <div class="note">💡 If you bought a rental property during the year, your closing paperwork helps establish the property basis and depreciation.</div>
       </div>
     </div>
-    <div class="card" onclick="toggleBox(this)"><div class="ci">🏛️</div><div class="cb"><div class="ct">Social Security or retirement distributions</div><div class="cd">SSA-1099, pension, IRA or 401(k) distributions</div></div><div class="sq"></div></div>
-    <div class="card" onclick="toggleBox(this)"><div class="ci">📦</div><div class="cb"><div class="ct">Unemployment or government benefits</div><div class="cd">1099-G forms</div></div><div class="sq"></div></div>
-    <div class="card" onclick="toggleBox(this)"><div class="ci">🌐</div><div class="cb"><div class="ct">Other income</div><div class="cd">Alimony, gambling, prizes, tips, or cash income not listed above</div></div><div class="sq"></div></div>
+    <div class="card" onclick="toggleBox(this)"><div class="ci"><svg viewBox="0 0 24 24"><path d="M3 22h18"/><path d="M19 10v12"/><path d="m12 2-9 6h18Z"/><path d="M5 10v12"/><path d="M9 10v12"/><path d="M15 10v12"/></svg></div><div class="cb"><div class="ct">Social Security or retirement distributions</div><div class="cd">SSA-1099, pension, IRA or 401(k) distributions</div></div><div class="sq"></div></div>
+    <div class="card" onclick="toggleBox(this)"><div class="ci"><svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg></div><div class="cb"><div class="ct">Unemployment or government benefits</div><div class="cd">1099-G forms</div></div><div class="sq"></div></div>
+    <div class="card" onclick="toggleBox(this)"><div class="ci"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div><div class="cb"><div class="ct">Other income</div><div class="cd">Alimony, gambling, prizes, tips, or cash income not listed above</div></div><div class="sq"></div></div>
   </div>
 
 
@@ -1152,14 +1192,14 @@ footer { text-align:center; padding:24px; font-size:.75rem; font-weight:300; col
   <div id="gigSec">
     <div class="slbl">Which platforms did you work on?</div>
     <div class="cards" id="gigP" style="margin-bottom:8px">
-      <div class="card" onclick="toggleBox(this)"><div class="ci">🍔</div><div class="cb"><div class="ct">DoorDash</div></div><div class="sq"></div></div>
-      <div class="card" onclick="toggleBox(this)"><div class="ci">🚗</div><div class="cb"><div class="ct">Uber / Uber Eats</div></div><div class="sq"></div></div>
-      <div class="card" onclick="toggleBox(this)"><div class="ci">🚕</div><div class="cb"><div class="ct">Lyft</div></div><div class="sq"></div></div>
-      <div class="card" onclick="toggleBox(this)"><div class="ci">🛒</div><div class="cb"><div class="ct">Instacart</div></div><div class="sq"></div></div>
-      <div class="card" onclick="toggleBox(this)"><div class="ci">🏠</div><div class="cb"><div class="ct">Airbnb / VRBO</div></div><div class="sq"></div></div>
-      <div class="card" onclick="toggleBox(this)"><div class="ci">📦</div><div class="cb"><div class="ct">Amazon Flex</div></div><div class="sq"></div></div>
-      <div class="card" onclick="toggleBox(this)"><div class="ci">🔧</div><div class="cb"><div class="ct">TaskRabbit or similar</div></div><div class="sq"></div></div>
-      <div class="card" onclick="toggleBox(this)"><div class="ci">🌐</div><div class="cb"><div class="ct">Other platform</div></div><div class="sq"></div></div>
+      <div class="card" onclick="toggleBox(this)"><div class="ci"><svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></div><div class="cb"><div class="ct">DoorDash</div></div><div class="sq"></div></div>
+      <div class="card" onclick="toggleBox(this)"><div class="ci"><svg viewBox="0 0 24 24"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/><path d="M9 17h6"/></svg></div><div class="cb"><div class="ct">Uber / Uber Eats</div></div><div class="sq"></div></div>
+      <div class="card" onclick="toggleBox(this)"><div class="ci"><svg viewBox="0 0 24 24"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/><path d="M9 17h6"/></svg></div><div class="cb"><div class="ct">Lyft</div></div><div class="sq"></div></div>
+      <div class="card" onclick="toggleBox(this)"><div class="ci"><svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg></div><div class="cb"><div class="ct">Instacart</div></div><div class="sq"></div></div>
+      <div class="card" onclick="toggleBox(this)"><div class="ci"><svg viewBox="0 0 24 24"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div><div class="cb"><div class="ct">Airbnb / VRBO</div></div><div class="sq"></div></div>
+      <div class="card" onclick="toggleBox(this)"><div class="ci"><svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg></div><div class="cb"><div class="ct">Amazon Flex</div></div><div class="sq"></div></div>
+      <div class="card" onclick="toggleBox(this)"><div class="ci"><svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div><div class="cb"><div class="ct">TaskRabbit or similar</div></div><div class="sq"></div></div>
+      <div class="card" onclick="toggleBox(this)"><div class="ci"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div><div class="cb"><div class="ct">Other platform</div></div><div class="sq"></div></div>
     </div>
     <div class="hr"></div>
   </div>
@@ -1167,10 +1207,10 @@ footer { text-align:center; padding:24px; font-size:.75rem; font-weight:300; col
   <div id="freeSec">
     <div class="slbl">Freelance / contract work</div>
     <div class="cards" id="freeP" style="margin-bottom:8px">
-      <div class="card" onclick="toggleBox(this)"><div class="ci">💻</div><div class="cb"><div class="ct">Upwork or Fiverr</div></div><div class="sq"></div></div>
-      <div class="card" onclick="toggleBox(this)"><div class="ci">🛍️</div><div class="cb"><div class="ct">Etsy or online store</div></div><div class="sq"></div></div>
-      <div class="card" onclick="toggleBox(this)"><div class="ci">📋</div><div class="cb"><div class="ct">Direct clients (I invoiced them myself)</div></div><div class="sq"></div></div>
-      <div class="card" onclick="toggleBox(this)"><div class="ci">🌐</div><div class="cb"><div class="ct">Other freelance work</div></div><div class="sq"></div></div>
+      <div class="card" onclick="toggleBox(this)"><div class="ci"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div><div class="cb"><div class="ct">Upwork or Fiverr</div></div><div class="sq"></div></div>
+      <div class="card" onclick="toggleBox(this)"><div class="ci"><svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></div><div class="cb"><div class="ct">Etsy or online store</div></div><div class="sq"></div></div>
+      <div class="card" onclick="toggleBox(this)"><div class="ci"><svg viewBox="0 0 24 24"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg></div><div class="cb"><div class="ct">Direct clients (I invoiced them myself)</div></div><div class="sq"></div></div>
+      <div class="card" onclick="toggleBox(this)"><div class="ci"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div><div class="cb"><div class="ct">Other freelance work</div></div><div class="sq"></div></div>
     </div>
     <div class="hr"></div>
   </div>
@@ -1202,29 +1242,29 @@ footer { text-align:center; padding:24px; font-size:.75rem; font-weight:300; col
     <div class="slbl">What best describes this self-employed or business income?</div>
     <div style="font-size:.82rem;font-weight:300;color:var(--mid);margin-bottom:10px">This helps us know whether to ask for inventory or cost of goods sold records later.</div>
     <div class="cards" id="bizModel">
-      <div class="card" onclick="radio(this,'bizModel')"><div class="ci">🛠️</div><div class="cb"><div class="ct">Services only / no physical products</div><div class="cd">Examples: consulting, design, bookkeeping, cleaning, driving, delivery, contracting, freelance services</div></div><div class="dot"></div></div>
-      <div class="card" onclick="radio(this,'bizModel')"><div class="ci">📦</div><div class="cb"><div class="ct">I sell physical products or keep inventory</div><div class="cd">Examples: retail merchandise, handmade products, online store items, products you make or buy to resell</div></div><div class="dot"></div></div>
-      <div class="card" onclick="radio(this,'bizModel')"><div class="ci">🧾</div><div class="cb"><div class="ct">Both services and physical products</div><div class="cd">For example, you provide services and also sell products or merchandise</div></div><div class="dot"></div></div>
-      <div class="card" onclick="radio(this,'bizModel')"><div class="ci">❓</div><div class="cb"><div class="ct">I'm not sure</div><div class="cd">We'll review your records and let you know what applies</div></div><div class="dot"></div></div>
+      <div class="card" onclick="radio(this,'bizModel')"><div class="ci"><svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div><div class="cb"><div class="ct">Services only / no physical products</div><div class="cd">Examples: consulting, design, bookkeeping, cleaning, driving, delivery, contracting, freelance services</div></div><div class="dot"></div></div>
+      <div class="card" onclick="radio(this,'bizModel')"><div class="ci"><svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg></div><div class="cb"><div class="ct">I sell physical products or keep inventory</div><div class="cd">Examples: retail merchandise, handmade products, online store items, products you make or buy to resell</div></div><div class="dot"></div></div>
+      <div class="card" onclick="radio(this,'bizModel')"><div class="ci"><svg viewBox="0 0 24 24"><path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1-2-1z"/><path d="M16 8H8"/><path d="M16 12H8"/><path d="M13 16H8"/></svg></div><div class="cb"><div class="ct">Both services and physical products</div><div class="cd">For example, you provide services and also sell products or merchandise</div></div><div class="dot"></div></div>
+      <div class="card" onclick="radio(this,'bizModel')"><div class="ci"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div><div class="cb"><div class="ct">I'm not sure</div><div class="cd">We'll review your records and let you know what applies</div></div><div class="dot"></div></div>
     </div>
     <div class="hr"></div>
   </div>
 
   <div class="slbl">How do you track income &amp; expenses? <span class="opt">Select all that apply</span></div>
   <div class="cards" id="tracking">
-    <div class="card" onclick="toggleBox(this)"><div class="ci">📱</div><div class="cb"><div class="ct">App summaries</div><div class="cd">What the platform shows me</div></div><div class="sq"></div></div>
-    <div class="card" onclick="toggleBox(this)"><div class="ci">📊</div><div class="cb"><div class="ct">Spreadsheet or notes</div><div class="cd">Excel, Google Sheets, or a notebook</div></div><div class="sq"></div></div>
-    <div class="card" onclick="toggleBox(this)"><div class="ci">💼</div><div class="cb"><div class="ct">Accounting software</div><div class="cd">QuickBooks, Wave, FreshBooks, etc.</div></div><div class="sq"></div></div>
-    <div class="card" onclick="toggleBox(this)"><div class="ci">🏦</div><div class="cb"><div class="ct">Bank statements</div><div class="cd">Everything runs through my bank account</div></div><div class="sq"></div></div>
-    <div class="card" onclick="toggleBox(this)"><div class="ci">🤷</div><div class="cb"><div class="ct">I haven't been tracking</div><div class="cd">I'll need some guidance</div></div><div class="sq"></div></div>
+    <div class="card" onclick="toggleBox(this)"><div class="ci"><svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg></div><div class="cb"><div class="ct">App summaries</div><div class="cd">What the platform shows me</div></div><div class="sq"></div></div>
+    <div class="card" onclick="toggleBox(this)"><div class="ci"><svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div><div class="cb"><div class="ct">Spreadsheet or notes</div><div class="cd">Excel, Google Sheets, or a notebook</div></div><div class="sq"></div></div>
+    <div class="card" onclick="toggleBox(this)"><div class="ci"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div><div class="cb"><div class="ct">Accounting software</div><div class="cd">QuickBooks, Wave, FreshBooks, etc.</div></div><div class="sq"></div></div>
+    <div class="card" onclick="toggleBox(this)"><div class="ci"><svg viewBox="0 0 24 24"><path d="M3 22h18"/><path d="M19 10v12"/><path d="m12 2-9 6h18Z"/><path d="M5 10v12"/><path d="M9 10v12"/><path d="M15 10v12"/></svg></div><div class="cb"><div class="ct">Bank statements</div><div class="cd">Everything runs through my bank account</div></div><div class="sq"></div></div>
+    <div class="card" onclick="toggleBox(this)"><div class="ci"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div><div class="cb"><div class="ct">I haven't been tracking</div><div class="cd">I'll need some guidance</div></div><div class="sq"></div></div>
   </div>
   <div class="hr"></div>
   <div class="slbl">Did you make estimated tax payments in 2025?</div>
   <div style="font-size:.82rem;font-weight:300;color:var(--mid);margin-bottom:10px">Quarterly payments sent directly to the IRS or your state outside of payroll withholding.</div>
   <div class="cards" id="estPay">
-    <div class="card" onclick="radio(this,'estPay')"><div class="ci">✅</div><div class="cb"><div class="ct">Yes</div><div class="cd">I made quarterly payments to the IRS and/or state</div></div><div class="dot"></div></div>
-    <div class="card" onclick="radio(this,'estPay')"><div class="ci">➖</div><div class="cb"><div class="ct">No</div></div><div class="dot"></div></div>
-    <div class="card" onclick="radio(this,'estPay')"><div class="ci">❓</div><div class="cb"><div class="ct">I'm not sure</div></div><div class="dot"></div></div>
+    <div class="card" onclick="radio(this,'estPay')"><div class="ci"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><div class="cb"><div class="ct">Yes</div><div class="cd">I made quarterly payments to the IRS and/or state</div></div><div class="dot"></div></div>
+    <div class="card" onclick="radio(this,'estPay')"><div class="ci"><svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/></svg></div><div class="cb"><div class="ct">No</div></div><div class="dot"></div></div>
+    <div class="card" onclick="radio(this,'estPay')"><div class="ci"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div><div class="cb"><div class="ct">I'm not sure</div></div><div class="dot"></div></div>
   </div>
   <div class="brow"><button class="bk" onclick="go(4)">← Back</button><button class="btn" onclick="go(6)">Continue →</button></div>
 </div>
@@ -1236,7 +1276,7 @@ footer { text-align:center; padding:24px; font-size:.75rem; font-weight:300; col
   <div class="qs">These can lower what you owe. Select everything that applies.</div>
   <div class="divider"></div>
   <div class="cards" id="deds">
-    <div class="card" onclick="toggleBox(this);toggleVehicle(this)"><div class="ci">🚗</div><div class="cb"><div class="ct">Used a vehicle for work</div><div class="cd">Deliveries, client visits, or business travel</div></div><div class="sq"></div></div>
+    <div class="card" onclick="toggleBox(this);toggleVehicle(this)"><div class="ci"><svg viewBox="0 0 24 24"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/><path d="M9 17h6"/></svg></div><div class="cb"><div class="ct">Used a vehicle for work</div><div class="cd">Deliveries, client visits, or business travel</div></div><div class="sq"></div></div>
   <div id="vehicleSec" class="hidden">
     <div class="subsec" style="margin-bottom:10px">
       <div class="subsec-title">Vehicle details</div>
@@ -1245,8 +1285,8 @@ footer { text-align:center; padding:24px; font-size:.75rem; font-weight:300; col
       </div>
     </div>
   </div>
-    <div class="card" onclick="toggleBox(this)"><div class="ci">🏠</div><div class="cb"><div class="ct">Home office</div><div class="cd">A dedicated space in your home used only for work</div></div><div class="sq"></div></div>
-    <div class="card" onclick="toggleBox(this);togglePhone(this)"><div class="ci">📱</div><div class="cb"><div class="ct">Phone or internet for work</div><div class="cd">Only the business-use portion is deductible</div></div><div class="sq"></div></div>
+    <div class="card" onclick="toggleBox(this)"><div class="ci"><svg viewBox="0 0 24 24"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div><div class="cb"><div class="ct">Home office</div><div class="cd">A dedicated space in your home used only for work</div></div><div class="sq"></div></div>
+    <div class="card" onclick="toggleBox(this);togglePhone(this)"><div class="ci"><svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg></div><div class="cb"><div class="ct">Phone or internet for work</div><div class="cd">Only the business-use portion is deductible</div></div><div class="sq"></div></div>
   <div id="phoneSec" class="hidden">
     <div class="subsec" style="margin-bottom:10px">
       <div class="subsec-title">Phone and internet usage</div>
@@ -1275,19 +1315,19 @@ footer { text-align:center; padding:24px; font-size:.75rem; font-weight:300; col
       <div class="note">💡 The IRS only allows you to deduct the business portion. Claiming 100% on a personal phone or home internet is a red flag. Be honest even 50% adds up.</div>
     </div>
   </div>
-    <div class="card" onclick="toggleBox(this)"><div class="ci">🎒</div><div class="cb"><div class="ct">Supplies, equipment, or tools for work</div></div><div class="sq"></div></div>
-    <div class="card" onclick="toggleBox(this)"><div class="ci">🏡</div><div class="cb"><div class="ct">Mortgage interest on your primary home</div><div class="cd">Usually reported on Form 1098 from your mortgage lender</div></div><div class="sq"></div></div>
-    <div class="card" onclick="toggleBox(this)"><div class="ci">🏘️</div><div class="cb"><div class="ct">Property taxes paid</div><div class="cd">On your home or other real estate you own</div></div><div class="sq"></div></div>
-    <div class="card" onclick="toggleBox(this)"><div class="ci">🎓</div><div class="cb"><div class="ct">Student loan interest or tuition</div><div class="cd">1098-E or 1098-T forms</div></div><div class="sq"></div></div>
-    <div class="card" onclick="toggleBox(this)"><div class="ci">💝</div><div class="cb"><div class="ct">Charitable donations</div><div class="cd">Cash or non-cash donations to qualified organizations</div></div><div class="sq"></div></div>
-    <div class="card" onclick="toggleBox(this)"><div class="ci">🏥</div><div class="cb"><div class="ct">Medical expenses or health insurance premiums</div><div class="cd">Out-of-pocket costs, HSA/FSA contributions, or self-paid premiums</div></div><div class="sq"></div></div>
+    <div class="card" onclick="toggleBox(this)"><div class="ci"><svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div><div class="cb"><div class="ct">Supplies, equipment, or tools for work</div></div><div class="sq"></div></div>
+    <div class="card" onclick="toggleBox(this)"><div class="ci"><svg viewBox="0 0 24 24"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div><div class="cb"><div class="ct">Mortgage interest on your primary home</div><div class="cd">Usually reported on Form 1098 from your mortgage lender</div></div><div class="sq"></div></div>
+    <div class="card" onclick="toggleBox(this)"><div class="ci"><svg viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><line x1="9" y1="22" x2="9" y2="16"/><line x1="15" y1="22" x2="15" y2="16"/><line x1="9" y1="16" x2="15" y2="16"/><path d="M8 6h2"/><path d="M14 6h2"/><path d="M8 10h2"/><path d="M14 10h2"/></svg></div><div class="cb"><div class="ct">Property taxes paid</div><div class="cd">On your home or other real estate you own</div></div><div class="sq"></div></div>
+    <div class="card" onclick="toggleBox(this)"><div class="ci"><svg viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 2 2 3 6 3s6-1 6-3v-5"/></svg></div><div class="cb"><div class="ct">Student loan interest or tuition</div><div class="cd">1098-E or 1098-T forms</div></div><div class="sq"></div></div>
+    <div class="card" onclick="toggleBox(this)"><div class="ci"><svg viewBox="0 0 24 24"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg></div><div class="cb"><div class="ct">Charitable donations</div><div class="cd">Cash or non-cash donations to qualified organizations</div></div><div class="sq"></div></div>
+    <div class="card" onclick="toggleBox(this)"><div class="ci"><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div><div class="cb"><div class="ct">Medical expenses or health insurance premiums</div><div class="cd">Out-of-pocket costs, HSA/FSA contributions, or self-paid premiums</div></div><div class="sq"></div></div>
   
-    <div class="card" onclick="toggleBox(this)"><div class="ci">🏦</div><div class="cb"><div class="ct">IRA or retirement contributions</div></div><div class="sq"></div></div>
-    <div class="card" onclick="toggleBox(this)"><div class="ci">🧸</div><div class="cb"><div class="ct">Childcare or dependent care expenses</div></div><div class="sq"></div></div>
-    <div class="card" onclick="toggleBox(this)"><div class="ci">👶</div><div class="cb"><div class="ct">Adoption expenses</div></div><div class="sq"></div></div>
-    <div class="card" onclick="toggleBox(this)"><div class="ci">⚡</div><div class="cb"><div class="ct">Electric vehicle or home energy upgrades</div></div><div class="sq"></div></div>
-    <div class="card" onclick="toggleBox(this)"><div class="ci">💸</div><div class="cb"><div class="ct">Alimony paid</div><div class="cd">For divorces finalized before 2019</div></div><div class="sq"></div></div>
-    <div class="card" onclick="toggleBox(this)"><div class="ci">➖</div><div class="cb"><div class="ct">None of these apply</div></div><div class="sq"></div></div>
+    <div class="card" onclick="toggleBox(this)"><div class="ci"><svg viewBox="0 0 24 24"><path d="M3 22h18"/><path d="M19 10v12"/><path d="m12 2-9 6h18Z"/><path d="M5 10v12"/><path d="M9 10v12"/><path d="M15 10v12"/></svg></div><div class="cb"><div class="ct">IRA or retirement contributions</div></div><div class="sq"></div></div>
+    <div class="card" onclick="toggleBox(this)"><div class="ci"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg></div><div class="cb"><div class="ct">Childcare or dependent care expenses</div></div><div class="sq"></div></div>
+    <div class="card" onclick="toggleBox(this)"><div class="ci"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg></div><div class="cb"><div class="ct">Adoption expenses</div></div><div class="sq"></div></div>
+    <div class="card" onclick="toggleBox(this)"><div class="ci"><svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div><div class="cb"><div class="ct">Electric vehicle or home energy upgrades</div></div><div class="sq"></div></div>
+    <div class="card" onclick="toggleBox(this)"><div class="ci"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><path d="M16 8h-4a2 2 0 0 0 0 4h4a2 2 0 0 1 0 4H8"/></svg></div><div class="cb"><div class="ct">Alimony paid</div><div class="cd">For divorces finalized before 2019</div></div><div class="sq"></div></div>
+    <div class="card" onclick="toggleBox(this)"><div class="ci"><svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/></svg></div><div class="cb"><div class="ct">None of these apply</div></div><div class="sq"></div></div>
   </div>
   <div class="brow"><button class="bk" id="s6bk" onclick="go(isSE()?5:4)">← Back</button><button class="btn" onclick="go(7)">Continue →</button></div>
 </div>
@@ -1299,9 +1339,9 @@ footer { text-align:center; padding:24px; font-size:.75rem; font-weight:300; col
   <div class="qs">Your situation as of December 31, 2025.</div>
   <div class="divider"></div>
   <div class="cards" id="filStat">
-    <div class="card" onclick="radio(this,'filStat');showSpouse(false, this)"><div class="ci">👤</div><div class="cb"><div class="ct">Single</div><div class="cd">Unmarried or legally separated</div></div><div class="dot"></div></div>
-    <div class="card" onclick="radio(this,'filStat');showSpouse(true, this)"><div class="ci">💑</div><div class="cb"><div class="ct">Married Filing Jointly</div><div class="cd">One return together with your spouse</div></div><div class="dot"></div></div>
-    <div class="card" onclick="radio(this,'filStat');showSpouse(true, this)"><div class="ci">📋</div><div class="cb"><div class="ct">Married Filing Separately</div><div class="cd">Married but filing your own separate return</div></div><div class="dot"></div></div>
+    <div class="card" onclick="radio(this,'filStat');showSpouse(false, this)"><div class="ci"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><div class="cb"><div class="ct">Single</div><div class="cd">Unmarried or legally separated</div></div><div class="dot"></div></div>
+    <div class="card" onclick="radio(this,'filStat');showSpouse(true, this)"><div class="ci"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><div class="cb"><div class="ct">Married Filing Jointly</div><div class="cd">One return together with your spouse</div></div><div class="dot"></div></div>
+    <div class="card" onclick="radio(this,'filStat');showSpouse(true, this)"><div class="ci"><svg viewBox="0 0 24 24"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg></div><div class="cb"><div class="ct">Married Filing Separately</div><div class="cd">Married but filing your own separate return</div></div><div class="dot"></div></div>
     <div class="hidden" id="spouseFields">
       <div class="subsec">
         <div class="subsec-title">Spouse information</div>
@@ -1318,9 +1358,9 @@ footer { text-align:center; padding:24px; font-size:.75rem; font-weight:300; col
         </div>
       </div>
     </div>
-    <div class="card" onclick="radio(this,'filStat');showSpouse(false, this)"><div class="ci">🏠</div><div class="cb"><div class="ct">Head of Household</div><div class="cd">Usually for unmarried taxpayers who paid more than half the cost of keeping up a home for a qualifying child or dependent. If you are unsure, choose the closest option and we will review it.</div></div><div class="dot"></div></div>
-    <div class="card" onclick="radio(this,'filStat');showSpouse(false, this)"><div class="ci">🕊️</div><div class="cb"><div class="ct">Qualifying Surviving Spouse</div><div class="cd">Widowed in the past two years with a dependent child</div></div><div class="dot"></div></div>
-    <div class="card" onclick="radio(this,'filStat');showSpouse(false, this)"><div class="ci">❓</div><div class="cb"><div class="ct">I'm not sure</div><div class="cd">We'll work this out together when we review your return</div></div><div class="dot"></div></div>
+    <div class="card" onclick="radio(this,'filStat');showSpouse(false, this)"><div class="ci"><svg viewBox="0 0 24 24"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div><div class="cb"><div class="ct">Head of Household</div><div class="cd">Usually for unmarried taxpayers who paid more than half the cost of keeping up a home for a qualifying child or dependent. If you are unsure, choose the closest option and we will review it.</div></div><div class="dot"></div></div>
+    <div class="card" onclick="radio(this,'filStat');showSpouse(false, this)"><div class="ci"><svg viewBox="0 0 24 24"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg></div><div class="cb"><div class="ct">Qualifying Surviving Spouse</div><div class="cd">Widowed in the past two years with a dependent child</div></div><div class="dot"></div></div>
+    <div class="card" onclick="radio(this,'filStat');showSpouse(false, this)"><div class="ci"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div><div class="cb"><div class="ct">I'm not sure</div><div class="cd">We'll work this out together when we review your return</div></div><div class="dot"></div></div>
   </div>
   <div class="brow"><button class="bk" onclick="go(6)">← Back</button><button class="btn" onclick="go(8)">Continue →</button></div>
 </div>
@@ -1332,8 +1372,8 @@ footer { text-align:center; padding:24px; font-size:.75rem; font-weight:300; col
   <div class="qs">Usually children or relatives you financially support.</div>
   <div class="divider"></div>
   <div class="cards" id="hasDeps">
-    <div class="card" onclick="radio(this,'hasDeps');showDeps(true)"><div class="ci">✅</div><div class="cb"><div class="ct">Yes I claim one or more dependents</div></div><div class="dot"></div></div>
-    <div class="card" onclick="radio(this,'hasDeps');showDeps(false)"><div class="ci">➖</div><div class="cb"><div class="ct">No dependents</div></div><div class="dot"></div></div>
+    <div class="card" onclick="radio(this,'hasDeps');showDeps(true)"><div class="ci"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><div class="cb"><div class="ct">Yes I claim one or more dependents</div></div><div class="dot"></div></div>
+    <div class="card" onclick="radio(this,'hasDeps');showDeps(false)"><div class="ci"><svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/></svg></div><div class="cb"><div class="ct">No dependents</div></div><div class="dot"></div></div>
   </div>
   <div class="hidden" id="depFields">
     <div class="subsec" style="margin-top:18px">
@@ -1440,17 +1480,17 @@ footer { text-align:center; padding:24px; font-size:.75rem; font-weight:300; col
   <div class="qs">Life events can affect your taxes. Select all that apply.</div>
   <div class="divider"></div>
   <div class="cards" id="life">
-    <div class="card" onclick="toggleBox(this)"><div class="ci">💍</div><div class="cb"><div class="ct">Got married or divorced</div></div><div class="sq"></div></div>
-    <div class="card" onclick="toggleBox(this)"><div class="ci">👶</div><div class="cb"><div class="ct">Had or adopted a child</div></div><div class="sq"></div></div>
-    <div class="card" onclick="toggleBox(this)"><div class="ci">🏠</div><div class="cb"><div class="ct">Sold a home</div><div class="cd">Main home, second home, or other real estate sold during the year</div></div><div class="sq"></div></div>
-    <div class="card" onclick="toggleBox(this)"><div class="ci">💼</div><div class="cb"><div class="ct">Started or lost a job</div></div><div class="sq"></div></div>
-    <div class="card" onclick="toggleBox(this)"><div class="ci">🚀</div><div class="cb"><div class="ct">Started a business or side hustle</div></div><div class="sq"></div></div>
-    <div class="card" onclick="toggleBox(this)"><div class="ci">🎓</div><div class="cb"><div class="ct">Started or finished college</div></div><div class="sq"></div></div>
-    <div class="card" onclick="toggleBox(this)"><div class="ci">🏥</div><div class="cb"><div class="ct">Major health or insurance changes</div></div><div class="sq"></div></div>
-    <div class="card" onclick="toggleBox(this)"><div class="ci">📬</div><div class="cb"><div class="ct">Received a letter or notice from the IRS</div></div><div class="sq"></div></div>
-    <div class="card" onclick="toggleBox(this)"><div class="ci">💰</div><div class="cb"><div class="ct">Received an inheritance</div></div><div class="sq"></div></div>
-    <div class="card" onclick="toggleBox(this)"><div class="ci">✏️</div><div class="cb"><div class="ct">This is my first time filing taxes</div></div><div class="sq"></div></div>
-    <div class="card" onclick="toggleBox(this)"><div class="ci">➖</div><div class="cb"><div class="ct">Nothing major changed</div></div><div class="sq"></div></div>
+    <div class="card" onclick="toggleBox(this)"><div class="ci"><svg viewBox="0 0 24 24"><circle cx="12" cy="14" r="6"/><path d="M12 2l2 4h-4z"/></svg></div><div class="cb"><div class="ct">Got married or divorced</div></div><div class="sq"></div></div>
+    <div class="card" onclick="toggleBox(this)"><div class="ci"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg></div><div class="cb"><div class="ct">Had or adopted a child</div></div><div class="sq"></div></div>
+    <div class="card" onclick="toggleBox(this)"><div class="ci"><svg viewBox="0 0 24 24"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div><div class="cb"><div class="ct">Sold a home</div><div class="cd">Main home, second home, or other real estate sold during the year</div></div><div class="sq"></div></div>
+    <div class="card" onclick="toggleBox(this)"><div class="ci"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div><div class="cb"><div class="ct">Started or lost a job</div></div><div class="sq"></div></div>
+    <div class="card" onclick="toggleBox(this)"><div class="ci"><svg viewBox="0 0 24 24"><path d="M4.5 16.5c-1.5 1.26-2 3.1-2 4.5 1.4 0 3.24-.5 4.5-2M21 3s-6.5.5-10.5 4.5C8 10 8 13.5 8 13.5s3.5 0 6-2.5C18 7 18.5 3 18.5 3z"/></svg></div><div class="cb"><div class="ct">Started a business or side hustle</div></div><div class="sq"></div></div>
+    <div class="card" onclick="toggleBox(this)"><div class="ci"><svg viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 2 2 3 6 3s6-1 6-3v-5"/></svg></div><div class="cb"><div class="ct">Started or finished college</div></div><div class="sq"></div></div>
+    <div class="card" onclick="toggleBox(this)"><div class="ci"><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div><div class="cb"><div class="ct">Major health or insurance changes</div></div><div class="sq"></div></div>
+    <div class="card" onclick="toggleBox(this)"><div class="ci"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><div class="cb"><div class="ct">Received a letter or notice from the IRS</div></div><div class="sq"></div></div>
+    <div class="card" onclick="toggleBox(this)"><div class="ci"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><path d="M16 8h-4a2 2 0 0 0 0 4h4a2 2 0 0 1 0 4H8"/></svg></div><div class="cb"><div class="ct">Received an inheritance</div></div><div class="sq"></div></div>
+    <div class="card" onclick="toggleBox(this)"><div class="ci"><svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg></div><div class="cb"><div class="ct">This is my first time filing taxes</div></div><div class="sq"></div></div>
+    <div class="card" onclick="toggleBox(this)"><div class="ci"><svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/></svg></div><div class="cb"><div class="ct">Nothing major changed</div></div><div class="sq"></div></div>
   </div>
   <div class="brow"><button class="bk" onclick="go(8)">← Back</button><button class="btn" onclick="go(10)">Continue →</button></div>
 </div>
@@ -1462,22 +1502,22 @@ footer { text-align:center; padding:24px; font-size:.75rem; font-weight:300; col
   <div class="qs">This affects certain credits and deductions on your return.</div>
   <div class="divider"></div>
   <div class="cards" id="healthCov">
-    <div class="card" onclick="radio(this,'healthCov');showACA(false);showPartialHealth(false)"><div class="ci">✅</div><div class="cb"><div class="ct">Yes covered all year</div><div class="cd">Through an employer, Medicare, Medicaid, or other plan</div></div><div class="dot"></div></div>
-    <div class="card" onclick="radio(this,'healthCov');showACA(true);showPartialHealth(false)"><div class="ci">🏪</div><div class="cb"><div class="ct">Yes through the Marketplace (ACA / Healthcare.gov)</div><div class="cd">Obtained through Healthcare.gov or a state exchange</div></div><div class="dot"></div></div>
-    <div class="card" onclick="radio(this,'healthCov');showACA(false);showPartialHealth(true)"><div class="ci">⏱️</div><div class="cb"><div class="ct">Covered part of the year only</div><div class="cd">Had a gap in coverage at some point in 2025</div></div><div class="dot"></div></div>
-    <div class="card" onclick="radio(this,'healthCov');showACA(false);showPartialHealth(false)"><div class="ci">➖</div><div class="cb"><div class="ct">No health insurance in 2025</div></div><div class="dot"></div></div>
-    <div class="card" onclick="radio(this,'healthCov');showACA(false);showPartialHealth(false)"><div class="ci">❓</div><div class="cb"><div class="ct">I'm not sure</div></div><div class="dot"></div></div>
+    <div class="card" onclick="radio(this,'healthCov');showACA(false);showPartialHealth(false)"><div class="ci"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><div class="cb"><div class="ct">Yes covered all year</div><div class="cd">Through an employer, Medicare, Medicaid, or other plan</div></div><div class="dot"></div></div>
+    <div class="card" onclick="radio(this,'healthCov');showACA(true);showPartialHealth(false)"><div class="ci"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg></div><div class="cb"><div class="ct">Yes through the Marketplace (ACA / Healthcare.gov)</div><div class="cd">Obtained through Healthcare.gov or a state exchange</div></div><div class="dot"></div></div>
+    <div class="card" onclick="radio(this,'healthCov');showACA(false);showPartialHealth(true)"><div class="ci"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><div class="cb"><div class="ct">Covered part of the year only</div><div class="cd">Had a gap in coverage at some point in 2025</div></div><div class="dot"></div></div>
+    <div class="card" onclick="radio(this,'healthCov');showACA(false);showPartialHealth(false)"><div class="ci"><svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/></svg></div><div class="cb"><div class="ct">No health insurance in 2025</div></div><div class="dot"></div></div>
+    <div class="card" onclick="radio(this,'healthCov');showACA(false);showPartialHealth(false)"><div class="ci"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div><div class="cb"><div class="ct">I'm not sure</div></div><div class="dot"></div></div>
   </div>
   <div class="hidden" id="partialHealthSec">
     <div class="subsec" style="margin-top:14px">
       <div class="subsec-title">Coverage details</div>
       <div style="font-size:.85rem;font-weight:300;color:var(--mid);margin-bottom:14px">What type of coverage did you have during the months you were covered? Select all that apply.</div>
       <div class="cards" id="partialHealthType">
-        <div class="card" onclick="toggleBox(this)"><div class="ci">💼</div><div class="cb"><div class="ct">Employer-sponsored plan</div><div class="cd">Coverage through your job or a family member's job</div></div><div class="sq"></div></div>
-        <div class="card" onclick="toggleBox(this)"><div class="ci">🏪</div><div class="cb"><div class="ct">Marketplace plan (ACA / Healthcare.gov)</div><div class="cd">Coverage through Healthcare.gov or a state exchange</div></div><div class="sq"></div></div>
-        <div class="card" onclick="toggleBox(this)"><div class="ci">🏛️</div><div class="cb"><div class="ct">Medicaid or Medicare</div></div><div class="sq"></div></div>
-        <div class="card" onclick="toggleBox(this)"><div class="ci">🎓</div><div class="cb"><div class="ct">Student health plan</div></div><div class="sq"></div></div>
-        <div class="card" onclick="toggleBox(this)"><div class="ci">🌐</div><div class="cb"><div class="ct">Other coverage</div></div><div class="sq"></div></div>
+        <div class="card" onclick="toggleBox(this)"><div class="ci"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div><div class="cb"><div class="ct">Employer-sponsored plan</div><div class="cd">Coverage through your job or a family member's job</div></div><div class="sq"></div></div>
+        <div class="card" onclick="toggleBox(this)"><div class="ci"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg></div><div class="cb"><div class="ct">Marketplace plan (ACA / Healthcare.gov)</div><div class="cd">Coverage through Healthcare.gov or a state exchange</div></div><div class="sq"></div></div>
+        <div class="card" onclick="toggleBox(this)"><div class="ci"><svg viewBox="0 0 24 24"><line x1="2" y1="22" x2="22" y2="22"/><polyline points="12 2 20 8 4 8 12 2"/><rect x="6" y="8" width="2" height="10"/><rect x="11" y="8" width="2" height="10"/><rect x="16" y="8" width="2" height="10"/></svg></div><div class="cb"><div class="ct">Medicaid or Medicare</div></div><div class="sq"></div></div>
+        <div class="card" onclick="toggleBox(this)"><div class="ci"><svg viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 2 2 3 6 3s6-1 6-3v-5"/></svg></div><div class="cb"><div class="ct">Student health plan</div></div><div class="sq"></div></div>
+        <div class="card" onclick="toggleBox(this)"><div class="ci"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div><div class="cb"><div class="ct">Other coverage</div></div><div class="sq"></div></div>
       </div>
     </div>
   </div>
@@ -1490,9 +1530,9 @@ footer { text-align:center; padding:24px; font-size:.75rem; font-weight:300; col
   <div class="qt">If you receive a refund, how would you like it?</div>
   <div class="divider"></div>
   <div class="cards" id="refundPref" style="margin-bottom:22px">
-    <div class="card" onclick="radio(this,'refundPref')"><div class="ci">🏦</div><div class="cb"><div class="ct">Direct deposit to my bank account</div><div class="cd">Fastest option usually within 21 days. You'll provide your bank info securely when you upload your documents later.</div></div><div class="dot"></div></div>
-    <div class="card" onclick="radio(this,'refundPref')"><div class="ci">📬</div><div class="cb"><div class="ct">Paper check mailed to me</div></div><div class="dot"></div></div>
-    <div class="card" onclick="radio(this,'refundPref')"><div class="ci">➡️</div><div class="cb"><div class="ct">Apply it toward next year's taxes</div><div class="cd">We'll credit it to your 2026 estimated taxes</div></div><div class="dot"></div></div>
+    <div class="card" onclick="radio(this,'refundPref')"><div class="ci"><svg viewBox="0 0 24 24"><path d="M3 22h18"/><path d="M19 10v12"/><path d="m12 2-9 6h18Z"/><path d="M5 10v12"/><path d="M9 10v12"/><path d="M15 10v12"/></svg></div><div class="cb"><div class="ct">Direct deposit to my bank account</div><div class="cd">Fastest option usually within 21 days. You'll provide your bank info securely when you upload your documents later.</div></div><div class="dot"></div></div>
+    <div class="card" onclick="radio(this,'refundPref')"><div class="ci"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><div class="cb"><div class="ct">Paper check mailed to me</div></div><div class="dot"></div></div>
+    <div class="card" onclick="radio(this,'refundPref')"><div class="ci"><svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div><div class="cb"><div class="ct">Apply it toward next year's taxes</div><div class="cd">We'll credit it to your 2026 estimated taxes</div></div><div class="dot"></div></div>
   </div>
 
   <div class="brow"><button class="bk" onclick="go(10)">← Back</button><button class="btn" onclick="go(12)">Continue →</button></div>
@@ -1505,10 +1545,10 @@ footer { text-align:center; padding:24px; font-size:.75rem; font-weight:300; col
   <div class="qs">If you end up owing, the IRS offers several ways to pay. Choosing now saves a step later.</div>
   <div class="divider"></div>
   <div class="cards" id="owePay">
-    <div class="card" onclick="radio(this,'owePay')"><div class="ci">🏦</div><div class="cb"><div class="ct">Direct debit from my bank account</div><div class="cd">We include your routing and account number in the return and the IRS withdraws automatically on the filing date. You'll provide your bank info securely when you upload your documents later.</div></div><div class="dot"></div></div>
-    <div class="card" onclick="radio(this,'owePay')"><div class="ci">💻</div><div class="cb"><div class="ct">I will pay on my own via IRS Direct Pay</div><div class="cd">Free, no account needed. We will include instructions in your finalization letter.</div></div><div class="dot"></div></div>
-    <div class="card" onclick="radio(this,'owePay')"><div class="ci">📅</div><div class="cb"><div class="ct">Installment plan</div><div class="cd">If you cannot pay in full, the IRS offers monthly payment plans. We can request one when we file.</div></div><div class="dot"></div></div>
-    <div class="card" onclick="radio(this,'owePay')"><div class="ci">❓</div><div class="cb"><div class="ct">Not sure yet</div><div class="cd">We will discuss options once we know what you owe.</div></div><div class="dot"></div></div>
+    <div class="card" onclick="radio(this,'owePay')"><div class="ci"><svg viewBox="0 0 24 24"><path d="M3 22h18"/><path d="M19 10v12"/><path d="m12 2-9 6h18Z"/><path d="M5 10v12"/><path d="M9 10v12"/><path d="M15 10v12"/></svg></div><div class="cb"><div class="ct">Direct debit from my bank account</div><div class="cd">We include your routing and account number in the return and the IRS withdraws automatically on the filing date. You'll provide your bank info securely when you upload your documents later.</div></div><div class="dot"></div></div>
+    <div class="card" onclick="radio(this,'owePay')"><div class="ci"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div><div class="cb"><div class="ct">I will pay on my own via IRS Direct Pay</div><div class="cd">Free, no account needed. We will include instructions in your finalization letter.</div></div><div class="dot"></div></div>
+    <div class="card" onclick="radio(this,'owePay')"><div class="ci"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div><div class="cb"><div class="ct">Installment plan</div><div class="cd">If you cannot pay in full, the IRS offers monthly payment plans. We can request one when we file.</div></div><div class="dot"></div></div>
+    <div class="card" onclick="radio(this,'owePay')"><div class="ci"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div><div class="cb"><div class="ct">Not sure yet</div><div class="cd">We will discuss options once we know what you owe.</div></div><div class="dot"></div></div>
   </div>
   <div class="note">💡 If you select direct debit, please include a voided check or your routing and account number in your secure document upload folder. We never store banking information in this form.</div>
   <div class="brow"><button class="bk" onclick="go(11)">← Back</button><button class="btn" onclick="go(13)">Continue →</button></div>
@@ -1521,10 +1561,10 @@ footer { text-align:center; padding:24px; font-size:.75rem; font-weight:300; col
   <div class="qs">Last year's return helps us prepare your 2025 return faster and more accurately.</div>
   <div class="divider"></div>
   <div class="cards" id="prior">
-    <div class="card" onclick="radio(this,'prior')"><div class="ci">✅</div><div class="cb"><div class="ct">Yes I can send it</div><div class="cd">I'll include it when I upload my documents later</div></div><div class="dot"></div></div>
-    <div class="card" onclick="radio(this,'prior')"><div class="ci">✨</div><div class="cb"><div class="ct">Calm Tax Co. prepared my 2024 return</div></div><div class="dot"></div></div>
-    <div class="card" onclick="radio(this,'prior')"><div class="ci">🆕</div><div class="cb"><div class="ct">This is my first time filing</div><div class="cd">No prior return exists</div></div><div class="dot"></div></div>
-    <div class="card" onclick="radio(this,'prior')"><div class="ci">❌</div><div class="cb"><div class="ct">I cannot get a copy of my 2024 return</div></div><div class="dot"></div></div>
+    <div class="card" onclick="radio(this,'prior')"><div class="ci"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><div class="cb"><div class="ct">Yes I can send it</div><div class="cd">I'll include it when I upload my documents later</div></div><div class="dot"></div></div>
+    <div class="card" onclick="radio(this,'prior')"><div class="ci"><svg viewBox="0 0 24 24"><path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m0-12.728l.707.707m11.314 11.314l.707-.707"/></svg></div><div class="cb"><div class="ct">Calm Tax Co. prepared my 2024 return</div></div><div class="dot"></div></div>
+    <div class="card" onclick="radio(this,'prior')"><div class="ci"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg></div><div class="cb"><div class="ct">This is my first time filing</div><div class="cd">No prior return exists</div></div><div class="dot"></div></div>
+    <div class="card" onclick="radio(this,'prior')"><div class="ci"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div><div class="cb"><div class="ct">I cannot get a copy of my 2024 return</div></div><div class="dot"></div></div>
   </div>
   <div class="brow"><button class="bk" onclick="go(12)">← Back</button><button class="btn" onclick="go(14)">Continue →</button></div>
 </div>
@@ -1649,7 +1689,7 @@ footer { text-align:center; padding:24px; font-size:.75rem; font-weight:300; col
       <div id="secureFolderCard" style="background: rgba(125, 142, 126, 0.06); border: 1.5px solid var(--sage); border-radius: 12px; padding: 22px; margin-bottom: 32px; box-shadow: 0 4px 10px rgba(125,142,126,0.03); display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;">
         <div style="flex: 1; min-width: 260px;">
           <h4 style="margin: 0 0 6px 0; color: var(--ink); font-family: 'Lora', serif; font-size: 1.1rem; display: flex; align-items: center; gap: 8px;">
-            <span style="font-size: 1.3rem;">📂</span> Secure Folder
+            <svg style="width:1.2em; height:1.2em; fill:none; stroke:currentColor; stroke-width:2; display:inline-block; vertical-align:middle;" viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg> Secure Folder
           </h4>
           <div style="font-size: 0.86rem; color: var(--mid); line-height: 1.45; text-align: left;">
             Your files are securely uploaded and routed directly to our private system. <span style="display:inline-block; margin-left: 4px; cursor: pointer; color: var(--ink); text-decoration: underline;" onclick="const el = document.getElementById('securityDetailsMain'); el.style.display = el.style.display === 'none' ? 'block' : 'none';">Privacy & Security details</span>
@@ -1669,7 +1709,7 @@ footer { text-align:center; padding:24px; font-size:.75rem; font-weight:300; col
       <div id="checklistUploadedFilesSection" style="margin-bottom: 24px; padding: 16px; border: 1px solid var(--border); border-radius: 12px; background: rgba(60, 54, 51, 0.015); display: none;">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
           <h5 style="margin: 0; font-size: 0.82rem; font-family: 'Inter', sans-serif; text-transform: uppercase; letter-spacing: 0.05em; color: var(--mid); display: flex; align-items: center; gap: 6px;">
-            <span style="font-size: 1rem;">🗂️</span> Documents Uploaded (<span id="checklistUploadedCount">0</span>)
+            <svg style="width:1.2em; height:1.2em; fill:none; stroke:currentColor; stroke-width:2; display:inline-block; vertical-align:middle;" viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/><line x1="12" y1="11" x2="12" y2="17"/><line x1="9" y1="14" x2="15" y2="14"/></svg> Documents Uploaded (<span id="checklistUploadedCount">0</span>)
           </h5>
           <span style="font-size: 0.72rem; color: var(--sage); font-weight: 600; display: flex; align-items: center; gap: 4px;">
             <span style="display:inline-block; width:5px; height:5px; background:var(--sage); border-radius:50%"></span> Folder Synced
@@ -2804,7 +2844,7 @@ function submitForm() {
         return `
           <div style="display: flex; align-items: middle; justify-content: space-between; padding: 10px 14px; background: var(--white); border: 1px solid var(--border); border-radius: 8px; font-size: 0.84rem; transition: all 0.2s ease; gap: 8px;">
             <div style="display: flex; align-items: center; gap: 8px; overflow: hidden;">
-              <span style="font-size: 1.15rem; color: var(--sage); flex-shrink: 0;">📄</span>
+              <span style="color: var(--sage); flex-shrink: 0; display: flex; align-items: center; justify-content: center;"><svg style="width:1.15rem; height:1.15rem; fill:none; stroke:currentColor; stroke-width:2;" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></span>
               <div style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap; line-height: 1.35;">
                 <strong style="color: var(--ink); font-weight: 500; font-size: 0.86rem; display: block; overflow: hidden; text-overflow: ellipsis;">${file.name}</strong>
                 <span style="font-size: 0.74rem; color: var(--mid);">${file.size} · Saved to Drive</span>
@@ -2822,7 +2862,7 @@ function submitForm() {
         return `
           <div style="display: flex; align-items: middle; justify-content: space-between; padding: 10px 14px; background: var(--white); border: 1.2px solid var(--border); border-radius: 8px; font-size: 0.84rem; transition: all 0.2s ease; gap: 8px;">
             <div style="display: flex; align-items: center; gap: 8px; overflow: hidden;">
-              <span style="font-size: 1.15rem; color: var(--sage); flex-shrink: 0;">📄</span>
+              <span style="color: var(--sage); flex-shrink: 0; display: flex; align-items: center; justify-content: center;"><svg style="width:1.15rem; height:1.15rem; fill:none; stroke:currentColor; stroke-width:2;" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></span>
               <div style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap; line-height: 1.35;">
                 <strong style="color: var(--ink); font-weight: 500; font-size: 0.86rem; display: block; overflow: hidden; text-overflow: ellipsis;">${file.name}</strong>
                 <span style="font-size: 0.74rem; color: var(--mid);">${file.size} · Connected ${file.time}</span>
@@ -2897,7 +2937,7 @@ function submitForm() {
       
       row.innerHTML = `
         <div style="display: flex; align-items: center; gap: 8px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
-          <span style="color: var(--mid)">📄</span>
+          <span style="color: var(--mid); display: flex; align-items: center; justify-content: center;"><svg style="width:1.15rem; height:1.15rem; fill:none; stroke:currentColor; stroke-width:2;" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></span>
           <strong style="color: var(--ink); overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${file.name}</strong>
         </div>
         <span class="file-status" style="color: var(--mid); font-style: italic; font-size: 0.78rem; flex-shrink: 0; margin-left: 8px;">Uploading (0%)...</span>
