@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="500"
+   height="500"
+   viewBox="0 0 132.29167 132.29167"
+   version="1.1"
+   id="svg31570"
+   inkscape:version="1.1.1 (3bf5ae0d25, 2021-09-20)"
+   sodipodi:docname="Dark Favicon.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview31572"
+     pagecolor="#ffffff"
+     bordercolor="#111111"
+     borderopacity="1"
+     inkscape:pageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="1"
+     inkscape:document-units="mm"
+     showgrid="false"
+     units="px"
+     inkscape:zoom="0.54929737"
+     inkscape:cx="89.204869"
+     inkscape:cy="327.69136"
+     inkscape:window-width="1248"
+     inkscape:window-height="874"
+     inkscape:window-x="656"
+     inkscape:window-y="73"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs31567">
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient853">
+      <stop
+         style="stop-color:#faf8f5;stop-opacity:1;"
+         offset="0"
+         id="stop849" />
+      <stop
+         style="stop-color:#faf8f5;stop-opacity:0;"
+         offset="1"
+         id="stop851" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient853"
+       id="linearGradient855"
+       x1="18.547858"
+       y1="68.983502"
+       x2="100.18357"
+       y2="68.983502"
+       gradientUnits="userSpaceOnUse" />
+  </defs>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="fill:#3c3633;fill-opacity:1;fill-rule:evenodd;stroke-width:0.264583"
+       id="rect31657"
+       width="132.29167"
+       height="132.29167"
+       x="1.3623853"
+       y="2.0435779"
+       rx="18.520834"
+       ry="18.520834" />
+    <text
+       xml:space="preserve"
+       style="font-style:italic;font-size:189.971px;line-height:1.25;font-family:'Instrument Serif';-inkscape-font-specification:'Instrument Serif Italic';word-spacing:0px;fill:#faf8f5;fill-opacity:1;stroke-width:0.237463"
+       x="2.8752511"
+       y="136.89813"
+       id="text32643"
+       transform="scale(1.1142093,0.89749744)"><tspan
+         sodipodi:role="line"
+         id="tspan32641"
+         style="font-size:189.971px;fill:#faf8f5;fill-opacity:1;stroke-width:0.237463"
+         x="2.8752511"
+         y="136.89813">~</tspan></text>
+  </g>
+</svg>
