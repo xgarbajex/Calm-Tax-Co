@@ -29,10 +29,10 @@ const About: React.FC = () => {
           </div>
           
           {/* Right Column - Text */}
-          <div className="text-left">
+          <div className="text-center md:text-left flex flex-col items-center md:items-start">
             <h2 className="text-4xl md:text-5xl serif-font text-[#3C3633] mb-4">Hi, I'm Jennifer.</h2>
-            <div className="w-48 h-px bg-[#3C3633]/20 mb-8" />
-            <div className="space-y-6 text-[#5D6D7E] text-lg leading-relaxed font-light">
+            <div className="w-48 h-px bg-[#3C3633]/20 mb-8 mx-auto md:mx-0" />
+            <div className="space-y-6 text-[#5D6D7E] text-lg leading-relaxed font-light text-center md:text-left">
               <p>
                 I started Calm Tax Co. because I wanted tax preparation to feel simpler, clearer, and easier to navigate. Too often, getting your taxes prepared feels more complicated than it needs to be.
               </p>
@@ -43,7 +43,7 @@ const About: React.FC = () => {
                 I am based in Arizona and work with clients across all 50 states as an IRS Authorized E-File Provider and IRS PTIN Holder.
               </p>
             </div>
-            <div className="mt-8 pt-6 border-t border-[#3C3633]/10">
+            <div className="mt-8 pt-6 border-t border-[#3C3633]/10 w-full">
               <span className="block text-xs uppercase tracking-widest text-[#3C3633] font-semibold mb-2">Credentials</span>
               <div className="text-[#7D8E7E] text-sm font-medium tracking-wide uppercase">
                 IRS Authorized E-File Provider · IRS PTIN Holder
