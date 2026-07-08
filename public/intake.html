@@ -2338,7 +2338,7 @@ function buildChecklist() {
 
   if (hasInc('Rental')) {
     l.push('• Rental income summary');
-    l.push('• Rental expense summary by category (repairs, insurance, HOA, mortgage interest, etc.)');
+    l.push('• Rental property expense totals by category (for property rented to others or held available for rent, separate from personal home office expenses)');
     if (sel('rentalPurchase').includes('purchased') || sel('rentalPurchase').includes("I'm not sure")) {
       l.push('• Closing Disclosure or settlement statement for rental property purchased during the year');
     }
@@ -2363,7 +2363,7 @@ function buildChecklist() {
   if (d.includes('Medical') || d.includes('health')) l.push('• Medical expense summary and health insurance premium records');
   if (d.includes('IRA') || d.includes('retirement')) l.push('• IRA contribution records (Form 5498 if available)');
   if (d.includes('Childcare'))         l.push('• Childcare provider\'s name, address, EIN or SSN, and total amount paid');
-  if (d.includes('Home office'))       l.push('• Home office information: office square footage, total home square footage, and annual home expenses such as rent or mortgage interest, property taxes, utilities, insurance, internet, and repairs if applicable');
+  if (d.includes('Home office'))       l.push('• Home office deduction choice and information: choose simplified if you prefer not to gather home expense records, or compare actual expenses if you can provide annual home expense totals');
   if (d.includes('Phone') || d.includes('phone') || d.includes('internet') || d.includes('Internet')) {
     l.push('• Total annual cost of phone and/or internet and your estimated business-use percentage');
   }
@@ -2482,7 +2482,7 @@ function submitForm() {
     "1099-G": "Annual unemployment compensation state tax statement.",
     "SSA-1099": "Social Security benefit statement from ssa.gov.",
     "Rental income summary": "Gross rent collected from tenants and any other related rental receipts.",
-    "Rental expense summary": "Totals categorized by repairs, business insurance, HOA fees, mortgage interest, and utilities.",
+    "Rental property expense totals": "For property rented to others or held available for rent. Include annual totals by category such as repairs, insurance, HOA fees, mortgage interest, taxes, utilities, management fees, and supplies.",
     "Closing Disclosure or settlement statement for rental property purchased during the year": "If you purchased a rental property during the year, upload your Closing Disclosure (or HUD-1 if applicable). This helps establish your tax basis and depreciation.",
     "Closing Disclosure (or settlement statement), Form 1099-S (if received), and records of major home improvements": "If you sold your home during the year, upload your Closing Disclosure (or settlement statement), Form 1099-S if you received one, and records of major improvements if available. These help determine any taxable gain and any applicable home sale exclusion.",
     "Vehicle details": "We need both vehicle details and mileage: year, make, model, date first used for business, business miles, total miles, and how you tracked them.",
@@ -2494,7 +2494,7 @@ function submitForm() {
     "Medical expense summary": "Sum of premiums, doctor copays, dental, optical, and prescriptions (only helpful if extremely high).",
     "Retirement contribution outside payroll": "Records of any contributions made to traditional or Roth IRAs outside of work payroll.",
     "Childcare provider's name": "Must include childcare provider's legal name, physical address, EIN/SSN, and the exact total amount paid in 2025.",
-    "Home office information": "Square footage plus related home expenses such as rent or mortgage interest, utilities, insurance, internet, and repairs if applicable.",
+    "Home office deduction choice": "Choose simplified if you prefer not to gather home expense records, or compare actual expenses if you can provide square footage and annual home expense totals.",
     "Total annual cost of phone": "Total phone/internet bills and your estimated business use percentage (e.g., 70% business).",
     "Total amount spent on supplies": "Add up purchases for business supplies, office equipment, software, or professional tools.",
     "Adoption expense": "Documentation for qualifying costs incurred during a legal adoption process.",
