@@ -805,6 +805,8 @@ footer { text-align:center; padding:24px; font-size:.75rem; font-weight:300; col
   to { transform: rotate(360deg); }
 }
 
+
+.brow .btn,.brow .bk,.card,.hiw-col.clickable{touch-action:manipulation;-webkit-tap-highlight-color:transparent;}
 </style>
 </head>
 <body>
@@ -2346,7 +2348,7 @@ function buildChecklist() {
 
   const d = chk('deds');
   if (d.includes('vehicle') || d.includes('Vehicle')) {
-    l.push('• Vehicle details and mileage records');
+    l.push('• Vehicle details: Year, make, model, date first used for business, business miles, and total miles');
   }
   if (d.includes('Mortgage interest')) l.push('• 1098 mortgage interest statement for your primary home');
   if (d.includes('Property taxes'))    l.push('• Property tax payment records or statements');
@@ -2367,7 +2369,7 @@ function buildChecklist() {
   if (d.includes('Alimony'))           l.push('• Alimony payment records and divorce agreement date');
 
   if (sel('healthCov').includes('Marketplace') || sel('healthCov').includes('ACA') || chk('partialHealthType').includes('Marketplace')) {
-    l.push('• Form 1095-A from Healthcare.gov / Marketplace (required to complete your return if you had Marketplace coverage)');
+    l.push('• Form 1095-A from Healthcare.gov / Marketplace');
   }
   if (sel('refundPref').includes('deposit') || sel('owePay').includes('direct debit') || sel('owePay').includes('Direct debit')) {
     addUniqueChecklistItem(l, '• Banking Information: routing number, account number, account type, and direct deposit/direct debit preference');
@@ -3030,5 +3032,16 @@ function submitForm() {
     }
   }
 </script>
+
+<script>
+(function(){
+  let lastTouchActivation=0;
+  let syntheticTouchClick=false;
+  function actionable(el){return el&&el.closest?el.closest('.brow .btn,.brow .bk,.card,.hiw-col.clickable'):null;}
+  document.addEventListener('touchend',function(event){const el=actionable(event.target);if(!el)return;lastTouchActivation=Date.now();event.preventDefault();syntheticTouchClick=true;el.click();if(el.blur)el.blur();setTimeout(function(){syntheticTouchClick=false;},0);},{passive:false});
+  document.addEventListener('click',function(event){const el=actionable(event.target);if(!el)return;if(!syntheticTouchClick&&Date.now()-lastTouchActivation<450){event.preventDefault();event.stopImmediatePropagation();}},true);
+})();
+</script>
+
 </body>
 </html>
