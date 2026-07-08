@@ -2287,12 +2287,12 @@ function buildChecklist() {
   const l = [];
 
   // Core identity/tax ID info - request through secure upload only, not by email.
-  l.push('• Taxpayer SSN or ITIN (provide only through your secure upload folder - do not email it)');
+  l.push('• Taxpayer SSN or ITIN');
   if (sel('filStat').includes('Married filing jointly') || v('fSFirst')) {
-    l.push('• Spouse SSN or ITIN (secure upload only)');
+    l.push('• Spouse SSN or ITIN');
   }
   if (depInfo()) {
-    l.push('• SSN or ITIN for each dependent you are claiming (secure upload only)');
+    l.push('• SSN or ITIN for each dependent you are claiming');
   }
 
   l.push('• Prior year tax return (2024) if available');
@@ -2346,7 +2346,7 @@ function buildChecklist() {
 
   const d = chk('deds');
   if (d.includes('vehicle') || d.includes('Vehicle')) {
-    l.push('• Vehicle details and mileage: year, make, model, date first used for business, business miles, total miles, and how mileage was tracked');
+    l.push('• Vehicle details and mileage records');
   }
   if (d.includes('Mortgage interest')) l.push('• 1098 mortgage interest statement for your primary home');
   if (d.includes('Property taxes'))    l.push('• Property tax payment records or statements');
@@ -2457,9 +2457,9 @@ function submitForm() {
   if (modalFolderNameSpan) modalFolderNameSpan.textContent = formattedFolder;
 
   const docSubtitles = {
-    "Taxpayer SSN or ITIN": "Required to file your tax return. Provide only through your secure upload folder - do not email it for privacy.",
-    "Spouse SSN or ITIN": "Required for a Married Filing Jointly return. Provide safely via secure upload only.",
-    "SSN or ITIN for each dependent": "Required for each child or relative claimed as a dependent.",
+    "Taxpayer SSN or ITIN": "Required to file your tax return. You can provide it securely on the checklist page or through your secure upload folder. Please do not email it.",
+    "Spouse SSN or ITIN": "Required for a Married Filing Jointly return. You can provide it securely on the checklist page or through your secure upload folder. Please do not email it.",
+    "SSN or ITIN for each dependent": "Required for each child or relative claimed as a dependent. You can provide it securely on the checklist page or through your secure upload folder. Please do not email it.",
     "Prior year tax return": "Helps us verify your identity-protection PIN and carryover deductions from your 2024 filing.",
     "W-2 form": "Issued by your employers. Usually found on your payroll portal (ADP, Gusto, Workday) or physical mail in January.",
     "1099-NEC": "Issued by clients or contract/gig platforms (Upwork, Fiverr) for self-employed work over $600.",
@@ -2478,7 +2478,7 @@ function submitForm() {
     "Rental expense summary": "Totals categorized by repairs, business insurance, HOA fees, mortgage interest, and utilities.",
     "Closing Disclosure or settlement statement for rental property purchased during the year": "If you purchased a rental property during the year, upload your Closing Disclosure (or HUD-1 if applicable). This helps establish your tax basis and depreciation.",
     "Closing Disclosure (or settlement statement), Form 1099-S (if received), and records of major home improvements": "If you sold your home during the year, upload your Closing Disclosure (or settlement statement), Form 1099-S if you received one, and records of major improvements if available. These help determine any taxable gain and any applicable home sale exclusion.",
-    "Vehicle details": "Your vehicle's year, make, model and mileage records (business vs. total miles driven in 2025).",
+    "Vehicle details": "We need both vehicle details and mileage: year, make, model, date first used for business, business miles, total miles, and how you tracked them.",
     "Keep your mileage log": "Keep detailed records in case of an IRS audit. We don't need the individual logs unless requested.",
     "Property tax payment records": "Found on your local county assessor's statement or escrow statements.",
     "1098-E": "Student loan interest statement from your loan servicer (Nelnet, Aidvantage, etc.).",
@@ -2494,8 +2494,8 @@ function submitForm() {
     "EV purchase documents": "Sales contract showing purchase date, vehicle VIN and dealer certification of eligibility.",
     "Alimony payment records": "Your divorce decree, recipient's name/SSN, and the total payments made in 2025.",
     "estimated tax payments in 2025": "Specific dates and amounts paid to IRS and/or state during the tax year.",
-    "Banking Information": "If selected, you'll provide this information securely later.",
-    "Bank account information": "If selected, you'll provide this information securely later.",
+    "Banking Information": "You can enter the information securely later on your checklist page or upload a bank document instead.",
+    "Bank account information": "You can enter the information securely later on your checklist page or upload a bank document instead.",
     "Other Documents": "Any other tax-related documents or notices not listed here."
   };
 
