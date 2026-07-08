@@ -2264,11 +2264,17 @@ function finalTaxInfo() {
 }
 
 function normalizeChecklistLabel(item) {
-  return String(item || '')
+  const text = String(item || '')
     .replace(/^•\s*/, '')
     .replace(/\s+/g, ' ')
     .trim()
     .toLowerCase();
+  const compact = text.replace(/[^a-z0-9]+/g, ' ').trim();
+  if (compact.includes('banking information') || compact.includes('bank account information') || compact.includes('routing number')) return 'banking-information';
+  if (compact.includes('childcare provider') && (compact.includes('ein') || compact.includes('ssn')) && compact.includes('total amount paid')) return 'childcare-provider-info';
+  if (compact.includes('vehicle details') && compact.includes('make') && compact.includes('model') && compact.includes('business miles') && compact.includes('total miles')) return 'vehicle-details-mileage';
+  if (compact.includes('business expense totals') || compact.includes('total annual expense amount')) return 'business-expense-totals';
+  return compact;
 }
 
 function addUniqueChecklistItem(list, item) {
@@ -2390,16 +2396,15 @@ function buildChecklist() {
   if (v('stateNotice') === 'Yes') l.push('• Copy of any state tax notice or letter received');
   if (dependentChildcareSelected()) l.push('• Childcare provider name, address, EIN/SSN, and total amount paid');
   
-  // Defensive cleanup: direct deposit and direct debit both require the same banking details.
-  // Keep only one Banking Information checklist item even if multiple banking-related choices apply.
-  const bankingIndexes = [];
-  l.forEach((item, index) => {
-    const key = normalizeChecklistLabel(item);
-    if (key.includes('banking information') || key.includes('bank account information') || key.includes('routing number')) {
-      bankingIndexes.push(index);
-    }
-  });
-  bankingIndexes.slice(1).reverse().forEach(index => l.splice(index, 1));
+  // Defensive cleanup: keep only one checklist item when two answers create the same request
+  // with slightly different wording, such as childcare provider details, vehicle mileage details, or banking info.
+  const seenChecklistKeys = {};
+  for (let index = l.length - 1; index >= 0; index--) {
+    const key = normalizeChecklistLabel(l[index]);
+    if (!key || l[index].trim() === '' || l[index].startsWith('---')) continue;
+    if (seenChecklistKeys[key]) l.splice(index, 1);
+    else seenChecklistKeys[key] = true;
+  }
 
   // ALWAYS ADD OTHER DOCUMENTS
   l.push('• Other Documents');
