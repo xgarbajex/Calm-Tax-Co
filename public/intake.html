@@ -1284,7 +1284,7 @@ footer { text-align:center; padding:24px; font-size:.75rem; font-weight:300; col
     <div class="subsec" style="margin-bottom:10px">
       <div class="subsec-title">Vehicle details</div>
       <div class="fields">
-        <div class="note" style="margin-top:12px">💡 We will need to know your vehicle's year, make, model, date first used for business, business miles, and total miles for 2025. You can provide these details when you upload your tax documents.</div>
+        <div class="note" style="margin-top:12px">💡 We will need to know your vehicle's year, make, model, date first used for business, business miles, commuting miles, and total miles for 2025. You can provide these details when you upload your tax documents.</div>
       </div>
     </div>
   </div>
@@ -2354,7 +2354,7 @@ function buildChecklist() {
 
   const d = chk('deds');
   if (d.includes('vehicle') || d.includes('Vehicle')) {
-    l.push('• Vehicle details: Year, make, model, date first used for business, business miles, and total miles');
+    l.push('• Vehicle details: Year, make, model, date first used for business, business miles, commuting miles, and total miles');
   }
   if (d.includes('Mortgage interest')) l.push('• 1098 mortgage interest statement for your primary home');
   if (d.includes('Property taxes'))    l.push('• Property tax payment records or statements');
@@ -2363,7 +2363,7 @@ function buildChecklist() {
   if (d.includes('Medical') || d.includes('health')) l.push('• Medical expense summary and health insurance premium records');
   if (d.includes('IRA') || d.includes('retirement')) l.push('• IRA contribution records (Form 5498 if available)');
   if (d.includes('Childcare'))         l.push('• Childcare provider\'s name, address, EIN or SSN, and total amount paid');
-  if (d.includes('Home office'))       l.push('• Home office information: office square footage, total home square footage, and supporting expenses such as rent or mortgage interest, property taxes, utilities, insurance, internet, and repairs if applicable');
+  if (d.includes('Home office'))       l.push('• Home office information: office square footage, total home square footage, and annual home expenses such as rent or mortgage interest, property taxes, utilities, insurance, internet, and repairs if applicable');
   if (d.includes('Phone') || d.includes('phone') || d.includes('internet') || d.includes('Internet')) {
     l.push('• Total annual cost of phone and/or internet and your estimated business-use percentage');
   }
