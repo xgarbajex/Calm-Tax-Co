@@ -814,8 +814,8 @@ footer { text-align:center; padding:24px; font-size:.75rem; font-weight:300; col
 <div id="submitLoadingOverlay" class="submit-loading-overlay" role="status" aria-live="polite" aria-hidden="true">
   <div class="submit-loading-card">
     <div class="submit-loading-spinner" aria-hidden="true"></div>
-    <h2 class="submit-loading-title">Creating your personalized checklist...</h2>
-    <p class="submit-loading-message">This usually takes just a few seconds.</p>
+    <h2 class="submit-loading-title">Submitting your answers...</h2>
+    <p class="submit-loading-message">Your secure checklist page will open as soon as it is ready.</p>
   </div>
 </div>
 
@@ -1553,7 +1553,7 @@ footer { text-align:center; padding:24px; font-size:.75rem; font-weight:300; col
     <div class="card" onclick="radio(this,'owePay')"><div class="ci"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div><div class="cb"><div class="ct">Installment plan</div><div class="cd">If you cannot pay in full, the IRS offers monthly payment plans. We can request one when we file.</div></div><div class="dot"></div></div>
     <div class="card" onclick="radio(this,'owePay')"><div class="ci"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div><div class="cb"><div class="ct">Not sure yet</div><div class="cd">We will discuss options once we know what you owe.</div></div><div class="dot"></div></div>
   </div>
-  <div class="note">💡 If selected, you'll provide this information securely later. Please do not email banking information.</div>
+  <div class="note">💡 If selected, you'll provide this information securely later. Please do not share banking information through email, as it is less secure than the upload page.</div>
   <div class="brow"><button class="bk" onclick="go(11)">← Back</button><button class="btn" onclick="go(13)">Continue →</button></div>
 </div>
 
@@ -2459,9 +2459,9 @@ function submitForm() {
   if (modalFolderNameSpan) modalFolderNameSpan.textContent = formattedFolder;
 
   const docSubtitles = {
-    "Taxpayer SSN or ITIN": "Required to file your tax return. You can provide it securely on the checklist page or through your secure upload folder. Please do not email it.",
-    "Spouse SSN or ITIN": "Required for a Married Filing Jointly return. You can provide it securely on the checklist page or through your secure upload folder. Please do not email it.",
-    "SSN or ITIN for each dependent": "Required for each child or relative claimed as a dependent. You can provide it securely on the checklist page or through your secure upload folder. Please do not email it.",
+    "Taxpayer SSN or ITIN": "Required to file your tax return. You can provide it securely on the checklist page. Please do not share it through email, as it is less secure than the checklist page.",
+    "Spouse SSN or ITIN": "Required for a Married Filing Jointly return. You can provide it securely on the checklist page. Please do not share it through email, as it is less secure than the checklist page.",
+    "SSN or ITIN for each dependent": "Required for each child or relative claimed as a dependent. You can provide it securely on the checklist page. Please do not share it through email, as it is less secure than the checklist page.",
     "Prior year tax return": "Helps us verify your identity-protection PIN and carryover deductions from your 2024 filing.",
     "W-2 form": "Issued by your employers. Usually found on your payroll portal (ADP, Gusto, Workday) or physical mail in January.",
     "1099-NEC": "Issued by clients or contract/gig platforms (Upwork, Fiverr) for self-employed work over $600.",
@@ -2737,7 +2737,9 @@ function submitForm() {
         const redirectUrl = data.url || data.checklistUrl;
 
         if (redirectUrl) {
-          window.top.location.href = redirectUrl;
+          const freshUrl = new URL(redirectUrl, window.location.href);
+          freshUrl.searchParams.set('fresh', '1');
+          window.top.location.href = freshUrl.toString();
         } else {
           document.getElementById('s14').classList.remove('active');
           document.getElementById('sDone').classList.add('active');
