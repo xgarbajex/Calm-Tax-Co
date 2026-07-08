@@ -348,6 +348,187 @@
   .journey.journey-card{border-radius:28px;padding:20px 14px 34px;}
 }
 
+
+
+/* Calm Tax v23 premium polish */
+.portal-line{
+  text-align:center;
+  margin:-16px auto 24px;
+  color:rgba(74,84,92,.78);
+  font-size:13.5px;
+  line-height:1.5;
+  letter-spacing:.02em;
+}
+.portal-line span{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  padding:7px 16px;
+  border:1px solid rgba(125,142,126,.18);
+  border-radius:999px;
+  background:rgba(255,255,255,.56);
+  box-shadow:0 4px 14px rgba(60,54,51,.025);
+}
+.card{
+  box-shadow:0 8px 28px rgba(60,54,51,.035);
+}
+.card p,
+.entry-help,
+.upload-alternative,
+.inline-help-panel,
+.tip,
+.row-status,
+.row-file,
+.other-upload-row p,
+.contact-card,
+.privacy{
+  font-size:14px;
+}
+.intro-card{
+  padding:20px 22px;
+  border-color:rgba(125,142,126,.24);
+  background:rgba(255,255,255,.78);
+  box-shadow:0 6px 20px rgba(60,54,51,.035);
+}
+.intro-card-title{
+  font-size:24px;
+  margin-bottom:8px;
+}
+.intro-card p{
+  font-size:14.25px;
+  line-height:1.6;
+}
+.checklist-card-header{
+  margin-bottom:22px;
+}
+.checklist-card-header .progress-pill{
+  font-size:14.5px;
+  padding:9px 17px;
+  box-shadow:0 4px 14px rgba(125,142,126,.06);
+}
+.checklist-card-instructions{
+  font-size:15.25px!important;
+  line-height:1.7!important;
+}
+.group-block{
+  margin:22px 0;
+  border-color:rgba(125,142,126,.20);
+  background:rgba(255,255,255,.66);
+  box-shadow:0 6px 22px rgba(60,54,51,.026);
+}
+.group-summary{
+  padding:16px 18px;
+  background:rgba(125,142,126,.052);
+}
+.group-items{
+  padding:18px 18px 6px;
+}
+.group-name{
+  font-size:1.42rem;
+}
+.group-progress{
+  font-size:12.5px;
+}
+.item.row-upload{
+  background:rgba(255,255,255,.76);
+  border-color:rgba(60,54,51,.07);
+  box-shadow:0 3px 12px rgba(60,54,51,.025);
+}
+.item.row-upload:hover{
+  border-color:rgba(125,142,126,.22);
+  background:rgba(255,255,255,.92);
+}
+.item.row-upload.checked{
+  background:rgba(125,142,126,.045);
+  border-color:rgba(125,142,126,.16);
+}
+.label{
+  font-size:16.25px;
+  line-height:1.52;
+}
+.checked .label{
+  text-decoration-thickness:1px;
+  text-decoration-color:rgba(60,54,51,.35);
+}
+.check{
+  width:23px;
+  height:23px;
+}
+.action-pill,
+.entry-toggle-pill,
+.row-upload-btn{
+  font-size:13.5px;
+  background:rgba(250,248,245,.9);
+  border-color:rgba(125,142,126,.26);
+  box-shadow:none;
+}
+.action-pill:hover,
+.entry-toggle-pill:hover,
+.row-upload-btn:hover{
+  background:rgba(125,142,126,.10);
+  border-color:rgba(125,142,126,.42);
+  box-shadow:0 5px 14px rgba(60,54,51,.04);
+}
+.entry-card.entry-card-collapsed .entry-inner{
+  box-shadow:0 10px 28px rgba(60,54,51,.055);
+}
+.entry-field label{
+  font-size:11.5px;
+}
+.entry-field input,
+.entry-field select,
+.entry-field textarea{
+  font-size:15.5px;
+}
+@media(max-width:700px){
+  .portal-line{
+    margin:-14px auto 20px;
+    font-size:13px;
+  }
+  .portal-line span{
+    border-radius:18px;
+    padding:9px 14px;
+  }
+  .journey{
+    border-radius:24px;
+    padding:18px 12px 28px;
+    background:rgba(255,255,255,.64);
+    border:1px solid rgba(125,142,126,.16);
+    box-shadow:0 6px 20px rgba(60,54,51,.026);
+  }
+  .journey-title{
+    font-size:22px;
+    margin-bottom:16px;
+  }
+  .journey-label{
+    font-size:14.5px;
+  }
+  .intro-card{
+    padding:19px 20px;
+  }
+  .group-block{
+    margin:20px 0;
+    border-radius:20px;
+  }
+  .group-summary{
+    padding:16px;
+  }
+  .group-items{
+    padding:16px 14px 4px;
+  }
+  .label{
+    font-size:16px;
+  }
+  .checklist-card-instructions{
+    font-size:15px!important;
+  }
+  .checklist-card-header .progress-pill{
+    font-size:13.5px;
+    padding:8px 15px;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -452,7 +633,7 @@ function visibleChecklistItems(){const source=state&&state.items?state.items:[];
 function groupProgressInfo(group){const total=group.length;const done=group.filter(function(row){return checked.has(row.idx);}).length;if(done>=total&&total>0)return {cls:'complete',symbol:'●',text:'Complete'};if(done>0)return {cls:'in-progress',symbol:'◐',text:(total-done)+' more item'+(total-done===1?'':'s')+' remaining'};return {cls:'not-started',symbol:'○',text:'Not started'};}
 function groupBlockHtml(cat,group,body,open){const info=groupProgressInfo(group);return '<div class="group-block '+info.cls+(open?'':' collapsed')+'"><button class="group-summary" type="button" onclick="toggleChecklistGroup(this,event)"><span class="group-name">'+esc(cat)+'</span><span class="group-progress"><span class="group-symbol">'+info.symbol+'</span>'+esc(info.text)+' <span class="group-chevron">▾</span></span></button><div class="group-items">'+body+'</div></div>';}
 function toggleChecklistGroup(btn,event){if(event)event.stopPropagation();const block=btn&&btn.closest?btn.closest('.group-block'):null;if(!block)return;block.classList.toggle('collapsed');}
-function render(){if(!state)return;const visibleItems=visibleChecklistItems();const items=visibleItems.map(function(row){return row.item;});const groups={};visibleItems.forEach(function(row){const c=categoryFor(row.item);if(!groups[c])groups[c]=[];groups[c].push({item:row.item,idx:row.idx});});const order=['Identity & Prior Return','Income Documents','Business & Deduction Records','Personal Deductions & Credits','Other Tax Items','Additional Documents'];let checklistHtml='';let groupNumber=0;order.forEach(function(cat){let group=groups[cat];if(!group||!group.length)return;group=group.slice().sort(function(a,b){return Number(checked.has(a.idx))-Number(checked.has(b.idx));});const body=group.map(function(row){return itemHtml(row.item,row.idx);}).join('');const info=groupProgressInfo(group);const open=(groupNumber===0||info.cls==='in-progress');checklistHtml+=groupBlockHtml(cat,group,body,open);groupNumber++;});const firstName=((state.name||'').split(' ')[0]||'there');const otherFiles=(state.uploadedFiles||[]).filter(function(f){return f.checklistIndex===''||f.checklistIndex===null||f.checklistIndex===undefined;}).map(fileHtml).join('');const ready=isReturnReadyMode();const complete=isCompleteMode();document.title=complete?'Your Tax Return Is Complete | Calm Tax Co.':(ready?'Review Your Tax Return | Calm Tax Co.':'Calm Tax Co. Tax Checklist & Documents');let html='<div class="brand"><div>'+logo()+'</div><div class="year"><div class="year-label">Tax Year</div><div class="year-num">2025</div></div></div>'+(complete?'':journeyHtml());if(complete){html+='<h1 class="title">Your Tax Return<br>Is Complete</h1>'+returnReviewHtml();}else if(ready){html+='<h1 class="title">Review<br>Your Tax Return</h1>'+returnReviewHtml()+signed8879UploadHtml()+originalChecklistDetailsHtml(checklistHtml,items);}else{html+='<h1 class="title checklist-title"><span class="client-name">Hi '+esc(firstName)+',</span><span class="checklist-subtitle">Your personalized upload checklist is below.</span></h1>'+checklistIntroHtml(firstName)+(state.uploadsLockedMessage?'<div class="privacy lock-note"><strong>Uploads locked:</strong> '+esc(state.uploadsLockedMessage)+'</div>':'')+'<div class="card"><div class="checklist-card-header"><div class="progress-pill">'+progressText(completedCount(),items.length)+'</div><p class="checklist-card-instructions">For each item, choose one option: take a photo, upload a file, or enter the information directly when available. You can manually check or uncheck items anytime.</p></div><div id="checklistList">'+(checklistHtml||'<p>No checklist items found. Please contact us if you think this is an error.</p>')+'</div>'+normalOtherUploadHtml(otherFiles)+'</div>';}html+=privacyHtml()+'<div class="contact-card"><span class="contact-icon"><svg class="icon-inline" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16v16H4z"/><path d="m4 7 8 6 8-6"/></svg></span><span>Questions? Reply to your checklist email or contact <a class="contact-email" href="mailto:hello@calmtax.co">hello@calmtax.co</a>.</span></div><p class="footer-note">© 2026 Calm Tax Co.</p>';document.getElementById('app').innerHTML=html;}function completedCount(){return visibleChecklistItems().filter(function(row){return checked.has(row.idx);}).length;}
+function render(){if(!state)return;const visibleItems=visibleChecklistItems();const items=visibleItems.map(function(row){return row.item;});const groups={};visibleItems.forEach(function(row){const c=categoryFor(row.item);if(!groups[c])groups[c]=[];groups[c].push({item:row.item,idx:row.idx});});const order=['Identity & Prior Return','Income Documents','Business & Deduction Records','Personal Deductions & Credits','Other Tax Items','Additional Documents'];let checklistHtml='';let groupNumber=0;order.forEach(function(cat){let group=groups[cat];if(!group||!group.length)return;group=group.slice().sort(function(a,b){return Number(checked.has(a.idx))-Number(checked.has(b.idx));});const body=group.map(function(row){return itemHtml(row.item,row.idx);}).join('');const info=groupProgressInfo(group);const open=(groupNumber===0||info.cls==='in-progress');checklistHtml+=groupBlockHtml(cat,group,body,open);groupNumber++;});const firstName=((state.name||'').split(' ')[0]||'there');const otherFiles=(state.uploadedFiles||[]).filter(function(f){return f.checklistIndex===''||f.checklistIndex===null||f.checklistIndex===undefined;}).map(fileHtml).join('');const ready=isReturnReadyMode();const complete=isCompleteMode();document.title=complete?'Your Tax Return Is Complete | Calm Tax Co.':(ready?'Review Your Tax Return | Calm Tax Co.':'Calm Tax Co. Tax Checklist & Documents');let html='<div class="brand"><div>'+logo()+'</div><div class="year"><div class="year-label">Tax Year</div><div class="year-num">2025</div></div></div><div class="portal-line"><span>Secure document upload for your 2025 tax return</span></div>'+(complete?'':journeyHtml());if(complete){html+='<h1 class="title">Your Tax Return<br>Is Complete</h1>'+returnReviewHtml();}else if(ready){html+='<h1 class="title">Review<br>Your Tax Return</h1>'+returnReviewHtml()+signed8879UploadHtml()+originalChecklistDetailsHtml(checklistHtml,items);}else{html+='<h1 class="title checklist-title"><span class="client-name">Hi '+esc(firstName)+',</span><span class="checklist-subtitle">Your personalized upload checklist is below.</span></h1>'+checklistIntroHtml(firstName)+(state.uploadsLockedMessage?'<div class="privacy lock-note"><strong>Uploads locked:</strong> '+esc(state.uploadsLockedMessage)+'</div>':'')+'<div class="card"><div class="checklist-card-header"><div class="progress-pill">'+progressText(completedCount(),items.length)+'</div><p class="checklist-card-instructions">For each item, choose one option: take a photo, upload a file, or enter the information directly when available. You can manually check or uncheck items anytime.</p></div><div id="checklistList">'+(checklistHtml||'<p>No checklist items found. Please contact us if you think this is an error.</p>')+'</div>'+normalOtherUploadHtml(otherFiles)+'</div>';}html+=privacyHtml()+'<div class="contact-card"><span class="contact-icon"><svg class="icon-inline" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16v16H4z"/><path d="m4 7 8 6 8-6"/></svg></span><span>Questions? Reply to your checklist email or contact <a class="contact-email" href="mailto:hello@calmtax.co">hello@calmtax.co</a>.</span></div><p class="footer-note">© 2026 Calm Tax Co.</p>';document.getElementById('app').innerHTML=html;}function completedCount(){return visibleChecklistItems().filter(function(row){return checked.has(row.idx);}).length;}
 async function toggleChecklistItem(idx,event){if(event)event.stopPropagation();idx=Number(idx);if(Number.isNaN(idx))return;if(checked.has(idx))checked.delete(idx);else checked.add(idx);render();try{await api({form_type:'saveChecklistState',clientId:CLIENT_ID,checkedIndexes:Array.from(checked)});}catch(error){console.error(error);}}
 function setRowStatus(idx,type,message){const el=document.getElementById('rowStatus-'+idx);if(!el)return;const icon=type==='loading'?'<span class="mini-spinner"></span>':type==='success'?'<span class="upload-check">✓</span>':'';el.innerHTML=icon+esc(message||'');}
 function formatFileSize(bytes){if(!bytes)return '0 KB';const kb=bytes/1024;if(kb<1024)return Math.round(kb)+' KB';return (kb/1024).toFixed(1)+' MB';}
