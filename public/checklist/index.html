@@ -761,6 +761,31 @@
   .entry-grid{grid-template-columns:1fr!important;}
 }
 
+
+
+/* Calm Tax v38: restore pill upload button and stable entry expansion layout */
+@media(min-width:701px){
+  .item-head{display:grid!important;grid-template-columns:24px minmax(0,1fr) 260px!important;align-items:start!important;column-gap:12px!important;}
+  .item-actions{grid-column:3!important;display:flex!important;flex-direction:column!important;align-items:stretch!important;justify-content:flex-start!important;gap:8px!important;width:260px!important;max-width:260px!important;flex:0 0 260px!important;margin:0 0 0 auto!important;padding-left:0!important;}
+  .item-actions .single-upload-pill{display:inline-flex!important;width:100%!important;max-width:260px!important;min-width:0!important;height:auto!important;min-height:40px!important;aspect-ratio:auto!important;border-radius:999px!important;padding:9px 16px!important;flex:0 0 auto!important;align-items:center!important;justify-content:center!important;white-space:nowrap!important;line-height:1.2!important;box-sizing:border-box!important;}
+  .item-actions .single-upload-pill svg{width:16px!important;height:16px!important;flex:0 0 auto!important;}
+  .item-actions .entry-card.entry-card-collapsed{display:block!important;width:100%!important;max-width:260px!important;margin:0!important;padding:0!important;border:0!important;background:transparent!important;box-shadow:none!important;box-sizing:border-box!important;overflow:visible!important;flex:0 0 auto!important;}
+  .entry-choice-row{width:100%!important;max-width:260px!important;margin:0!important;}
+  .entry-toggle-pill{display:inline-flex!important;width:100%!important;max-width:260px!important;min-height:40px!important;border-radius:999px!important;padding:9px 16px!important;align-items:center!important;justify-content:center!important;white-space:nowrap!important;line-height:1.2!important;box-sizing:border-box!important;}
+  .entry-card.entry-card-collapsed.open .entry-inner{display:block!important;width:min(620px,calc(100vw - 90px))!important;max-width:620px!important;position:relative!important;left:auto!important;right:0!important;transform:translateX(calc(260px - 100%))!important;margin-top:10px!important;}
+}
+@media(max-width:700px){
+  .item-head{display:flex!important;flex-direction:column!important;align-items:center!important;text-align:center!important;gap:10px!important;}
+  .item-title-wrap{width:100%!important;max-width:100%!important;text-align:center!important;}
+  .item-actions{display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:8px!important;width:100%!important;max-width:100%!important;flex:0 0 auto!important;margin:10px auto 0!important;padding-left:0!important;}
+  .item-actions .single-upload-pill{display:inline-flex!important;width:min(280px,100%)!important;max-width:280px!important;min-width:0!important;height:auto!important;min-height:42px!important;aspect-ratio:auto!important;border-radius:999px!important;padding:10px 16px!important;flex:0 0 auto!important;align-items:center!important;justify-content:center!important;white-space:nowrap!important;line-height:1.2!important;box-sizing:border-box!important;}
+  .item-actions .single-upload-pill svg{width:16px!important;height:16px!important;flex:0 0 auto!important;}
+  .item-actions .entry-card.entry-card-collapsed{display:block!important;width:min(280px,100%)!important;max-width:280px!important;margin:0!important;padding:0!important;border:0!important;background:transparent!important;box-shadow:none!important;box-sizing:border-box!important;overflow:visible!important;flex:0 0 auto!important;}
+  .entry-choice-row{width:100%!important;max-width:280px!important;margin:0!important;text-align:center!important;}
+  .entry-toggle-pill{display:inline-flex!important;width:100%!important;max-width:280px!important;min-height:42px!important;border-radius:999px!important;padding:10px 16px!important;align-items:center!important;justify-content:center!important;white-space:nowrap!important;line-height:1.2!important;box-sizing:border-box!important;}
+  .entry-card.entry-card-collapsed.open .entry-inner{display:block!important;width:calc(100vw - 44px)!important;max-width:620px!important;position:relative!important;left:50%!important;right:auto!important;transform:translateX(-50%)!important;margin-top:10px!important;box-sizing:border-box!important;}
+}
+
 </style>
 </head>
 <body>
@@ -830,6 +855,18 @@ function svgIcon(name){const icons={camera:'<svg class="icon-inline" viewBox="0 
 function taxIdMaskText(value){const raw=String(value||'');let out='';for(let i=0;i<raw.length;i++){out += /\d/.test(raw[i]) ? '•' : raw[i];}return out;}
 function updateTaxIdMask(input){if(!input)return;const wrap=input.closest('.taxid-sensitive-wrap');const mask=wrap?wrap.querySelector('.taxid-mask-display'):null;if(mask)mask.textContent=taxIdMaskText(input.value||'');}
 function fieldInputHtml(field,idx,value){const key=esc(field.key||'');const label=esc(field.label||'');const type=field.type||'text';const id='entry-'+idx+'-'+key;const val=esc(value||'');const taxIdFormat=!!field.taxIdFormat;const sensitive=(!!field.sensitive||type==='password');const compact=!!field.compactLabel;const depAttr=field.depRow?' data-dep-row="'+field.depRow+'"':'';const full=(type==='textarea'||String(field.label||'').toLowerCase().includes('notes')||String(field.label||'').toLowerCase().includes('dates and amounts'))?' full':'';const fieldClass='entry-field'+full+(compact?' compact-label':'');const placeholder=field.placeholder?' placeholder="'+esc(field.placeholder)+'"':'';const autocomplete=(sensitive||taxIdFormat)?' autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" data-lpignore="true" data-1p-ignore="true" data-form-type="other" ':'';const inputHandler=(taxIdFormat?'formatTaxIdInput(this);updateTaxIdMask(this);':'')+'validateEntry('+idx+')';if(type==='select'){const opts=(field.options||[]).map(function(opt){const selected=String(opt)===String(value)?' selected':'';return '<option value="'+esc(opt)+'"'+selected+'>'+esc(opt)+'</option>';}).join('');return '<div class="'+fieldClass+'"'+depAttr+'><label for="'+id+'">'+label+'</label><select id="'+id+'" data-entry-field="'+key+'" onchange="validateEntry('+idx+')"><option value=""></option>'+opts+'</select></div>';}if(type==='textarea'){return '<div class="entry-field full'+(compact?' compact-label':'')+'"'+depAttr+'><label for="'+id+'">'+label+'</label><textarea id="'+id+'" data-entry-field="'+key+'" '+placeholder+autocomplete+' oninput="validateEntry('+idx+')">'+val+'</textarea></div>';}let htmlType='text';if(type==='number'||type==='date')htmlType=type;if(type==='money'||type==='percent')htmlType='text';const maskClass=sensitive?(taxIdFormat?'taxid-sensitive-input':'sensitive-masked'):'';const input='<input id="'+id+'" type="'+htmlType+'" value="'+val+'" data-entry-field="'+key+'" '+(sensitive?'data-sensitive="true" ':'')+(taxIdFormat?'data-taxid-format="true" ':'')+placeholder+autocomplete+' class="'+maskClass.trim()+'" inputmode="'+(type==='number'||type==='money'||type==='percent'||taxIdFormat||key.toLowerCase().includes('routing')||key.toLowerCase().includes('account')?'numeric':'text')+'" oninput="'+inputHandler+'">';if(sensitive&&taxIdFormat){return '<div class="'+fieldClass+'"'+depAttr+'><label for="'+id+'">'+label+'</label><div class="sensitive-wrap taxid-sensitive-wrap">'+input+'<span class="taxid-mask-display" aria-hidden="true">'+esc(taxIdMaskText(value||''))+'</span><button class="eye-btn" type="button" aria-label="Show or hide '+label+'" onclick="toggleSensitiveField(\''+id+'\',event)">'+svgIcon('eye')+'</button></div></div>';}if(sensitive){return '<div class="'+fieldClass+'"'+depAttr+'><label for="'+id+'">'+label+'</label><div class="sensitive-wrap">'+input+'<button class="eye-btn" type="button" aria-label="Show or hide '+label+'" onclick="toggleSensitiveField(\''+id+'\',event)">'+svgIcon('eye')+'</button></div></div>';}return '<div class="'+fieldClass+'"'+depAttr+'><label for="'+id+'">'+label+'</label>'+input+'</div>';}
+
+function toggleEntryPanel(idx,event){
+  if(event){event.preventDefault();event.stopPropagation();}
+  const panel=document.getElementById('entryPanel-'+idx);
+  if(!panel)return false;
+  document.querySelectorAll('.entry-card.open').forEach(function(card){
+    if(card!==panel)card.classList.remove('open');
+  });
+  panel.classList.toggle('open');
+  return false;
+}
+
 function collectEntryValues(idx){
   const first=document.querySelector('.entry-card [id^="entry-'+idx+'-"]');
   const card=first?first.closest('.entry-card'):document.getElementById('entryPanel-'+idx);
