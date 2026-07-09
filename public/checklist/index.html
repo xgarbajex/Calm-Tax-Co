@@ -786,6 +786,72 @@
   .entry-card.entry-card-collapsed.open .entry-inner{display:block!important;width:calc(100vw - 44px)!important;max-width:620px!important;position:relative!important;left:50%!important;right:auto!important;transform:translateX(-50%)!important;margin-top:10px!important;box-sizing:border-box!important;}
 }
 
+
+
+/* v39: keep sensitive-field eye button clickable above masked SSN/ITIN input */
+.taxid-sensitive-wrap .eye-btn,
+.sensitive-wrap .eye-btn{
+  z-index:6!important;
+  pointer-events:auto!important;
+}
+.taxid-sensitive-wrap input.taxid-sensitive-input{
+  padding-right:48px!important;
+}
+.taxid-sensitive-wrap .taxid-mask-display{
+  pointer-events:none!important;
+  right:50px!important;
+}
+.taxid-sensitive-wrap .eye-btn .icon-inline,
+.sensitive-wrap .eye-btn .icon-inline{
+  pointer-events:none!important;
+}
+
+
+
+/* Calm Tax v40: contain expanded Enter Information card on mobile */
+@media(max-width:700px){
+  .item-actions{
+    width:100%!important;
+    max-width:100%!important;
+    align-items:center!important;
+    overflow:visible!important;
+  }
+  .item-actions .entry-card.entry-card-collapsed{
+    width:100%!important;
+    max-width:100%!important;
+    margin:0 auto!important;
+    overflow:visible!important;
+  }
+  .entry-card.entry-card-collapsed .entry-choice-row{
+    width:min(280px,100%)!important;
+    max-width:280px!important;
+    margin:0 auto!important;
+  }
+  .entry-card.entry-card-collapsed .entry-toggle-pill{
+    width:100%!important;
+    max-width:280px!important;
+  }
+  .entry-card.entry-card-collapsed.open .entry-inner{
+    width:100%!important;
+    max-width:100%!important;
+    min-width:0!important;
+    position:relative!important;
+    left:auto!important;
+    right:auto!important;
+    transform:none!important;
+    margin:10px auto 0!important;
+    box-sizing:border-box!important;
+    overflow:hidden!important;
+    padding:14px!important;
+  }
+  .entry-card.entry-card-collapsed.open .entry-inner input,
+  .entry-card.entry-card-collapsed.open .entry-inner select,
+  .entry-card.entry-card-collapsed.open .entry-inner textarea{
+    max-width:100%!important;
+    box-sizing:border-box!important;
+  }
+}
+
 </style>
 </head>
 <body>
