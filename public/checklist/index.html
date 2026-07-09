@@ -650,6 +650,43 @@
   .group-progress{font-size:1rem!important;}
 }
 
+
+
+/* Calm Tax v33 targeted visual fixes */
+:root{--soft-sage-bg-stronger:rgba(125,142,126,.085);--soft-sage-bg-medium:rgba(125,142,126,.10);}
+.group-summary{background:var(--soft-sage-bg-stronger)!important;}
+.item.row-upload.checked{background:rgba(125,142,126,.075)!important;border-color:rgba(125,142,126,.20)!important;}
+.other-upload-row{background:rgba(125,142,126,.075)!important;}
+.entry-card.entry-card-collapsed .entry-inner{background:rgba(125,142,126,.06)!important;}
+.group-name{font-size:1.30rem!important;}
+.group-progress{font-size:1.02rem!important;font-family:Lora,serif!important;font-weight:500!important;color:rgba(60,54,51,.72)!important;letter-spacing:.005em!important;}
+.group-symbol{width:16px!important;height:16px!important;min-width:16px!important;flex:0 0 16px!important;border-radius:50%!important;border:1.7px solid var(--sage)!important;display:inline-flex!important;align-items:center!important;justify-content:center!important;font-size:0!important;line-height:0!important;box-sizing:border-box!important;background:transparent!important;overflow:hidden!important;}
+.group-symbol::before{content:none!important;display:none!important;}
+.group-block.in-progress .group-symbol{background:linear-gradient(90deg,var(--sage) 0 50%,transparent 50% 100%)!important;}
+.group-block.complete .group-symbol{background:var(--sage)!important;}
+.group-block.not-started .group-symbol{background:transparent!important;}
+.item.row-upload.complete-pending{background:rgba(235,232,224,.82)!important;border-color:rgba(125,142,126,.32)!important;opacity:.76!important;filter:grayscale(.12)!important;}
+.item.row-upload.complete-pending .row-status{display:inline-flex!important;align-items:center!important;width:auto!important;margin-top:12px!important;padding:9px 12px!important;border:1px solid rgba(125,142,126,.28)!important;border-radius:999px!important;background:rgba(255,255,255,.82)!important;color:var(--sage)!important;font-weight:700!important;box-shadow:0 6px 16px rgba(60,54,51,.055)!important;}
+@media(min-width:701px){
+  .item-head{display:grid!important;grid-template-columns:24px minmax(0,1fr) 260px!important;column-gap:12px!important;align-items:flex-start!important;}
+  .item-actions{width:260px!important;flex:0 0 260px!important;max-width:260px!important;margin-left:0!important;padding-left:0!important;display:flex!important;flex-wrap:nowrap!important;align-items:center!important;justify-content:flex-end!important;gap:6px!important;}
+  .item-actions .action-pill{flex:1 1 0!important;min-width:0!important;justify-content:center!important;padding:8px 9px!important;font-size:12.8px!important;}
+  .item-actions .action-or{flex:0 0 auto!important;margin:0!important;font-size:12.5px!important;}
+  .entry-card.entry-card-collapsed{width:260px!important;max-width:260px!important;margin:10px 0 0 auto!important;box-sizing:border-box!important;}
+  .entry-choice-row{position:relative!important;display:block!important;width:100%!important;max-width:100%!important;margin:8px 0 0!important;overflow:visible!important;}
+  .entry-action-or{position:absolute!important;left:-25px!important;top:50%!important;transform:translateY(-50%)!important;margin:0!important;font-size:12.5px!important;color:rgba(74,84,92,.76)!important;}
+  .entry-toggle-pill{width:100%!important;max-width:260px!important;box-sizing:border-box!important;justify-content:center!important;text-align:center!important;white-space:nowrap!important;padding-left:10px!important;padding-right:10px!important;}
+  .entry-card.entry-card-collapsed .entry-inner{width:min(620px,calc(100vw - 90px))!important;max-width:620px!important;transform:translateX(calc(260px - 100%))!important;}
+}
+@media(min-width:701px) and (max-width:1100px){
+  .item-actions{margin-left:0!important;margin-right:0!important;}
+  .entry-card.entry-card-collapsed{margin-left:auto!important;margin-right:0!important;}
+}
+@media(max-width:700px){
+  .group-name{font-size:1.18rem!important;}
+  .group-progress{font-size:.98rem!important;}
+}
+
 </style>
 </head>
 <body>
