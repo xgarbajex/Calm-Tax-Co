@@ -1390,6 +1390,122 @@
   .group-block.collapsed .group-summary:hover .group-chevron{transform:rotate(-90deg);}
 }
 
+
+
+/* Calm Tax v53: consistent hover and focus feedback for interactive elements */
+.completed-archive summary,
+.contact-email,
+.btn,
+.action-pill,
+.entry-toggle-pill,
+.entry-save,
+.row-upload-btn,
+.completed-card-toggle,
+.help-panel-link,
+.help-link,
+.delete-btn,
+.delete-confirm-cancel,
+.delete-confirm-ok,
+.modal-close,
+.device-btn,
+.dependent-add,
+.eye-btn,
+.check,
+.help,
+.details-card summary{
+  transition:transform .18s ease,background-color .18s ease,border-color .18s ease,box-shadow .18s ease,color .18s ease,opacity .18s ease,text-decoration-color .18s ease!important;
+}
+.completed-archive summary:hover{
+  background:rgba(125,142,126,.115)!important;
+  box-shadow:0 7px 18px rgba(60,54,51,.05)!important;
+  transform:translateY(-1px);
+}
+.completed-archive summary:focus-visible{
+  outline:none!important;
+  background:rgba(125,142,126,.12)!important;
+  box-shadow:0 0 0 4px rgba(125,142,126,.13),0 7px 18px rgba(60,54,51,.05)!important;
+  transform:translateY(-1px);
+}
+.contact-email{
+  display:inline-block;
+  border-radius:6px;
+  text-decoration:underline!important;
+  text-decoration-color:rgba(125,142,126,.34)!important;
+  text-underline-offset:3px;
+}
+.contact-email:hover{
+  color:var(--ink)!important;
+  text-decoration-color:var(--sage)!important;
+  transform:translateY(-1px);
+}
+.contact-email:focus-visible{
+  outline:none;
+  color:var(--ink)!important;
+  box-shadow:0 0 0 4px rgba(125,142,126,.13);
+  transform:translateY(-1px);
+}
+.btn:hover,
+.action-pill:hover,
+.entry-toggle-pill:hover,
+.entry-save:hover,
+.row-upload-btn:hover,
+.completed-card-toggle:hover,
+.help-panel-link:hover,
+.help-link:hover,
+.delete-btn:hover,
+.delete-confirm-cancel:hover,
+.delete-confirm-ok:hover,
+.modal-close:hover,
+.device-btn:hover,
+.dependent-add:hover,
+.eye-btn:hover,
+.details-card summary:hover{
+  transform:translateY(-1px);
+}
+.btn:focus-visible,
+.action-pill:focus-visible,
+.entry-toggle-pill:focus-visible,
+.entry-save:focus-visible,
+.row-upload-btn:focus-visible,
+.completed-card-toggle:focus-visible,
+.help-panel-link:focus-visible,
+.help-link:focus-visible,
+.delete-btn:focus-visible,
+.delete-confirm-cancel:focus-visible,
+.delete-confirm-ok:focus-visible,
+.modal-close:focus-visible,
+.device-btn:focus-visible,
+.dependent-add:focus-visible,
+.eye-btn:focus-visible,
+.check:focus-visible,
+.help:focus-visible,
+.details-card summary:focus-visible{
+  outline:none!important;
+  box-shadow:0 0 0 4px rgba(125,142,126,.13)!important;
+}
+@media (hover:none){
+  .completed-archive summary:hover,
+  .contact-email:hover,
+  .btn:hover,
+  .action-pill:hover,
+  .entry-toggle-pill:hover,
+  .entry-save:hover,
+  .row-upload-btn:hover,
+  .completed-card-toggle:hover,
+  .help-panel-link:hover,
+  .help-link:hover,
+  .delete-btn:hover,
+  .delete-confirm-cancel:hover,
+  .delete-confirm-ok:hover,
+  .modal-close:hover,
+  .device-btn:hover,
+  .dependent-add:hover,
+  .eye-btn:hover,
+  .details-card summary:hover{
+    transform:none;
+  }
+}
+
 </style>
 </head>
 <body>
