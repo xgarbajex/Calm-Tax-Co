@@ -1855,6 +1855,52 @@
   .item.row-upload .item-title-wrap{transition:none!important;animation:none!important;}
 }
 
+
+/* Calm Tax v62: calm accordion expansion without horizontal motion */
+.intro-help-email,
+.contact-email{color:var(--sage)!important;}
+@media(min-width:701px){
+  .item.row-upload:has(.entry-card.open) .item-head{
+    grid-template-columns:24px minmax(0,1fr) 260px!important;
+    align-items:center!important;
+  }
+  .item.row-upload:has(.entry-card.open) .item-title-wrap{
+    align-self:center!important;
+    width:auto!important;
+    max-width:none!important;
+    transform:none!important;
+  }
+  .item.row-upload:has(.entry-card.open) .item-actions{
+    grid-column:1/-1!important;
+    grid-row:2!important;
+    width:100%!important;
+    max-width:none!important;
+    margin:14px 0 0!important;
+    padding:0!important;
+    align-items:flex-end!important;
+    transform:none!important;
+  }
+  .item.row-upload:has(.entry-card.open) .entry-card.entry-card-collapsed{
+    width:min(620px,calc(100vw - 90px))!important;
+    max-width:620px!important;
+    margin:0!important;
+    align-self:flex-end!important;
+  }
+  .item.row-upload:has(.entry-card.open) .entry-card.entry-card-collapsed .entry-choice-row,
+  .item.row-upload:has(.entry-card.open) .entry-card.entry-card-collapsed .entry-inner{
+    width:100%!important;
+    max-width:620px!important;
+    transform:none!important;
+  }
+}
+.entry-card.entry-card-collapsed .entry-inner{
+  transform:none!important;
+  transition:max-height .34s cubic-bezier(.22,.61,.36,1),opacity .2s ease,padding .28s ease,border-width .2s ease!important;
+}
+.entry-card.entry-card-collapsed.open .entry-inner{transform:none!important;}
+.item.row-upload .item-actions,
+.item.row-upload .item-title-wrap{will-change:auto!important;}
+
 </style>
 </head>
 <body>
@@ -1929,32 +1975,11 @@ function taxIdMaskText(value){const raw=String(value||'');let out='';for(let i=0
 function updateTaxIdMask(input){if(!input)return;const wrap=input.closest('.taxid-sensitive-wrap');const mask=wrap?wrap.querySelector('.taxid-mask-display'):null;if(mask)mask.textContent=taxIdMaskText(input.value||'');}
 function fieldInputHtml(field,idx,value){const key=esc(field.key||'');const label=esc(field.label||'');const type=field.type||'text';const id='entry-'+idx+'-'+key;const val=esc(value||'');const taxIdFormat=!!field.taxIdFormat;const sensitive=(!!field.sensitive||type==='password');const compact=!!field.compactLabel;const depAttr=field.depRow?' data-dep-row="'+field.depRow+'"':'';const full=(type==='textarea'||String(field.label||'').toLowerCase().includes('notes')||String(field.label||'').toLowerCase().includes('dates and amounts'))?' full':'';const fieldClass='entry-field'+full+(compact?' compact-label':'');const placeholder=field.placeholder?' placeholder="'+esc(field.placeholder)+'"':'';const autocomplete=(sensitive||taxIdFormat)?' autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" data-lpignore="true" data-1p-ignore="true" data-form-type="other" ':'';const inputHandler=(taxIdFormat?'formatTaxIdInput(this);updateTaxIdMask(this);':'')+'validateEntry('+idx+');scheduleEntryAutosave('+idx+')';if(type==='select'){const opts=(field.options||[]).map(function(opt){const selected=String(opt)===String(value)?' selected':'';return '<option value="'+esc(opt)+'"'+selected+'>'+esc(opt)+'</option>';}).join('');return '<div class="'+fieldClass+'"'+depAttr+'><label for="'+id+'">'+label+'</label><select id="'+id+'" data-entry-field="'+key+'" onchange="validateEntry('+idx+');scheduleEntryAutosave('+idx+')"><option value=""></option>'+opts+'</select></div>';}if(type==='textarea'){return '<div class="entry-field full'+(compact?' compact-label':'')+'"'+depAttr+'><label for="'+id+'">'+label+'</label><textarea id="'+id+'" data-entry-field="'+key+'" '+placeholder+autocomplete+' oninput="validateEntry('+idx+');scheduleEntryAutosave('+idx+')">'+val+'</textarea></div>';}let htmlType='text';if(type==='number'||type==='date')htmlType=type;if(type==='money'||type==='percent')htmlType='text';const maskClass=sensitive?(taxIdFormat?'taxid-sensitive-input':'sensitive-masked'):'';const input='<input id="'+id+'" type="'+htmlType+'" value="'+val+'" data-entry-field="'+key+'" '+(sensitive?'data-sensitive="true" ':'')+(taxIdFormat?'data-taxid-format="true" ':'')+placeholder+autocomplete+' class="'+maskClass.trim()+'" inputmode="'+(type==='number'||type==='money'||type==='percent'||taxIdFormat||key.toLowerCase().includes('routing')||key.toLowerCase().includes('account')?'numeric':'text')+'" oninput="'+inputHandler+'">';if(sensitive&&taxIdFormat){return '<div class="'+fieldClass+'"'+depAttr+'><label for="'+id+'">'+label+'</label><div class="sensitive-wrap taxid-sensitive-wrap">'+input+'<span class="taxid-mask-display" aria-hidden="true">'+esc(taxIdMaskText(value||''))+'</span><button class="eye-btn" type="button" aria-label="Show or hide '+label+'" onclick="toggleSensitiveField(\''+id+'\',event)">'+svgIcon('eye')+'</button></div></div>';}if(sensitive){return '<div class="'+fieldClass+'"'+depAttr+'><label for="'+id+'">'+label+'</label><div class="sensitive-wrap">'+input+'<button class="eye-btn" type="button" aria-label="Show or hide '+label+'" onclick="toggleSensitiveField(\''+id+'\',event)">'+svgIcon('eye')+'</button></div></div>';}return '<div class="'+fieldClass+'"'+depAttr+'><label for="'+id+'">'+label+'</label>'+input+'</div>';}
 
-function animateEntryPanelLayout(panel,shouldOpen){
+function setEntryPanelOpen(panel,shouldOpen){
   if(!panel)return;
-  const row=panel.closest('.item.row-upload');
-  const actions=row?row.querySelector('.item-actions'):null;
-  const title=row?row.querySelector('.item-title-wrap'):null;
-  const moving=[actions,title].filter(Boolean);
-  const first=moving.map(function(el){return {el:el,rect:el.getBoundingClientRect()};});
   panel.classList.toggle('open',!!shouldOpen);
   const button=panel.querySelector('.entry-toggle-pill');
   if(button)button.setAttribute('aria-expanded',shouldOpen?'true':'false');
-  moving.forEach(function(el){el.getBoundingClientRect();});
-  first.forEach(function(item){
-    const last=item.el.getBoundingClientRect();
-    const dx=item.rect.left-last.left;
-    const dy=item.rect.top-last.top;
-    if(Math.abs(dx)<.5&&Math.abs(dy)<.5)return;
-    item.el.style.transition='none';
-    item.el.style.transform='translate('+dx+'px,'+dy+'px)';
-    requestAnimationFrame(function(){
-      requestAnimationFrame(function(){
-        item.el.style.transition='transform 280ms cubic-bezier(.22,.61,.36,1)';
-        item.el.style.transform='translate(0,0)';
-        window.setTimeout(function(){item.el.style.transition='';item.el.style.transform='';},300);
-      });
-    });
-  });
 }
 function toggleEntryPanel(idx,event){
   if(event){event.preventDefault();event.stopPropagation();}
@@ -1962,9 +1987,9 @@ function toggleEntryPanel(idx,event){
   if(!panel)return false;
   const shouldOpen=!panel.classList.contains('open');
   document.querySelectorAll('.entry-card.open').forEach(function(card){
-    if(card!==panel)animateEntryPanelLayout(card,false);
+    if(card!==panel)setEntryPanelOpen(card,false);
   });
-  animateEntryPanelLayout(panel,shouldOpen);
+  setEntryPanelOpen(panel,shouldOpen);
   if(shouldOpen)setTimeout(function(){updateFieldCompletion(idx);},220);
   return false;
 }
