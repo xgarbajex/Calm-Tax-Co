@@ -1329,6 +1329,30 @@
 @media(min-width:701px){.entry-card.entry-card-collapsed.open .entry-choice-row{width:min(620px,calc(100vw - 90px))!important;max-width:620px!important;transform:translateX(calc(260px - 100%))!important;}.entry-card.entry-card-collapsed.open .entry-inner{margin-top:0!important;}}
 @media(max-width:700px){.entry-card.entry-card-collapsed .entry-choice-row,.entry-card.entry-card-collapsed.open .entry-choice-row{width:100%!important;max-width:100%!important;transform:none!important;margin:0!important;}.entry-card.entry-card-collapsed .entry-toggle-pill{min-height:44px!important;padding:11px 14px!important;}.entry-card.entry-card-collapsed.open .entry-inner{margin-top:0!important;}}
 
+
+
+/* Calm Tax v51: keep Enter Details as a compact tab above the expanded panel */
+@media(min-width:701px){
+  .entry-card.entry-card-collapsed.open .entry-choice-row{
+    width:100%!important;
+    max-width:260px!important;
+    transform:none!important;
+    margin:0 0 0 auto!important;
+    border-radius:16px 16px 0 0!important;
+    position:relative!important;
+    z-index:2!important;
+  }
+  .entry-card.entry-card-collapsed.open .entry-inner{
+    width:min(620px,calc(100vw - 90px))!important;
+    max-width:620px!important;
+    transform:translateX(calc(260px - 100%))!important;
+    margin-top:0!important;
+    border-radius:16px 0 16px 16px!important;
+    position:relative!important;
+    z-index:1!important;
+  }
+}
+
 </style>
 </head>
 <body>
