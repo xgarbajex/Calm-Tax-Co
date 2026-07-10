@@ -1215,70 +1215,75 @@
 
 
 
-/* Calm Tax v47: progress ring, calmer spacing, focus mode, and immediate completion feedback */
-.checklist-progress-wrap{
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  gap:7px;
-  margin:0 auto 22px;
-  text-align:center;
-}
-.progress-ring{
-  width:92px;
-  height:92px;
-  display:block;
-  transform:rotate(-90deg);
-  overflow:visible;
-}
-.progress-ring-track,.progress-ring-value{fill:none;stroke-width:7;}
-.progress-ring-track{stroke:rgba(125,142,126,.16);}
-.progress-ring-value{
-  stroke:var(--sage);
-  stroke-linecap:round;
-  transition:stroke-dashoffset .55s cubic-bezier(.22,.61,.36,1);
-}
-.progress-ring-percent{
-  font-family:Lora,serif;
-  font-size:18px;
-  font-weight:500;
-  fill:var(--ink);
-  text-anchor:middle;
-  dominant-baseline:middle;
-  transform:rotate(90deg);
-  transform-origin:46px 46px;
-}
-.progress-ring-message{font-family:"Cormorant Garamond",Georgia,serif;font-size:23px;font-style:italic;font-weight:500;color:var(--ink);line-height:1.2;}
+/* Calm Tax v47: focused active checklist, progress ring, and immediate completion feedback */
+.checklist-progress-wrap{display:flex;flex-direction:column;align-items:center;justify-content:center;margin:2px auto 24px;text-align:center;}
+.progress-ring{position:relative;width:118px;height:118px;margin:0 auto 12px;}
+.progress-ring svg{width:118px;height:118px;display:block;transform:rotate(-90deg);}
+.progress-ring-track,.progress-ring-value{fill:none;stroke-width:8;}
+.progress-ring-track{stroke:rgba(125,142,126,.15);}
+.progress-ring-value{stroke:var(--sage);stroke-linecap:round;transition:stroke-dashoffset .55s ease;}
+.progress-ring-percent{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:Lora,serif;font-size:27px;font-weight:500;color:var(--ink);}
+.progress-ring-message{font-family:"Cormorant Garamond",Georgia,serif;font-size:23px;font-style:italic;font-weight:500;color:var(--ink);line-height:1.2;margin-bottom:3px;}
 .progress-ring-count{font-size:13px;color:var(--mid);line-height:1.4;}
-.group-block{margin:28px 0!important;transition:opacity .22s ease,filter .22s ease,transform .22s ease,box-shadow .22s ease;}
-.group-items{padding-top:21px!important;padding-bottom:10px!important;}
-.item.row-upload{margin-bottom:17px!important;}
+.checklist-list{display:block;}
+.checklist-list .group-block{margin:28px 0;transition:opacity .2s ease,filter .2s ease,transform .2s ease,box-shadow .2s ease;}
+.checklist-list.focus-mode .group-block:not(.focus-active){opacity:.58;filter:saturate(.78);box-shadow:none;}
+.checklist-list.focus-mode .group-block.focus-active{transform:translateY(-1px);}
+.group-items{padding-top:20px!important;padding-bottom:8px!important;}
+.item.row-upload{margin-bottom:18px!important;}
 .entry-card.entry-card-collapsed.open .entry-inner{margin-top:14px!important;}
-#checklistList.checklist-focus .group-block:not(.focus-active){opacity:.58;filter:saturate(.72);box-shadow:none!important;}
-#checklistList.checklist-focus .group-block.focus-active{opacity:1;filter:none;transform:translateY(-1px);}
-.group-items{transform-origin:top;}
-.group-block.category-completing{border-color:rgba(125,142,126,.48)!important;box-shadow:0 12px 34px rgba(125,142,126,.12)!important;}
-.group-block.category-completing .group-summary{background:rgba(125,142,126,.14)!important;}
-.group-block.category-completing .group-symbol{animation:categoryCompletePop .7s ease both;}
-@keyframes categoryCompletePop{0%{transform:scale(.72);opacity:.4}55%{transform:scale(1.18);opacity:1}100%{transform:scale(1);opacity:1}}
-.item.row-upload.completing-item{opacity:.68;pointer-events:none;transition:opacity .18s ease;}
-.entry-save.is-completing{background:var(--sage)!important;cursor:wait;min-width:160px;}
-.completion-modal.processing .completion-modal-icon{background:transparent;}
-.completion-modal.processing .completion-modal-icon::before{
-  content:"";
-  width:28px;height:28px;border-radius:50%;border:3px solid rgba(125,142,126,.20);border-top-color:var(--sage);animation:spin .8s linear infinite;
+.group-progress{white-space:nowrap;}
+.completed-archive{margin:34px 0 8px;border:1px solid rgba(125,142,126,.20);border-radius:18px;background:rgba(255,255,255,.58);overflow:hidden;}
+.completed-archive summary{list-style:none;cursor:pointer;padding:16px 18px;display:flex;align-items:center;justify-content:space-between;gap:12px;background:rgba(125,142,126,.07);font-family:"Cormorant Garamond",Georgia,serif;font-size:22px;font-style:italic;font-weight:600;color:var(--ink);}
+.completed-archive summary::-webkit-details-marker{display:none;}
+.completed-archive summary::after{content:"▾";font-family:Inter,sans-serif;font-style:normal;font-size:13px;color:var(--sage);transition:transform .18s ease;}
+.completed-archive[open] summary::after{transform:rotate(180deg);}
+.completed-archive-inner{padding:18px 18px 4px;}
+.completed-category{margin:0 0 24px;}
+.completed-category:last-child{margin-bottom:8px;}
+.completed-category-title{font-family:"Cormorant Garamond",Georgia,serif;font-size:20px;font-style:italic;font-weight:600;color:rgba(60,54,51,.78);margin:0 0 10px;padding-bottom:7px;border-bottom:1px solid rgba(60,54,51,.09);}
+.completed-archive .item.row-upload{margin-bottom:10px!important;}
+.completion-modal.loading .completion-modal-icon{background:transparent;}
+.completion-modal-spinner{width:32px;height:32px;border-radius:50%;border:3px solid rgba(125,142,126,.18);border-top-color:var(--sage);animation:spin .8s linear infinite;display:block;}
+.completion-modal.loading .btn{display:none;}
+.completion-modal.loading p{max-width:330px;}
+.item.completing{opacity:.68;pointer-events:none;transition:opacity .18s ease;}
+.entry-save.completing{min-width:154px;}
+.category-complete-line{font-weight:700!important;color:var(--sage)!important;margin-top:12px!important;}
+/* Calm Tax v48: move completed work into a quiet archive with a graceful handoff */
+.item.row-upload.item-moving-to-completed{
+  opacity:.18!important;
+  transform:translateY(8px) scale(.985)!important;
+  max-height:0!important;
+  margin-top:0!important;
+  margin-bottom:0!important;
+  padding-top:0!important;
+  padding-bottom:0!important;
+  border-width:0!important;
+  overflow:hidden!important;
+  transition:opacity .34s ease,transform .34s ease,max-height .48s ease,margin .48s ease,padding .48s ease,border-width .48s ease!important;
 }
-.completion-modal.processing .completion-modal-icon{font-size:0;}
-.completion-modal-category{font-weight:700;color:var(--sage)!important;margin-top:12px!important;}
-.completion-modal .btn[hidden]{display:none!important;}
+.group-block.category-finishing{
+  border-color:rgba(125,142,126,.42)!important;
+  background:rgba(125,142,126,.07)!important;
+  box-shadow:0 10px 28px rgba(60,54,51,.055)!important;
+  transition:border-color .28s ease,background .28s ease,box-shadow .28s ease,opacity .42s ease,transform .42s ease!important;
+}
+.group-block.category-finishing .group-summary{background:rgba(125,142,126,.13)!important;}
+.group-block.category-finishing .group-progress{color:var(--sage)!important;}
+.group-block.category-finishing .group-symbol{background:var(--sage)!important;}
+.group-block.category-finishing.category-leaving{opacity:0;transform:translateY(8px);}
+.completed-archive{scroll-margin-top:22px;}
+
 @media(max-width:700px){
-  .progress-ring{width:84px;height:84px;}
-  .progress-ring-percent{transform-origin:46px 46px;}
+  .progress-ring,.progress-ring svg{width:106px;height:106px;}
+  .progress-ring-percent{font-size:25px;}
   .progress-ring-message{font-size:21px;}
-  .group-block{margin:24px 0!important;}
-  .group-items{padding-top:18px!important;}
-  .item.row-upload{margin-bottom:15px!important;}
+  .checklist-list .group-block{margin:24px 0;}
+  .group-items{padding-top:17px!important;}
+  .item.row-upload{margin-bottom:16px!important;}
+  .completed-archive summary{font-size:21px;padding:15px 16px;}
+  .completed-archive-inner{padding:15px 14px 3px;}
 }
 
 </style>
@@ -1295,9 +1300,9 @@ let state=null;
 let checked=new Set();
 let completionRenderTimer=null;
 let pendingCompletion=null;
-let pendingMissingFocus=null;
+const completionLocks={};
 const entryAutosavePromises={};
-const entryCompleting={};
+let pendingMissingFocus=null;
 function esc(v){return String(v||'').replace(/[&<>"']/g,function(c){return({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c];});}
 async function api(payload){const controller=new AbortController();const timeoutId=setTimeout(function(){controller.abort();},payload&&payload.form_type==='uploadFile'?120000:30000);let response;try{response=await fetch(AS_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(payload),signal:controller.signal});}catch(error){if(error&&error.name==='AbortError')throw new Error('The server took too long to respond. Please refresh and try again.');throw error;}finally{clearTimeout(timeoutId);}const text=await response.text();let data;try{data=JSON.parse(text);}catch(error){throw new Error('Unexpected server response.');}if(!data||data.status==='error')throw new Error(data&&data.message?data.message:'Request failed.');return data;}
 function cleanItemLabel(value){let text=String(value||'').replace(/^•\s*/,'').trim();const lower=text.toLowerCase();if(lower.includes('mileage records for business driving')||lower.includes('vehicle details and mileage records')||((lower.includes('mileage')||lower.includes('business miles'))&&!lower.includes('vehicle details:')))return 'Vehicle details: Year, make, model, date first used for business, business miles, commuting miles, and total miles';if(lower.includes('home office')&&(lower.includes('square footage')||lower.includes('supporting expenses')||lower.includes('related home expenses')||lower.includes('method choice')||lower.includes('simplified')||lower.includes('actual expense')))return 'Home office deduction choice and information';if(lower.includes('phone')&&lower.includes('internet')&&lower.includes('business-use percentage'))return 'Total annual cost(s) of phone and/or internet';if((lower.includes('supplies')&&lower.includes('equipment')&&lower.includes('tools'))||(lower.includes('total amount spent')&&(lower.includes('supplies')||lower.includes('equipment')||lower.includes('tools'))))return 'Supplies, equipment, and tools purchased for work - Provide totals by category';if(lower.includes('business expense totals')||lower.includes('total annual expense amount'))return 'Business expense totals by category';if(lower.includes('cost of goods')||lower.includes('inventory'))return 'Inventory $ values and inventory purchase total';if(lower.includes('rental expense'))return 'Rental property expense totals by category';return text.replace(/\s*\(secure upload only\)\s*/gi,'').replace(/\s*\(provide only through your secure upload (?:page|folder)\s*[—–-]\s*do not email it\)\s*/gi,'').replace(/\s*\(do not email it\)\s*/gi,'').replace(/\s*\(required to complete your return if you had marketplace coverage\)\s*/gi,'');}
@@ -1453,54 +1458,54 @@ function highlightMissingFields(idx,missing){
   }
 }
 function completionModalHtml(){
-  return '<div class="completion-modal-backdrop" id="completionModal" role="dialog" aria-modal="true" aria-labelledby="completionModalTitle"><div class="completion-modal" id="completionModalBox"><div class="completion-modal-icon" id="completionModalIcon">✓</div><h2 id="completionModalTitle">Item Complete</h2><p id="completionModalLead"></p><p id="completionModalDetail"></p><p class="completion-modal-category" id="completionModalCategory"></p><button class="btn" type="button" id="completionModalContinue" onclick="continueCompletionModal(event)">Continue</button></div></div>';
+  return '<div class="completion-modal-backdrop" id="completionModal" role="dialog" aria-modal="true" aria-labelledby="completionModalTitle"><div class="completion-modal" id="completionModalBox"><div class="completion-modal-icon" id="completionModalIcon">✓</div><h2 id="completionModalTitle">Item Complete</h2><p id="completionModalLead"></p><p id="completionModalDetail"></p><p class="category-complete-line" id="completionModalCategory" hidden></p><button class="btn" type="button" id="completionModalContinue" onclick="continueCompletionModal(event)">Continue</button></div></div>';
 }
-function openCompletionModal(options){
-  pendingCompletion=options||{};
+function setCompletionModalState(options){
+  pendingCompletion=Object.assign({},pendingCompletion||{},options||{});
   const backdrop=document.getElementById('completionModal');
   const box=document.getElementById('completionModalBox');
   if(!backdrop||!box)return;
-  const warning=!!pendingCompletion.warning;
-  const processing=!!pendingCompletion.processing;
+  const stage=pendingCompletion.stage||(pendingCompletion.warning?'warning':'success');
+  const warning=stage==='warning';
+  const loading=stage==='loading';
   box.classList.toggle('warning',warning);
-  box.classList.toggle('processing',processing);
+  box.classList.toggle('loading',loading);
   const icon=document.getElementById('completionModalIcon');
   const title=document.getElementById('completionModalTitle');
   const lead=document.getElementById('completionModalLead');
   const detail=document.getElementById('completionModalDetail');
   const category=document.getElementById('completionModalCategory');
-  const btn=document.getElementById('completionModalContinue');
-  icon.textContent=processing?'':(warning?'!':'✓');
-  title.textContent=processing?(pendingCompletion.method==='upload'?'Uploading Document':'Completing Item'):(warning?'A few details are still needed':'Item Complete');
-  lead.textContent=processing?(pendingCompletion.method==='upload'?'Securely uploading your document...':'Saving your information...'):(warning?'Please complete the highlighted fields below, or upload a document instead.':(pendingCompletion.method==='upload'?'Your document has been uploaded.':'Your information has been saved.'));
-  detail.textContent=(warning||processing)?'':'This item has moved to the bottom of your checklist. You can edit it there anytime before your return is completed.';
-  category.textContent=(!warning&&!processing&&pendingCompletion.categoryComplete)?('Your '+pendingCompletion.categoryComplete+' section is complete.'):'';
-  btn.hidden=processing;
-  btn.textContent='Continue';
+  const button=document.getElementById('completionModalContinue');
+  if(loading){
+    icon.innerHTML='<span class="completion-modal-spinner" aria-hidden="true"></span>';
+    title.textContent='Completing Item';
+    lead.textContent='Saving your information...';
+    detail.textContent='Please wait a moment.';
+    category.hidden=true;
+    button.disabled=true;
+  }else if(warning){
+    icon.textContent='!';
+    title.textContent='A few details are still needed';
+    lead.textContent='Please complete the highlighted fields below, or upload a document instead.';
+    detail.textContent='';
+    category.hidden=true;
+    button.disabled=false;
+  }else{
+    icon.textContent='✓';
+    title.textContent='Item Complete';
+    lead.textContent=pendingCompletion.method==='upload'?'Your document has been uploaded.':'Your information has been saved.';
+    detail.textContent='This item has moved to the bottom of your checklist. You can edit it there anytime before your return is completed.';
+    if(pendingCompletion.categoryComplete&&pendingCompletion.categoryName){
+      category.textContent='Your '+pendingCompletion.categoryName+' section is complete.';
+      category.hidden=false;
+    }else category.hidden=true;
+    button.disabled=false;
+    setTimeout(function(){if(button)button.focus();},40);
+  }
   backdrop.classList.add('open');
   document.body.style.overflow='hidden';
-  if(!processing)setTimeout(function(){if(btn)btn.focus();},40);
 }
-function categoryForIndex(idx){return state&&state.items&&state.items[idx]?categoryFor(state.items[idx]):'';}
-function completedCategoryForIndex(idx){
-  const cat=categoryForIndex(idx);
-  if(!cat)return '';
-  const rows=visibleChecklistItems().filter(function(row){return categoryFor(row.item)===cat;});
-  return rows.length&&rows.every(function(row){return checked.has(Number(row.idx));})?cat:'';
-}
-function animateCompletionThenRender(action){
-  const idx=Number(action.idx);
-  const row=document.querySelector('.item.row-upload[data-idx="'+idx+'"]');
-  if(row)row.classList.add('checked','complete-pending');
-  const cat=action.categoryComplete||'';
-  if(cat){
-    const block=document.querySelector('.group-block[data-category="'+CSS.escape(cat)+'"]');
-    if(block){block.classList.add('category-completing','focus-active');const list=document.getElementById('checklistList');if(list)list.classList.add('checklist-focus');}
-    setTimeout(function(){render();},720);
-  }else{
-    setTimeout(function(){render();},260);
-  }
-}
+function openCompletionModal(options){setCompletionModalState(options||{});}
 function continueCompletionModal(event){
   if(event){event.preventDefault();event.stopPropagation();}
   const action=pendingCompletion||{};
@@ -1508,8 +1513,26 @@ function continueCompletionModal(event){
   if(backdrop)backdrop.classList.remove('open');
   document.body.style.overflow='';
   pendingCompletion=null;
-  if(action.warning){highlightMissingFields(action.idx,action.missing||[]);return;}
-  animateCompletionThenRender(action);
+  if(action.warning||action.stage==='warning'){highlightMissingFields(action.idx,action.missing||[]);return;}
+
+  const idx=Number(action.idx);
+  const row=Number.isNaN(idx)?null:document.querySelector('.item.row-upload[data-idx="'+idx+'"]');
+  const categoryBlock=row&&row.closest?row.closest('.group-block'):null;
+  if(row)row.classList.add('item-moving-to-completed');
+  if(action.categoryComplete&&categoryBlock){
+    categoryBlock.classList.add('category-finishing');
+    const progress=categoryBlock.querySelector('.group-progress');
+    if(progress)progress.innerHTML='<span class="group-symbol" aria-hidden="true"></span>Section complete <span class="group-chevron">▾</span>';
+    setTimeout(function(){categoryBlock.classList.add('category-leaving');},320);
+  }
+  setTimeout(function(){render();},action.categoryComplete?760:470);
+}
+function categoryNameForIndex(idx){return state&&state.items&&state.items[idx]?categoryFor(state.items[idx]):'';}
+function categoryIsCompleteForIndex(idx){
+  const category=categoryNameForIndex(idx);
+  if(!category)return false;
+  const rows=visibleChecklistItems().filter(function(row){return categoryFor(row.item)===category;});
+  return rows.length>0&&rows.every(function(row){return checked.has(Number(row.idx));});
 }
 function showCompletionBeforeRender(idx,message){
   idx=Number(idx);
@@ -1537,23 +1560,24 @@ function scheduleEntryAutosave(idx){
   if(validation){validation.className='entry-validation';validation.textContent='Saving...';}
   entryAutosaveTimers[idx]=setTimeout(function(){autosaveChecklistEntry(idx);},900);
 }
-async function autosaveChecklistEntry(idx){
+async function autosaveChecklistEntry(idx,options){
+  options=options||{};
   clearTimeout(entryAutosaveTimers[idx]);
   const requestId=(entryAutosaveRequests[idx]||0)+1;
   entryAutosaveRequests[idx]=requestId;
   const validation=document.getElementById('entryValidation-'+idx);
-  if(validation){validation.className='entry-validation';validation.innerHTML='<span class="mini-spinner"></span>Saving...';}
+  if(validation&&!options.silent){validation.className='entry-validation';validation.innerHTML='<span class="mini-spinner"></span>Saving...';}
   const promise=(async function(){
     try{
       const values=collectEntryValues(idx);
       const result=await api({form_type:'saveChecklistEntry',clientId:CLIENT_ID,itemIndex:idx,values:values,markComplete:false});
-      if(entryAutosaveRequests[idx]!==requestId)return;
+      if(entryAutosaveRequests[idx]!==requestId)return result;
       state.entryValues=state.entryValues||{};
       state.entryValues[String(idx)]=result.values||values;
-      if(validation&&!entryCompleting[idx]){validation.className='entry-validation ok';validation.textContent='Saved';}
+      if(validation&&!options.silent){validation.className='entry-validation ok';validation.textContent='Saved';}
+      return result;
     }catch(error){
-      if(entryAutosaveRequests[idx]!==requestId)return;
-      if(validation&&!entryCompleting[idx]){validation.className='entry-validation attn';validation.textContent='Could not auto-save. Please try again.';}
+      if(entryAutosaveRequests[idx]===requestId&&validation&&!options.silent){validation.className='entry-validation attn';validation.textContent='Could not auto-save. Please try again.';}
       throw error;
     }finally{
       if(entryAutosavePromises[idx]===promise)delete entryAutosavePromises[idx];
@@ -1562,45 +1586,51 @@ async function autosaveChecklistEntry(idx){
   entryAutosavePromises[idx]=promise;
   return promise;
 }
+function setEntryCompletingState(idx,on){
+  const row=document.querySelector('.item.row-upload[data-idx="'+Number(idx)+'"]');
+  const button=row?row.querySelector('.entry-save'):null;
+  if(row)row.classList.toggle('completing',!!on);
+  if(button){
+    button.disabled=!!on;
+    button.classList.toggle('completing',!!on);
+    button.innerHTML=on?'<span class="mini-spinner"></span>Completing item...':'Complete Item';
+  }
+}
 async function saveChecklistEntry(idx,event){
   if(event){event.preventDefault();event.stopPropagation();}
   idx=Number(idx);
-  if(entryCompleting[idx])return;
-  clearTimeout(entryAutosaveTimers[idx]);
+  if(completionLocks[idx])return;
   const readiness=entryIsReadyToComplete(idx);
   if(!readiness.ready){
-    openCompletionModal({warning:true,idx:idx,missing:readiness.missing});
+    openCompletionModal({stage:'warning',warning:true,idx:idx,missing:readiness.missing});
     return;
   }
-  entryCompleting[idx]=true;
-  const row=document.querySelector('.item.row-upload[data-idx="'+idx+'"]');
-  const button=event&&event.currentTarget?event.currentTarget:document.querySelector('#entryPanel-'+idx+' .entry-save');
+  completionLocks[idx]=true;
+  setEntryCompletingState(idx,true);
+  openCompletionModal({stage:'loading',idx:idx,method:'entry'});
   const validation=document.getElementById('entryValidation-'+idx);
-  if(row)row.classList.add('completing-item');
-  if(button){button.disabled=true;button.classList.add('is-completing');button.innerHTML='<span class="mini-spinner"></span>Completing item...';}
-  if(validation){validation.className='entry-validation';validation.textContent='';}
-  openCompletionModal({processing:true,idx:idx,method:'entry'});
   try{
-    const activeAutosave=entryAutosavePromises[idx];
-    if(activeAutosave){try{await activeAutosave;}catch(ignore){}}
+    clearTimeout(entryAutosaveTimers[idx]);
+    if(entryAutosavePromises[idx])await entryAutosavePromises[idx].catch(function(){});
+    else await autosaveChecklistEntry(idx,{silent:true});
     const values=collectEntryValues(idx);
     const result=await api({form_type:'saveChecklistEntry',clientId:CLIENT_ID,itemIndex:idx,values:values,markComplete:true});
     state.entryValues=state.entryValues||{};
     state.entryValues[String(idx)]=result.values||values;
     checked=new Set((result.checkedIndexes||Array.from(checked).concat([idx])).map(Number));
-    checked.add(idx);
     if(validation){validation.className='entry-validation ok';validation.textContent='Saved';}
-    openCompletionModal({warning:false,idx:idx,method:'entry',categoryComplete:completedCategoryForIndex(idx)});
+    setRowStatus(idx,'success','Item complete.');
+    setCompletionModalState({stage:'success',warning:false,idx:idx,method:'entry',categoryComplete:categoryIsCompleteForIndex(idx),categoryName:categoryNameForIndex(idx)});
   }catch(error){
-    if(row)row.classList.remove('completing-item');
-    if(button){button.disabled=false;button.classList.remove('is-completing');button.textContent='Complete Item';}
+    const backdrop=document.getElementById('completionModal');
+    if(backdrop)backdrop.classList.remove('open');
+    document.body.style.overflow='';
+    pendingCompletion=null;
     if(validation){validation.className='entry-validation attn';validation.textContent='Save failed: '+error.message;}
-    openCompletionModal({warning:true,idx:idx,missing:[],error:true});
-    const title=document.getElementById('completionModalTitle');
-    const lead=document.getElementById('completionModalLead');
-    if(title)title.textContent='Could not complete item';
-    if(lead)lead.textContent='Your information was not lost. Please close this message and try again.';
-  }finally{delete entryCompleting[idx];}
+  }finally{
+    completionLocks[idx]=false;
+    setEntryCompletingState(idx,false);
+  }
 }
 function closeHelpBubbles(){document.querySelectorAll('.help.open').forEach(function(h){h.classList.remove('open');});document.querySelectorAll('.inline-help-panel.open').forEach(function(panel){panel.classList.remove('open');});document.querySelectorAll('.help-backdrop').forEach(function(backdrop){backdrop.remove();});}
 document.addEventListener('click',function(e){if(!e.target.closest||(!e.target.closest('.help')&&!e.target.closest('.tip')&&!e.target.closest('.inline-help-panel')&&!e.target.closest('.help-panel-link'))){closeHelpBubbles();}});
@@ -1683,8 +1713,6 @@ function checklistIntroHtml(firstName){
 function privacyHtml(){
   return '<div class="privacy"><strong>Privacy &amp; security:</strong> Use this secure upload page for tax documents and personal information. Your information is stored in a restricted-access secure workspace and is used only to prepare, review, and file your return. Calm Tax Co. does not sell your information or share it for marketing. Please do not share Social Security numbers, banking details, or tax documents through email, as it is less secure than this page.</div>';
 }
-function progressMessage(completed,total){const pct=total?Math.round((completed/total)*100):0;if(pct>=100)return 'Everything is complete.';if(pct>=80)return 'Almost finished.';if(pct>=55)return 'More than halfway there.';if(pct>=25)return 'Nice progress.';return "You're off to a great start.";}
-function progressRingHtml(completed,total){const pct=total?Math.max(0,Math.min(100,Math.round((completed/total)*100))):0;const radius=36;const circumference=2*Math.PI*radius;const offset=circumference-(pct/100)*circumference;return '<div class="checklist-progress-wrap"><svg class="progress-ring" viewBox="0 0 92 92" role="img" aria-label="'+pct+' percent complete"><circle class="progress-ring-track" cx="46" cy="46" r="36"></circle><circle class="progress-ring-value" cx="46" cy="46" r="36" style="stroke-dasharray:'+circumference.toFixed(2)+';stroke-dashoffset:'+offset.toFixed(2)+'"></circle><text class="progress-ring-percent" x="46" y="46">'+pct+'%</text></svg><div class="progress-ring-message">'+esc(progressMessage(completed,total))+'</div><div class="progress-ring-count">'+esc(progressText(completed,total))+'</div></div>';}
 function progressText(completed,total){if(!total)return '';if(completed>=total)return 'All items complete';return completed+' of '+total+' complete';}
 function originalChecklistDetailsHtml(checklistHtml,items){return '<details class="card details-card"><summary><span>View original document checklist</span></summary><div style="margin-top:20px;"><div class="progress-pill" style="display:flex;margin:0 auto 18px;">'+progressText(completedCount(),items.length)+'</div><div id="checklistList">'+(checklistHtml||'<p>No checklist items found. Please contact us if you think this is an error.</p>')+'</div></div></details>';}
 function normalOtherUploadHtml(otherFiles){return '<div class="other-upload-row" id="otherUploadRow" ondragenter="otherDragEnter(event)" ondragover="otherDragOver(event)" ondragleave="otherDragLeave(event)" ondrop="otherDrop(event)"><h3>Other Documents</h3><p>Use this for anything that does not clearly match a checklist row.</p><button class="btn" type="button" onclick="openOtherFilePicker(event)">Upload Other Documents</button><input class="hidden-row-file-input" type="file" id="otherFileInput" multiple accept=".pdf,.jpg,.jpeg,.png,.heic,.webp,.doc,.docx,.txt,.rtf,.csv,.xls,.xlsx,.ods,.numbers" onchange="handleOtherFileInput(event)"><div class="row-status" id="rowStatus-other"></div>'+(otherFiles?'<div class="row-files" style="margin-left:0;margin-top:12px">'+otherFiles+'</div>':'')+'</div>';}
@@ -1693,12 +1721,98 @@ function selectedLabelForIndex(idx){return state&&state.items&&state.items[idx]?
 function canonicalChecklistKey(item){const t=cleanItemLabel(item).toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();if(t.includes('banking information')||t.includes('bank account information')||t.includes('routing number'))return 'banking-information';if(t.includes('childcare provider')&&(t.includes('ein')||t.includes('ssn'))&&t.includes('total amount paid'))return 'childcare-provider-info';if(t.includes('vehicle details')&&t.includes('make')&&t.includes('model')&&t.includes('business miles')&&t.includes('total miles'))return 'vehicle-details-mileage';if(t.includes('business expense totals')||t.includes('total annual expense amount'))return 'business-expense-totals';return t;}
 function isBankingChecklistItem(item){return canonicalChecklistKey(item)==='banking-information';}
 function visibleChecklistItems(){const source=state&&state.items?state.items:[];const seen={};return source.map(function(item,idx){return {item:item,idx:idx};}).filter(function(row){const key=canonicalChecklistKey(row.item);if(seen[key])return false;seen[key]=true;return true;});}
-function groupProgressInfo(group){const total=group.length;const done=group.filter(function(row){return checked.has(row.idx);}).length;const remaining=total-done;if(done>=total&&total>0)return {cls:'complete',symbol:'●',text:'Complete'};if(done>0)return {cls:'in-progress',symbol:'◐',text:remaining+' item'+(remaining===1?'':'s')+' still needed'};return {cls:'not-started',symbol:'○',text:total+' item'+(total===1?'':'s')+' still needed'};}
-function groupBlockHtml(cat,group,body,open){const info=groupProgressInfo(group);return '<div class="group-block '+info.cls+(open?'':' collapsed')+'" data-category="'+esc(cat)+'"><button class="group-summary" type="button" onclick="toggleChecklistGroup(this,event)"><span class="group-name">'+esc(cat)+'</span><span class="group-progress"><span class="group-symbol">'+info.symbol+'</span>'+esc(info.text)+' <span class="group-chevron">▾</span></span></button><div class="group-items">'+body+'</div></div>';}
-function toggleChecklistGroup(btn,event){if(event)event.stopPropagation();const block=btn&&btn.closest?btn.closest('.group-block'):null;if(!block)return;const list=document.getElementById('checklistList');const opening=block.classList.contains('collapsed');document.querySelectorAll('.group-block.focus-active').forEach(function(other){other.classList.remove('focus-active');});if(opening){document.querySelectorAll('.group-block').forEach(function(other){if(other!==block)other.classList.add('collapsed');});block.classList.remove('collapsed');block.classList.add('focus-active');if(list)list.classList.add('checklist-focus');}else{block.classList.add('collapsed');if(list)list.classList.remove('checklist-focus');}}
-function render(){if(!state)return;const visibleItems=visibleChecklistItems();const items=visibleItems.map(function(row){return row.item;});const groups={};visibleItems.forEach(function(row){const c=categoryFor(row.item);if(!groups[c])groups[c]=[];groups[c].push({item:row.item,idx:row.idx});});const order=['Identity & Prior Return','Income Documents','Business & Deduction Records','Personal Deductions & Credits','Other Tax Items','Additional Documents'];let checklistHtml='';let groupNumber=0;order.forEach(function(cat){let group=groups[cat];if(!group||!group.length)return;group=group.slice().sort(function(a,b){return Number(checked.has(a.idx))-Number(checked.has(b.idx));});const body=group.map(function(row){return itemHtml(row.item,row.idx);}).join('');const info=groupProgressInfo(group);const open=(info.cls!=='complete'&&(groupNumber===0||info.cls==='in-progress'));checklistHtml+=groupBlockHtml(cat,group,body,open);groupNumber++;});const firstName=((state.name||'').split(' ')[0]||'there');const otherFiles=(state.uploadedFiles||[]).filter(function(f){return f.checklistIndex===''||f.checklistIndex===null||f.checklistIndex===undefined;}).map(fileHtml).join('');const ready=isReturnReadyMode();const complete=isCompleteMode();document.title=complete?'Your Tax Return Is Complete | Calm Tax Co.':(ready?'Review Your Tax Return | Calm Tax Co.':'Calm Tax Co. Tax Checklist & Documents');let html='<div class="brand"><div class="brand-left"><div>'+logo()+'</div><div class="secure-header-note"><svg class="secure-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 5 6v5c0 4.4 2.8 8.4 7 10 4.2-1.6 7-5.6 7-10V6z"/><path d="m9.5 12 1.7 1.7 3.8-4"/></svg><span>Secure upload page</span></div></div><div class="year"><div class="year-label">Tax Year</div><div class="year-num">2025</div></div></div>'+(complete?'':journeyHtml());if(complete){html+='<h1 class="title">Your Tax Return<br>Is Complete</h1>'+returnReviewHtml();}else if(ready){html+='<h1 class="title">Review<br>Your Tax Return</h1>'+returnReviewHtml()+signed8879UploadHtml()+originalChecklistDetailsHtml(checklistHtml,items);}else{html+='<h1 class="title checklist-title"><span class="client-name">Hi '+esc(firstName)+',</span><span class="checklist-subtitle">Your personalized upload checklist is below.</span></h1>'+checklistIntroHtml(firstName)+(state.uploadsLockedMessage?'<div class="privacy lock-note"><strong>Uploads locked:</strong> '+esc(state.uploadsLockedMessage)+'</div>':'')+'<div class="card"><div class="checklist-card-header">'+progressRingHtml(completedCount(),items.length)+'<p class="checklist-card-instructions">For each item, upload a document or enter the information directly when available. You can manually check or uncheck items anytime.</p></div><div id="checklistList">'+(checklistHtml||'<p>No checklist items found. Please contact us if you think this is an error.</p>')+'</div>'+normalOtherUploadHtml(otherFiles)+'</div>';}html+=completionModalHtml()+privacyHtml()+'<div class="contact-card"><span class="contact-icon"><svg class="icon-inline" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16v16H4z"/><path d="m4 7 8 6 8-6"/></svg></span><span>Questions? Reply to your checklist email or contact us at <a class="contact-email" href="mailto:hello@calmtax.co">hello@calmtax.co</a>.</span></div><p class="footer-note">© 2026 Calm Tax Co.</p>';document.getElementById('app').innerHTML=html;}function completedCount(){return visibleChecklistItems().filter(function(row){return checked.has(row.idx);}).length;}
+function groupProgressInfo(group){
+  const remaining=group.length;
+  return {cls:'not-started',symbol:'○',text:remaining+' item'+(remaining===1?'':'s')+' remaining'};
+}
+function groupBlockHtml(cat,group,body,open){
+  const info=groupProgressInfo(group);
+  return '<div class="group-block '+info.cls+(open?'':' collapsed')+'" data-category="'+esc(cat)+'"><button class="group-summary" type="button" onclick="toggleChecklistGroup(this,event)"><span class="group-name">'+esc(cat)+'</span><span class="group-progress"><span class="group-symbol">'+info.symbol+'</span>'+esc(info.text)+' <span class="group-chevron">▾</span></span></button><div class="group-items">'+body+'</div></div>';
+}
+function toggleChecklistGroup(btn,event){
+  if(event)event.stopPropagation();
+  const block=btn&&btn.closest?btn.closest('.group-block'):null;
+  if(!block)return;
+  const list=document.getElementById('checklistList');
+  const opening=block.classList.contains('collapsed');
+  if(list){
+    list.querySelectorAll('.group-block').forEach(function(group){
+      group.classList.remove('focus-active');
+      if(group!==block&&opening)group.classList.add('collapsed');
+    });
+  }
+  block.classList.toggle('collapsed',!opening);
+  block.classList.toggle('focus-active',opening);
+  if(list)list.classList.toggle('focus-mode',opening);
+}
+function progressMessage(completed,total){
+  if(!total)return 'Let’s get started.';
+  const pct=completed/total;
+  if(pct>=1)return 'Everything is complete.';
+  if(pct>=.8)return 'Just a few items left.';
+  if(pct>=.5)return 'More than halfway there.';
+  if(pct>=.2)return 'Nice progress.';
+  return 'You’re off to a great start.';
+}
+function progressRingHtml(completed,total){
+  const pct=total?Math.round((completed/total)*100):0;
+  const radius=49;
+  const circumference=2*Math.PI*radius;
+  const offset=circumference-(circumference*(pct/100));
+  return '<div class="checklist-progress-wrap"><div class="progress-ring" role="img" aria-label="'+pct+' percent complete"><svg viewBox="0 0 118 118" aria-hidden="true"><circle class="progress-ring-track" cx="59" cy="59" r="'+radius+'"></circle><circle class="progress-ring-value" cx="59" cy="59" r="'+radius+'" stroke-dasharray="'+circumference.toFixed(2)+'" stroke-dashoffset="'+offset.toFixed(2)+'"></circle></svg><div class="progress-ring-percent">'+pct+'%</div></div><div class="progress-ring-message">'+esc(progressMessage(completed,total))+'</div><div class="progress-ring-count">'+completed+' of '+total+' complete</div></div>';
+}
+function completedArchiveHtml(groups,order,total){
+  if(!total)return '';
+  let inner='';
+  order.forEach(function(cat){
+    const group=groups[cat];
+    if(!group||!group.length)return;
+    inner+='<section class="completed-category"><h3 class="completed-category-title">'+esc(cat)+'</h3>'+group.map(function(row){return itemHtml(row.item,row.idx);}).join('')+'</section>';
+  });
+  return '<details class="completed-archive"><summary>Completed ('+total+')</summary><div class="completed-archive-inner">'+inner+'</div></details>';
+}
+function render(){
+  if(!state)return;
+  const visibleItems=visibleChecklistItems();
+  const items=visibleItems.map(function(row){return row.item;});
+  const activeGroups={};
+  const completedGroups={};
+  const order=['Identity & Prior Return','Income Documents','Business & Deduction Records','Personal Deductions & Credits','Other Tax Items','Additional Documents'];
+  visibleItems.forEach(function(row){
+    const cat=categoryFor(row.item);
+    const target=checked.has(Number(row.idx))?completedGroups:activeGroups;
+    if(!target[cat])target[cat]=[];
+    target[cat].push({item:row.item,idx:row.idx});
+  });
+  let checklistHtml='';
+  let activeNumber=0;
+  order.forEach(function(cat){
+    const group=activeGroups[cat];
+    if(!group||!group.length)return;
+    const body=group.map(function(row){return itemHtml(row.item,row.idx);}).join('');
+    checklistHtml+=groupBlockHtml(cat,group,body,activeNumber===0);
+    activeNumber++;
+  });
+  if(!checklistHtml)checklistHtml='<div class="privacy" style="text-align:center;border-left:0;border-radius:14px;"><strong>Everything on your checklist is complete.</strong></div>';
+  const doneCount=visibleItems.filter(function(row){return checked.has(Number(row.idx));}).length;
+  const archiveHtml=completedArchiveHtml(completedGroups,order,doneCount);
+  const firstName=((state.name||'').split(' ')[0]||'there');
+  const otherFiles=(state.uploadedFiles||[]).filter(function(f){return f.checklistIndex===''||f.checklistIndex===null||f.checklistIndex===undefined;}).map(fileHtml).join('');
+  const ready=isReturnReadyMode();
+  const complete=isCompleteMode();
+  document.title=complete?'Your Tax Return Is Complete | Calm Tax Co.':(ready?'Review Your Tax Return | Calm Tax Co.':'Calm Tax Co. Tax Checklist & Documents');
+  let html='<div class="brand"><div class="brand-left"><div>'+logo()+'</div><div class="secure-header-note"><svg class="secure-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 5 6v5c0 4.4 2.8 8.4 7 10 4.2-1.6 7-5.6 7-10V6z"/><path d="m9.5 12 1.7 1.7 3.8-4"/></svg><span>Secure upload page</span></div></div><div class="year"><div class="year-label">Tax Year</div><div class="year-num">2025</div></div></div>'+(complete?'':journeyHtml());
+  if(complete){html+='<h1 class="title">Your Tax Return<br>Is Complete</h1>'+returnReviewHtml();}
+  else if(ready){html+='<h1 class="title">Review<br>Your Tax Return</h1>'+returnReviewHtml()+signed8879UploadHtml()+originalChecklistDetailsHtml(checklistHtml+archiveHtml,items);}
+  else{
+    html+='<h1 class="title checklist-title"><span class="client-name">Hi '+esc(firstName)+',</span><span class="checklist-subtitle">Your personalized upload checklist is below.</span></h1>'+checklistIntroHtml(firstName)+(state.uploadsLockedMessage?'<div class="privacy lock-note"><strong>Uploads locked:</strong> '+esc(state.uploadsLockedMessage)+'</div>':'')+'<div class="card"><div class="checklist-card-header">'+progressRingHtml(doneCount,items.length)+'<p class="checklist-card-instructions">For each item, upload a document or enter the information directly when available. You can manually check or uncheck items anytime.</p></div><div id="checklistList" class="checklist-list">'+checklistHtml+'</div>'+archiveHtml+normalOtherUploadHtml(otherFiles)+'</div>';
+  }
+  html+=completionModalHtml()+privacyHtml()+'<div class="contact-card"><span class="contact-icon"><svg class="icon-inline" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16v16H4z"/><path d="m4 7 8 6 8-6"/></svg></span><span>Questions? Reply to your checklist email or contact us at <a class="contact-email" href="mailto:hello@calmtax.co">hello@calmtax.co</a>.</span></div><p class="footer-note">© 2026 Calm Tax Co.</p>';
+  document.getElementById('app').innerHTML=html;
+}
+function completedCount(){return visibleChecklistItems().filter(function(row){return checked.has(row.idx);}).length;}
 async function toggleChecklistItem(idx,event){
-  if(event){event.preventDefault();event.stopPropagation();}
+  if(event)event.stopPropagation();
   idx=Number(idx);
   if(Number.isNaN(idx))return;
   const wasComplete=checked.has(idx);
@@ -1712,21 +1826,15 @@ async function toggleChecklistItem(idx,event){
   const hasEntry=meta&&meta.mode&&meta.mode!=='upload'&&meta.fields&&meta.fields.length;
   if(hasEntry&&!uploadedFilesForIndex(idx).length){
     const readiness=entryIsReadyToComplete(idx);
-    if(!readiness.ready){openCompletionModal({warning:true,idx:idx,missing:readiness.missing});return;}
+    if(!readiness.ready){openCompletionModal({stage:'warning',warning:true,idx:idx,missing:readiness.missing});return;}
   }
-  const row=document.querySelector('.item.row-upload[data-idx="'+idx+'"]');
-  if(row)row.classList.add('completing-item');
-  openCompletionModal({processing:true,idx:idx,method:'entry'});
+  checked.add(idx);
   try{
-    checked.add(idx);
     await api({form_type:'saveChecklistState',clientId:CLIENT_ID,checkedIndexes:Array.from(checked)});
-    openCompletionModal({warning:false,idx:idx,method:uploadedFilesForIndex(idx).length?'upload':'entry',categoryComplete:completedCategoryForIndex(idx)});
+    openCompletionModal({stage:'success',idx:idx,method:uploadedFilesForIndex(idx).length?'upload':'entry',categoryComplete:categoryIsCompleteForIndex(idx),categoryName:categoryNameForIndex(idx)});
   }catch(error){
     checked.delete(idx);
-    if(row)row.classList.remove('completing-item');
-    openCompletionModal({warning:true,idx:idx,missing:[]});
-    const title=document.getElementById('completionModalTitle');const lead=document.getElementById('completionModalLead');
-    if(title)title.textContent='Could not complete item';if(lead)lead.textContent='Please try again in a moment.';
+    console.error(error);
   }
 }
 function setRowStatus(idx,type,message){const el=document.getElementById('rowStatus-'+idx);if(!el)return;const icon=type==='loading'?'<span class="mini-spinner"></span>':type==='success'?'<span class="upload-check">✓</span>':'';el.innerHTML=icon+esc(message||'');}
@@ -1745,39 +1853,7 @@ function otherDragEnter(e){e.preventDefault();e.stopPropagation();document.getEl
 function otherDragOver(e){e.preventDefault();e.stopPropagation();document.getElementById('otherUploadRow').classList.add('drag-over');}
 function otherDragLeave(e){e.preventDefault();e.stopPropagation();const row=document.getElementById('otherUploadRow');if(!row||row.contains(e.relatedTarget))return;row.classList.remove('drag-over');}
 function otherDrop(e){e.preventDefault();e.stopPropagation();document.getElementById('otherUploadRow').classList.remove('drag-over');const files=Array.from(e.dataTransfer&&e.dataTransfer.files?e.dataTransfer.files:[]);if(files.length)uploadFilesAsOther(files);}
-async function uploadFilesForChecklistItem(idx,files){
-  idx=Number(idx);
-  const button=document.getElementById('uploadBtn-'+idx);
-  const row=document.querySelector('.item.row-upload[data-idx="'+idx+'"]');
-  if(button)button.disabled=true;
-  if(row)row.classList.add('completing-item');
-  openCompletionModal({processing:true,idx:idx,method:'upload'});
-  try{
-    for(let i=0;i<files.length;i++){
-      const originalFile=files[i];
-      const prefix=files.length>1?'File '+(i+1)+' of '+files.length+': ':'';
-      setRowStatus(idx,'loading',prefix+'Uploading '+originalFile.name+' ('+formatFileSize(originalFile.size)+')…');
-      const dataUrl=await readFileAsDataURL(originalFile);
-      const label=selectedLabelForIndex(idx);
-      const cleanLabel=cleanDocLabel(label);
-      const result=await api({form_type:'uploadFile',clientId:CLIENT_ID,file:{name:originalFile.name,mimeType:originalFile.type||'application/octet-stream',dataUrl:dataUrl,docType:label,docTypeLabel:cleanLabel,checklistIndex:idx}});
-      if(!state.uploadedFiles)state.uploadedFiles=[];
-      state.uploadedFiles.push({name:result.fileName||originalFile.name,id:result.fileId||'',timestamp:new Date().toISOString(),checklistIndex:idx,docTypeLabel:cleanLabel});
-    }
-    checked.add(idx);
-    await api({form_type:'saveChecklistState',clientId:CLIENT_ID,checkedIndexes:Array.from(checked)});
-    setRowStatus(idx,'success','Upload complete.');
-    openCompletionModal({warning:false,idx:idx,method:'upload',categoryComplete:completedCategoryForIndex(idx)});
-  }catch(error){
-    if(row)row.classList.remove('completing-item');
-    setRowStatus(idx,'error','Upload failed: '+error.message);
-    openCompletionModal({warning:true,idx:idx,missing:[]});
-    const title=document.getElementById('completionModalTitle');const lead=document.getElementById('completionModalLead');
-    if(title)title.textContent='Upload did not finish';if(lead)lead.textContent='Your document was not marked complete. Please close this message and try again.';
-  }finally{
-    const fresh=document.getElementById('uploadBtn-'+idx);if(fresh)fresh.disabled=false;
-  }
-}
+async function uploadFilesForChecklistItem(idx,files){const button=document.getElementById('uploadBtn-'+idx);if(button)button.disabled=true;try{for(let i=0;i<files.length;i++){const originalFile=files[i];const prefix=files.length>1?'File '+(i+1)+' of '+files.length+': ':'';setRowStatus(idx,'loading',prefix+'Uploading '+originalFile.name+' ('+formatFileSize(originalFile.size)+')…');const dataUrl=await readFileAsDataURL(originalFile);const label=selectedLabelForIndex(idx);const cleanLabel=cleanDocLabel(label);const result=await api({form_type:'uploadFile',clientId:CLIENT_ID,file:{name:originalFile.name,mimeType:originalFile.type||'application/octet-stream',dataUrl:dataUrl,docType:label,docTypeLabel:cleanLabel,checklistIndex:idx}});if(!state.uploadedFiles)state.uploadedFiles=[];state.uploadedFiles.push({name:result.fileName||originalFile.name,id:result.fileId||'',timestamp:new Date().toISOString(),checklistIndex:idx,docTypeLabel:cleanLabel});}checked.add(Number(idx));await api({form_type:'saveChecklistState',clientId:CLIENT_ID,checkedIndexes:Array.from(checked)});openCompletionModal({stage:'success',warning:false,idx:Number(idx),method:'upload',categoryComplete:categoryIsCompleteForIndex(Number(idx)),categoryName:categoryNameForIndex(Number(idx))});}catch(error){setRowStatus(idx,'error','Upload failed: '+error.message);}finally{const fresh=document.getElementById('uploadBtn-'+idx);if(fresh)fresh.disabled=false;}}
 async function uploadFilesAsOther(files){try{const returnReady=isReturnReadyMode();const docLabel=returnReady?'Signed Form 8879':'Other Documents';for(let i=0;i<files.length;i++){const originalFile=files[i];const prefix=files.length>1?'File '+(i+1)+' of '+files.length+': ':'';setRowStatus('other','loading',prefix+'Uploading '+originalFile.name+'…');const dataUrl=await readFileAsDataURL(originalFile);const result=await api({form_type:'uploadFile',clientId:CLIENT_ID,file:{name:originalFile.name,mimeType:originalFile.type||'application/octet-stream',dataUrl:dataUrl,docType:docLabel,docTypeLabel:docLabel,checklistIndex:''}});if(!state.uploadedFiles)state.uploadedFiles=[];state.uploadedFiles.push({name:result.fileName||originalFile.name,id:result.fileId||'',timestamp:new Date().toISOString(),checklistIndex:'',docTypeLabel:docLabel});}render();setRowStatus('other','success',returnReady?'Form 8879 uploaded successfully.':(files.length>1?files.length+' files uploaded.':'Upload complete.'));}catch(error){setRowStatus('other','error','Upload failed: '+error.message);}}
 function deleteFile(fileId,event){event.stopPropagation();if(!fileId||state.canDeleteFiles===false)return;const button=event.currentTarget;const row=button?button.closest('.row-file'):null;if(!row)return;document.querySelectorAll('.delete-confirm').forEach(function(p){p.remove();});document.querySelectorAll('.confirming-delete').forEach(function(el){el.classList.remove('confirming-delete');});const rec=(state.uploadedFiles||[]).find(function(f){return String(f.id)===String(fileId);});const name=rec?(clientDisplayFileName(rec)||'this file'):'this file';row.classList.add('confirming-delete');const panel=document.createElement('div');panel.className='delete-confirm';panel.innerHTML='<div>Delete “'+esc(name)+'”? This cannot be undone.</div><div class="delete-confirm-actions"><button type="button" class="delete-confirm-cancel">Cancel</button><button type="button" class="delete-confirm-ok">Delete file</button></div>';row.appendChild(panel);panel.querySelector('.delete-confirm-cancel').onclick=function(e){e.stopPropagation();panel.remove();row.classList.remove('confirming-delete');};panel.querySelector('.delete-confirm-ok').onclick=function(e){e.stopPropagation();confirmDeleteFile(fileId,row,button,e.currentTarget);};}
 async function confirmDeleteFile(fileId,row,originalButton,confirmButton){const rec=(state.uploadedFiles||[]).find(function(f){return String(f.id)===String(fileId);});const deletedIndex=rec&&rec.checklistIndex!==undefined&&rec.checklistIndex!==''?Number(rec.checklistIndex):null;row.classList.add('deleting');if(originalButton)originalButton.disabled=true;if(confirmButton){confirmButton.disabled=true;confirmButton.innerHTML='<span class="mini-spinner"></span>Deleting...';}try{await api({form_type:'deleteFile',clientId:CLIENT_ID,fileId:fileId});state.uploadedFiles=(state.uploadedFiles||[]).filter(function(f){return String(f.id)!==String(fileId);});if(deletedIndex!==null&&!Number.isNaN(deletedIndex)){const still=state.uploadedFiles.some(function(f){return Number(f.checklistIndex)===Number(deletedIndex);});if(!still){checked.delete(deletedIndex);await api({form_type:'saveChecklistState',clientId:CLIENT_ID,checkedIndexes:Array.from(checked)});}}render();}catch(error){row.classList.remove('deleting');if(originalButton)originalButton.disabled=false;if(confirmButton){confirmButton.disabled=false;confirmButton.textContent='Delete file';}const p=row.querySelector('.delete-confirm div');if(p)p.textContent='Delete failed: '+error.message;}}
