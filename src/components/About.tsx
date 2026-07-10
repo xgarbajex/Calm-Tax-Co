@@ -32,7 +32,7 @@ const About: React.FC = () => {
           <div className="text-center md:text-left flex flex-col items-center md:items-start">
             <h2 className="text-4xl md:text-5xl serif-font text-[#3C3633] mb-4">Hi, I'm Jennifer.</h2>
             <div className="w-48 h-px bg-[#3C3633]/20 mb-8 mx-auto md:mx-0" />
-            <div className="space-y-6 text-[#5D6D7E] text-lg leading-relaxed font-light text-center md:text-left">
+            <div className="space-y-6 text-[#59524F] text-lg leading-relaxed font-light text-center md:text-left">
               <p>
                 I started Calm Tax Co. because I wanted tax preparation to feel simpler, clearer, and easier to navigate. Too often, getting your taxes prepared feels more complicated than it needs to be.
               </p>

@@ -53,7 +53,7 @@ const BlogPostPage: React.FC = () => {
             <h1 className="text-4xl md:text-6xl serif-font text-[#3C3633] leading-tight mb-8">
               {post.title}
             </h1>
-            <p className="text-xl text-[#5D6D7E] italic leading-relaxed">
+            <p className="text-xl text-[#59524F] italic leading-relaxed">
               {post.description}
             </p>
           </header>
@@ -83,7 +83,7 @@ const BlogPostPage: React.FC = () => {
         <footer className="mt-24 pt-12 border-t border-[#3C3633]/10">
           <div className="bg-white p-8 md:p-12 rounded-[2.5rem] text-center border border-[#3C3633]/5">
             <h3 className="text-2xl serif-font text-[#3C3633] mb-4">Ready for a calmer tax season?</h3>
-            <p className="text-[#5D6D7E] mb-8">
+            <p className="text-[#59524F] mb-8">
               We help freelancers and remote workers handle their filing with clarity and precision.
             </p>
             <a 

@@ -12,20 +12,19 @@ const HowItWorks: React.FC = () => {
     },
     {
       title: "Quote & Pay",
-      desc: "We'll review your information and email your personalized quote before preparing your return."
+      desc: "Your tax professional reviews your documents, then emails your flat-rate quote, which you'll pay before we prepare your return."
     },
     {
       title: "Prepare & E-file",
-      desc: "After payment, we'll prepare your return, have you review and e-sign it, then e-file it for you."
+      desc: "After payment, we prepare and file your federal and state returns. You simply review, e-sign, and relax."
     }
   ];
 
   return (
     <section id="how-it-works" className="py-32 px-6 bg-white">
       <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-24">
-          <h2 className="text-5xl md:text-6xl serif-font text-[#3C3633] mb-4">How it works</h2>
-          <div className="w-px h-12 bg-[#7D8E7E]/30 mx-auto my-8" />
+        <div className="text-center mb-16">
+          <h2 className="text-5xl md:text-6xl serif-font text-[#3C3633] mb-3">How it works</h2>
           <p className="text-[#3C3633] serif-font text-xl max-w-2xl mx-auto">A simple, guided process from intake to e-file.</p>
         </div>
 
@@ -87,7 +86,7 @@ const HowItWorks: React.FC = () => {
                        <>
                         <div className="text-right py-2 max-w-[200px] sm:max-w-[260px] ml-auto relative z-10 pr-4 sm:pr-6">
                            <h3 className="text-xl sm:text-2xl serif-font text-[#3C3633] mb-2 leading-snug">{step.title}</h3>
-                           <p className="text-[#5D6D7E] text-xs sm:text-sm leading-relaxed">{step.desc}</p>
+                           <p className="text-[#59524F] text-xs sm:text-sm leading-relaxed">{step.desc}</p>
                          </div>
                          <div className="w-full flex justify-start pl-4 sm:pl-6 relative py-2">
                            {/* Circle */}
@@ -107,7 +106,7 @@ const HowItWorks: React.FC = () => {
                          </div>
                          <div className="text-left py-2 max-w-[200px] sm:max-w-[260px] mr-auto relative z-10 pl-4 sm:pl-6">
                            <h3 className="text-xl sm:text-2xl serif-font text-[#3C3633] mb-2 leading-snug">{step.title}</h3>
-                           <p className="text-[#5D6D7E] text-xs sm:text-sm leading-relaxed">{step.desc}</p>
+                           <p className="text-[#59524F] text-xs sm:text-sm leading-relaxed">{step.desc}</p>
                          </div>
                        </>
                      )}
@@ -125,7 +124,7 @@ const HowItWorks: React.FC = () => {
                     {/* Content */}
                     <div className="text-center mt-1 md:mt-0 relative z-10">
                       <h3 className="text-2xl serif-font text-[#3C3633] mb-3 leading-snug">{step.title}</h3>
-                      <p className="text-[#5D6D7E] text-base leading-relaxed">{step.desc}</p>
+                      <p className="text-[#59524F] text-base leading-relaxed">{step.desc}</p>
                     </div>
                   </div>
                 </div>

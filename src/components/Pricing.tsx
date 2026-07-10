@@ -29,7 +29,7 @@ const Pricing: React.FC = () => {
                 <div className="w-60 h-px bg-[#3C3633]"></div>
               </div>
               
-              <p className="text-[#5D6D7E] leading-relaxed mb-10 w-full max-w-sm">
+              <p className="text-[#59524F] leading-relaxed mb-10 w-full max-w-sm">
                 {service.description}
               </p>
               

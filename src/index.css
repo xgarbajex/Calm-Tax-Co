@@ -1,10 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lora:ital,wght@0,400;0,500;1,400;1,500&display=swap');
 @import "tailwindcss";
 
 @theme {
   --font-serif: "Playfair Display", serif;
   --font-sans: "Inter", sans-serif;
   --font-cormorant: "Cormorant Garamond", serif;
+  --font-lora: "Lora", serif;
 }
 
 .serif-font {
@@ -13,6 +14,10 @@
 
 .cormorant-font {
   font-family: var(--font-cormorant);
+}
+
+.lora-font {
+  font-family: var(--font-lora);
 }
 
 .markdown-body h1, .markdown-body h2, .markdown-body h3 {
@@ -28,7 +33,7 @@
 .markdown-body h3 { font-size: 1.5rem; }
 
 .markdown-body p {
-  color: #5D6D7E;
+  color: #59524F;
   line-height: 1.8;
   margin-bottom: 1.5rem;
 }
@@ -36,7 +41,7 @@
 .markdown-body ul, .markdown-body ol {
   margin-bottom: 1.5rem;
   padding-left: 1.5rem;
-  color: #5D6D7E;
+  color: #59524F;
 }
 
 .markdown-body li {

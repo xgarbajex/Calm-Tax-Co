@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BrowserRouter, Routes, Route, useLocation, Link } from 'react-router-dom';
+import { HashRouter, Routes, Route, useLocation, Link } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import Blog from './pages/Blog';
@@ -111,8 +111,13 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
               </div>
             </div>
           </div>
-          <div className="mt-8 pt-4 border-t border-[#3C3633]/5">
-            <p className="text-xs text-[#3C3633]/30 text-center">© 2026 Calm Tax Co. All rights reserved.</p>
+          <div className="mt-8 pt-4 border-t border-[#3C3633]/5 text-center flex flex-wrap items-center justify-center gap-x-1.5 gap-y-1">
+            <p className="text-xs text-[#3C3633]/30">
+              © 2026 Calm Tax Co. All rights reserved. · Encrypted & confidential via secure upload ·
+            </p>
+            <a href="mailto:hello@calmtax.co" className="footer-email-react">
+              hello@calmtax.co
+            </a>
           </div>
         </div>
       </footer>
@@ -141,6 +146,20 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
         .animate-fade-in {
           animation: fade-in-up 0.8s ease-out forwards;
         }
+        .footer-email-react {
+          font-family: 'Lora', serif;
+          font-size: 0.88rem;
+          font-weight: 500;
+          color: #9bb09c;
+          text-decoration: none;
+          display: inline-block;
+          transition: transform 0.2s ease, color 0.2s ease;
+          cursor: pointer;
+        }
+        .footer-email-react:hover {
+          transform: translateY(-2px);
+          color: #7D8E7E;
+        }
       `}</style>
     </main>
   );
@@ -148,7 +167,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 
 const App: React.FC = () => {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Layout>
         <Routes>
           <Route path="/" element={<Home />} />
@@ -161,7 +180,7 @@ const App: React.FC = () => {
           <Route path="/services/phoenix-online-tax-preparation" element={<PhoenixOnlineTax />} />
         </Routes>
       </Layout>
-    </BrowserRouter>
+    </HashRouter>
   );
 };
 

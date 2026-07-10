@@ -63,7 +63,7 @@ const Contact: React.FC = () => {
           <div>
             <h2 className="text-5xl md:text-6xl mb-4 leading-tight">Let's <br /><span className="italic">connect.</span></h2>
             <div className="w-48 h-px bg-[#3C3633]/20 mb-8" />
-            <p className="text-[#5D6D7E] mb-12 max-w-md leading-relaxed">
+            <p className="text-[#59524F] mb-12 max-w-md leading-relaxed">
               We handle the filing so you don't have to. Drop us a message and we'll be in touch. No phone calls, no scheduling. Just write when you're ready.
             </p>
             
@@ -97,7 +97,7 @@ const Contact: React.FC = () => {
                   </svg>
                 </div>
                 <h3 className="text-2xl mb-2">Thank you.</h3>
-                <p className="text-[#5D6D7E]">We've received your message and will reach out shortly.</p>
+                <p className="text-[#59524F]">We've received your message and will reach out shortly.</p>
                 <button 
                   onClick={() => setStatus('idle')}
                   className="mt-8 text-xs uppercase tracking-widest border-b border-[#3C3633] pb-1"

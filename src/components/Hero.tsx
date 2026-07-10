@@ -31,12 +31,15 @@ const Hero: React.FC = () => {
         </h1>
         <div className="w-48 h-px bg-[#3C3633]/20 mx-auto mb-10" />
         <div className="flex flex-col gap-6 mb-12">
-          <p className="text-sm md:text-base text-[#5D6D7E] max-w-xl mx-auto leading-relaxed font-sans font-light">
-            A quick, self-guided walkthrough creates a personalized document checklist, so you know exactly what to gather and upload. We'll handle the rest.
+          <p className="lora-font text-base md:text-lg text-[#3C3633]/80 italic max-w-2xl mx-auto leading-relaxed">
+            Our quick, click-through intake helps you organize your documents, and a professional tax preparer handles the preparation and filing for you.
           </p>
         </div>
         
-        <div className="flex justify-center mb-6">
+        <div className="flex flex-col md:flex-row items-center justify-center gap-3 mb-6">
+          <span className="inline-block px-5 py-2 rounded-full border border-[#7D8E7E]/30 bg-[#7D8E7E]/5 text-[11px] md:text-[13px] text-[#7D8E7E] uppercase tracking-[0.2em] font-medium">
+            Tax preparation by a certified human professional
+          </span>
           <span className="inline-block px-5 py-2 rounded-full border border-[#A66D5E]/30 bg-[#A66D5E]/5 text-[11px] md:text-[13px] text-[#A66D5E] uppercase tracking-[0.2em] font-medium">
             No scheduling · No office visits · No phone tag
           </span>

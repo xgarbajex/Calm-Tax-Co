@@ -100,7 +100,7 @@ const LegalNotice: React.FC<LegalNoticeProps> = ({ isOpen, onClose, type }) => {
                 {currentContent.sections.map((section, index) => (
                   <div key={index}>
                     <h3 className="cormorant-font text-xl md:text-2xl font-light text-[#3C3633] mb-3">{section.heading}</h3>
-                    <p className="text-[#5D6D7E] leading-relaxed font-sans">{section.text}</p>
+                    <p className="text-[#59524F] leading-relaxed font-sans">{section.text}</p>
                   </div>
                 ))}
               </div>

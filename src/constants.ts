@@ -30,5 +30,5 @@ export const COLORS = {
   stone: '#3C3633',
   sage: '#7D8E7E',
   terracotta: '#A66D5E',
-  slate: '#5D6D7E'
+  slate: '#59524F'
 };

@@ -17,7 +17,7 @@ const WhoItsFor: React.FC = () => {
   ];
 
   return (
-    <section id="who-its-for" className="py-32 px-6 bg-[#F9F7F2]">
+    <section id="who-its-for" className="py-32 px-6 bg-[#FAF8F5]">
       <div className="max-w-7xl mx-auto">
         {/* Common Situations Section */}
         <div className="text-center">
@@ -34,7 +34,7 @@ const WhoItsFor: React.FC = () => {
                 {/* Content */}
                 <div className="relative z-10 flex flex-col items-center text-center">
                   <h3 className="text-2xl serif-font text-[#3C3633] mb-3 pb-3 border-b border-[#3C3633]/15 w-full">{card.title}</h3>
-                  <p className="text-[#5D6D7E] text-base leading-relaxed pt-3">{card.body}</p>
+                  <p className="text-[#59524F] text-base leading-relaxed pt-3">{card.body}</p>
                 </div>
               </div>
             ))}

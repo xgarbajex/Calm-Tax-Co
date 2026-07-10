@@ -4,6 +4,10 @@ import { Plus, Minus } from 'lucide-react';
 const FAQ: React.FC = () => {
   const faqs = [
     {
+      question: "Is Calm Tax Co. a DIY software tool (like TurboTax) or a professional service?",
+      answer: "Calm Tax is a human-powered, professional tax preparation service, NOT software where you file your own taxes. Our click-through, self-guided intake is simply a peaceful, smart way to organize and share documents with us on your own schedule. Once uploaded, a real, qualified, human tax preparer reviews your situation, prepares your federal and state returns with diligence, and files them for you. You get the peace of mind of a professional filing without the stress of an office visit or phone calls."
+    },
+    {
       question: "How does online tax preparation work?",
       answer: "It's a simple, guided process. You start with our short intake walkthrough, answering one question at a time on your own schedule. Your answers automatically create a personalized document checklist. Once you upload those documents securely, we'll review them and email your personalized quote. After payment, we prepare your return, have you review and e-sign it, and e-file it for you."
     },
@@ -101,7 +105,7 @@ const FAQ: React.FC = () => {
         <div 
           className={`overflow-hidden transition-all duration-500 ease-in-out ${isOpen ? 'max-h-[500px] opacity-100 mb-5' : 'max-h-0 opacity-0'}`}
         >
-          <p className="text-[#5D6D7E] text-base leading-relaxed">
+          <p className="text-[#59524F] text-base leading-relaxed">
             {faq.answer}
           </p>
         </div>

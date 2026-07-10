@@ -63,11 +63,11 @@ const Navbar: React.FC = () => {
 
       {/* Mobile Menu Overlay */}
       <div 
-        className={`fixed inset-0 bg-[#F9F7F2] z-40 transition-all duration-500 ease-in-out flex flex-col items-center justify-center p-6 ${
+        className={`fixed inset-0 bg-[#F9F7F2] z-40 transition-all duration-500 ease-in-out flex flex-col items-center justify-start p-6 pt-36 sm:pt-44 md:pt-48 pb-12 overflow-y-auto ${
           isMenuOpen ? 'translate-y-0 opacity-100 pointer-events-auto' : '-translate-y-full opacity-0 pointer-events-none'
         }`}
       >
-        <div className="flex flex-col items-center text-center">
+        <div className="flex flex-col items-center text-center w-full mt-4 sm:mt-8 mb-auto">
           <div className="flex flex-col items-center space-y-6">
             {NAV_ITEMS.map((item) => {
               const linkClasses = "font-sans font-light text-2xl uppercase tracking-[0.2em] text-[#3C3633] hover:text-[#A66D5E] transition-colors duration-300 py-1";

@@ -31,7 +31,7 @@ const Blog: React.FC = () => {
                 <h2 className="text-3xl md:text-4xl serif-font text-[#3C3633] mb-4 group-hover:text-[#A66D5E] transition-colors duration-300">
                   {post.title}
                 </h2>
-                <p className="text-[#5D6D7E] text-lg leading-relaxed mb-8 max-w-3xl">
+                <p className="text-[#59524F] text-lg leading-relaxed mb-8 max-w-3xl">
                   {post.description}
                 </p>
                 <div className="flex items-center gap-2 text-sm uppercase tracking-widest text-[#3C3633] font-medium">

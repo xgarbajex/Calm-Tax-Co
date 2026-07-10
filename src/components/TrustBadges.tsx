@@ -26,13 +26,16 @@ const TrustBadges: React.FC = () => {
   ];
 
   return (
-    <div className="pt-12 flex flex-row flex-wrap md:flex-nowrap items-center justify-center gap-4 md:gap-6 lg:gap-8 max-w-full overflow-x-auto md:overflow-visible no-scrollbar">
+    <div className="pt-16 flex flex-row flex-nowrap items-center justify-center gap-x-4 md:gap-x-8 max-w-full px-4">
       {badges.map((badge, index) => (
-        <div key={index} className="flex items-center gap-2 text-[#7D8E7E] whitespace-nowrap">
-          <div className="flex-none">
+        <div 
+          key={index} 
+          className="flex items-center gap-2 text-[#7D8E7E] whitespace-nowrap opacity-90 hover:opacity-100 transition-opacity duration-300"
+        >
+          <div className="flex-none text-[#7D8E7E]">
             {badge.icon}
           </div>
-          <span className="text-[10px] lg:text-[11px] uppercase tracking-[0.12em] md:tracking-[0.15em] font-medium">
+          <span className="text-[10px] sm:text-[11px] md:text-xs uppercase tracking-[0.15em] font-medium text-[#59524F]">
             {badge.text}
           </span>
         </div>
