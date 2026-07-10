@@ -1286,6 +1286,34 @@
   .completed-archive-inner{padding:15px 14px 3px;}
 }
 
+
+
+/* Calm Tax v49: immediate manual-completion feedback and clearer selectable circles */
+.check{
+  cursor:pointer;
+  transition:background .18s ease,border-color .18s ease,color .18s ease,box-shadow .18s ease,transform .18s ease;
+}
+.item.row-upload:not(.checked) .check:hover,
+.item.row-upload:not(.checked) .check:focus-visible{
+  background:rgba(125,142,126,.11);
+  border-color:var(--sage);
+  color:rgba(125,142,126,.72);
+  box-shadow:0 0 0 5px rgba(125,142,126,.10),0 4px 12px rgba(60,54,51,.07);
+  transform:translateY(-1px) scale(1.05);
+  outline:none;
+}
+.item.row-upload:not(.checked) .check:active{transform:scale(.96);}
+.item.row-upload.manual-completing .check{
+  background:rgba(125,142,126,.12);
+  color:var(--sage);
+  box-shadow:0 0 0 5px rgba(125,142,126,.08);
+}
+.completion-modal.error .completion-modal-icon{
+  background:rgba(166,109,94,.11);
+  color:var(--clay);
+  font-size:20px;
+}
+
 </style>
 </head>
 <body>
@@ -1483,7 +1511,17 @@ function setCompletionModalState(options){
     detail.textContent='Please wait a moment.';
     category.hidden=true;
     button.disabled=true;
+  }else if(stage==='error'){
+    box.classList.remove('warning','loading');
+    box.classList.add('error');
+    icon.textContent='!';
+    title.textContent='Could not complete item';
+    lead.textContent='Your selection was not saved.';
+    detail.textContent='Please close this message and try again.';
+    category.hidden=true;
+    button.disabled=false;
   }else if(warning){
+    box.classList.remove('error');
     icon.textContent='!';
     title.textContent='A few details are still needed';
     lead.textContent='Please complete the highlighted fields below, or upload a document instead.';
@@ -1491,9 +1529,10 @@ function setCompletionModalState(options){
     category.hidden=true;
     button.disabled=false;
   }else{
+    box.classList.remove('error');
     icon.textContent='✓';
     title.textContent='Item Complete';
-    lead.textContent=pendingCompletion.method==='upload'?'Your document has been uploaded.':'Your information has been saved.';
+    lead.textContent=pendingCompletion.method==='upload'?'Your document has been uploaded.':(pendingCompletion.method==='manual'?'This item has been marked complete.':'Your information has been saved.');
     detail.textContent='This item has moved to the bottom of your checklist. You can edit it there anytime before your return is completed.';
     if(pendingCompletion.categoryComplete&&pendingCompletion.categoryName){
       category.textContent='Your '+pendingCompletion.categoryName+' section is complete.';
@@ -1692,7 +1731,7 @@ function itemHtml(item,idx){
   const completedMethod='';
   const completedToggle=isComplete?'<button class="completed-card-toggle" type="button" aria-expanded="false" aria-label="View/Edit" onclick="toggleCompletedCard('+idx+',event)">View/Edit <span class="completed-toggle-arrow" aria-hidden="true">▾</span></button>':'';
   const rowClass='item row-upload '+(isComplete?'checked completed-collapsed':'');
-  return '<div class="'+rowClass+'" data-idx="'+idx+'" ondragenter="rowDragEnter(event,'+idx+')" ondragover="rowDragOver(event,'+idx+')" ondragleave="rowDragLeave(event,'+idx+')" ondrop="rowDrop(event,'+idx+')"><div class="item-main"><div class="item-head"><div class="check" role="button" tabindex="0" title="Check off this item" onclick="toggleChecklistItem('+idx+',event)">✓</div><div class="item-title-wrap"><div class="label">'+esc(cleanItemLabel(item))+help+'</div>'+completedMethod+'</div>'+completedToggle+actions+'</div><div class="row-status" id="rowStatus-'+idx+'"></div>'+(files.length?'<div class="row-files">'+files.map(fileHtml).join('')+'</div>':'')+'<input class="hidden-row-file-input" type="file" id="rowFileInput-'+idx+'" multiple accept=".pdf,.jpg,.jpeg,.png,.heic,.webp,.doc,.docx,.txt,.rtf,.csv,.xls,.xlsx,.ods,.numbers,image/*,application/pdf" onchange="handleRowFileInput('+idx+',event)"></div></div>';
+  return '<div class="'+rowClass+'" data-idx="'+idx+'" ondragenter="rowDragEnter(event,'+idx+')" ondragover="rowDragOver(event,'+idx+')" ondragleave="rowDragLeave(event,'+idx+')" ondrop="rowDrop(event,'+idx+')"><div class="item-main"><div class="item-head"><div class="check" role="button" tabindex="0" title="Mark complete if provided or not applicable" aria-label="Mark this item complete if provided or not applicable" onclick="toggleChecklistItem('+idx+',event)" onkeydown="if(event.key===&quot;Enter&quot;||event.key===&quot; &quot;){event.preventDefault();toggleChecklistItem('+idx+',event);}">✓</div><div class="item-title-wrap"><div class="label">'+esc(cleanItemLabel(item))+help+'</div>'+completedMethod+'</div>'+completedToggle+actions+'</div><div class="row-status" id="rowStatus-'+idx+'"></div>'+(files.length?'<div class="row-files">'+files.map(fileHtml).join('')+'</div>':'')+'<input class="hidden-row-file-input" type="file" id="rowFileInput-'+idx+'" multiple accept=".pdf,.jpg,.jpeg,.png,.heic,.webp,.doc,.docx,.txt,.rtf,.csv,.xls,.xlsx,.ods,.numbers,image/*,application/pdf" onchange="handleRowFileInput('+idx+',event)"></div></div>';
 }
 function toggleHelpBubble(event,el){event.stopPropagation();const wasOpen=el.classList.contains('open');closeHelpBubbles();if(wasOpen)return;el.classList.add('open');const backdrop=document.createElement('div');backdrop.className='help-backdrop';backdrop.setAttribute('aria-hidden','true');backdrop.addEventListener('click',function(e){e.stopPropagation();closeHelpBubbles();});document.body.appendChild(backdrop);}
 function isReturnReadyMode(){const rr=state&&state.returnReview?state.returnReview:{};return !!rr.isReturnReady;}
@@ -1814,7 +1853,7 @@ function completedCount(){return visibleChecklistItems().filter(function(row){re
 async function toggleChecklistItem(idx,event){
   if(event)event.stopPropagation();
   idx=Number(idx);
-  if(Number.isNaN(idx))return;
+  if(Number.isNaN(idx)||completionLocks[idx])return;
   const wasComplete=checked.has(idx);
   if(wasComplete){
     checked.delete(idx);
@@ -1822,21 +1861,33 @@ async function toggleChecklistItem(idx,event){
     try{await api({form_type:'saveChecklistState',clientId:CLIENT_ID,checkedIndexes:Array.from(checked)});}catch(error){console.error(error);}
     return;
   }
-  const meta=metaForIndex(idx);
-  const hasEntry=meta&&meta.mode&&meta.mode!=='upload'&&meta.fields&&meta.fields.length;
-  if(hasEntry&&!uploadedFilesForIndex(idx).length){
-    const readiness=entryIsReadyToComplete(idx);
-    if(!readiness.ready){openCompletionModal({stage:'warning',warning:true,idx:idx,missing:readiness.missing});return;}
-  }
+
+  completionLocks[idx]=true;
   checked.add(idx);
+  const row=document.querySelector('.item.row-upload[data-idx="'+idx+'"]');
+  if(row)row.classList.add('manual-completing');
+  openCompletionModal({stage:'loading',idx:idx,method:'manual'});
+
   try{
     await api({form_type:'saveChecklistState',clientId:CLIENT_ID,checkedIndexes:Array.from(checked)});
-    openCompletionModal({stage:'success',idx:idx,method:uploadedFilesForIndex(idx).length?'upload':'entry',categoryComplete:categoryIsCompleteForIndex(idx),categoryName:categoryNameForIndex(idx)});
+    setCompletionModalState({
+      stage:'success',
+      idx:idx,
+      method:'manual',
+      categoryComplete:categoryIsCompleteForIndex(idx),
+      categoryName:categoryNameForIndex(idx)
+    });
   }catch(error){
     checked.delete(idx);
     console.error(error);
+    setCompletionModalState({stage:'error',idx:idx,method:'manual'});
+  }finally{
+    completionLocks[idx]=false;
+    const fresh=document.querySelector('.item.row-upload[data-idx="'+idx+'"]');
+    if(fresh)fresh.classList.remove('manual-completing');
   }
 }
+
 function setRowStatus(idx,type,message){const el=document.getElementById('rowStatus-'+idx);if(!el)return;const icon=type==='loading'?'<span class="mini-spinner"></span>':type==='success'?'<span class="upload-check">✓</span>':'';el.innerHTML=icon+esc(message||'');}
 function formatFileSize(bytes){if(!bytes)return '0 KB';const kb=bytes/1024;if(kb<1024)return Math.round(kb)+' KB';return (kb/1024).toFixed(1)+' MB';}
 function readFileAsDataURL(file){return new Promise(function(resolve,reject){const r=new FileReader();r.onload=function(){resolve(r.result);};r.onerror=function(){reject(new Error('Could not read '+file.name));};r.readAsDataURL(file);});}
