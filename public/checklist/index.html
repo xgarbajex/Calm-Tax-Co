@@ -1779,6 +1779,43 @@
   .intro-accordion-chevron{right:15px!important;}
 }
 
+
+
+/* Calm Tax v60: keep expanded entry forms below the item heading */
+@media(min-width:701px){
+  .item.row-upload:has(.entry-card.open) .item-head{
+    grid-template-columns:24px minmax(0,1fr) 260px!important;
+    align-items:center!important;
+  }
+  .item.row-upload:has(.entry-card.open) .item-actions{
+    grid-column:1/-1!important;
+    grid-row:2!important;
+    width:100%!important;
+    max-width:none!important;
+    flex:0 0 auto!important;
+    margin:14px 0 0!important;
+    padding:0!important;
+    align-items:flex-end!important;
+  }
+  .item.row-upload:has(.entry-card.open) .entry-card.entry-card-collapsed{
+    width:min(620px,calc(100vw - 90px))!important;
+    max-width:620px!important;
+    margin:0!important;
+    align-self:flex-end!important;
+  }
+  .item.row-upload:has(.entry-card.open) .entry-card.entry-card-collapsed .entry-choice-row,
+  .item.row-upload:has(.entry-card.open) .entry-card.entry-card-collapsed .entry-inner{
+    width:100%!important;
+    max-width:620px!important;
+    transform:none!important;
+  }
+  .item.row-upload:has(.entry-card.open) .single-upload-pill{
+    width:260px!important;
+    max-width:260px!important;
+    align-self:flex-end!important;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -2216,7 +2253,7 @@ function signed8879UploadHtml(){const files=(state.uploadedFiles||[]).filter(fun
 return '<div class="card"><div class="signed-8879-upload" id="otherUploadRow" ondragenter="otherDragEnter(event)" ondragover="otherDragOver(event)" ondragleave="otherDragLeave(event)" ondrop="otherDrop(event)"><h3>Upload Your Signed Form 8879</h3><p><strong>No printer? No problem.</strong></p><p>Most phones, tablets, and computers let you sign PDFs electronically in just a minute or two. Sign the PDF, save it, then upload it below.</p><button class="help-link" type="button" onclick="openSignHelpModal(event)">Need help signing the PDF?</button><br><button class="btn" type="button" onclick="openOtherFilePicker(event)">Upload Signed Form 8879</button><input class="hidden-row-file-input" type="file" id="otherFileInput" multiple accept=".pdf,.jpg,.jpeg,.png,.heic,.webp,.doc,.docx,.txt,.rtf,.csv,.xls,.xlsx,.ods,.numbers" onchange="handleOtherFileInput(event)"><div class="row-status" id="rowStatus-other"></div>'+(files?'<div class="row-files" style="margin-left:0;margin-top:12px">'+files+'</div>':'')+'</div></div>'+signingHelpModalHtml();}
 function checklistIntroHtml(firstName){
   return '<div class="intro-cards intro-accordions">'+
-    '<div class="intro-accordion"><button class="intro-accordion-toggle" type="button" aria-expanded="false" onclick="toggleIntroCard(this,event)"><span>Returning later?</span><span class="intro-accordion-chevron">▾</span></button><div class="intro-accordion-body"><div class="intro-accordion-body-inner"><p>We\'ve emailed you a link to this page so you can easily return at any time. If you don\'t see it within a few minutes, please check your spam or junk folder, and consider adding hello@calmtax.co to your contacts.</p></div></div></div>'+ 
+    '<div class="intro-accordion"><button class="intro-accordion-toggle" type="button" aria-expanded="false" onclick="toggleIntroCard(this,event)"><span>Returning later?</span><span class="intro-accordion-chevron">▾</span></button><div class="intro-accordion-body"><div class="intro-accordion-body-inner"><p>We\'ve emailed you a link to this page so you can easily return at any time. If you don\'t see it within a few minutes, please check your spam or junk folder, and consider adding <a class="intro-help-email" href="mailto:hello@calmtax.co">hello@calmtax.co</a> to your contacts.</p></div></div></div>'+ 
     '<div class="intro-accordion"><button class="intro-accordion-toggle" type="button" aria-expanded="false" onclick="toggleIntroCard(this,event)"><span>What happens next?</span><span class="intro-accordion-chevron">▾</span></button><div class="intro-accordion-body"><div class="intro-accordion-body-inner"><p>Once you\'ve completed your checklist, we\'ll review everything and email you your personalized quote. After you\'ve approved your quote and payment has been received, we\'ll get started on preparing your return.</p></div></div></div>'+ 
     '<div class="intro-accordion"><button class="intro-accordion-toggle" type="button" aria-expanded="false" onclick="toggleIntroCard(this,event)"><span>Need help?</span><span class="intro-accordion-chevron">▾</span></button><div class="intro-accordion-body"><div class="intro-accordion-body-inner"><p>Click the <strong>?</strong> next to a checklist item for more information about where to find that form or information. Feel free to email us at <a class="intro-help-email" href="mailto:hello@calmtax.co">hello@calmtax.co</a> with any additional questions.</p></div></div></div>'+ 
   '</div>';
