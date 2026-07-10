@@ -1733,6 +1733,52 @@
   .intro-accordion-body p{padding:0 16px 15px;}
 }
 
+
+/* Calm Tax v59: completed header, alignment symmetry, and centered intro help */
+.completed-archive summary{
+  position:relative!important;
+  justify-content:center!important;
+  text-align:center!important;
+  padding-left:52px!important;
+  padding-right:52px!important;
+}
+.completed-archive summary::after{position:absolute!important;right:20px!important;top:50%!important;transform:translateY(-50%)!important;}
+.completed-archive[open] summary::after{transform:translateY(-50%) rotate(180deg)!important;}
+.completed-archive-title{display:inline-flex;align-items:center;justify-content:center;gap:9px;}
+.completed-count-badge{
+  width:27px;height:27px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;
+  background:rgba(125,142,126,.14);border:1px solid rgba(125,142,126,.32);color:var(--sage);
+  font-family:Inter,sans-serif;font-style:normal;font-size:12px;font-weight:700;line-height:1;
+}
+.item.row-upload .item-head{align-items:center!important;}
+.item.row-upload .check{align-self:center!important;margin-top:0!important;}
+.item.row-upload .item-title-wrap{align-self:center!important;}
+.item.row-upload .item-actions{align-self:center!important;justify-content:center!important;}
+.item.row-upload .single-upload-pill{align-self:center!important;}
+.item.row-upload .entry-card.entry-card-collapsed{align-self:center!important;}
+.item.row-upload .action-choice-or{
+  display:flex!important;align-items:center!important;justify-content:center!important;text-align:center!important;
+  min-height:18px!important;line-height:1!important;margin:0!important;width:100%!important;
+}
+.item.row-upload .item-actions:has(.entry-card){gap:8px!important;padding-top:0!important;padding-bottom:0!important;}
+.item.row-upload .item-actions:has(.entry-card) .entry-card,
+.item.row-upload .item-actions:has(.entry-card) .single-upload-pill{margin-top:0!important;margin-bottom:0!important;}
+.intro-accordion-toggle{justify-content:center!important;text-align:center!important;position:relative!important;padding-left:42px!important;padding-right:42px!important;}
+.intro-accordion-chevron{position:absolute!important;right:18px!important;top:50%!important;transform:translateY(-50%)!important;}
+.intro-accordion.open .intro-accordion-chevron{transform:translateY(-50%) rotate(180deg)!important;}
+.intro-accordion-body p{text-align:center!important;}
+.intro-help-email{
+  display:inline-block;color:#4A545C;font-family:Lora,serif;font-weight:500;text-decoration:none;
+  transition:transform .16s ease,color .16s ease,text-shadow .16s ease;
+}
+.intro-help-email:hover,.intro-help-email:focus-visible{color:var(--sage);transform:translateY(-1px);text-shadow:0 4px 10px rgba(60,54,51,.08);outline:none;}
+@media(max-width:700px){
+  .completed-archive summary{padding-left:46px!important;padding-right:46px!important;}
+  .completed-archive summary::after{right:16px!important;}
+  .intro-accordion-toggle{padding-left:38px!important;padding-right:38px!important;}
+  .intro-accordion-chevron{right:15px!important;}
+}
+
 </style>
 </head>
 <body>
@@ -2172,7 +2218,7 @@ function checklistIntroHtml(firstName){
   return '<div class="intro-cards intro-accordions">'+
     '<div class="intro-accordion"><button class="intro-accordion-toggle" type="button" aria-expanded="false" onclick="toggleIntroCard(this,event)"><span>Returning later?</span><span class="intro-accordion-chevron">▾</span></button><div class="intro-accordion-body"><div class="intro-accordion-body-inner"><p>We\'ve emailed you a link to this page so you can easily return at any time. If you don\'t see it within a few minutes, please check your spam or junk folder, and consider adding hello@calmtax.co to your contacts.</p></div></div></div>'+ 
     '<div class="intro-accordion"><button class="intro-accordion-toggle" type="button" aria-expanded="false" onclick="toggleIntroCard(this,event)"><span>What happens next?</span><span class="intro-accordion-chevron">▾</span></button><div class="intro-accordion-body"><div class="intro-accordion-body-inner"><p>Once you\'ve completed your checklist, we\'ll review everything and email you your personalized quote. After you\'ve approved your quote and payment has been received, we\'ll get started on preparing your return.</p></div></div></div>'+ 
-    '<div class="intro-accordion"><button class="intro-accordion-toggle" type="button" aria-expanded="false" onclick="toggleIntroCard(this,event)"><span>Not sure where to find something?</span><span class="intro-accordion-chevron">▾</span></button><div class="intro-accordion-body"><div class="intro-accordion-body-inner"><p>Click the <strong>?</strong> next to a checklist item for more information about where to find that form or information.</p></div></div></div>'+ 
+    '<div class="intro-accordion"><button class="intro-accordion-toggle" type="button" aria-expanded="false" onclick="toggleIntroCard(this,event)"><span>Need help?</span><span class="intro-accordion-chevron">▾</span></button><div class="intro-accordion-body"><div class="intro-accordion-body-inner"><p>Click the <strong>?</strong> next to a checklist item for more information about where to find that form or information. Feel free to email us at <a class="intro-help-email" href="mailto:hello@calmtax.co">hello@calmtax.co</a> with any additional questions.</p></div></div></div>'+ 
   '</div>';
 }
 function toggleIntroCard(button,event){
@@ -2252,7 +2298,7 @@ function completedArchiveHtml(groups,order,total){
     if(!group||!group.length)return;
     inner+='<section class="completed-category"><h3 class="completed-category-title">'+esc(cat)+'</h3>'+group.map(function(row){return itemHtml(row.item,row.idx);}).join('')+'</section>';
   });
-  return '<details class="completed-archive"><summary>Completed ('+total+')</summary><div class="completed-archive-inner">'+inner+'</div></details>';
+  return '<details class="completed-archive"><summary><span class="completed-archive-title">Completed Items <span class="completed-count-badge">'+total+'</span></span></summary><div class="completed-archive-inner">'+inner+'</div></details>';
 }
 function render(){
   if(!state)return;
