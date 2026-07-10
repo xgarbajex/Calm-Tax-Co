@@ -1750,19 +1750,6 @@
   background:rgba(125,142,126,.14);border:1px solid rgba(125,142,126,.32);color:var(--sage);
   font-family:Inter,sans-serif;font-style:normal;font-size:12px;font-weight:700;line-height:1;
 }
-.item.row-upload .item-head{align-items:center!important;}
-.item.row-upload .check{align-self:center!important;margin-top:0!important;}
-.item.row-upload .item-title-wrap{align-self:center!important;}
-.item.row-upload .item-actions{align-self:center!important;justify-content:center!important;}
-.item.row-upload .single-upload-pill{align-self:center!important;}
-.item.row-upload .entry-card.entry-card-collapsed{align-self:center!important;}
-.item.row-upload .action-choice-or{
-  display:flex!important;align-items:center!important;justify-content:center!important;text-align:center!important;
-  min-height:18px!important;line-height:1!important;margin:0!important;width:100%!important;
-}
-.item.row-upload .item-actions:has(.entry-card){gap:8px!important;padding-top:0!important;padding-bottom:0!important;}
-.item.row-upload .item-actions:has(.entry-card) .entry-card,
-.item.row-upload .item-actions:has(.entry-card) .single-upload-pill{margin-top:0!important;margin-bottom:0!important;}
 .intro-accordion-toggle{justify-content:center!important;text-align:center!important;position:relative!important;padding-left:42px!important;padding-right:42px!important;}
 .intro-accordion-chevron{position:absolute!important;right:18px!important;top:50%!important;transform:translateY(-50%)!important;}
 .intro-accordion.open .intro-accordion-chevron{transform:translateY(-50%) rotate(180deg)!important;}
@@ -1780,126 +1767,9 @@
 }
 
 
-
-/* Calm Tax v60: keep expanded entry forms below the item heading */
-@media(min-width:701px){
-  .item.row-upload:has(.entry-card.open) .item-head{
-    grid-template-columns:24px minmax(0,1fr) 260px!important;
-    align-items:center!important;
-  }
-  .item.row-upload:has(.entry-card.open) .item-actions{
-    grid-column:1/-1!important;
-    grid-row:2!important;
-    width:100%!important;
-    max-width:none!important;
-    flex:0 0 auto!important;
-    margin:14px 0 0!important;
-    padding:0!important;
-    align-items:flex-end!important;
-  }
-  .item.row-upload:has(.entry-card.open) .entry-card.entry-card-collapsed{
-    width:min(620px,calc(100vw - 90px))!important;
-    max-width:620px!important;
-    margin:0!important;
-    align-self:flex-end!important;
-  }
-  .item.row-upload:has(.entry-card.open) .entry-card.entry-card-collapsed .entry-choice-row,
-  .item.row-upload:has(.entry-card.open) .entry-card.entry-card-collapsed .entry-inner{
-    width:100%!important;
-    max-width:620px!important;
-    transform:none!important;
-  }
-  .item.row-upload:has(.entry-card.open) .single-upload-pill{
-    width:260px!important;
-    max-width:260px!important;
-    align-self:flex-end!important;
-  }
-}
-
-
-/* Calm Tax v61: smooth Enter Details accordion motion */
-.item.row-upload .item-actions,
-.item.row-upload .item-title-wrap{
-  will-change:transform;
-}
-.entry-card.entry-card-collapsed .entry-inner{
-  display:block!important;
-  max-height:0;
-  opacity:0;
-  overflow:hidden!important;
-  transform:translateY(-8px)!important;
-  padding-top:0!important;
-  padding-bottom:0!important;
-  border-top-width:0!important;
-  border-bottom-width:0!important;
-  pointer-events:none;
-  transition:max-height .32s cubic-bezier(.22,.61,.36,1),opacity .18s ease,transform .28s cubic-bezier(.22,.61,.36,1),padding .28s ease,border-width .2s ease!important;
-}
-.entry-card.entry-card-collapsed.open .entry-inner{
-  max-height:1800px;
-  opacity:1;
-  transform:none!important;
-  padding-top:16px!important;
-  padding-bottom:14px!important;
-  border-top-width:1px!important;
-  border-bottom-width:1px!important;
-  pointer-events:auto;
-}
-.entry-card.entry-card-collapsed .entry-choice-row{
-  transition:background .2s ease,border-color .2s ease,box-shadow .2s ease,border-radius .24s ease,transform .28s cubic-bezier(.22,.61,.36,1)!important;
-}
-@media(prefers-reduced-motion:reduce){
-  .entry-card.entry-card-collapsed .entry-inner,
-  .entry-card.entry-card-collapsed .entry-choice-row,
-  .item.row-upload .item-actions,
-  .item.row-upload .item-title-wrap{transition:none!important;animation:none!important;}
-}
-
-
-/* Calm Tax v62: calm accordion expansion without horizontal motion */
+/* Calm Tax v62: email accent color */
 .intro-help-email,
 .contact-email{color:var(--sage)!important;}
-@media(min-width:701px){
-  .item.row-upload:has(.entry-card.open) .item-head{
-    grid-template-columns:24px minmax(0,1fr) 260px!important;
-    align-items:center!important;
-  }
-  .item.row-upload:has(.entry-card.open) .item-title-wrap{
-    align-self:center!important;
-    width:auto!important;
-    max-width:none!important;
-    transform:none!important;
-  }
-  .item.row-upload:has(.entry-card.open) .item-actions{
-    grid-column:1/-1!important;
-    grid-row:2!important;
-    width:100%!important;
-    max-width:none!important;
-    margin:14px 0 0!important;
-    padding:0!important;
-    align-items:flex-end!important;
-    transform:none!important;
-  }
-  .item.row-upload:has(.entry-card.open) .entry-card.entry-card-collapsed{
-    width:min(620px,calc(100vw - 90px))!important;
-    max-width:620px!important;
-    margin:0!important;
-    align-self:flex-end!important;
-  }
-  .item.row-upload:has(.entry-card.open) .entry-card.entry-card-collapsed .entry-choice-row,
-  .item.row-upload:has(.entry-card.open) .entry-card.entry-card-collapsed .entry-inner{
-    width:100%!important;
-    max-width:620px!important;
-    transform:none!important;
-  }
-}
-.entry-card.entry-card-collapsed .entry-inner{
-  transform:none!important;
-  transition:max-height .34s cubic-bezier(.22,.61,.36,1),opacity .2s ease,padding .28s ease,border-width .2s ease!important;
-}
-.entry-card.entry-card-collapsed.open .entry-inner{transform:none!important;}
-.item.row-upload .item-actions,
-.item.row-upload .item-title-wrap{will-change:auto!important;}
 
 </style>
 </head>
@@ -1975,22 +1845,21 @@ function taxIdMaskText(value){const raw=String(value||'');let out='';for(let i=0
 function updateTaxIdMask(input){if(!input)return;const wrap=input.closest('.taxid-sensitive-wrap');const mask=wrap?wrap.querySelector('.taxid-mask-display'):null;if(mask)mask.textContent=taxIdMaskText(input.value||'');}
 function fieldInputHtml(field,idx,value){const key=esc(field.key||'');const label=esc(field.label||'');const type=field.type||'text';const id='entry-'+idx+'-'+key;const val=esc(value||'');const taxIdFormat=!!field.taxIdFormat;const sensitive=(!!field.sensitive||type==='password');const compact=!!field.compactLabel;const depAttr=field.depRow?' data-dep-row="'+field.depRow+'"':'';const full=(type==='textarea'||String(field.label||'').toLowerCase().includes('notes')||String(field.label||'').toLowerCase().includes('dates and amounts'))?' full':'';const fieldClass='entry-field'+full+(compact?' compact-label':'');const placeholder=field.placeholder?' placeholder="'+esc(field.placeholder)+'"':'';const autocomplete=(sensitive||taxIdFormat)?' autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" data-lpignore="true" data-1p-ignore="true" data-form-type="other" ':'';const inputHandler=(taxIdFormat?'formatTaxIdInput(this);updateTaxIdMask(this);':'')+'validateEntry('+idx+');scheduleEntryAutosave('+idx+')';if(type==='select'){const opts=(field.options||[]).map(function(opt){const selected=String(opt)===String(value)?' selected':'';return '<option value="'+esc(opt)+'"'+selected+'>'+esc(opt)+'</option>';}).join('');return '<div class="'+fieldClass+'"'+depAttr+'><label for="'+id+'">'+label+'</label><select id="'+id+'" data-entry-field="'+key+'" onchange="validateEntry('+idx+');scheduleEntryAutosave('+idx+')"><option value=""></option>'+opts+'</select></div>';}if(type==='textarea'){return '<div class="entry-field full'+(compact?' compact-label':'')+'"'+depAttr+'><label for="'+id+'">'+label+'</label><textarea id="'+id+'" data-entry-field="'+key+'" '+placeholder+autocomplete+' oninput="validateEntry('+idx+');scheduleEntryAutosave('+idx+')">'+val+'</textarea></div>';}let htmlType='text';if(type==='number'||type==='date')htmlType=type;if(type==='money'||type==='percent')htmlType='text';const maskClass=sensitive?(taxIdFormat?'taxid-sensitive-input':'sensitive-masked'):'';const input='<input id="'+id+'" type="'+htmlType+'" value="'+val+'" data-entry-field="'+key+'" '+(sensitive?'data-sensitive="true" ':'')+(taxIdFormat?'data-taxid-format="true" ':'')+placeholder+autocomplete+' class="'+maskClass.trim()+'" inputmode="'+(type==='number'||type==='money'||type==='percent'||taxIdFormat||key.toLowerCase().includes('routing')||key.toLowerCase().includes('account')?'numeric':'text')+'" oninput="'+inputHandler+'">';if(sensitive&&taxIdFormat){return '<div class="'+fieldClass+'"'+depAttr+'><label for="'+id+'">'+label+'</label><div class="sensitive-wrap taxid-sensitive-wrap">'+input+'<span class="taxid-mask-display" aria-hidden="true">'+esc(taxIdMaskText(value||''))+'</span><button class="eye-btn" type="button" aria-label="Show or hide '+label+'" onclick="toggleSensitiveField(\''+id+'\',event)">'+svgIcon('eye')+'</button></div></div>';}if(sensitive){return '<div class="'+fieldClass+'"'+depAttr+'><label for="'+id+'">'+label+'</label><div class="sensitive-wrap">'+input+'<button class="eye-btn" type="button" aria-label="Show or hide '+label+'" onclick="toggleSensitiveField(\''+id+'\',event)">'+svgIcon('eye')+'</button></div></div>';}return '<div class="'+fieldClass+'"'+depAttr+'><label for="'+id+'">'+label+'</label>'+input+'</div>';}
 
-function setEntryPanelOpen(panel,shouldOpen){
-  if(!panel)return;
-  panel.classList.toggle('open',!!shouldOpen);
-  const button=panel.querySelector('.entry-toggle-pill');
-  if(button)button.setAttribute('aria-expanded',shouldOpen?'true':'false');
-}
 function toggleEntryPanel(idx,event){
   if(event){event.preventDefault();event.stopPropagation();}
   const panel=document.getElementById('entryPanel-'+idx);
   if(!panel)return false;
-  const shouldOpen=!panel.classList.contains('open');
   document.querySelectorAll('.entry-card.open').forEach(function(card){
-    if(card!==panel)setEntryPanelOpen(card,false);
+    if(card!==panel){
+      card.classList.remove('open');
+      const otherButton=card.querySelector('.entry-toggle-pill');
+      if(otherButton)otherButton.setAttribute('aria-expanded','false');
+    }
   });
-  setEntryPanelOpen(panel,shouldOpen);
-  if(shouldOpen)setTimeout(function(){updateFieldCompletion(idx);},220);
+  panel.classList.toggle('open');
+  const button=panel.querySelector('.entry-toggle-pill');
+  if(button)button.setAttribute('aria-expanded',panel.classList.contains('open')?'true':'false');
+  if(panel.classList.contains('open'))setTimeout(function(){updateFieldCompletion(idx);},0);
   return false;
 }
 
