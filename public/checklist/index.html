@@ -1314,6 +1314,21 @@
   font-size:20px;
 }
 
+
+
+/* Calm Tax v50: integrated Enter Details accordion and refined modal wording */
+.entry-card.entry-card-collapsed{border:0!important;background:transparent!important;box-shadow:none!important;}
+.entry-card.entry-card-collapsed .entry-choice-row{display:block!important;position:relative!important;margin:0!important;border:1px solid rgba(166,109,94,.28)!important;border-radius:16px!important;background:rgba(166,109,94,.055)!important;overflow:hidden!important;box-shadow:0 2px 8px rgba(60,54,51,.025)!important;transition:background .18s ease,border-color .18s ease,box-shadow .18s ease,border-radius .18s ease!important;}
+.entry-card.entry-card-collapsed .entry-choice-row:hover{background:rgba(166,109,94,.09)!important;border-color:rgba(166,109,94,.42)!important;box-shadow:0 5px 14px rgba(60,54,51,.045)!important;}
+.entry-card.entry-card-collapsed .entry-toggle-pill{display:flex!important;width:100%!important;max-width:none!important;min-height:42px!important;padding:10px 14px!important;align-items:center!important;justify-content:flex-start!important;gap:8px!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;color:var(--ink)!important;text-align:left!important;white-space:normal!important;transform:none!important;}
+.entry-card.entry-card-collapsed .entry-toggle-pill:hover{background:transparent!important;border:0!important;box-shadow:none!important;transform:none!important;}
+.entry-card.entry-card-collapsed .entry-toggle-icon{margin-left:auto!important;color:var(--clay)!important;transition:transform .2s ease!important;}
+.entry-card.entry-card-collapsed.open .entry-toggle-icon{transform:rotate(180deg)!important;}
+.entry-card.entry-card-collapsed.open .entry-choice-row{border-radius:16px 16px 0 0!important;border-bottom-color:rgba(125,142,126,.18)!important;background:rgba(125,142,126,.075)!important;box-shadow:0 10px 28px rgba(60,54,51,.055)!important;}
+.entry-card.entry-card-collapsed .entry-inner{margin-top:0!important;border-top:0!important;border-radius:0 0 16px 16px!important;box-shadow:0 10px 28px rgba(60,54,51,.055)!important;}
+@media(min-width:701px){.entry-card.entry-card-collapsed.open .entry-choice-row{width:min(620px,calc(100vw - 90px))!important;max-width:620px!important;transform:translateX(calc(260px - 100%))!important;}.entry-card.entry-card-collapsed.open .entry-inner{margin-top:0!important;}}
+@media(max-width:700px){.entry-card.entry-card-collapsed .entry-choice-row,.entry-card.entry-card-collapsed.open .entry-choice-row{width:100%!important;max-width:100%!important;transform:none!important;margin:0!important;}.entry-card.entry-card-collapsed .entry-toggle-pill{min-height:44px!important;padding:11px 14px!important;}.entry-card.entry-card-collapsed.open .entry-inner{margin-top:0!important;}}
+
 </style>
 </head>
 <body>
@@ -1393,9 +1408,15 @@ function toggleEntryPanel(idx,event){
   const panel=document.getElementById('entryPanel-'+idx);
   if(!panel)return false;
   document.querySelectorAll('.entry-card.open').forEach(function(card){
-    if(card!==panel)card.classList.remove('open');
+    if(card!==panel){
+      card.classList.remove('open');
+      const otherButton=card.querySelector('.entry-toggle-pill');
+      if(otherButton)otherButton.setAttribute('aria-expanded','false');
+    }
   });
   panel.classList.toggle('open');
+  const button=panel.querySelector('.entry-toggle-pill');
+  if(button)button.setAttribute('aria-expanded',panel.classList.contains('open')?'true':'false');
   if(panel.classList.contains('open'))setTimeout(function(){updateFieldCompletion(idx);},0);
   return false;
 }
@@ -1524,7 +1545,7 @@ function setCompletionModalState(options){
     box.classList.remove('error');
     icon.textContent='!';
     title.textContent='A few details are still needed';
-    lead.textContent='Please complete the highlighted fields below, or upload a document instead.';
+    lead.textContent='Please complete the highlighted fields or upload a document instead.';
     detail.textContent='';
     category.hidden=true;
     button.disabled=false;
@@ -1532,8 +1553,8 @@ function setCompletionModalState(options){
     box.classList.remove('error');
     icon.textContent='✓';
     title.textContent='Item Complete';
-    lead.textContent=pendingCompletion.method==='upload'?'Your document has been uploaded.':(pendingCompletion.method==='manual'?'This item has been marked complete.':'Your information has been saved.');
-    detail.textContent='This item has moved to the bottom of your checklist. You can edit it there anytime before your return is completed.';
+    lead.textContent='This item has moved to the bottom of your checklist.';
+    detail.textContent='You can edit it there anytime before your return enters Preparation.';
     if(pendingCompletion.categoryComplete&&pendingCompletion.categoryName){
       category.textContent='Your '+pendingCompletion.categoryName+' section is complete.';
       category.hidden=false;
@@ -1696,7 +1717,7 @@ function entryCardHtml(item,idx){
     });
   }
   const title=esc(meta.entryTitle||'Enter Details');
-  return '<div class="entry-card entry-card-collapsed" id="entryPanel-'+idx+'" onclick="event.stopPropagation()"><div class="entry-choice-row"><button class="entry-toggle-pill" type="button" onclick="toggleEntryPanel('+idx+',event)">'+svgIcon('keyboard')+'Enter Details <span class="entry-toggle-icon">▾</span></button></div><div class="entry-inner"><div class="entry-title">'+title+'</div>'+(isBank?bankingHelpHtml(idx):'')+'<div class="entry-grid">'+fields+'</div>'+(meta.helpAfter?'<p class="entry-support-note">'+meta.helpAfter+'</p>':'')+'<div class="entry-actions"><button class="entry-save" type="button" onclick="saveChecklistEntry('+idx+',event)">Complete Item</button><span class="entry-validation" id="entryValidation-'+idx+'"></span></div><div class="entry-divider"></div><p class="upload-alternative">Prefer not to type this? <em>Upload a document containing this information instead.</em></p></div></div>';
+  return '<div class="entry-card entry-card-collapsed" id="entryPanel-'+idx+'" onclick="event.stopPropagation()"><div class="entry-choice-row"><button class="entry-toggle-pill" type="button" aria-expanded="false" aria-controls="entryInner-'+idx+'" onclick="toggleEntryPanel('+idx+',event)">'+svgIcon('keyboard')+'<span>Enter Details</span><span class="entry-toggle-icon" aria-hidden="true">▾</span></button></div><div class="entry-inner" id="entryInner-'+idx+'"><div class="entry-title">'+title+'</div>'+(isBank?bankingHelpHtml(idx):'')+'<div class="entry-grid">'+fields+'</div>'+(meta.helpAfter?'<p class="entry-support-note">'+meta.helpAfter+'</p>':'')+'<div class="entry-actions"><button class="entry-save" type="button" onclick="saveChecklistEntry('+idx+',event)">Complete Item</button><span class="entry-validation" id="entryValidation-'+idx+'"></span></div><div class="entry-divider"></div><p class="upload-alternative">Prefer not to type this? <em>Upload a document containing this information instead.</em></p></div></div>';
 }
 function completionMethodForIndex(idx){
   if(uploadedFilesForIndex(idx).length)return 'upload';
