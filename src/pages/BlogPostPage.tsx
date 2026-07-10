@@ -8,7 +8,11 @@ import { ExpenseCategoriesGuide } from '../components/ExpenseCategoriesGuide';
 
 const BlogPostPage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
-  const post = BLOG_POSTS.find((p) => p.slug === slug);
+  const post = BLOG_POSTS.find((p) => {
+    if (!slug) return false;
+    const cleanSlug = slug.replace(/\/$/, '').replace(/\.html$/, '').toLowerCase();
+    return p.slug.toLowerCase() === cleanSlug;
+  });
 
   useEffect(() => {
     if (post) {
@@ -22,7 +26,7 @@ const BlogPostPage: React.FC = () => {
   if (!post) {
     return (
       <div className="pt-40 md:pt-48 pb-32 px-6 text-center bg-[#F9F7F2] min-h-screen">
-        <h1 className="text-4xl serif-font mb-8">Article not found</h1>
+        <h1 className="text-4xl serif-font mb-8">Article not found ({slug})</h1>
         <Link to="/blog" className="text-[#7D8E7E] hover:underline flex items-center justify-center gap-2">
           <ArrowLeft className="w-4 h-4" /> Back to Tax Resources
         </Link>
