@@ -1506,6 +1506,50 @@
   }
 }
 
+
+
+/* Calm Tax v54: help affordance, readable tooltip layer, and centered upload alternative */
+.help{
+  transition:transform .18s ease,background-color .18s ease,border-color .18s ease,color .18s ease,box-shadow .18s ease;
+  transform-origin:center;
+}
+.help:hover,
+.help:focus-visible{
+  transform:translateY(-2px) scale(1.06);
+  background:rgba(125,142,126,.12);
+  border-color:rgba(125,142,126,.72);
+  color:var(--ink);
+  box-shadow:0 6px 14px rgba(60,54,51,.12);
+  outline:none;
+}
+.help:active{transform:translateY(0) scale(.98);}
+.help.open{
+  position:relative;
+  z-index:1202!important;
+  background:#fff;
+  color:var(--sage);
+  box-shadow:0 8px 18px rgba(60,54,51,.14);
+}
+.help.open .tip{
+  z-index:1203!important;
+  background:#fff!important;
+  opacity:1!important;
+  filter:none!important;
+  color:var(--ink)!important;
+  box-shadow:0 18px 44px rgba(60,54,51,.24)!important;
+}
+.help-backdrop{z-index:1199!important;}
+.upload-alternative{
+  width:100%;
+  text-align:center!important;
+  margin-left:auto!important;
+  margin-right:auto!important;
+}
+@media (prefers-reduced-motion:reduce){
+  .help{transition:none!important;}
+  .help:hover,.help:focus-visible,.help:active{transform:none!important;}
+}
+
 </style>
 </head>
 <body>
