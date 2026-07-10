@@ -805,6 +805,8 @@ footer { text-align:center; padding:24px; font-size:.75rem; font-weight:300; col
   to { transform: rotate(360deg); }
 }
 
+
+.brow .btn,.brow .bk,.card,.hiw-col.clickable{touch-action:manipulation;-webkit-tap-highlight-color:transparent;}
 </style>
 </head>
 <body>
@@ -812,8 +814,8 @@ footer { text-align:center; padding:24px; font-size:.75rem; font-weight:300; col
 <div id="submitLoadingOverlay" class="submit-loading-overlay" role="status" aria-live="polite" aria-hidden="true">
   <div class="submit-loading-card">
     <div class="submit-loading-spinner" aria-hidden="true"></div>
-    <h2 class="submit-loading-title">Creating your personalized checklist...</h2>
-    <p class="submit-loading-message">This usually takes just a few seconds.</p>
+    <h2 class="submit-loading-title">Submitting your answers...</h2>
+    <p class="submit-loading-message">Your secure checklist page will open as soon as it is ready.</p>
   </div>
 </div>
 
@@ -1282,7 +1284,7 @@ footer { text-align:center; padding:24px; font-size:.75rem; font-weight:300; col
     <div class="subsec" style="margin-bottom:10px">
       <div class="subsec-title">Vehicle details</div>
       <div class="fields">
-        <div class="note" style="margin-top:12px">💡 We will need to know your vehicle's year, make, model, date first used for business, business miles, and total miles for 2025. You can provide these details when you upload your tax documents.</div>
+        <div class="note" style="margin-top:12px">💡 We will need to know your vehicle's year, make, model, date first used for business, business miles, commuting miles, and total miles for 2025. You can provide these details when you upload your tax documents.</div>
       </div>
     </div>
   </div>
@@ -1531,7 +1533,7 @@ footer { text-align:center; padding:24px; font-size:.75rem; font-weight:300; col
   <div class="qt">If you receive a refund, how would you like it?</div>
   <div class="divider"></div>
   <div class="cards" id="refundPref" style="margin-bottom:22px">
-    <div class="card" onclick="radio(this,'refundPref')"><div class="ci"><svg viewBox="0 0 24 24"><path d="M3 22h18"/><path d="M19 10v12"/><path d="m12 2-9 6h18Z"/><path d="M5 10v12"/><path d="M9 10v12"/><path d="M15 10v12"/></svg></div><div class="cb"><div class="ct">Direct deposit to my bank account</div><div class="cd">Fastest option usually within 21 days. You'll provide your bank info securely when you upload your documents later.</div></div><div class="dot"></div></div>
+    <div class="card" onclick="radio(this,'refundPref')"><div class="ci"><svg viewBox="0 0 24 24"><path d="M3 22h18"/><path d="M19 10v12"/><path d="m12 2-9 6h18Z"/><path d="M5 10v12"/><path d="M9 10v12"/><path d="M15 10v12"/></svg></div><div class="cb"><div class="ct">Direct deposit to my bank account</div><div class="cd">If selected, you'll provide this information securely later.</div></div><div class="dot"></div></div>
     <div class="card" onclick="radio(this,'refundPref')"><div class="ci"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><div class="cb"><div class="ct">Paper check mailed to me</div></div><div class="dot"></div></div>
     <div class="card" onclick="radio(this,'refundPref')"><div class="ci"><svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div><div class="cb"><div class="ct">Apply it toward next year's taxes</div><div class="cd">We'll credit it to your 2026 estimated taxes</div></div><div class="dot"></div></div>
   </div>
@@ -1546,12 +1548,12 @@ footer { text-align:center; padding:24px; font-size:.75rem; font-weight:300; col
   <div class="qs">If you end up owing, the IRS offers several ways to pay. Choosing now saves a step later.</div>
   <div class="divider"></div>
   <div class="cards" id="owePay">
-    <div class="card" onclick="radio(this,'owePay')"><div class="ci"><svg viewBox="0 0 24 24"><path d="M3 22h18"/><path d="M19 10v12"/><path d="m12 2-9 6h18Z"/><path d="M5 10v12"/><path d="M9 10v12"/><path d="M15 10v12"/></svg></div><div class="cb"><div class="ct">Direct debit from my bank account</div><div class="cd">We include your routing and account number in the return and the IRS withdraws automatically on the filing date. You'll provide your bank info securely when you upload your documents later.</div></div><div class="dot"></div></div>
+    <div class="card" onclick="radio(this,'owePay')"><div class="ci"><svg viewBox="0 0 24 24"><path d="M3 22h18"/><path d="M19 10v12"/><path d="m12 2-9 6h18Z"/><path d="M5 10v12"/><path d="M9 10v12"/><path d="M15 10v12"/></svg></div><div class="cb"><div class="ct">Direct debit from my bank account</div><div class="cd">If selected, you'll provide this information securely later.</div></div><div class="dot"></div></div>
     <div class="card" onclick="radio(this,'owePay')"><div class="ci"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div><div class="cb"><div class="ct">I will pay on my own via IRS Direct Pay</div><div class="cd">Free, no account needed. We will include instructions in your finalization letter.</div></div><div class="dot"></div></div>
     <div class="card" onclick="radio(this,'owePay')"><div class="ci"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div><div class="cb"><div class="ct">Installment plan</div><div class="cd">If you cannot pay in full, the IRS offers monthly payment plans. We can request one when we file.</div></div><div class="dot"></div></div>
     <div class="card" onclick="radio(this,'owePay')"><div class="ci"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div><div class="cb"><div class="ct">Not sure yet</div><div class="cd">We will discuss options once we know what you owe.</div></div><div class="dot"></div></div>
   </div>
-  <div class="note">💡 If you select direct debit, please include a voided check or your routing and account number in your secure document upload folder. We never store banking information in this form.</div>
+  <div class="note">💡 If selected, you'll provide this information securely later. Please do not share banking information through email, as it is less secure than the upload page.</div>
   <div class="brow"><button class="bk" onclick="go(11)">← Back</button><button class="btn" onclick="go(13)">Continue →</button></div>
 </div>
 
@@ -1652,7 +1654,7 @@ footer { text-align:center; padding:24px; font-size:.75rem; font-weight:300; col
       </div>
 
       <h3 class="wlead print-hidden" style="font-family: 'Lora', serif; font-weight: 400; font-size: 1.05rem; color: var(--ink); line-height: 1.5; text-align: center; max-width: 680px; margin: 0 auto 40px auto;">
-        Here is your personalized document checklist based on your responses.<br><br>You do not need to gather everything before getting started. Upload any documents you already have, and you can add additional items later as you locate them.<br><br>Use the secure upload button below to submit documents as they become available. You can check off items as you upload them to keep track of your progress. Once we've reviewed everything, we'll let you know if we need anything further.
+        Here is your personalized checklist based on your responses.<br><br>You do not need to gather everything before getting started. Upload documents you already have, type simple details directly into your secure checklist page when prompted, and add additional items later as you locate them.<br><br>Once we've reviewed everything, we'll let you know if we need anything further.
       </h3>
 
       <div class="print-hidden" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 32px; border-top: 1px solid var(--border); padding-top: 40px; text-align: center; margin-bottom: 40px;">
@@ -2125,7 +2127,7 @@ function checkScope() {
 function scopeReviewNote() {
   const answer = sel("scopeCheck");
   return answer.includes("I'm not sure")
-    ? "Scope review recommended — client selected I'm not sure on the out-of-scope question."
+    ? "Scope review recommended - client selected I'm not sure on the out-of-scope question."
     : "";
 }
 
@@ -2261,16 +2263,44 @@ function finalTaxInfo() {
   return parts.join(' | ');
 }
 
+function normalizeChecklistLabel(item) {
+  const text = String(item || '')
+    .replace(/^•\s*/, '')
+    .replace(/\s+/g, ' ')
+    .trim()
+    .toLowerCase();
+  const compact = text.replace(/[^a-z0-9]+/g, ' ').trim();
+  if (compact.includes('banking information') || compact.includes('bank account information') || compact.includes('routing number')) return 'banking-information';
+  if (compact.includes('childcare provider') && (compact.includes('ein') || compact.includes('ssn')) && compact.includes('total amount paid')) return 'childcare-provider-info';
+  if (compact.includes('vehicle details') && compact.includes('make') && compact.includes('model') && compact.includes('business miles') && compact.includes('total miles')) return 'vehicle-details-mileage';
+  if (compact.includes('business expense totals') || compact.includes('total annual expense amount')) return 'business-expense-totals';
+  return compact;
+}
+
+function addUniqueChecklistItem(list, item) {
+  const key = normalizeChecklistLabel(item);
+  if (!key) return;
+  const isBanking = key.includes('bank account information') || key.includes('banking information') || key.includes('routing number');
+  const exists = list.some(existing => {
+    const existingKey = normalizeChecklistLabel(existing);
+    if (isBanking) {
+      return existingKey.includes('bank account information') || existingKey.includes('banking information') || existingKey.includes('routing number');
+    }
+    return existingKey === key;
+  });
+  if (!exists) list.push(item);
+}
+
 function buildChecklist() {
   const l = [];
 
-  // Core identity/tax ID info — request through secure upload only, not by email.
-  l.push('• Taxpayer SSN or ITIN (provide only through your secure upload folder — do not email it)');
+  // Core identity/tax ID info - request through secure upload only, not by email.
+  l.push('• Taxpayer SSN or ITIN');
   if (sel('filStat').includes('Married filing jointly') || v('fSFirst')) {
-    l.push('• Spouse SSN or ITIN (secure upload only)');
+    l.push('• Spouse SSN or ITIN');
   }
   if (depInfo()) {
-    l.push('• SSN or ITIN for each dependent you are claiming (secure upload only)');
+    l.push('• SSN or ITIN for each dependent you are claiming');
   }
 
   l.push('• Prior year tax return (2024) if available');
@@ -2283,13 +2313,13 @@ function buildChecklist() {
     l.push('• All 1099-NEC forms received');
     l.push('• 1099-K from payment apps if applicable (PayPal, Venmo, Stripe, Cash App, etc.)');
     l.push('• Total income not already shown on 1099 forms');
-    l.push('• Total annual expense amount spent, categorized by standard IRS Schedule C categories (e.g., Advertising, Car & Truck expenses, Office expenses, Rent/Lease, Repairs/Maintenance, Supplies, Utilities, or other specific business costs). You do not need to send individual receipts—please keep those for your records!');
+    l.push('• Total annual expense amount spent, categorized by standard IRS Schedule C categories (e.g., Advertising, Car & Truck expenses, Office expenses, Rent/Lease, Repairs/Maintenance, Supplies, Utilities, or other specific business costs). You do not need to send individual receipts-please keep those for your records!');
     l.push('  💡 *How to prepare:* You do not need to upload individual receipts! Simply look through your 2025 bank statements, credit card statements, or bookkeeping records. Add up the totals for each category, and provide a single list or spreadsheet with those final dollar totals.');
   }
 
   if (hasInc('Small business')) {
     l.push('• Business income summary, sales report, or 1099 forms showing total income');
-    l.push('• Total annual expense amount spent, categorized by standard IRS Schedule C categories (e.g., Advertising, Car & Truck expenses, Office expenses, Business Insurance, Professional fees/Legal, Rent/Lease, Repairs/Maintenance, Supplies, Utilities, or other specific business costs). You do not need to send individual receipts—please keep those for your records!');
+    l.push('• Total annual expense amount spent, categorized by standard IRS Schedule C categories (e.g., Advertising, Car & Truck expenses, Office expenses, Business Insurance, Professional fees/Legal, Rent/Lease, Repairs/Maintenance, Supplies, Utilities, or other specific business costs). You do not need to send individual receipts-please keep those for your records!');
     l.push('  💡 *How to prepare:* You do not need to upload individual receipts! Simply look through your 2025 bank statements, credit card statements, or bookkeeping records. Add up the totals for each category, and provide a single list or spreadsheet with those final dollar totals.');
     l.push('• Asset/equipment purchases: item description, purchase date, date first used for business, and cost');
     l.push('• Any 1099s issued to contractors, if applicable');
@@ -2308,7 +2338,7 @@ function buildChecklist() {
 
   if (hasInc('Rental')) {
     l.push('• Rental income summary');
-    l.push('• Rental expense summary by category (repairs, insurance, HOA, mortgage interest, etc.)');
+    l.push('• Rental property expense totals by category (for property rented to others or held available for rent, separate from personal home office expenses)');
     if (sel('rentalPurchase').includes('purchased') || sel('rentalPurchase').includes("I'm not sure")) {
       l.push('• Closing Disclosure or settlement statement for rental property purchased during the year');
     }
@@ -2324,8 +2354,7 @@ function buildChecklist() {
 
   const d = chk('deds');
   if (d.includes('vehicle') || d.includes('Vehicle')) {
-    l.push('• Vehicle details: year, make, model, date first used for business, business miles, and total miles');
-    l.push('• Keep your mileage log for your records. Upload it only if requested.');
+    l.push('• Vehicle details: Year, make, model, date first used for business, business miles, commuting miles, and total miles');
   }
   if (d.includes('Mortgage interest')) l.push('• 1098 mortgage interest statement for your primary home');
   if (d.includes('Property taxes'))    l.push('• Property tax payment records or statements');
@@ -2334,7 +2363,7 @@ function buildChecklist() {
   if (d.includes('Medical') || d.includes('health')) l.push('• Medical expense summary and health insurance premium records');
   if (d.includes('IRA') || d.includes('retirement')) l.push('• IRA contribution records (Form 5498 if available)');
   if (d.includes('Childcare'))         l.push('• Childcare provider\'s name, address, EIN or SSN, and total amount paid');
-  if (d.includes('Home office'))       l.push('• Home office square footage and total home square footage');
+  if (d.includes('Home office'))       l.push('• Home office deduction choice and information: choose simplified if you prefer not to gather home expense records, or compare actual expenses if you can provide annual home expense totals');
   if (d.includes('Phone') || d.includes('phone') || d.includes('internet') || d.includes('Internet')) {
     l.push('• Total annual cost of phone and/or internet and your estimated business-use percentage');
   }
@@ -2346,10 +2375,11 @@ function buildChecklist() {
   if (d.includes('Alimony'))           l.push('• Alimony payment records and divorce agreement date');
 
   if (sel('healthCov').includes('Marketplace') || sel('healthCov').includes('ACA') || chk('partialHealthType').includes('Marketplace')) {
-    l.push('• Form 1095-A from Healthcare.gov / Marketplace (required to complete your return if you had Marketplace coverage)');
+    l.push('• Form 1095-A from Healthcare.gov / Marketplace');
   }
-  if (sel('refundPref').includes('deposit')) l.push('• Bank routing number and account number for direct deposit');
-  if (sel('owePay').includes('direct debit') || sel('owePay').includes('Direct debit')) l.push('• Bank routing number and account number for direct debit, or a voided check');
+  if (sel('refundPref').includes('deposit') || sel('owePay').includes('direct debit') || sel('owePay').includes('Direct debit')) {
+    addUniqueChecklistItem(l, '• Banking Information: routing number, account number, account type, and direct deposit/direct debit preference');
+  }
   if (sel('estPay').includes('Yes')) l.push('• Records of estimated tax payments in 2025 (dates and amounts paid to IRS and/or state)');
   if (v('educationWho') && v('educationWho') !== 'No') {
     l.push('• Form 1098-T for college/training expenses, if applicable');
@@ -2366,6 +2396,16 @@ function buildChecklist() {
   if (v('stateNotice') === 'Yes') l.push('• Copy of any state tax notice or letter received');
   if (dependentChildcareSelected()) l.push('• Childcare provider name, address, EIN/SSN, and total amount paid');
   
+  // Defensive cleanup: keep only one checklist item when two answers create the same request
+  // with slightly different wording, such as childcare provider details, vehicle mileage details, or banking info.
+  const seenChecklistKeys = {};
+  for (let index = l.length - 1; index >= 0; index--) {
+    const key = normalizeChecklistLabel(l[index]);
+    if (!key || l[index].trim() === '' || l[index].startsWith('---')) continue;
+    if (seenChecklistKeys[key]) l.splice(index, 1);
+    else seenChecklistKeys[key] = true;
+  }
+
   // ALWAYS ADD OTHER DOCUMENTS
   l.push('• Other Documents');
 
@@ -2424,9 +2464,9 @@ function submitForm() {
   if (modalFolderNameSpan) modalFolderNameSpan.textContent = formattedFolder;
 
   const docSubtitles = {
-    "Taxpayer SSN or ITIN": "Required to file your tax return. Provide only through your secure upload folder — do not email it for privacy.",
-    "Spouse SSN or ITIN": "Required for a Married Filing Jointly return. Provide safely via secure upload only.",
-    "SSN or ITIN for each dependent": "Required for each child or relative claimed as a dependent.",
+    "Taxpayer SSN or ITIN": "Required to file your tax return. You can provide it securely on the checklist page. Please do not share it through email, as it is less secure than the checklist page.",
+    "Spouse SSN or ITIN": "Required for a Married Filing Jointly return. You can provide it securely on the checklist page. Please do not share it through email, as it is less secure than the checklist page.",
+    "SSN or ITIN for each dependent": "Required for each child or relative claimed as a dependent. You can provide it securely on the checklist page. Please do not share it through email, as it is less secure than the checklist page.",
     "Prior year tax return": "Helps us verify your identity-protection PIN and carryover deductions from your 2024 filing.",
     "W-2 form": "Issued by your employers. Usually found on your payroll portal (ADP, Gusto, Workday) or physical mail in January.",
     "1099-NEC": "Issued by clients or contract/gig platforms (Upwork, Fiverr) for self-employed work over $600.",
@@ -2442,10 +2482,10 @@ function submitForm() {
     "1099-G": "Annual unemployment compensation state tax statement.",
     "SSA-1099": "Social Security benefit statement from ssa.gov.",
     "Rental income summary": "Gross rent collected from tenants and any other related rental receipts.",
-    "Rental expense summary": "Totals categorized by repairs, business insurance, HOA fees, mortgage interest, and utilities.",
+    "Rental property expense totals": "For property rented to others or held available for rent. Include annual totals by category such as repairs, insurance, HOA fees, mortgage interest, taxes, utilities, management fees, and supplies.",
     "Closing Disclosure or settlement statement for rental property purchased during the year": "If you purchased a rental property during the year, upload your Closing Disclosure (or HUD-1 if applicable). This helps establish your tax basis and depreciation.",
     "Closing Disclosure (or settlement statement), Form 1099-S (if received), and records of major home improvements": "If you sold your home during the year, upload your Closing Disclosure (or settlement statement), Form 1099-S if you received one, and records of major improvements if available. These help determine any taxable gain and any applicable home sale exclusion.",
-    "Vehicle details": "Your vehicle's year, make, model and mileage records (business vs. total miles driven in 2025).",
+    "Vehicle details": "We need both vehicle details and mileage: year, make, model, date first used for business, business miles, total miles, and how you tracked them.",
     "Keep your mileage log": "Keep detailed records in case of an IRS audit. We don't need the individual logs unless requested.",
     "Property tax payment records": "Found on your local county assessor's statement or escrow statements.",
     "1098-E": "Student loan interest statement from your loan servicer (Nelnet, Aidvantage, etc.).",
@@ -2454,14 +2494,15 @@ function submitForm() {
     "Medical expense summary": "Sum of premiums, doctor copays, dental, optical, and prescriptions (only helpful if extremely high).",
     "Retirement contribution outside payroll": "Records of any contributions made to traditional or Roth IRAs outside of work payroll.",
     "Childcare provider's name": "Must include childcare provider's legal name, physical address, EIN/SSN, and the exact total amount paid in 2025.",
-    "Home office square footage": "The square-footage of your dedicated workspace and the total square-footage of your home.",
+    "Home office deduction choice": "Choose simplified if you prefer not to gather home expense records, or compare actual expenses if you can provide square footage and annual home expense totals.",
     "Total annual cost of phone": "Total phone/internet bills and your estimated business use percentage (e.g., 70% business).",
     "Total amount spent on supplies": "Add up purchases for business supplies, office equipment, software, or professional tools.",
     "Adoption expense": "Documentation for qualifying costs incurred during a legal adoption process.",
     "EV purchase documents": "Sales contract showing purchase date, vehicle VIN and dealer certification of eligibility.",
     "Alimony payment records": "Your divorce decree, recipient's name/SSN, and the total payments made in 2025.",
     "estimated tax payments in 2025": "Specific dates and amounts paid to IRS and/or state during the tax year.",
-    "Bank routing number": "Required for secure, direct deposit of your refund or direct debit of any balance due.",
+    "Banking Information": "You can enter the information securely later on your checklist page or upload a bank document instead.",
+    "Bank account information": "You can enter the information securely later on your checklist page or upload a bank document instead.",
     "Other Documents": "Any other tax-related documents or notices not listed here."
   };
 
@@ -2701,7 +2742,9 @@ function submitForm() {
         const redirectUrl = data.url || data.checklistUrl;
 
         if (redirectUrl) {
-          window.top.location.href = redirectUrl;
+          const freshUrl = new URL(redirectUrl, window.location.href);
+          freshUrl.searchParams.set('fresh', '1');
+          window.top.location.href = freshUrl.toString();
         } else {
           document.getElementById('s14').classList.remove('active');
           document.getElementById('sDone').classList.add('active');
@@ -2996,5 +3039,16 @@ function submitForm() {
     }
   }
 </script>
+
+<script>
+(function(){
+  let lastTouchActivation=0;
+  let syntheticTouchClick=false;
+  function actionable(el){return el&&el.closest?el.closest('.brow .btn,.brow .bk,.card,.hiw-col.clickable'):null;}
+  document.addEventListener('touchend',function(event){const el=actionable(event.target);if(!el)return;lastTouchActivation=Date.now();event.preventDefault();syntheticTouchClick=true;el.click();if(el.blur)el.blur();setTimeout(function(){syntheticTouchClick=false;},0);},{passive:false});
+  document.addEventListener('click',function(event){const el=actionable(event.target);if(!el)return;if(!syntheticTouchClick&&Date.now()-lastTouchActivation<450){event.preventDefault();event.stopImmediatePropagation();}},true);
+})();
+</script>
+
 </body>
 </html>
