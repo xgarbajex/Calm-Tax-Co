@@ -1597,6 +1597,29 @@
   display:inline-block!important;
 }
 
+
+/* Calm Tax v56: keep every help popup fully bright above focus mode */
+.checklist-list.focus-mode .group-block.help-tooltip-active{
+  opacity:1!important;
+  filter:none!important;
+  box-shadow:0 6px 22px rgba(60,54,51,.026)!important;
+}
+.group-block.help-tooltip-active,
+.group-block.help-tooltip-active .item,
+.group-block.help-tooltip-active .item-main,
+.group-block.help-tooltip-active .item-head,
+.group-block.help-tooltip-active .item-title-wrap{
+  opacity:1!important;
+  filter:none!important;
+}
+.group-block.help-tooltip-active .help.open .tip{
+  background:#fff!important;
+  color:var(--ink)!important;
+  opacity:1!important;
+  filter:none!important;
+  isolation:isolate;
+}
+
 </style>
 </head>
 <body>
@@ -1960,7 +1983,7 @@ async function saveChecklistEntry(idx,event){
     setEntryCompletingState(idx,false);
   }
 }
-function closeHelpBubbles(){document.querySelectorAll('.help.open').forEach(function(h){h.classList.remove('open');});document.querySelectorAll('.inline-help-panel.open').forEach(function(panel){panel.classList.remove('open');});document.querySelectorAll('.help-backdrop').forEach(function(backdrop){backdrop.remove();});}
+function closeHelpBubbles(){document.querySelectorAll('.help.open').forEach(function(h){h.classList.remove('open');});document.querySelectorAll('.group-block.help-tooltip-active').forEach(function(group){group.classList.remove('help-tooltip-active');});document.querySelectorAll('.inline-help-panel.open').forEach(function(panel){panel.classList.remove('open');});document.querySelectorAll('.help-backdrop').forEach(function(backdrop){backdrop.remove();});}
 document.addEventListener('click',function(e){if(!e.target.closest||(!e.target.closest('.help')&&!e.target.closest('.tip')&&!e.target.closest('.inline-help-panel')&&!e.target.closest('.help-panel-link'))){closeHelpBubbles();}});
 function formatTaxIdInput(input){if(!input)return;const digits=String(input.value||'').replace(/\D/g,'').slice(0,9);let formatted=digits;if(digits.length>5)formatted=digits.slice(0,3)+'-'+digits.slice(3,5)+'-'+digits.slice(5);else if(digits.length>3)formatted=digits.slice(0,3)+'-'+digits.slice(3);input.value=formatted;updateTaxIdMask(input);}
 function dependentTaxRowsHtml(meta,idx,values){let html='';for(let i=1;i<=6;i++){const nameKey='dependent'+i+'Name';const taxKey='dependent'+i+'TaxId';const visible=i===1||String(values[nameKey]||'').trim()||String(values[taxKey]||'').trim();html+='<div class="dependent-tax-row '+(visible?'':'hidden')+'" data-dependent-tax-row="'+i+'">'+fieldInputHtml({key:nameKey,label:(i===1?'Dependent name':'Dependent '+i+' name'),type:'text',depRow:i},idx,values[nameKey]||'')+fieldInputHtml({key:taxKey,label:'SSN or ITIN',type:'text',sensitive:true,taxIdFormat:true,compactLabel:i>1,depRow:i},idx,values[taxKey]||'')+'</div>';}html+='<button class="dependent-add" type="button" onclick="addDependentTaxRow('+idx+',event)">+ Add another dependent</button>';return html;}
@@ -2022,7 +2045,7 @@ function itemHtml(item,idx){
   const rowClass='item row-upload '+(isComplete?'checked completed-collapsed':'');
   return '<div class="'+rowClass+'" data-idx="'+idx+'" ondragenter="rowDragEnter(event,'+idx+')" ondragover="rowDragOver(event,'+idx+')" ondragleave="rowDragLeave(event,'+idx+')" ondrop="rowDrop(event,'+idx+')"><div class="item-main"><div class="item-head"><div class="check" role="button" tabindex="0" title="Mark complete if provided or not applicable" aria-label="Mark this item complete if provided or not applicable" onclick="toggleChecklistItem('+idx+',event)" onkeydown="if(event.key===&quot;Enter&quot;||event.key===&quot; &quot;){event.preventDefault();toggleChecklistItem('+idx+',event);}">✓</div><div class="item-title-wrap"><div class="label">'+esc(cleanItemLabel(item))+help+'</div>'+completedMethod+'</div>'+completedToggle+actions+'</div><div class="row-status" id="rowStatus-'+idx+'"></div>'+(files.length?'<div class="row-files">'+files.map(fileHtml).join('')+'</div>':'')+'<input class="hidden-row-file-input" type="file" id="rowFileInput-'+idx+'" multiple accept=".pdf,.jpg,.jpeg,.png,.heic,.webp,.doc,.docx,.txt,.rtf,.csv,.xls,.xlsx,.ods,.numbers,image/*,application/pdf" onchange="handleRowFileInput('+idx+',event)"></div></div>';
 }
-function toggleHelpBubble(event,el){event.stopPropagation();const wasOpen=el.classList.contains('open');closeHelpBubbles();if(wasOpen)return;el.classList.add('open');const backdrop=document.createElement('div');backdrop.className='help-backdrop';backdrop.setAttribute('aria-hidden','true');backdrop.addEventListener('click',function(e){e.stopPropagation();closeHelpBubbles();});document.body.appendChild(backdrop);}
+function toggleHelpBubble(event,el){event.stopPropagation();const wasOpen=el.classList.contains('open');closeHelpBubbles();if(wasOpen)return;const group=el.closest('.group-block');if(group)group.classList.add('help-tooltip-active');el.classList.add('open');const backdrop=document.createElement('div');backdrop.className='help-backdrop';backdrop.setAttribute('aria-hidden','true');backdrop.addEventListener('click',function(e){e.stopPropagation();closeHelpBubbles();});document.body.appendChild(backdrop);}
 function isReturnReadyMode(){const rr=state&&state.returnReview?state.returnReview:{};return !!rr.isReturnReady;}
 function isCompleteMode(){const rr=state&&state.returnReview?state.returnReview:{};return !!rr.isComplete||String(rr.status||'').trim().toLowerCase()==='complete';}
 function isAuthorizationReceived(){const rr=state&&state.returnReview?state.returnReview:{};const value=String(rr.form8879Received||'').trim().toLowerCase();return value==='yes'||value==='received'||value==='true'||String(rr.efileDate||'').trim()!=='';}
