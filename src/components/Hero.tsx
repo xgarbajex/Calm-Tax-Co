@@ -10,8 +10,8 @@ const Hero: React.FC = () => {
         <img src="/hero_background.png" alt="" className="w-full h-full object-cover" />
       </div>
 
-      <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
-        <h1 className="cormorant-font text-4xl sm:text-5xl md:text-6xl lg:text-7xl mb-6 leading-tight font-light tracking-[0.015em] px-4 text-[#3C3633]">
+      <div className="relative z-10 w-full max-w-4xl mx-auto px-4 sm:px-6 text-center">
+        <h1 className="cormorant-font text-4xl sm:text-5xl md:text-6xl lg:text-7xl mb-6 leading-tight font-light tracking-[0.015em] text-[#3C3633]">
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
@@ -36,11 +36,11 @@ const Hero: React.FC = () => {
           </p>
         </div>
         
-        <div className="flex flex-col md:flex-row items-center justify-center gap-3 mb-6">
-          <span className="inline-block px-5 py-2 rounded-full border border-[#7D8E7E]/30 bg-[#7D8E7E]/5 text-[11px] md:text-[13px] text-[#7D8E7E] uppercase tracking-[0.2em] font-medium">
+        <div className="flex flex-col md:flex-row items-center justify-center gap-3 mb-6 w-full">
+          <span className="inline-block w-full md:w-auto px-5 py-2 rounded-full border border-[#7D8E7E]/30 bg-[#7D8E7E]/5 text-[10px] sm:text-[11px] md:text-[13px] text-[#7D8E7E] uppercase tracking-[0.15em] sm:tracking-[0.2em] font-medium text-center">
             Tax preparation by a certified human professional
           </span>
-          <span className="inline-block px-5 py-2 rounded-full border border-[#A66D5E]/30 bg-[#A66D5E]/5 text-[11px] md:text-[13px] text-[#A66D5E] uppercase tracking-[0.2em] font-medium">
+          <span className="inline-block w-full md:w-auto px-5 py-2 rounded-full border border-[#A66D5E]/30 bg-[#A66D5E]/5 text-[10px] sm:text-[11px] md:text-[13px] text-[#A66D5E] uppercase tracking-[0.15em] sm:tracking-[0.2em] font-medium text-center">
             No scheduling · No office visits · No phone tag
           </span>
         </div>
@@ -48,16 +48,16 @@ const Hero: React.FC = () => {
         <p className="text-[#7D8E7E] text-sm md:text-base tracking-widest uppercase font-medium mb-16 px-4">
           All online. All on your schedule. All year round.
         </p>
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 w-full">
           <a 
             href="#pricing" 
-            className="px-10 py-4 rounded-full border border-[#3C3633] text-[#3C3633] hover:bg-[#3C3633] hover:text-[#F9F7F2] hover:-translate-y-1 hover:shadow-lg hover:shadow-[#3C3633]/10 active:translate-y-0 transition-all duration-300 text-sm uppercase tracking-widest block"
+            className="w-full sm:w-auto px-6 sm:px-10 py-4 rounded-full border border-[#3C3633] text-[#3C3633] hover:bg-[#3C3633] hover:text-[#F9F7F2] hover:-translate-y-1 hover:shadow-lg hover:shadow-[#3C3633]/10 active:translate-y-0 transition-all duration-300 text-xs sm:text-sm uppercase tracking-widest block"
           >
             See Pricing
           </a>
           <a 
             href="/intake.html" 
-            className="px-10 py-4 rounded-full bg-[#3C3633] text-white hover:bg-[#4d4642] hover:-translate-y-1 hover:shadow-lg hover:shadow-[#3C3633]/25 active:translate-y-0 transition-all duration-300 text-sm uppercase tracking-widest block"
+            className="w-full sm:w-auto px-6 sm:px-10 py-4 rounded-full bg-[#3C3633] text-white hover:bg-[#4d4642] hover:-translate-y-1 hover:shadow-lg hover:shadow-[#3C3633]/25 active:translate-y-0 transition-all duration-300 text-xs sm:text-sm uppercase tracking-widest block"
           >
             Begin Intake Walkthrough
           </a>

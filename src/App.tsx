@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { HashRouter, Routes, Route, useLocation, Link } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useLocation, Link } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import Blog from './pages/Blog';
@@ -167,7 +167,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 
 const App: React.FC = () => {
   return (
-    <HashRouter>
+    <BrowserRouter>
       <Layout>
         <Routes>
           <Route path="/" element={<Home />} />
@@ -180,7 +180,7 @@ const App: React.FC = () => {
           <Route path="/services/phoenix-online-tax-preparation" element={<PhoenixOnlineTax />} />
         </Routes>
       </Layout>
-    </HashRouter>
+    </BrowserRouter>
   );
 };
 

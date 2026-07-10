@@ -17,7 +17,7 @@ const WhoItsFor: React.FC = () => {
   ];
 
   return (
-    <section id="who-its-for" className="py-32 px-6 bg-[#FAF8F5]">
+    <section id="who-its-for" className="py-32 px-6 bg-[#FCFBF9]">
       <div className="max-w-7xl mx-auto">
         {/* Common Situations Section */}
         <div className="text-center">

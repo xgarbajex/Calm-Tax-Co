@@ -26,7 +26,7 @@ const TrustBadges: React.FC = () => {
   ];
 
   return (
-    <div className="pt-16 flex flex-row flex-nowrap items-center justify-center gap-x-4 md:gap-x-8 max-w-full px-4">
+    <div className="pt-16 flex flex-col md:flex-row md:flex-nowrap items-center justify-center gap-y-4 md:gap-x-6 lg:gap-x-8 max-w-full px-4 pb-2">
       {badges.map((badge, index) => (
         <div 
           key={index} 
