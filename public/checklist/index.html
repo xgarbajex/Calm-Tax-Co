@@ -964,6 +964,50 @@
   .completion-modal h2{font-size:25px;}
 }
 
+
+/* Calm Tax v44: compact completed cards and SSN/autosave fixes */
+.taxid-sensitive-wrap input.taxid-sensitive-input{
+  background:transparent!important;
+  text-align:left!important;
+  padding-left:13px!important;
+}
+.taxid-sensitive-wrap .taxid-mask-display{
+  z-index:3!important;
+  left:13px!important;
+  right:50px!important;
+  text-align:left!important;
+}
+.item.row-upload.completed-collapsed{
+  padding-top:13px!important;
+  padding-bottom:13px!important;
+  background:rgba(125,142,126,.055)!important;
+}
+.item.row-upload.completed-collapsed .item-head{align-items:center!important;}
+.item.row-upload.completed-collapsed .item-actions,
+.item.row-upload.completed-collapsed .row-files,
+.item.row-upload.completed-collapsed .row-status{display:none!important;}
+.completed-card-toggle{
+  border:1px solid rgba(125,142,126,.28);
+  background:rgba(255,255,255,.8);
+  color:var(--sage);
+  border-radius:999px;
+  padding:7px 11px;
+  font-family:Inter,sans-serif;
+  font-size:12px;
+  font-weight:700;
+  cursor:pointer;
+  white-space:nowrap;
+}
+.completed-card-toggle:hover{background:rgba(125,142,126,.10);}
+.item.row-upload.completed-expanded .completed-card-toggle{background:rgba(125,142,126,.10);}
+.completed-method{margin-top:5px;}
+@media(min-width:701px){.item.row-upload.completed-collapsed .item-head{grid-template-columns:24px minmax(0,1fr) auto!important;}}
+@media(max-width:700px){
+  .item.row-upload.completed-collapsed .item-head{display:grid!important;grid-template-columns:26px minmax(0,1fr)!important;text-align:left!important;width:100%!important;}
+  .item.row-upload.completed-collapsed .item-title-wrap{text-align:left!important;}
+  .item.row-upload.completed-collapsed .completed-card-toggle{grid-column:2;justify-self:start;margin-top:8px;}
+}
+
 </style>
 </head>
 <body>
@@ -1222,6 +1266,8 @@ async function saveChecklistEntry(idx,event){
     state.entryValues=state.entryValues||{};
     state.entryValues[String(idx)]=result.values||values;
     checked=new Set((result.checkedIndexes||Array.from(checked)).map(Number));
+    if(validation){validation.className='entry-validation ok';validation.textContent='Saved';}
+    setRowStatus(idx,'success','Item complete.');
     openCompletionModal({warning:false,idx:Number(idx),method:'entry'});
   }catch(error){if(validation){validation.className='entry-validation attn';validation.textContent='Save failed: '+error.message;}}
 }
@@ -1257,6 +1303,17 @@ function completionMethodForIndex(idx){
   const values=valuesForIndex(idx);
   return Object.keys(values||{}).some(function(key){return String(values[key]||'').trim();})?'entry':'';
 }
+function toggleCompletedCard(idx,event){
+  if(event){event.preventDefault();event.stopPropagation();}
+  const row=document.querySelector('.item.row-upload[data-idx="'+Number(idx)+'"]');
+  if(!row)return false;
+  const expanding=row.classList.contains('completed-collapsed');
+  row.classList.toggle('completed-collapsed',!expanding);
+  row.classList.toggle('completed-expanded',expanding);
+  const button=row.querySelector('.completed-card-toggle');
+  if(button){button.textContent=expanding?'Hide editing options':'View or edit';button.setAttribute('aria-expanded',expanding?'true':'false');}
+  return false;
+}
 function itemHtml(item,idx){
   const tip=helpFor(item);
   const files=uploadedFilesForIndex(idx);
@@ -1268,8 +1325,11 @@ function itemHtml(item,idx){
   const orText=hasEntry?'<span class="action-choice-or">or</span>':'';
   const actions='<div class="item-actions">'+entry+orText+'<button class="action-pill single-upload-pill" type="button" id="uploadBtn-'+idx+'" onclick="openRowFilePicker('+idx+',event,\'files\')">'+svgIcon('file')+'Upload Document</button></div>';
   const method=completionMethodForIndex(idx);
-  const completedMethod=isComplete&&method?'<div class="completed-method">✓ Completed using '+(method==='upload'?'uploaded document':'entered details')+'</div>':'';
-  return '<div class="item row-upload '+(isComplete?'checked':'')+'" data-idx="'+idx+'" ondragenter="rowDragEnter(event,'+idx+')" ondragover="rowDragOver(event,'+idx+')" ondragleave="rowDragLeave(event,'+idx+')" ondrop="rowDrop(event,'+idx+')"><div class="item-main"><div class="item-head"><div class="check" role="button" tabindex="0" title="Check off this item" onclick="toggleChecklistItem('+idx+',event)">✓</div><div class="item-title-wrap"><div class="label">'+esc(cleanItemLabel(item))+help+'</div>'+completedMethod+'</div>'+actions+'</div><div class="row-status" id="rowStatus-'+idx+'"></div>'+(files.length?'<div class="row-files">'+files.map(fileHtml).join('')+'</div>':'')+'<input class="hidden-row-file-input" type="file" id="rowFileInput-'+idx+'" multiple accept=".pdf,.jpg,.jpeg,.png,.heic,.webp,.doc,.docx,.txt,.rtf,.csv,.xls,.xlsx,.ods,.numbers,image/*,application/pdf" onchange="handleRowFileInput('+idx+',event)"></div></div>';
+  const methodText=method==='upload'?'Completed using uploaded document':(method==='entry'?'Completed using entered details':'Marked complete');
+  const completedMethod=isComplete?'<div class="completed-method">✓ '+methodText+'</div>':'';
+  const completedToggle=isComplete?'<button class="completed-card-toggle" type="button" aria-expanded="false" onclick="toggleCompletedCard('+idx+',event)">View or edit</button>':'';
+  const rowClass='item row-upload '+(isComplete?'checked completed-collapsed':'');
+  return '<div class="'+rowClass+'" data-idx="'+idx+'" ondragenter="rowDragEnter(event,'+idx+')" ondragover="rowDragOver(event,'+idx+')" ondragleave="rowDragLeave(event,'+idx+')" ondrop="rowDrop(event,'+idx+')"><div class="item-main"><div class="item-head"><div class="check" role="button" tabindex="0" title="Check off this item" onclick="toggleChecklistItem('+idx+',event)">✓</div><div class="item-title-wrap"><div class="label">'+esc(cleanItemLabel(item))+help+'</div>'+completedMethod+'</div>'+completedToggle+actions+'</div><div class="row-status" id="rowStatus-'+idx+'"></div>'+(files.length?'<div class="row-files">'+files.map(fileHtml).join('')+'</div>':'')+'<input class="hidden-row-file-input" type="file" id="rowFileInput-'+idx+'" multiple accept=".pdf,.jpg,.jpeg,.png,.heic,.webp,.doc,.docx,.txt,.rtf,.csv,.xls,.xlsx,.ods,.numbers,image/*,application/pdf" onchange="handleRowFileInput('+idx+',event)"></div></div>';
 }
 function toggleHelpBubble(event,el){event.stopPropagation();const wasOpen=el.classList.contains('open');closeHelpBubbles();if(wasOpen)return;el.classList.add('open');const backdrop=document.createElement('div');backdrop.className='help-backdrop';backdrop.setAttribute('aria-hidden','true');backdrop.addEventListener('click',function(e){e.stopPropagation();closeHelpBubbles();});document.body.appendChild(backdrop);}
 function isReturnReadyMode(){const rr=state&&state.returnReview?state.returnReview:{};return !!rr.isReturnReady;}
@@ -1336,7 +1396,7 @@ function otherDragEnter(e){e.preventDefault();e.stopPropagation();document.getEl
 function otherDragOver(e){e.preventDefault();e.stopPropagation();document.getElementById('otherUploadRow').classList.add('drag-over');}
 function otherDragLeave(e){e.preventDefault();e.stopPropagation();const row=document.getElementById('otherUploadRow');if(!row||row.contains(e.relatedTarget))return;row.classList.remove('drag-over');}
 function otherDrop(e){e.preventDefault();e.stopPropagation();document.getElementById('otherUploadRow').classList.remove('drag-over');const files=Array.from(e.dataTransfer&&e.dataTransfer.files?e.dataTransfer.files:[]);if(files.length)uploadFilesAsOther(files);}
-async function uploadFilesForChecklistItem(idx,files){const button=document.getElementById('uploadBtn-'+idx);if(button)button.disabled=true;try{for(let i=0;i<files.length;i++){const originalFile=files[i];const prefix=files.length>1?'File '+(i+1)+' of '+files.length+': ':'';setRowStatus(idx,'loading',prefix+'Uploading '+originalFile.name+' ('+formatFileSize(originalFile.size)+')…');const dataUrl=await readFileAsDataURL(originalFile);const label=selectedLabelForIndex(idx);const cleanLabel=cleanDocLabel(label);const result=await api({form_type:'uploadFile',clientId:CLIENT_ID,file:{name:originalFile.name,mimeType:originalFile.type||'application/octet-stream',dataUrl:dataUrl,docType:label,docTypeLabel:cleanLabel,checklistIndex:idx}});if(!state.uploadedFiles)state.uploadedFiles=[];state.uploadedFiles.push({name:result.fileName||originalFile.name,id:result.fileId||'',timestamp:new Date().toISOString(),checklistIndex:idx,docTypeLabel:cleanLabel});}checked.add(Number(idx));await api({form_type:'saveChecklistState',clientId:CLIENT_ID,checkedIndexes:Array.from(checked)});openCompletionModal({warning:false,idx:Number(idx),method:'upload'});}catch(error){setRowStatus(idx,'error','Upload failed: '+error.message);}finally{const fresh=document.getElementById('uploadBtn-'+idx);if(fresh)fresh.disabled=false;}}
+async function uploadFilesForChecklistItem(idx,files){const button=document.getElementById('uploadBtn-'+idx);if(button)button.disabled=true;try{for(let i=0;i<files.length;i++){const originalFile=files[i];const prefix=files.length>1?'File '+(i+1)+' of '+files.length+': ':'';setRowStatus(idx,'loading',prefix+'Uploading '+originalFile.name+' ('+formatFileSize(originalFile.size)+')…');const dataUrl=await readFileAsDataURL(originalFile);const label=selectedLabelForIndex(idx);const cleanLabel=cleanDocLabel(label);const result=await api({form_type:'uploadFile',clientId:CLIENT_ID,file:{name:originalFile.name,mimeType:originalFile.type||'application/octet-stream',dataUrl:dataUrl,docType:label,docTypeLabel:cleanLabel,checklistIndex:idx}});if(!state.uploadedFiles)state.uploadedFiles=[];state.uploadedFiles.push({name:result.fileName||originalFile.name,id:result.fileId||'',timestamp:new Date().toISOString(),checklistIndex:idx,docTypeLabel:cleanLabel});}checked.add(Number(idx));await api({form_type:'saveChecklistState',clientId:CLIENT_ID,checkedIndexes:Array.from(checked)});setRowStatus(idx,'success','Upload complete.');openCompletionModal({warning:false,idx:Number(idx),method:'upload'});}catch(error){setRowStatus(idx,'error','Upload failed: '+error.message);}finally{const fresh=document.getElementById('uploadBtn-'+idx);if(fresh)fresh.disabled=false;}}
 async function uploadFilesAsOther(files){try{const returnReady=isReturnReadyMode();const docLabel=returnReady?'Signed Form 8879':'Other Documents';for(let i=0;i<files.length;i++){const originalFile=files[i];const prefix=files.length>1?'File '+(i+1)+' of '+files.length+': ':'';setRowStatus('other','loading',prefix+'Uploading '+originalFile.name+'…');const dataUrl=await readFileAsDataURL(originalFile);const result=await api({form_type:'uploadFile',clientId:CLIENT_ID,file:{name:originalFile.name,mimeType:originalFile.type||'application/octet-stream',dataUrl:dataUrl,docType:docLabel,docTypeLabel:docLabel,checklistIndex:''}});if(!state.uploadedFiles)state.uploadedFiles=[];state.uploadedFiles.push({name:result.fileName||originalFile.name,id:result.fileId||'',timestamp:new Date().toISOString(),checklistIndex:'',docTypeLabel:docLabel});}render();setRowStatus('other','success',returnReady?'Form 8879 uploaded successfully.':(files.length>1?files.length+' files uploaded.':'Upload complete.'));}catch(error){setRowStatus('other','error','Upload failed: '+error.message);}}
 function deleteFile(fileId,event){event.stopPropagation();if(!fileId||state.canDeleteFiles===false)return;const button=event.currentTarget;const row=button?button.closest('.row-file'):null;if(!row)return;document.querySelectorAll('.delete-confirm').forEach(function(p){p.remove();});document.querySelectorAll('.confirming-delete').forEach(function(el){el.classList.remove('confirming-delete');});const rec=(state.uploadedFiles||[]).find(function(f){return String(f.id)===String(fileId);});const name=rec?(clientDisplayFileName(rec)||'this file'):'this file';row.classList.add('confirming-delete');const panel=document.createElement('div');panel.className='delete-confirm';panel.innerHTML='<div>Delete “'+esc(name)+'”? This cannot be undone.</div><div class="delete-confirm-actions"><button type="button" class="delete-confirm-cancel">Cancel</button><button type="button" class="delete-confirm-ok">Delete file</button></div>';row.appendChild(panel);panel.querySelector('.delete-confirm-cancel').onclick=function(e){e.stopPropagation();panel.remove();row.classList.remove('confirming-delete');};panel.querySelector('.delete-confirm-ok').onclick=function(e){e.stopPropagation();confirmDeleteFile(fileId,row,button,e.currentTarget);};}
 async function confirmDeleteFile(fileId,row,originalButton,confirmButton){const rec=(state.uploadedFiles||[]).find(function(f){return String(f.id)===String(fileId);});const deletedIndex=rec&&rec.checklistIndex!==undefined&&rec.checklistIndex!==''?Number(rec.checklistIndex):null;row.classList.add('deleting');if(originalButton)originalButton.disabled=true;if(confirmButton){confirmButton.disabled=true;confirmButton.innerHTML='<span class="mini-spinner"></span>Deleting...';}try{await api({form_type:'deleteFile',clientId:CLIENT_ID,fileId:fileId});state.uploadedFiles=(state.uploadedFiles||[]).filter(function(f){return String(f.id)!==String(fileId);});if(deletedIndex!==null&&!Number.isNaN(deletedIndex)){const still=state.uploadedFiles.some(function(f){return Number(f.checklistIndex)===Number(deletedIndex);});if(!still){checked.delete(deletedIndex);await api({form_type:'saveChecklistState',clientId:CLIENT_ID,checkedIndexes:Array.from(checked)});}}render();}catch(error){row.classList.remove('deleting');if(originalButton)originalButton.disabled=false;if(confirmButton){confirmButton.disabled=false;confirmButton.textContent='Delete file';}const p=row.querySelector('.delete-confirm div');if(p)p.textContent='Delete failed: '+error.message;}}
