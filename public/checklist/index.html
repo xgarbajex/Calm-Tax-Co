@@ -1655,6 +1655,84 @@
   .help-tip-portal{left:50%!important;top:50%!important;right:auto!important;transform:translate(-50%,-50%)!important;}
 }
 
+
+
+/* Calm Tax v58: quieter progress ring and compact introductory accordions */
+.progress-ring-percent{display:none!important;}
+.intro-cards.intro-accordions{
+  max-width:820px;
+  margin:0 auto 28px;
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:12px;
+  align-items:start;
+}
+.intro-accordion{
+  border:1px solid rgba(125,142,126,.22);
+  background:rgba(255,255,255,.72);
+  border-radius:18px;
+  box-shadow:0 2px 10px rgba(60,54,51,.025);
+  overflow:hidden;
+  transition:background .18s ease,border-color .18s ease,box-shadow .18s ease,transform .18s ease;
+}
+.intro-accordion:hover{
+  background:#fff;
+  border-color:rgba(125,142,126,.42);
+  box-shadow:0 8px 22px rgba(60,54,51,.055);
+  transform:translateY(-1px);
+}
+.intro-accordion-toggle{
+  width:100%;
+  border:0;
+  background:transparent;
+  color:var(--ink);
+  padding:16px 18px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  cursor:pointer;
+  text-align:left;
+  font-family:"Cormorant Garamond",Georgia,serif;
+  font-size:22px;
+  font-style:italic;
+  font-weight:500;
+  line-height:1.2;
+  transition:color .18s ease,transform .18s ease;
+}
+.intro-accordion-toggle:hover,.intro-accordion-toggle:focus-visible{color:var(--sage);outline:none;}
+.intro-accordion-toggle:active{transform:scale(.99);}
+.intro-accordion-chevron{
+  flex:0 0 auto;
+  color:var(--sage);
+  font-family:Inter,sans-serif;
+  font-size:12px;
+  font-style:normal;
+  transition:transform .2s ease;
+}
+.intro-accordion.open .intro-accordion-chevron{transform:rotate(180deg);}
+.intro-accordion-body{
+  display:grid;
+  grid-template-rows:0fr;
+  transition:grid-template-rows .24s ease;
+}
+.intro-accordion.open .intro-accordion-body{grid-template-rows:1fr;}
+.intro-accordion-body-inner{overflow:hidden;}
+.intro-accordion-body p{
+  margin:0;
+  padding:0 18px 16px;
+  color:var(--mid);
+  font-family:Inter,sans-serif;
+  font-size:14px;
+  line-height:1.6;
+  text-align:left;
+}
+@media(max-width:820px){
+  .intro-cards.intro-accordions{grid-template-columns:1fr;max-width:680px;gap:10px;}
+  .intro-accordion-toggle{font-size:21px;padding:14px 16px;}
+  .intro-accordion-body p{padding:0 16px 15px;}
+}
+
 </style>
 </head>
 <body>
@@ -2091,11 +2169,29 @@ function signingHelpModalHtml(){return '<div class="modal-backdrop" id="signHelp
 function signed8879UploadHtml(){const files=(state.uploadedFiles||[]).filter(function(f){const label=String(f.docTypeLabel||f.docType||f.name||'').toLowerCase();return label.includes('signed form 8879')||label.includes('signed 8879');}).map(fileHtml).join('');if(isAuthorizationReceived()){return '<div class="card signed-8879-card"><h2>Authorization Received</h2><p>We have received your signed Form 8879. Your return is now awaiting electronic filing.</p></div>';}
 return '<div class="card"><div class="signed-8879-upload" id="otherUploadRow" ondragenter="otherDragEnter(event)" ondragover="otherDragOver(event)" ondragleave="otherDragLeave(event)" ondrop="otherDrop(event)"><h3>Upload Your Signed Form 8879</h3><p><strong>No printer? No problem.</strong></p><p>Most phones, tablets, and computers let you sign PDFs electronically in just a minute or two. Sign the PDF, save it, then upload it below.</p><button class="help-link" type="button" onclick="openSignHelpModal(event)">Need help signing the PDF?</button><br><button class="btn" type="button" onclick="openOtherFilePicker(event)">Upload Signed Form 8879</button><input class="hidden-row-file-input" type="file" id="otherFileInput" multiple accept=".pdf,.jpg,.jpeg,.png,.heic,.webp,.doc,.docx,.txt,.rtf,.csv,.xls,.xlsx,.ods,.numbers" onchange="handleOtherFileInput(event)"><div class="row-status" id="rowStatus-other"></div>'+(files?'<div class="row-files" style="margin-left:0;margin-top:12px">'+files+'</div>':'')+'</div></div>'+signingHelpModalHtml();}
 function checklistIntroHtml(firstName){
-  return '<div class="intro-cards">'+
-    '<div class="intro-card"><div class="intro-card-title">Returning later?</div><p>We\'ve emailed you a link to this page so you can easily return at any time. If you don\'t see it within a few minutes, please check your spam or junk folder, and consider adding hello@calmtax.co to your contacts.</p></div>'+
-    '<div class="intro-card"><div class="intro-card-title">What happens next?</div><p>Once you\'ve completed your checklist, we\'ll review everything and email you your personalized quote. After you\'ve approved your quote and payment has been received, we\'ll get started on preparing your return.</p></div>'+
-    '<div class="intro-card"><div class="intro-card-title">Not sure where to find something?</div><p>Click the <strong>?</strong> next to a checklist item for more information about where to find that form or information.</p></div>'+
+  return '<div class="intro-cards intro-accordions">'+
+    '<div class="intro-accordion"><button class="intro-accordion-toggle" type="button" aria-expanded="false" onclick="toggleIntroCard(this,event)"><span>Returning later?</span><span class="intro-accordion-chevron">▾</span></button><div class="intro-accordion-body"><div class="intro-accordion-body-inner"><p>We\'ve emailed you a link to this page so you can easily return at any time. If you don\'t see it within a few minutes, please check your spam or junk folder, and consider adding hello@calmtax.co to your contacts.</p></div></div></div>'+ 
+    '<div class="intro-accordion"><button class="intro-accordion-toggle" type="button" aria-expanded="false" onclick="toggleIntroCard(this,event)"><span>What happens next?</span><span class="intro-accordion-chevron">▾</span></button><div class="intro-accordion-body"><div class="intro-accordion-body-inner"><p>Once you\'ve completed your checklist, we\'ll review everything and email you your personalized quote. After you\'ve approved your quote and payment has been received, we\'ll get started on preparing your return.</p></div></div></div>'+ 
+    '<div class="intro-accordion"><button class="intro-accordion-toggle" type="button" aria-expanded="false" onclick="toggleIntroCard(this,event)"><span>Not sure where to find something?</span><span class="intro-accordion-chevron">▾</span></button><div class="intro-accordion-body"><div class="intro-accordion-body-inner"><p>Click the <strong>?</strong> next to a checklist item for more information about where to find that form or information.</p></div></div></div>'+ 
   '</div>';
+}
+function toggleIntroCard(button,event){
+  if(event)event.stopPropagation();
+  const card=button&&button.closest?button.closest('.intro-accordion'):null;
+  if(!card)return;
+  const willOpen=!card.classList.contains('open');
+  const wrap=card.parentElement;
+  if(wrap){
+    wrap.querySelectorAll('.intro-accordion.open').forEach(function(other){
+      if(other!==card){
+        other.classList.remove('open');
+        const otherButton=other.querySelector('.intro-accordion-toggle');
+        if(otherButton)otherButton.setAttribute('aria-expanded','false');
+      }
+    });
+  }
+  card.classList.toggle('open',willOpen);
+  button.setAttribute('aria-expanded',willOpen?'true':'false');
 }
 function privacyHtml(){
   return '<div class="privacy"><strong>Privacy &amp; security:</strong> Use this secure upload page for tax documents and personal information. Your information is stored in a restricted-access secure workspace and is used only to prepare, review, and file your return. Calm Tax Co. does not sell your information or share it for marketing. Please do not share Social Security numbers, banking details, or tax documents through email, as it is less secure than this page.</div>';
@@ -2146,7 +2242,7 @@ function progressRingHtml(completed,total){
   const radius=49;
   const circumference=2*Math.PI*radius;
   const offset=circumference-(circumference*(pct/100));
-  return '<div class="checklist-progress-wrap"><div class="progress-ring" role="img" aria-label="'+pct+' percent complete"><svg viewBox="0 0 118 118" aria-hidden="true"><circle class="progress-ring-track" cx="59" cy="59" r="'+radius+'"></circle><circle class="progress-ring-value" cx="59" cy="59" r="'+radius+'" stroke-dasharray="'+circumference.toFixed(2)+'" stroke-dashoffset="'+offset.toFixed(2)+'"></circle></svg><div class="progress-ring-percent">'+pct+'%</div></div><div class="progress-ring-message">'+esc(progressMessage(completed,total))+'</div><div class="progress-ring-count">'+completed+' of '+total+' complete</div></div>';
+  return '<div class="checklist-progress-wrap"><div class="progress-ring" role="img" aria-label="'+pct+' percent complete"><svg viewBox="0 0 118 118" aria-hidden="true"><circle class="progress-ring-track" cx="59" cy="59" r="'+radius+'"></circle><circle class="progress-ring-value" cx="59" cy="59" r="'+radius+'" stroke-dasharray="'+circumference.toFixed(2)+'" stroke-dashoffset="'+offset.toFixed(2)+'"></circle></svg></div><div class="progress-ring-message">'+esc(progressMessage(completed,total))+'</div><div class="progress-ring-count">'+completed+' of '+total+' complete</div></div>';
 }
 function completedArchiveHtml(groups,order,total){
   if(!total)return '';
