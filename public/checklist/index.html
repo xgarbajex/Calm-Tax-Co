@@ -1353,6 +1353,43 @@
   }
 }
 
+
+/* Calm Tax v52: complete Enter Details border and clearer category hover affordance */
+.entry-card.entry-card-collapsed.open .entry-inner{
+  border:1px solid rgba(125,142,126,.22)!important;
+  border-top:1px solid rgba(125,142,126,.22)!important;
+}
+.group-summary{
+  cursor:pointer!important;
+  transition:background .18s ease,border-color .18s ease,box-shadow .18s ease,transform .18s ease!important;
+  will-change:transform;
+}
+.group-summary:hover{
+  background:rgba(125,142,126,.105)!important;
+  box-shadow:0 7px 18px rgba(60,54,51,.055)!important;
+  transform:translateY(-1px);
+}
+.group-summary:hover .group-chevron{
+  transform:translateY(2px);
+}
+.group-summary:focus-visible{
+  outline:none!important;
+  background:rgba(125,142,126,.11)!important;
+  box-shadow:0 0 0 4px rgba(125,142,126,.13),0 7px 18px rgba(60,54,51,.055)!important;
+  transform:translateY(-1px);
+}
+.group-chevron{
+  transition:transform .18s ease,color .18s ease!important;
+}
+.group-block.collapsed .group-summary:hover .group-chevron{
+  transform:rotate(-90deg) translateX(-2px);
+}
+@media (hover:none){
+  .group-summary:hover{transform:none;box-shadow:none!important;}
+  .group-summary:hover .group-chevron{transform:none;}
+  .group-block.collapsed .group-summary:hover .group-chevron{transform:rotate(-90deg);}
+}
+
 </style>
 </head>
 <body>
